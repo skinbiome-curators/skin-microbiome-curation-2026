@@ -1,0 +1,101 @@
+{
+  "settings": {
+    "alpha_two_sided": 0.05,
+    "powers": [
+      0.8,
+      0.9
+    ],
+    "aucs": [
+      0.65,
+      0.7,
+      0.75,
+      0.8
+    ],
+    "amplification_success": 0.775,
+    "amplification_source": "Ahle 2022 Commun Biol PMC9452508 — tuf2 93/120 증폭",
+    "variance": "Hanley & McNeil 1982",
+    "simulation": "binormal equal-variance, N_SIM=2000, seed=20260918, test=stats_util.auc_p",
+    "note": "기대 AUC 는 가정값. 42명 Malassezia 0.847 은 부풀려졌을 수 있어 쓰지 않음. AUC 0.65 는 반대 방향 0.35 와 같은 크기."
+  },
+  "power_table": [
+    {
+      "auc": 0.65,
+      "power": 0.8,
+      "n_per_group": 57,
+      "n_per_group_with_failure": 74,
+      "total_with_failure": 148,
+      "simulated_power_at_n": 0.783
+    },
+    {
+      "auc": 0.65,
+      "power": 0.9,
+      "n_per_group": 75,
+      "n_per_group_with_failure": 97,
+      "total_with_failure": 194,
+      "simulated_power_at_n": 0.905
+    },
+    {
+      "auc": 0.7,
+      "power": 0.8,
+      "n_per_group": 32,
+      "n_per_group_with_failure": 42,
+      "total_with_failure": 84,
+      "simulated_power_at_n": 0.816
+    },
+    {
+      "auc": 0.7,
+      "power": 0.9,
+      "n_per_group": 41,
+      "n_per_group_with_failure": 53,
+      "total_with_failure": 106,
+      "simulated_power_at_n": 0.896
+    },
+    {
+      "auc": 0.75,
+      "power": 0.8,
+      "n_per_group": 20,
+      "n_per_group_with_failure": 26,
+      "total_with_failure": 52,
+      "simulated_power_at_n": 0.815
+    },
+    {
+      "auc": 0.75,
+      "power": 0.9,
+      "n_per_group": 26,
+      "n_per_group_with_failure": 34,
+      "total_with_failure": 68,
+      "simulated_power_at_n": 0.908
+    },
+    {
+      "auc": 0.8,
+      "power": 0.8,
+      "n_per_group": 14,
+      "n_per_group_with_failure": 19,
+      "total_with_failure": 38,
+      "simulated_power_at_n": 0.828
+    },
+    {
+      "auc": 0.8,
+      "power": 0.9,
+      "n_per_group": 17,
+      "n_per_group_with_failure": 22,
+      "total_with_failure": 44,
+      "simulated_power_at_n": 0.909
+    }
+  ],
+  "precision": {
+    "assumed_auc": 0.5,
+    "half_width_now_23v19": 0.1775,
+    "n_per_group_for_half_width_0.10": 65,
+    "half_width_at_65": 0.0996
+  },
+  "min_detectable_auc_at_65_per_group": {
+    "80%": 0.641,
+    "90%": 0.661
+  },
+  "min_detectable_auc_at_65_after_failure": {
+    "n_per_group": 50,
+    "80%": 0.66,
+    "90%": 0.682
+  }
+}

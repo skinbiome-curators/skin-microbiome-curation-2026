@@ -1,0 +1,231 @@
+{
+  "n": 595,
+  "oral_genera_used": [
+    "Streptococcus",
+    "Rothia",
+    "Actinomyces",
+    "Haemophilus",
+    "Neisseria",
+    "Veillonella",
+    "Gemella",
+    "Granulicatella",
+    "Lautropia",
+    "Prevotella"
+  ],
+  "oral_sum_pct": {
+    "median": 36.18,
+    "mean": 40.55,
+    "max": 99.14,
+    "n_over_50pct": 246
+  },
+  "skin_reference_pct": {
+    "median": 6.833,
+    "n_zero": 5
+  },
+  "subset_oral_under_20pct_n": 218,
+  "eps": 1e-05,
+  "gate2": {
+    "Cutibacterium": {
+      "age": {
+        "raw": {
+          "rho": -0.379,
+          "p": 8.310977245972136e-22
+        },
+        "logratio": {
+          "rho": -0.327,
+          "p": 2.844839211373232e-16
+        },
+        "subset": {
+          "rho": -0.281,
+          "p": 2.5731545556238312e-05,
+          "n": 218
+        }
+      },
+      "sebum": {
+        "raw": {
+          "rho": 0.367
+        },
+        "logratio": {
+          "rho": 0.315,
+          "p": 3.2937548956947548e-15
+        },
+        "subset": {
+          "rho": 0.246,
+          "p": 0.00023752434233157896
+        }
+      },
+      "verdict": "견고 — 세 표현 모두 같은 방향·비슷한 크기"
+    },
+    "Staphylococcus": {
+      "age": {
+        "raw": {
+          "rho": -0.053,
+          "p": 0.19770432998131082
+        },
+        "logratio": {
+          "rho": -0.148,
+          "p": 0.0003053371732550323
+        },
+        "subset": {
+          "rho": 0.155,
+          "p": 0.022090759363087093,
+          "n": 218
+        }
+      },
+      "sebum": {
+        "raw": {
+          "rho": 0.103
+        },
+        "logratio": {
+          "rho": 0.158,
+          "p": 0.00010448146030738042
+        },
+        "subset": {
+          "rho": -0.019,
+          "p": 0.7815292147881073
+        }
+      },
+      "verdict": "표현 의존 — 부호가 뒤집힘"
+    },
+    "Corynebacterium": {
+      "age": {
+        "raw": {
+          "rho": 0.105,
+          "p": 0.010556840554344351
+        },
+        "logratio": {
+          "rho": 0.017,
+          "p": 0.6730069715691884
+        },
+        "subset": {
+          "rho": 0.216,
+          "p": 0.0013024302663969566,
+          "n": 218
+        }
+      },
+      "sebum": {
+        "raw": {
+          "rho": -0.099
+        },
+        "logratio": {
+          "rho": -0.023,
+          "p": 0.569756341851968
+        },
+        "subset": {
+          "rho": -0.152,
+          "p": 0.024538268193332106
+        }
+      },
+      "verdict": "표현 의존 — 표현에 따라 사라짐"
+    }
+  },
+  "oral_sum_vs_age": {
+    "rho": 0.342,
+    "p": 8.408781149763316e-18
+  },
+  "oral_sum_vs_cutibacterium": {
+    "rho": -0.573,
+    "p": 3.313088350647687e-53
+  },
+  "gate2_eps_ladder": {
+    "eps_values": [
+      1e-05,
+      0.0001,
+      0.001
+    ],
+    "genera": {
+      "Cutibacterium": {
+        "by_eps": [
+          {
+            "eps": 1e-05,
+            "rho": -0.327,
+            "p": 2.844839211373232e-16
+          },
+          {
+            "eps": 0.0001,
+            "rho": -0.326,
+            "p": 3.381337229038471e-16
+          },
+          {
+            "eps": 0.001,
+            "rho": -0.322,
+            "p": 7.812447941618431e-16
+          }
+        ],
+        "rho_range": 0.005,
+        "stable": true
+      },
+      "Staphylococcus": {
+        "by_eps": [
+          {
+            "eps": 1e-05,
+            "rho": -0.148,
+            "p": 0.0003053371732550323
+          },
+          {
+            "eps": 0.0001,
+            "rho": -0.146,
+            "p": 0.000367452119776329
+          },
+          {
+            "eps": 0.001,
+            "rho": -0.138,
+            "p": 0.0007246563397318085
+          }
+        ],
+        "rho_range": 0.01,
+        "stable": true
+      },
+      "Corynebacterium": {
+        "by_eps": [
+          {
+            "eps": 1e-05,
+            "rho": 0.017,
+            "p": 0.6730069715691884
+          },
+          {
+            "eps": 0.0001,
+            "rho": 0.01,
+            "p": 0.8165820763551971
+          },
+          {
+            "eps": 0.001,
+            "rho": -0.008,
+            "p": 0.8398297545483269
+          }
+        ],
+        "rho_range": 0.025,
+        "stable": false
+      }
+    }
+  },
+  "gate4_logratio": {
+    "Cutibacterium": {
+      "auc": 0.449,
+      "ci": [
+        0.277,
+        0.627
+      ],
+      "p": 0.5696,
+      "crosses_half": true
+    },
+    "Staphylococcus": {
+      "auc": 0.4,
+      "ci": [
+        0.222,
+        0.579
+      ],
+      "p": 0.2716,
+      "crosses_half": true
+    },
+    "Corynebacterium": {
+      "auc": 0.368,
+      "ci": [
+        0.201,
+        0.545
+      ],
+      "p": 0.1462,
+      "crosses_half": true
+    }
+  }
+}

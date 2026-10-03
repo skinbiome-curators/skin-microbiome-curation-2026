@@ -1,0 +1,196 @@
+{
+  "source": "data/microbiome-2026-main/asv/03_sensitive_ITS_asv_*",
+  "n": 42,
+  "n_sensitive": 23,
+  "n_non_sensitive": 19,
+  "n_asv_total": 1169,
+  "n_asv_malassezia": 116,
+  "why": "15차 §10-2 는 restricta·globosa·sympodialis 가 한 칸이라 ⑤ 불가라고 적었다. ASV 표에는 종이 나뉘어 있다. 속 요약표만 쓴 탓이지 자료가 없던 것이 아니다.",
+  "caveat": "종 라벨은 ITS 기반 추정이고 일부는 미분류다. ⑤를 통과시키는 것이 아니라 「불가」를 「부분 가능 — 진균에 한정」으로 바꾼다. 세균은 16S ASV 에서도 Cutibacterium 종 라벨 9% · Staphylococcus 10% 라 그대로 불가다.",
+  "genus_total_median": {
+    "sensitive": 36.37,
+    "non_sensitive": 84.23
+  },
+  "species": [
+    {
+      "species": "restricta",
+      "detect_pct": 100.0,
+      "median_sensitive": 30.243,
+      "median_non_sensitive": 66.945,
+      "auc": 0.165,
+      "ci": [
+        0.05,
+        0.307
+      ],
+      "p": 0.0002,
+      "crosses_half": false,
+      "screened": true,
+      "q_bh": 0.0024
+    },
+    {
+      "species": "(종 미분류)",
+      "detect_pct": 97.6,
+      "median_sensitive": 4.669,
+      "median_non_sensitive": 8.46,
+      "auc": 0.355,
+      "ci": [
+        0.195,
+        0.533
+      ],
+      "p": 0.1086,
+      "crosses_half": true,
+      "screened": true,
+      "q_bh": 0.4189
+    },
+    {
+      "species": "globosa",
+      "detect_pct": 81.0,
+      "median_sensitive": 0.359,
+      "median_non_sensitive": 0.652,
+      "auc": 0.357,
+      "ci": [
+        0.199,
+        0.529
+      ],
+      "p": 0.1142,
+      "crosses_half": true,
+      "screened": true,
+      "q_bh": 0.4189
+    },
+    {
+      "species": "dermatis",
+      "detect_pct": 31.0,
+      "median_sensitive": 0.0,
+      "median_non_sensitive": 0.0,
+      "auc": 0.588,
+      "ci": [
+        0.449,
+        0.723
+      ],
+      "p": 0.3306,
+      "crosses_half": true,
+      "screened": false,
+      "q_bh": 0.9091
+    },
+    {
+      "species": "sympodialis",
+      "detect_pct": 38.1,
+      "median_sensitive": 0.0,
+      "median_non_sensitive": 0.0,
+      "auc": 0.513,
+      "ci": [
+        0.357,
+        0.665
+      ],
+      "p": 0.8895,
+      "crosses_half": true,
+      "screened": false,
+      "q_bh": 0.9496
+    },
+    {
+      "species": "cuniculi",
+      "detect_pct": 9.5,
+      "median_sensitive": 0.0,
+      "median_non_sensitive": 0.0,
+      "auc": 0.444,
+      "ci": [
+        0.342,
+        0.522
+      ],
+      "p": 0.5358,
+      "crosses_half": true,
+      "screened": false,
+      "q_bh": 0.9496
+    },
+    {
+      "species": "slooffiae",
+      "detect_pct": 9.5,
+      "median_sensitive": 0.0,
+      "median_non_sensitive": 0.0,
+      "auc": 0.442,
+      "ci": [
+        0.342,
+        0.522
+      ],
+      "p": 0.5193,
+      "crosses_half": true,
+      "screened": false,
+      "q_bh": 0.9496
+    },
+    {
+      "species": "yamatoensis",
+      "detect_pct": 4.8,
+      "median_sensitive": 0.0,
+      "median_non_sensitive": 0.0,
+      "auc": 0.543,
+      "ci": [
+        0.5,
+        0.609
+      ],
+      "p": 0.6311,
+      "crosses_half": true,
+      "screened": false,
+      "q_bh": 0.9496
+    },
+    {
+      "species": "furfur",
+      "detect_pct": 4.8,
+      "median_sensitive": 0.0,
+      "median_non_sensitive": 0.0,
+      "auc": 0.494,
+      "ci": [
+        0.421,
+        0.565
+      ],
+      "p": 0.9496,
+      "crosses_half": true,
+      "screened": false,
+      "q_bh": 0.9496
+    },
+    {
+      "species": "obtusa",
+      "detect_pct": 2.4,
+      "median_sensitive": 0.0,
+      "median_non_sensitive": 0.0,
+      "auc": 0.522,
+      "ci": [
+        0.5,
+        0.565
+      ],
+      "p": 0.8103,
+      "crosses_half": true,
+      "screened": false,
+      "q_bh": 0.9496
+    },
+    {
+      "species": "japonica",
+      "detect_pct": 2.4,
+      "median_sensitive": 0.0,
+      "median_non_sensitive": 0.0,
+      "auc": 0.474,
+      "ci": [
+        0.421,
+        0.5
+      ],
+      "p": 0.7713,
+      "crosses_half": true,
+      "screened": false,
+      "q_bh": 0.9496
+    }
+  ],
+  "multiplicity": "검출률 무관 전체 11개 종/그룹에 BH 보정",
+  "restricta_vs_original_paper": {
+    "original": "Keum 2020 이 민감군에서 M. restricta 감소를 보고했다",
+    "ours": {
+      "median_sensitive": 30.243,
+      "median_non_sensitive": 66.945,
+      "auc": 0.165,
+      "ci": [
+        0.05,
+        0.307
+      ],
+      "q_bh": 0.0024
+    },
+    "reproduced": true
+  }
+}

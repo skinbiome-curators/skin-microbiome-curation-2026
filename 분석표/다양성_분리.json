@@ -1,0 +1,184 @@
+{
+  "why": "ρ=−0.979 와 구별력 0.324 가 문서에만 있고 생성기가 없었다. 검증하고 종 수준으로 확장한다.",
+  "shannon_def": "H = -Σ p·ln p · 속 수준 상대비율 · 미분류 라벨도 한 칸. sample_info 의 Shannon 열과는 산출 방식이 달라 값이 다르다.",
+  "decision_rule_prespecified": "restricta 가 Shannon 위에 더하고 역은 아니다 → 분리된다 / 둘 다 못 더한다 → 분리 안 된다 / Shannon 이 더한다 → 다양성이 축 / CI 가 전부 0 을 걸친다 → n=42 로 판단 불가",
+  "n": 42,
+  "n_sensitive": 23,
+  "n_non_sensitive": 19,
+  "asv_available": true,
+  "seed": 20260918,
+  "n_boot": 2000,
+  "correlations": [
+    {
+      "a": "Malassezia 속",
+      "b": "Shannon(전체)",
+      "rho": -0.979,
+      "p": 3.749626229963366e-29
+    },
+    {
+      "a": "Malassezia 속",
+      "b": "Shannon(속 제외)",
+      "rho": -0.305,
+      "p": 0.04946081312996649
+    },
+    {
+      "a": "restricta",
+      "b": "Shannon(전체)",
+      "rho": -0.957,
+      "p": 5.0432518061058933e-23
+    },
+    {
+      "a": "restricta",
+      "b": "Shannon(속 제외)",
+      "rho": -0.384,
+      "p": 0.011973940156176633
+    },
+    {
+      "a": "restricta",
+      "b": "Malassezia 속",
+      "rho": 0.965,
+      "p": 5.536869929825187e-25
+    },
+    {
+      "a": "globosa(음성대조)",
+      "b": "Shannon(전체)",
+      "rho": -0.329,
+      "p": 0.03353859328984192
+    }
+  ],
+  "documented_rho_check": {
+    "documented": -0.979,
+    "recomputed": -0.979,
+    "matches": true
+  },
+  "discrimination": [
+    {
+      "axis": "Malassezia 속",
+      "auc": 0.153,
+      "ci": [
+        0.048,
+        0.284
+      ],
+      "discrimination": 0.347,
+      "p": 0.0001,
+      "crosses_half": false,
+      "q_bh": 0.0006
+    },
+    {
+      "axis": "restricta",
+      "auc": 0.165,
+      "ci": [
+        0.048,
+        0.307
+      ],
+      "discrimination": 0.335,
+      "p": 0.0002,
+      "crosses_half": false,
+      "q_bh": 0.0006
+    },
+    {
+      "axis": "Shannon(전체)",
+      "auc": 0.824,
+      "ci": [
+        0.691,
+        0.941
+      ],
+      "discrimination": 0.324,
+      "p": 0.0003,
+      "crosses_half": false,
+      "q_bh": 0.0007
+    },
+    {
+      "axis": "Shannon(속 제외)",
+      "auc": 0.627,
+      "ci": [
+        0.453,
+        0.81
+      ],
+      "discrimination": 0.127,
+      "p": 0.1608,
+      "crosses_half": true,
+      "q_bh": 0.1608
+    },
+    {
+      "axis": "관찰 속 수",
+      "auc": 0.771,
+      "ci": [
+        0.61,
+        0.912
+      ],
+      "discrimination": 0.271,
+      "p": 0.0027,
+      "crosses_half": false,
+      "q_bh": 0.0041
+    },
+    {
+      "axis": "globosa(음성대조)",
+      "auc": 0.357,
+      "ci": [
+        0.197,
+        0.531
+      ],
+      "discrimination": 0.143,
+      "p": 0.1142,
+      "crosses_half": true,
+      "q_bh": 0.1371
+    }
+  ],
+  "multiplicity": "이 표의 6개 축에 BH 보정. 42명에 가설을 더 얹은 것이다.",
+  "added_information": {
+    "models": {
+      "Shannon 만": {
+        "resub": 0.824,
+        "loocv": 0.796
+      },
+      "Shannon + restricta": {
+        "resub": 0.833,
+        "loocv": 0.794
+      },
+      "restricta 만": {
+        "resub": 0.835,
+        "loocv": 0.792
+      },
+      "restricta + Shannon": {
+        "resub": 0.833,
+        "loocv": 0.794
+      }
+    },
+    "deltas": {
+      "shannon_plus_restricta": {
+        "base": "Shannon 만",
+        "full": "Shannon + restricta",
+        "delta_resub": 0.009,
+        "ci": [
+          -0.009,
+          0.072
+        ],
+        "crosses_zero": true,
+        "delta_loocv": -0.002
+      },
+      "restricta_plus_shannon": {
+        "base": "restricta 만",
+        "full": "restricta + Shannon",
+        "delta_resub": -0.002,
+        "ci": [
+          -0.025,
+          0.035
+        ],
+        "crosses_zero": true,
+        "delta_loocv": 0.002
+      }
+    }
+  },
+  "verdict": "판단 불가 — 양쪽 증가분 CI 가 모두 0 을 걸친다. n=42 로는 어느 쪽이 축인지 말할 수 없다. 한계 #6 은 그대로 유지된다.",
+  "logratio": {
+    "note": "restricta 를 «Malassezia 속을 뺀 나머지» 대비 로그비로 바꿔 다시 잰다. «restricta 가 낮다» 와 «나머지가 많다» 를 가르기 위한 것.",
+    "auc": 0.158,
+    "ci": [
+      0.046,
+      0.291
+    ],
+    "crosses_half": false,
+    "eps": 1e-05
+  }
+}

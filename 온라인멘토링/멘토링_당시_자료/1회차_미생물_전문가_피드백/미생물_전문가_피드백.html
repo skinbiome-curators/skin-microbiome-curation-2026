@@ -1,0 +1,988 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>미생물 전문가 피드백</title>
+<style>
+  :root{
+    --bg:#e9ebee; --paper:#ffffff; --ink:#1d2330; --ink2:#4a5263; --mute:#8a909c;
+    --line:#e3e6eb; --accent:#1f6f5c; --accent-soft:#e7f2ee; --warn:#b4532a; --warn-soft:#fbeee7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+    -webkit-font-smoothing:antialiased;overflow:hidden}
+  #stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform-origin:center center}
+  .slide{position:absolute;inset:0;background:var(--paper);border-radius:6px;
+    box-shadow:0 10px 40px rgba(20,30,50,.12);padding:64px 84px 56px;display:none;flex-direction:column}
+  .slide.on{display:flex}
+  .kicker{font-size:22px;font-weight:700;color:var(--accent);letter-spacing:.02em}
+  h1{font-size:50px;font-weight:800;letter-spacing:-.02em;margin-top:10px;line-height:1.2}
+  .src{font-size:15px;color:var(--mute);line-height:1.45;margin-top:10px}
+  .src i{font-style:italic}
+  .pageno{position:absolute;right:40px;bottom:24px;font-size:15px;color:var(--mute)}
+
+  /* slide 1 */
+  .s1-body{display:grid;grid-template-columns:1fr 1.25fr;gap:36px;margin-top:40px;flex:1;min-height:0}
+  .col{display:flex;flex-direction:column;gap:24px;min-height:0}
+  .card{border:1px solid var(--line);border-radius:12px;padding:24px 28px}
+  .label{font-size:18px;font-weight:700;color:var(--ink2);margin-bottom:10px}
+  .label b{color:var(--accent);margin-right:6px}
+  .def{font-size:25px;line-height:1.5;font-weight:500}
+  .def strong{font-weight:800;color:var(--accent)}
+  .nums{display:flex;gap:36px;align-items:flex-end}
+  .num{font-size:64px;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--ink)}
+  .num small{font-size:32px;font-weight:700}
+  .numcap{font-size:19px;color:var(--ink2);margin-top:8px}
+  .card.problem{background:var(--warn-soft);border-color:#f1d9cc;flex:1}
+  .card.problem .label b{color:var(--warn)}
+  .ptitle{font-size:27px;font-weight:800;margin-bottom:18px}
+  table{width:100%;border-collapse:collapse;font-size:21px}
+  th{font-size:16px;font-weight:700;color:var(--ink2);text-align:left;padding:0 0 10px;border-bottom:2px solid #e8cbbd}
+  td{padding:15px 0;border-bottom:1px solid #f1dcd1;vertical-align:top;line-height:1.4}
+  tr:last-child td{border-bottom:none}
+  td.tool{font-weight:800;width:32%}
+  td.tool span{display:block;font-size:16px;font-weight:500;color:var(--ink2);margin-top:3px}
+  td.lim{color:var(--ink)}
+  td.lim em{font-style:normal;font-weight:800;color:var(--warn)}
+  .question{margin-top:28px;background:var(--accent);color:#fff;border-radius:12px;padding:24px 32px;
+    display:flex;align-items:center;gap:28px}
+  .question .q-lab{font-size:19px;font-weight:700;opacity:.85;white-space:nowrap}
+  .question .q-text{font-size:36px;font-weight:800;letter-spacing:-.02em}
+
+  /* 2 · 자료 */
+  .s2-body{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:36px}
+  .ds{border:1px solid var(--line);border-radius:12px;padding:26px 32px}
+  .ds.main{border:2px solid var(--accent);background:linear-gradient(180deg,var(--accent-soft),#fff 42%)}
+  .ds-head{display:flex;align-items:center;gap:22px;padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:8px}
+  .ds-n{font-size:60px;font-weight:800;letter-spacing:-.03em;line-height:1}
+  .ds-n small{font-size:28px;font-weight:700;margin-left:2px}
+  .ds.main .ds-n{color:var(--accent)}
+  .ds-role{font-size:26px;font-weight:800}
+  .ds-role span{display:block;font-size:18px;font-weight:500;color:var(--ink2);margin-top:4px}
+  dl{display:grid;grid-template-columns:150px 1fr;font-size:21px}
+  dt{color:var(--ink2);font-weight:600;padding:11px 0;border-bottom:1px solid #f0f2f5}
+  dd{padding:11px 0;border-bottom:1px solid #f0f2f5}
+  dl dt:last-of-type,dl dd:last-of-type{border-bottom:none}
+  b.yes{color:var(--accent)} b.no{color:var(--warn)}
+  .s2-foot{margin-top:24px}
+  .note,.ask{border-radius:12px;padding:18px 26px;font-size:19px;line-height:1.55}
+  .note{background:#f4f5f7}
+  .mark{font-weight:800;color:var(--warn);margin-right:8px}
+  .ask{background:#fff8e6;border:1px dashed #e6c46a}
+  .note-lab{font-size:15px;font-weight:800;color:var(--ink2);margin-bottom:6px;letter-spacing:.02em}
+  .ask .note-lab{color:#9a6b00}
+
+  /* 3 · 모으기 */
+  :root{--c-skin:#1f6f5c;--c-oral:#3a6fb0;--c-env:#a0764a;--c-etc:#a3a9b3}
+  .legend{display:flex;gap:28px;margin-top:22px;font-size:18px;color:var(--ink2)}
+  .legend span{display:flex;align-items:center;gap:8px}
+  .dot{width:14px;height:14px;border-radius:4px;display:inline-block}
+  .dot.skin{background:var(--c-skin)} .dot.oral{background:var(--c-oral)}
+  .dot.env{background:var(--c-env)} .dot.etc{background:var(--c-etc)}
+  .s3-body{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:22px}
+  .rank{border:1px solid var(--line);border-radius:12px;padding:20px 22px 14px}
+  .rank-h{font-size:21px;font-weight:800;margin-bottom:8px}
+  .rank-h span{font-size:16px;font-weight:500;color:var(--mute);margin-left:10px}
+  .rank ol{list-style:none}
+  .rank li{display:grid;grid-template-columns:178px 1fr 52px;align-items:center;gap:10px;
+    font-size:19px;padding:8px 0}
+  .rank li em{font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .rank li b{display:block;height:18px;border-radius:3px;width:max(var(--w),3px)}
+  .rank li s{text-decoration:none;text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+  .rank li.skin b{background:var(--c-skin)} .rank li.skin em{font-weight:800;color:var(--c-skin)}
+  .rank li.oral b{background:var(--c-oral)}
+  .rank li.env b{background:var(--c-env)}
+  .rank li.etc b{background:var(--c-etc)} .rank li.etc{color:var(--ink2)}
+  .s3-take{display:flex;flex-direction:column;gap:8px;margin-top:20px;background:#f4f5f7;border-radius:12px;padding:16px 24px;font-size:19px;line-height:1.45}
+  .s3-take > div{white-space:nowrap}
+  .s3-take em{font-style:italic}
+  .tk{display:inline-flex;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;
+    font-size:15px;font-weight:800;align-items:center;justify-content:center;margin-right:8px;vertical-align:1px}
+  .src code{font-family:inherit}
+
+  /* 4 · 비교 */
+  :root{--c-s:#d0703f;--c-n:#8b9bb0}
+  .cmp{margin-top:26px;border:1px solid var(--line);border-radius:12px;padding:8px 28px 12px}
+  .cmp-row{display:grid;grid-template-columns:230px 1fr 1fr 230px;gap:28px;align-items:center;padding:8px 0;font-size:20px}
+  .cmp-h{font-size:16px;font-weight:700;color:var(--ink2);border-bottom:2px solid var(--line);padding:12px 0 10px}
+  .cmp-h span{font-weight:500;color:var(--mute);margin-left:4px}
+  .sw{display:inline-block;width:14px;height:14px;border-radius:3px;margin-right:8px;vertical-align:-1px}
+  .sw.s{background:var(--c-s)} .sw.n{background:var(--c-n)}
+  .cmp-sec{font-size:15px;font-weight:800;color:var(--mute);padding:10px 0 2px;letter-spacing:.04em}
+  .g em{font-style:italic} .g.skin em{font-weight:800;color:var(--c-skin)}
+  .bar{display:grid;grid-template-columns:1fr 56px;align-items:center;gap:12px}
+  .bar b{display:block;height:20px;border-radius:3px;width:max(var(--w),3px)}
+  .bar.s b{background:var(--c-s)} .bar.n b{background:var(--c-n)}
+  .bar s{text-decoration:none;text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+  .chip{display:inline-block;font-size:17px;font-weight:700;border-radius:999px;padding:4px 14px;white-space:nowrap}
+  .chip.none{background:#eef0f3;color:#6b7280}
+  .chip.weak{background:#fff8e6;color:#9a6b00;border:1px solid #ecd18a}
+  .chip.strong{background:var(--accent);color:#fff}
+  .see{font-size:15px;font-weight:700;color:var(--accent);margin-left:10px}
+  .chip.trend{background:#fff;color:#8a909c;border:1px dashed #c5cad2}
+  .cmp-row.key{background:var(--accent-soft);margin:0 -28px;padding:8px 28px;border-radius:8px}
+  .s4-take{display:flex;flex-direction:column;gap:6px;margin-top:18px;background:#f4f5f7;border-radius:12px;padding:14px 24px;font-size:19px;line-height:1.45}
+  .s4-take em{font-style:italic}
+  .s4-take .mk{font-size:17px;color:var(--ink2);margin-top:2px}
+
+  /* 6~9 · 균 카드 */
+  h1 em{font-style:italic}
+  .h1-ko{font-size:28px;font-weight:600;color:var(--mute);margin-left:12px;letter-spacing:0}
+  .card3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-top:26px;flex:1;min-height:0}
+  .c3{border:1px solid var(--line);border-radius:12px;padding:24px 28px;display:flex;flex-direction:column}
+  .c3.block{background:var(--warn-soft);border-color:#f1d9cc}
+  .c3-h{font-size:20px;font-weight:800;color:var(--ink2);margin-bottom:18px;display:flex;align-items:center;gap:8px}
+  .c3-no{display:inline-flex;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-size:15px;align-items:center;justify-content:center}
+  .c3.block .c3-no{background:var(--warn)}
+  .c3-lead{font-size:27px;font-weight:600;line-height:1.4;margin-bottom:22px}
+  .c3-lead span{font-size:19px;color:var(--ink2);font-weight:500}
+  .c3 em{font-style:italic}
+  .c3 ul{list-style:none;display:flex;flex-direction:column;gap:18px;flex:1}
+  .c3 li{font-size:21px;line-height:1.5;padding-left:18px;position:relative}
+  .c3 li::before{content:"";position:absolute;left:0;top:13px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  .c3 .src{margin-top:auto;padding-top:10px}
+  .mini-h{font-size:17px;font-weight:800;color:var(--mute);margin-bottom:12px}
+  .agebars div{display:grid;grid-template-columns:88px 1fr 70px;gap:12px;align-items:center;font-size:20px;padding:8px 0}
+  .agebars b{display:block;height:26px;border-radius:3px;background:var(--c-skin);width:max(var(--w),3px)}
+  .agebars s{text-decoration:none;font-weight:800;text-align:right}
+  .mini-note{font-size:19px;color:var(--ink2);margin-top:10px}
+  .sn{display:flex;align-items:center;gap:20px;font-size:21px;flex-wrap:wrap}
+  .sn b{font-weight:800}
+  .bk{padding:22px 0;border-bottom:1px solid #f1dcd1}
+  .bk:last-child{border-bottom:none}
+  .bk-q{font-size:22px;font-weight:800}
+  .bk-q small{display:block;font-size:16px;font-weight:500;color:var(--ink2);margin-top:2px}
+  .bk-a{font-size:20px;margin-top:8px;line-height:1.45}
+  .bk-a b{color:var(--warn)}
+  .verdict{margin-top:20px;background:var(--accent-soft);border-radius:12px;padding:16px 26px;font-size:22px;display:flex;align-items:center;gap:14px}
+  .v-lab{font-size:15px;font-weight:800;color:#fff;background:var(--accent);border-radius:6px;padding:3px 10px}
+  .verdict b{color:var(--accent);font-weight:800}
+
+  /* 6 · 세균 요약 */
+  .btab{margin-top:26px;border:1px solid var(--line);border-radius:12px;padding:6px 26px}
+  .br{display:grid;grid-template-columns:200px 250px 130px 170px 1fr 110px;gap:20px;align-items:center;padding:24px 0;border-bottom:1px solid #f0f2f5;font-size:18px;line-height:1.45}
+  .br:last-child{border-bottom:none}
+  .br.bh{font-size:15px;font-weight:800;color:var(--ink2);padding:12px 0;border-bottom:2px solid var(--line)}
+  .br.bh small{display:block;font-weight:500;color:var(--mute)}
+  .bn em{font-size:21px;font-weight:800;font-style:italic;color:var(--c-skin)}
+  .bn small{display:block;font-size:15px;color:var(--mute)}
+  .br em{font-style:italic}
+  .br .bnum{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+  .br .bnum .chip{display:block;width:max-content;margin-top:6px;font-size:15px;font-weight:700}
+  .br b{color:var(--warn)}
+  .verdict + .src{margin-top:12px}
+  /* 7 */
+  .m7{display:grid;grid-template-columns:0.85fr 1.4fr;gap:24px;margin-top:26px;flex:1;min-height:0}
+  .strip{margin-top:10px}
+  .st-row{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:center;margin-bottom:20px}
+  .st-lab{font-size:18px;font-weight:700;color:var(--ink2)}
+  .st-lab b{display:block;font-size:40px;font-weight:800;color:var(--ink);margin-top:2px}
+  .st-track{position:relative;height:150px;background:#f7f8fa;border-radius:8px;margin:0 8px}
+  .dt{position:absolute;width:20px;height:20px;border-radius:50%;transform:translate(-50%,-50%);opacity:.85;border:1.5px solid #fff}
+  .dt.s{background:var(--c-s)} .dt.n{background:var(--c-n)}
+  .md{position:absolute;top:6%;bottom:6%;width:3px;background:var(--ink);transform:translateX(-50%);border-radius:2px}
+  .st-axis{display:grid;grid-template-columns:150px 1fr;gap:18px}
+  .ax{position:relative;height:22px;margin:0 8px;font-size:14px;color:var(--mute)}
+  .ax span{position:absolute;transform:translateX(-50%)}
+  .m7-take{display:flex;align-items:center;gap:16px;margin-top:26px;background:var(--accent-soft);border-radius:10px;padding:14px 18px}
+  .m7-take p{font-size:22px}
+  /* 8 */
+  .checks{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:28px}
+  .ck{border:1px solid var(--line);border-radius:12px;padding:26px 30px}
+  .ck-q{font-size:25px;font-weight:800;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+  .ck-no{display:inline-flex;width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;font-size:15px;align-items:center;justify-content:center}
+  .ck p{font-size:20px;line-height:1.55;color:var(--ink);margin-bottom:6px}
+  .ck em{font-style:italic}
+  .ck-r{margin-top:16px;font-size:20px;font-weight:800;color:var(--accent);background:var(--accent-soft);border-radius:8px;padding:8px 12px}
+  /* 9 */
+  .sp-stack-wrap{margin-top:24px}
+  .sp-stack{display:flex;height:54px;border-radius:8px;overflow:hidden}
+  .sp-stack b{width:var(--w);display:flex;align-items:center;justify-content:center;color:#fff;font-size:19px;font-weight:700;white-space:nowrap}
+  .sp-stack em{font-style:italic;margin-right:6px}
+  .s9{margin-top:22px}
+  .s9 .cmp-row{padding:16px 0;font-size:23px}
+  .s9 .bar b{height:26px}
+  .s9 .cmp-row.key{padding:16px 28px}
+  /* 10 */
+  .unk{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:26px;flex:1;min-height:0}
+  .uk{border:1px solid #f1d9cc;background:var(--warn-soft);border-radius:12px;padding:26px 26px;display:flex;flex-direction:column}
+  .uk-q{font-size:26px;font-weight:800;line-height:1.3;margin-bottom:22px;min-height:68px}
+  .uk p{font-size:21px;line-height:1.55;margin-bottom:16px}
+  .uk em{font-style:italic}
+  .uk-a{margin-top:auto;font-size:21px;font-weight:800;color:var(--warn);border-top:1px dashed #e8c3b0;padding-top:12px}
+  h1 em,.kicker em{font-style:italic}
+
+  /* 11 */
+  .aim{display:grid;grid-template-columns:1fr 44px 1fr 44px 1fr;align-items:stretch;margin-top:30px;gap:0}
+  .aim-c{background:var(--accent);color:#fff;border-radius:12px;padding:24px 26px}
+  .aim-c span{display:block;font-size:15px;font-weight:700;opacity:.8;margin-bottom:6px}
+  .aim-c b{font-size:24px;font-weight:800;line-height:1.4}
+  .aim-c em{font-style:italic}
+  .aim-ar{display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;color:var(--accent)}
+  .road{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:28px}
+  .rd{border-radius:12px;padding:28px 30px;border:1px solid var(--line)}
+  .rd.done{background:var(--accent-soft);border-color:#cfe5dc}
+  .rd.now{background:#fff8e6;border:1.5px dashed #e6c46a}
+  .rd.next{background:#f4f5f7}
+  .rd-st{font-size:17px;font-weight:800;color:var(--ink2);margin-bottom:12px}
+  .rd.done .rd-st{color:var(--accent)} .rd.now .rd-st{color:#9a6b00}
+  .rd-t{font-size:29px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .rd-t span{display:inline-flex;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;font-size:16px;align-items:center;justify-content:center}
+  .rd p{font-size:22px;line-height:1.55}
+  .rd p em{font-style:italic}
+  .rd .rd-s{font-size:18px;color:var(--ink2);margin-top:12px}
+  .toc{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:30px}
+  .toc-lab{font-size:18px;font-weight:800;color:var(--ink2);margin-right:4px}
+  .tc{font-size:19px;font-weight:700;border:1px solid var(--line);border-radius:999px;padding:8px 16px;background:#fff}
+  .tc small{font-size:14px;font-weight:500;color:var(--mute);margin-left:4px}
+  .tc.x{border-color:#f1d9cc;background:var(--warn-soft)}
+  .toc + .src{margin-top:22px}
+
+  /* 12 */
+  .qgrid{display:grid;grid-template-columns:1fr 1fr;grid-auto-flow:row dense;gap:16px 22px;margin-top:24px}
+  .qg{border:1px solid var(--line);border-radius:12px;padding:16px 22px}
+  .qg.key{grid-row:span 2;background:#fff8e6;border:1.5px dashed #e6c46a}
+  .qg-h{font-size:17px;font-weight:800;color:var(--ink2);margin-bottom:8px}
+  .qg-h small{font-size:14px;font-weight:600;color:var(--mute);margin-left:6px}
+  .qg-h em,.qq em{font-style:italic}
+  .qq{display:flex;gap:12px;font-size:21px;line-height:1.45;padding:7px 0}
+  .qq span{flex:none;display:inline-flex;width:30px;height:30px;border-radius:50%;background:#9a6b00;color:#fff;font-size:16px;font-weight:800;align-items:center;justify-content:center;margin-top:1px}
+  .qg:not(.key) .qq span{background:var(--ink2)}
+
+  /* 4-1 */
+  .s41 .cmp-row{grid-template-columns:330px 1fr 1fr 230px}
+  .g small{display:block;font-size:14px;color:var(--mute);font-weight:500;margin-top:2px;font-style:normal}
+  .who{font-size:16px;color:var(--ink2);white-space:nowrap}
+
+  /* 5 · 고르기 */
+  .s5-body{display:grid;grid-template-columns:1.35fr 1fr;gap:28px;margin-top:26px}
+  .funnel{border:1px solid var(--line);border-radius:12px;padding:14px 26px 18px}
+  .fn-head,.fn-row{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:16px;align-items:center}
+  .fn-head{font-size:16px;font-weight:800;color:var(--ink2);padding-bottom:8px;border-bottom:2px solid var(--line)}
+  .fn-head div:not(:first-child){text-align:center}
+  .fn-row{padding:10px 0;border-bottom:1px solid #f0f2f5}
+  .fn-step{font-size:20px;font-weight:700;line-height:1.3}
+  .fn-step small{display:block;font-size:15px;font-weight:500;color:var(--ink2);margin-top:2px}
+  .fn-no{display:inline-block;min-width:34px;font-weight:800;color:var(--accent);margin-right:4px}
+  .fn-cell{text-align:center;font-size:18px;color:var(--ink2);line-height:1.3}
+  .fn-n{font-size:34px;font-weight:800;color:var(--ink);margin-right:2px;font-variant-numeric:tabular-nums}
+  .fn-cell .out{display:block;font-size:15px;color:var(--warn);font-weight:700}
+  .fn-cell .out em{font-style:italic}
+  .fn-cell.skip{font-size:15px;color:var(--mute);background:repeating-linear-gradient(45deg,#f6f7f9,#f6f7f9 6px,#fff 6px,#fff 12px);border-radius:8px;padding:8px 4px}
+  .fn-final{display:flex;align-items:center;gap:10px;flex-wrap:wrap;row-gap:8px;margin-top:14px;background:var(--accent-soft);border-radius:10px;padding:10px 16px 12px}
+  .fn-lab{flex-basis:100%;font-size:15px;font-weight:800;color:var(--accent)}
+  .pick{font-size:18px;font-weight:800;color:#fff;background:var(--c-skin);border-radius:999px;padding:5px 13px}
+  .pick em{font-style:italic}
+  .pick.fungi{background:#14503f}
+  .drops{display:flex;flex-direction:column;gap:12px}
+  .drops-h{font-size:16px;font-weight:800;color:var(--ink2)}
+  .drop{border:1px solid #f1d9cc;background:var(--warn-soft);border-radius:12px;padding:14px 20px}
+  .drop-t{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  .drop-t em{font-size:21px;font-weight:800;font-style:italic;text-decoration:line-through;text-decoration-color:rgba(180,83,42,.55)}
+  .drop-t span{font-size:15px;font-weight:800;color:var(--warn)}
+  .drop p{font-size:17px;line-height:1.5;color:var(--ink)}
+  .s5-note{display:flex;flex-direction:column;gap:4px;margin-top:18px;font-size:17px;color:var(--ink2);line-height:1.5}
+  .s5-note em{font-style:italic}
+
+  /* 0 · 표지 */
+  .cover{padding:72px 96px;justify-content:space-between;
+    background:linear-gradient(135deg,#ffffff 0%,#ffffff 58%,var(--accent-soft) 100%)}
+  .cv-top{font-size:20px;font-weight:600;color:var(--ink2)}
+  .cv-bar{width:72px;height:8px;background:var(--accent);border-radius:4px;margin-bottom:30px}
+  .cv-sub{font-size:26px;font-weight:700;color:var(--accent)}
+  .cv-title{font-size:78px;font-weight:800;line-height:1.22;letter-spacing:-.03em;margin-top:18px}
+  .cv-for{display:inline-block;margin-top:36px;font-size:22px;font-weight:700;color:var(--ink2);
+    border:1.5px solid var(--line);border-radius:999px;padding:10px 24px;background:#fff}
+  .cv-foot{font-size:22px;color:var(--ink2);border-top:1px solid var(--line);padding-top:24px}
+  .cv-team{font-weight:800;color:var(--ink);margin-right:18px}
+
+  html.embed #hint{display:none} html.embed,html.embed body{background:#fff} html.embed .slide{box-shadow:none;border-radius:0}
+  #hint{position:fixed;left:16px;bottom:12px;font-size:12px;color:#8a909c}
+  @media print{
+    html,body{overflow:visible;background:#fff}
+    #stage{position:static;transform:none!important}
+    .slide{display:flex!important;position:relative;box-shadow:none;page-break-after:always}
+    #hint{display:none}
+    @page{size:1600px 900px;margin:0}
+  }
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- 0 · 표지 -->
+  <section class="slide cover">
+    <div class="cv-top">동의대학교 바이오헬스 혁신융합대학사업단</div>
+    <div class="cv-main">
+      <div class="cv-bar"></div>
+      <div class="cv-sub">민감피부 × 피부 마이크로바이옴 큐레이션</div>
+      <h1 class="cv-title">피부 미생물로<br>민감피부를 구별할 수 있을까?</h1>
+      <div class="cv-for">미생물 전문가 피드백 자료</div>
+    </div>
+    <div class="cv-foot">
+      <div><span class="cv-team">우리를놓아조</span>박세준 · 장수미 · 이승민</div>
+    </div>
+  </section>
+
+  <!-- 1 · 왜 민감피부인가 -->
+  <section class="slide">
+    <div class="kicker">1 · 왜 민감피부인가</div>
+    <h1>민감피부는 진단 표준이 없는 증후군입니다</h1>
+
+    <div class="s1-body">
+      <div class="col">
+        <div class="card">
+          <div class="label"><b>①</b>민감피부란</div>
+          <p class="def">보통은 자극이 되지 않는 자극에 <strong>따가움·화끈거림·가려움</strong>을 느끼는 <strong>증후군</strong>. 질환이 아닙니다.</p>
+          <p class="src">Misery L 외. <i>Acta Derm Venereol</i> 2017;97(1):4–6 — IFSI 민감피부 정의</p>
+        </div>
+        <div class="card">
+          <div class="label"><b>②</b>흔합니다</div>
+          <div class="nums">
+            <div><div class="num">71<small>%</small></div><div class="numcap">스스로 “약간이라도 민감하다”</div></div>
+            <div><div class="num">40<small>%</small></div><div class="numcap">그중 “보통 이상 민감하다”</div></div>
+          </div>
+          <p class="src">Chen W 외. <i>J Eur Acad Dermatol Venereol</i> 2020;34(8):1779–1788 — 메타분석, 26개 연구 · 18개국 · 51,783명 (자기보고 기준)</p>
+        </div>
+      </div>
+
+      <div class="card problem">
+        <div class="label"><b>③</b>문제</div>
+        <div class="ptitle">민감한지 아닌지 객관적으로 가를 방법이 없습니다</div>
+        <table>
+          <thead><tr><th>지금 쓰는 도구</th><th>한계</th></tr></thead>
+          <tbody>
+            <tr><td class="tool">설문 (SS-10)<span>10문항에 본인이 답함</span></td>
+                <td class="lim">본인 답이 곧 정답 — <em>주관적</em></td></tr>
+            <tr><td class="tool">유산 자통시험<span>젖산을 바르고 따가움 점수</span></td>
+                <td class="lim">채점이 본인 감각 — <em>결과가 일관되지 않음</em></td></tr>
+            <tr><td class="tool">TEWL<span>피부로 빠져나가는 수분량</span></td>
+                <td class="lim">장벽만 봄 — <em>민감/비민감 기준선 없음</em></td></tr>
+          </tbody>
+        </table>
+        <p class="src"><i>Ann Dermatol</i> 종설, doi:10.5021/ad.24.157 — “임상 징후가 없어 진단과 관리가 어렵다”</p>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-lab">그래서 저희의 질문</div>
+      <div class="q-text">피부 미생물로 민감피부를 구별할 수 있을까?</div>
+    </div>
+
+    <div class="pageno">1</div>
+  </section>
+
+  <!-- 2 · 우리가 가진 자료 -->
+  <section class="slide">
+    <div class="kicker">2 · 우리가 가진 자료</div>
+    <h1>두 자료로 봤습니다 — 구별을 볼 수 있는 건 42명뿐입니다</h1>
+
+    <div class="s2-body">
+      <div class="ds main">
+        <div class="ds-head">
+          <div class="ds-n">42<small>명</small></div>
+          <div class="ds-role">판별용<span>민감 vs 비민감에서 다른 균 찾기</span></div>
+        </div>
+        <dl>
+          <dt>대상</dt><dd>한국인 여성 22–52세</dd>
+          <dt>민감/비민감</dt><dd><b class="yes">있음</b> — 민감 23 · 비민감 19</dd>
+          <dt>채취</dt><dd>오른쪽 볼 면봉</dd>
+          <dt>본 미생물</dt><dd>세균(16S) + <b>진균(ITS)</b></dd>
+          <dt>함께 잰 것</dt><dd>설문</dd>
+        </dl>
+        <p class="src">Keum HL 외. <i>Microorganisms</i> 2020;8(7):1032 (PMC7409107) — 민감 판정: SLS 패치 + 유산 자통시험 + 설문을 모두 충족 (원 논문 기준, 저희가 정하지 않음)</p>
+      </div>
+
+      <div class="ds">
+        <div class="ds-head">
+          <div class="ds-n">595<small>명</small></div>
+          <div class="ds-role">균 확인용<span>그 균이 늘 있는지, 나이·피지에 끌려가는지</span></div>
+        </div>
+        <dl>
+          <dt>대상</dt><dd>한국인 여성 20–79세</dd>
+          <dt>민감/비민감</dt><dd><b class="no">없음</b></dd>
+          <dt>채취</dt><dd>얼굴 전체 세척액</dd>
+          <dt>본 미생물</dt><dd>세균(16S)만</dd>
+          <dt>함께 잰 것</dt><dd>나이 · 피지 · 수분 · TEWL 등</dd>
+        </dl>
+        <p class="src">공개 코호트 재분석 (EGA EGAS00001007334) — <i>Front Cell Infect Microbiol</i> 2025 (PMC12277360) · <i>mSystems</i> (doi:10.1128/msystems.00840-26)</p>
+      </div>
+    </div>
+
+    <div class="s2-foot">
+      <div class="note">
+        <p><span class="mark">※</span>균 이름이 <b>“속(genus)”</b>까지만 붙어 있습니다. 포도상구균속인 건 알지만, 그게 <span style="white-space:nowrap"><i>S. aureus</i>(해로운 균)</span>인지 <span style="white-space:nowrap"><i>S. epidermidis</i>(지켜주는 균)</span>인지는 모릅니다.</p>
+      </div>
+    </div>
+
+    <div class="pageno">2</div>
+  </section>
+
+  <!-- 3 · 얼굴에 어떤 균이 사나 -->
+  <section class="slide">
+    <div class="kicker">3 · 모으기 — 얼굴에 어떤 균이 사나</div>
+    <h1>얼굴 피부의 상위 균</h1>
+
+    <div class="legend">
+      <span><i class="dot skin"></i>피부 상재</span>
+      <span><i class="dot oral"></i>구강 유래로 알려진 균</span>
+      <span><i class="dot env"></i>환경 유래로 알려진 균</span>
+      <span><i class="dot etc"></i>기타 · 미분류</span>
+    </div>
+
+    <div class="s3-body">
+      <div class="rank">
+        <div class="rank-h">595명 · 세균<span>얼굴 세척액</span></div>
+        <ol>
+          <li class="oral"><em>Streptococcus</em><b style="--w:100%"></b><s>18.2</s></li>
+          <li class="skin"><em>Cutibacterium</em><b style="--w:51.6%"></b><s>9.4</s></li>
+          <li class="skin"><em>Staphylococcus</em><b style="--w:30.3%"></b><s>5.5</s></li>
+          <li class="oral"><em>Rothia</em><b style="--w:23.1%"></b><s>4.2</s></li>
+          <li class="skin"><em>Corynebacterium</em><b style="--w:5.9%"></b><s>1.1</s></li>
+          <li class="oral"><em>Actinomyces</em><b style="--w:5.8%"></b><s>1.1</s></li>
+          <li class="oral"><em>Haemophilus</em><b style="--w:4.2%"></b><s>0.8</s></li>
+          <li class="oral"><em>Neisseria</em><b style="--w:4%"></b><s>0.7</s></li>
+        </ol>
+      </div>
+
+      <div class="rank">
+        <div class="rank-h">42명 · 세균<span>볼 면봉</span></div>
+        <ol>
+          <li class="etc">미분류<b style="--w:100%"></b><s>26.2</s></li>
+          <li class="skin"><em>Cutibacterium</em><b style="--w:83.3%"></b><s>21.8</s></li>
+          <li class="env"><em>Delftia</em><b style="--w:11%"></b><s>2.9</s></li>
+          <li class="skin"><em>Staphylococcus</em><b style="--w:9.1%"></b><s>2.4</s></li>
+          <li class="env"><em>Rhodanobacter</em><b style="--w:5.7%"></b><s>1.5</s></li>
+          <li class="env"><em>Pseudomonas</em><b style="--w:5%"></b><s>1.3</s></li>
+          <li class="etc"><em>Lactobacillus</em><b style="--w:3.1%"></b><s>0.8</s></li>
+          <li class="skin"><em>Corynebacterium</em><b style="--w:2.9%"></b><s>0.8</s></li>
+        </ol>
+      </div>
+
+      <div class="rank">
+        <div class="rank-h">42명 · 진균<span>볼 면봉</span></div>
+        <ol>
+          <li class="skin"><em>Malassezia</em><b style="--w:100%"></b><s>66.4</s></li>
+          <li class="etc">미분류<b style="--w:5.6%"></b><s>3.7</s></li>
+          <li class="env"><em>Cladosporium</em><b style="--w:1.8%"></b><s>1.2</s></li>
+          <li class="env"><em>Lasiobolus</em><b style="--w:1.5%"></b><s>1.0</s></li>
+          <li class="env"><em>Rhodotorula</em><b style="--w:1.4%"></b><s>0.9</s></li>
+          <li class="env"><em>Enterocarpus</em><b style="--w:0.8%"></b><s>0.5</s></li>
+          <li class="env"><em>Mucor</em><b style="--w:0.5%"></b><s>0.3</s></li>
+          <li class="env"><em>Fusarium</em><b style="--w:0.3%"></b><s>0.2</s></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="s3-take">
+      <div><span class="tk">1</span><b>세균</b> — 피부 상재균 3개(<em>Cutibacterium · Staphylococcus · Corynebacterium</em>)가 두 자료 모두 상위</div>
+      <div><span class="tk">2</span><b>진균</b> — <em>Malassezia</em> 하나가 약 3분의 2</div>
+      <div><span class="tk">3</span><b><em>Streptococcus</em></b> — 595명 1위(18.2%)인데 볼 면봉에선 0.6% → 채취법 차이일 수 있음</div>
+    </div>
+
+    <p class="src">각 칸 상위 8개 · 사람별 상대풍부도 <b>중앙값(%)</b> · 막대 길이는 칸마다 그 칸 1위 기준 — 저희가 원자료에서 계산 (<code>분석표/595_genus_relabund.tsv</code> · <code>원자료/03_sensitive_16S·ITS_genus_pct.tsv</code>)<br>
+    역할 색은 문헌상 알려진 서식지 기준이며, 저희 자료에서 오염을 확인했다는 뜻이 아닙니다</p>
+
+    <div class="pageno">3</div>
+  </section>
+
+  <!-- 4 · 민감 vs 비민감 -->
+  <section class="slide">
+    <div class="kicker">4 · 비교하기 — 42명에서 민감과 비민감은 무엇이 다른가</div>
+    <h1>민감 vs 비민감 비교</h1>
+
+    <div class="cmp">
+      <div class="cmp-row cmp-h">
+        <div>균</div>
+        <div><i class="sw s"></i>민감 <span>23명</span></div>
+        <div><i class="sw n"></i>비민감 <span>19명</span></div>
+        <div>차이</div>
+      </div>
+
+      <div class="cmp-sec">세균</div>
+      <div class="cmp-row">
+        <div class="g skin"><em>Cutibacterium</em></div>
+        <div class="bar s"><b style="--w:100%"></b><s>24.8</s></div>
+        <div class="bar n"><b style="--w:87.8%"></b><s>21.7</s></div>
+        <div><span class="chip none">차이 없음</span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="g skin"><em>Staphylococcus</em></div>
+        <div class="bar s"><b style="--w:66.7%"></b><s>2.0</s></div>
+        <div class="bar n"><b style="--w:100%"></b><s>2.9</s></div>
+        <div><span class="chip none">차이 없음</span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="g skin"><em>Corynebacterium</em></div>
+        <div class="bar s"><b style="--w:42%"></b><s>0.5</s></div>
+        <div class="bar n"><b style="--w:100%"></b><s>1.1</s></div>
+        <div><span class="chip trend">민감↓ 경향만</span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="g"><em>Lactobacillus</em></div>
+        <div class="bar s"><b style="--w:100%"></b><s>1.4</s></div>
+        <div class="bar n"><b style="--w:24.1%"></b><s>0.3</s></div>
+        <div><span class="chip weak">민감↑ 차이 있음 · 약함</span></div>
+      </div>
+
+      <div class="cmp-sec">진균</div>
+      <div class="cmp-row key">
+        <div class="g skin"><em>Malassezia</em></div>
+        <div class="bar s"><b style="--w:43.2%"></b><s>36.4</s></div>
+        <div class="bar n"><b style="--w:100%"></b><s>84.2</s></div>
+        <div><span class="chip strong">민감↓ 뚜렷</span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="g"><em>Mucor</em></div>
+        <div class="bar s"><b style="--w:100%"></b><s>1.6</s></div>
+        <div class="bar n"><b style="--w:5.1%"></b><s>0.1</s></div>
+        <div><span class="chip weak">민감↑ 차이 있음 · 약함</span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="g">미분류 진균</div>
+        <div class="bar s"><b style="--w:100%"></b><s>11.4</s></div>
+        <div class="bar n"><b style="--w:7%"></b><s>0.8</s></div>
+        <div><span class="chip strong">민감↑ 뚜렷</span><span class="see">→ 4-1</span></div>
+      </div>
+        </div>
+
+    <div class="s4-take">
+      <div><span class="tk">1</span><b>세균</b> — 상위 3개(피부 상재균)는 민감·비민감 차이가 거의 없음</div>
+      <div><span class="tk">2</span><b>진균</b> — <em>Malassezia</em>가 민감군에서 절반 이하로 낮음 (36% vs 84%)</div>
+      <div class="mk"><span class="mark">※</span><em>Malassezia</em>↓ · <em>Mucor</em>↑ · <em>Lactobacillus</em>↑는 원 논문이 이미 보고한 것 — 저희는 같은 자료에서 다시 확인</div>
+    </div>
+
+    <p class="src">42명 · 사람별 상대풍부도 <b>중앙값(%)</b> · 막대는 줄마다 둘 중 큰 값 기준 — 저희가 원자료에서 계산 (<code>원자료/03_sensitive_16S·ITS_genus_pct.tsv</code>)<br>
+    뚜렷 = 42명에서도 우연으로 보기 어려움 · 차이 있음·약함 = 차이는 있으나 42명으로는 우연을 배제하기 어려움 · 경향만 = 방향만 보임 · 원 논문: Keum HL 외. <i>Microorganisms</i> 2020;8(7):1032</p>
+
+    <div class="pageno">4</div>
+  </section>
+
+  <!-- 4-1 · 미분류 진균의 정체 -->
+  <section class="slide">
+    <div class="kicker">4-1 · 민감군에서 늘어난 미분류 진균을 BLAST로 확인</div>
+    <h1>미분류 진균의 정체</h1>
+
+    <div class="cmp s41">
+      <div class="cmp-row cmp-h">
+        <div>BLAST로 가장 비슷한 것</div>
+        <div><i class="sw s"></i>민감 <span>평균 %</span></div>
+        <div><i class="sw n"></i>비민감 <span>평균 %</span></div>
+        <div>가진 사람</div>
+      </div>
+      <div class="cmp-row key">
+        <div class="g"><em><b>Epicoccum nigrum</b></em><small>공기·식물 곰팡이 · 일치 99.7–100%</small></div>
+        <div class="bar s"><b style="--w:100%"></b><s>5.5</s></div>
+        <div class="bar n"><b style="--w:8%"></b><s>0.4</s></div>
+        <div class="who">민감 11/23 · 비민감 7/19</div>
+      </div>
+      <div class="cmp-row">
+        <div class="g">미배양 진균 · 부분 일치<small>이름 붙은 친척 없음 · 일치 84–86% 또는 일부만</small></div>
+        <div class="bar s"><b style="--w:100%"></b><s>3.4</s></div>
+        <div class="bar n"><b style="--w:34.3%"></b><s>1.2</s></div>
+        <div class="who">민감 18/23 · 비민감 16/19</div>
+      </div>
+      <div class="cmp-row">
+        <div class="g">항아리곰팡이문<small>물·흙에 사는 진균 (Chytridiomycota)</small></div>
+        <div class="bar s"><b style="--w:100%"></b><s>0.5</s></div>
+        <div class="bar n"><b style="--w:19.6%"></b><s>0.1</s></div>
+        <div class="who">민감 9/23 · 비민감 3/19</div>
+      </div>
+      <div class="cmp-row">
+        <div class="g">미배양 진균 · 잘 맞음<small>일치 97% 이상이지만 종 이름 없음</small></div>
+        <div class="bar s"><b style="--w:100%"></b><s>0.3</s></div>
+        <div class="bar n"><b style="--w:7.7%"></b><s>0.0</s></div>
+        <div class="who">민감 7/23 · 비민감 1/19</div>
+      </div>
+    </div>
+
+    <div class="s4-take">
+      <div><span class="tk">1</span><b>전부 진균</b> — 사람·식물·세균 DNA는 없음</div>
+      <div><span class="tk">2</span>이름이 확실한 건 <em>Epicoccum nigrum</em>(공기 중 곰팡이) 하나 — <b>피부에 사는 균은 없음</b></div>
+      <div><span class="tk">3</span>소수가 끌어올린 값 (중앙값은 두 군 모두 0%) — 실제로 붙어 사는지, <em>Malassezia</em> 빈자리 착시인지는 절대량(qPCR)이 필요</div>
+    </div>
+
+    <p class="src">42명 ITS · 속 이름이 없는 서열(ASV) 중 계(kingdom)도 모르는 67개 전부 + Didymellaceae 과 상위 5개(16개 중) = 72개 — NCBI BLAST (blastn megablast · core_nt · 2026-09-29) · 가장 비슷한 서열 1개 기준 · 결과 <code>분석표/미분류진균_BLAST_*_20260929</code><br>
+    “미배양 진균” = 환경에서 서열만 얻고 배양·명명된 적 없는 진균 기록 · 가진 사람 = 해당 서열이 1개 이상 검출된 사람 수</p>
+
+    <div class="pageno">4-1</div>
+  </section>
+
+  <!-- 5 · 후보 균 고르기 -->
+  <section class="slide">
+    <div class="kicker">5 · 고르기 — 807속에서 4개로</div>
+    <h1>후보 균 고르기</h1>
+
+    <div class="s5-body">
+      <div class="funnel">
+        <div class="fn-head"><div></div><div>세균</div><div>진균</div></div>
+        <div class="fn-row">
+          <div class="fn-step"><span class="fn-no">시작</span></div>
+          <div class="fn-cell"><b class="fn-n">807</b>속</div>
+          <div class="fn-cell"><b class="fn-n">234</b>속</div>
+        </div>
+        <div class="fn-row">
+          <div class="fn-step"><span class="fn-no">①</span>흔한가<small>90% 이상에서 검출 · 중앙값 0.5% 이상</small></div>
+          <div class="fn-cell"><b class="fn-n">4</b>속</div>
+          <div class="fn-cell"><b class="fn-n">2</b>속</div>
+        </div>
+        <div class="fn-row">
+          <div class="fn-step"><span class="fn-no">②</span>채취법에 흔들리지 않나<small>두 자료 중앙값 차이 5배 미만</small></div>
+          <div class="fn-cell"><b class="fn-n">3</b>속<span class="out">− <em>Streptococcus</em></span></div>
+          <div class="fn-cell skip">595명에 진균 없음<br>→ 이 단계 없음</div>
+        </div>
+        <div class="fn-row">
+          <div class="fn-step"><span class="fn-no">③</span>오염 의심 빼기</div>
+          <div class="fn-cell"><b class="fn-n">3</b>속</div>
+          <div class="fn-cell"><b class="fn-n">1</b>속<span class="out">− <em>Cladosporium</em></span></div>
+        </div>
+        <div class="fn-final">
+          <span class="fn-lab">남은 후보</span>
+          <span class="pick"><em>Cutibacterium</em></span>
+          <span class="pick"><em>Staphylococcus</em></span>
+          <span class="pick"><em>Corynebacterium</em></span>
+          <span class="pick fungi"><em>Malassezia</em></span>
+        </div>
+      </div>
+
+      <div class="drops">
+        <div class="drops-h">탈락한 균</div>
+        <div class="drop">
+          <div class="drop-t"><em>Streptococcus</em><span>많은데 못 씀</span></div>
+          <p>595명 1위(18.2%)인데 볼 면봉에선 0.6% — <b>30.7배</b> 차이. 채취법이 만든 숫자</p>
+        </div>
+        <div class="drop">
+          <div class="drop-t"><em>Lactobacillus</em><span>차이는 있는데 못 씀</span></div>
+          <p>4장에서 민감군에 많았지만, 595명에선 63%만 검출 · 중앙값 0.04% · <b>오염 신호</b>도 있음</p>
+        </div>
+        <div class="drop">
+          <div class="drop-t"><em>Cladosporium</em><span>오염 의심</span></div>
+          <p>얕게 읽은 시료일수록 많이 나옴 · 시약만 돌린 음성대조에서 <b>35.6%</b> (시료 1.4%)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="s5-note">
+      <div><span class="mark">※</span>이 기준에는 <b>민감/비민감 결과를 쓰지 않았습니다</b> — 차이 나는 균을 골라 뽑은 것이 아닙니다</div>
+      <div><span class="mark">※</span><em>Malassezia</em>는 595명에 진균 자료가 없어 ②를 거치지 않았습니다 — 세균보다 한 단계 덜 걸렀습니다</div>
+      <div><span class="mark">※</span>4장의 미분류 진균은 한 균이 아닌 서열 묶음이라 후보에서 제외 — 그 안에서 이름이 확실한 <em>Epicoccum</em>도 42명 중 18명에서만 나와 ①에서 탈락</div>
+    </div>
+
+    <p class="src">세균: 595명 807속 + 42명 · 진균: 42명만 (234속, 미분류 제외) — 생성 코드 <code>코드/5_후보선정규칙.py</code> · <code>8_진균_판별력.py</code> · 결과 <code>분석표/후보선정규칙.json</code> · <code>진균_판별력.json</code><br>
+    음성대조(블랭크)는 저희 자료가 아니라 같은 수업 자료의 다른 연구 ITS 블랭크 1개 · 오염 신호 = 시퀀싱 심도와 음의 상관 (Salter 2014 방식)</p>
+
+    <div class="pageno">5</div>
+  </section>
+
+  <!-- 6 · 세균 후보 3개 요약 -->
+  <section class="slide">
+    <div class="kicker">6 · 후보 균 — 세균 3개</div>
+    <h1>세균 후보 요약</h1>
+
+    <div class="btab">
+      <div class="br bh"><div>균</div><div>어떤 균</div><div>595명<small>검출 · 중앙값</small></div><div>42명<small>민감 vs 비민감</small></div><div>막힌 곳</div><div>판정</div></div>
+      <div class="br">
+        <div class="bn"><em>Cutibacterium</em><small>큐티박테리움</small></div>
+        <div>피지 먹는 얼굴 최우점 세균 (“여드름균”)</div>
+        <div class="bnum">99% · 9.4%</div>
+        <div class="bnum">24.8 vs 21.7<span class="chip none">차이 없음</span></div>
+        <div>나이·피지에 크게 끌려감 (20대 21% → 55세+ 3%) · 여드름과 갈리는 건 양이 아니라 <b>계통형</b></div>
+        <div><span class="chip weak">조건부</span></div>
+      </div>
+      <div class="br">
+        <div class="bn"><em>Staphylococcus</em><small>포도상구균</small></div>
+        <div>해로운 종(<em>aureus</em>)과 지켜주는 종이 한 속에</div>
+        <div class="bnum">99% · 5.5%</div>
+        <div class="bnum">2.0 vs 2.9<span class="chip none">차이 없음</span></div>
+        <div>계산 방식에 따라 나이와의 관계가 뒤집힘 · <b>종 99% 미분류</b>라 해로운 종·지켜주는 종 구분 불가</div>
+        <div><span class="chip weak">조건부</span></div>
+      </div>
+      <div class="br">
+        <div class="bn"><em>Corynebacterium</em><small>코리네박테리움</small></div>
+        <div>피부 지질에 사는 세균 · 보호 종과 기회감염 종이 섞임</div>
+        <div class="bnum">90% · 1.1%</div>
+        <div class="bnum">0.5 vs 1.1<span class="chip trend">경향만</span></div>
+        <div><b>시약 오염균 목록</b>에 있음 (음성대조 4개 모두 검출) · 얕게 읽은 시료에선 검출 81%</div>
+        <div><span class="chip weak">조건부</span></div>
+      </div>
+    </div>
+
+    <div class="verdict"><span class="v-lab">공통</span><span>셋 다 <b>민감피부를 가르는지 42명으로는 모름</b> — 필요한 것: 군당 65명 · 종/계통형 수준 분석 (16S로는 불가)</span></div>
+
+    <p class="src">595명: <code>분석표/gate_results.json</code> · <code>종수준_한계.json</code> · <code>오염점검.json</code> · 42명: <code>원자료/03_sensitive_16S_genus_pct.tsv</code> · 균의 역할: <code>문헌/세균3속_문헌역할.md</code>(원문 확인) · Keum 2020도 <em>Cutibacterium</em>·<em>Staphylococcus</em> 유의차 없음</p>
+
+    <div class="pageno">6</div>
+  </section>
+
+  <!-- 7 · Malassezia ① -->
+  <section class="slide">
+    <div class="kicker">7 · 핵심 후보 — 진균 <em>Malassezia</em> ①</div>
+    <h1><em>Malassezia</em> <span class="h1-ko">말라세지아 — 어떤 균이고, 무엇이 다른가</span></h1>
+
+    <div class="m7">
+      <div class="c3 what">
+        <div class="c3-h"><span class="c3-no">1</span>어떤 균인가</div>
+        <p class="c3-lead">피지를 먹고 사는 <b>효모</b><br><span>얼굴 진균의 약 3분의 2</span></p>
+        <ul>
+          <li>지방산을 스스로 못 만들어 <b>피지에 의존</b> → 얼굴·두피·등에 많음</li>
+          <li>피지를 분해하는 효소(리파아제)를 가짐</li>
+          <li>비듬·지루피부염 등과 연관 — <b>모두 많을 때</b>의 이야기</li>
+          <li>원 논문: 42명 진균의 80%가 이 균 · 민감군에서 <b>감소</b> 보고</li>
+        </ul>
+        <p class="src">Cho &amp; Sugita, <i>J Microbiol Biotechnol</i> (PMC9705927) — 원문 확인</p>
+      </div>
+
+      <div class="c3 ours">
+        <div class="c3-h"><span class="c3-no">2</span>42명에서 — 점 하나가 한 사람</div>
+        <div class="strip">
+          <div class="st-row"><div class="st-lab"><i class="sw s"></i>민감 23<b>36.4%</b></div><div class="st-track"><i class="dt s" style="left:0%;top:38%"></i><i class="dt s" style="left:1.5%;top:62%"></i><i class="dt s" style="left:2%;top:50%"></i><i class="dt s" style="left:12.3%;top:74%"></i><i class="dt s" style="left:14.9%;top:44%"></i><i class="dt s" style="left:21.8%;top:68%"></i><i class="dt s" style="left:23%;top:56%"></i><i class="dt s" style="left:24.1%;top:38%"></i><i class="dt s" style="left:30.8%;top:62%"></i><i class="dt s" style="left:36.2%;top:50%"></i><i class="dt s" style="left:36.2%;top:74%"></i><i class="dt s" style="left:36.4%;top:44%"></i><i class="dt s" style="left:36.8%;top:68%"></i><i class="dt s" style="left:40.1%;top:56%"></i><i class="dt s" style="left:49.8%;top:38%"></i><i class="dt s" style="left:52.9%;top:62%"></i><i class="dt s" style="left:56.2%;top:50%"></i><i class="dt s" style="left:57.9%;top:74%"></i><i class="dt s" style="left:70.9%;top:44%"></i><i class="dt s" style="left:86.5%;top:68%"></i><i class="dt s" style="left:88.9%;top:56%"></i><i class="dt s" style="left:89.1%;top:38%"></i><i class="dt s" style="left:90.3%;top:62%"></i><i class="md" style="left:36.4%"></i></div></div>
+          <div class="st-row"><div class="st-lab"><i class="sw n"></i>비민감 19<b>84.2%</b></div><div class="st-track"><i class="dt n" style="left:19.4%;top:38%"></i><i class="dt n" style="left:38.2%;top:62%"></i><i class="dt n" style="left:66%;top:50%"></i><i class="dt n" style="left:66.8%;top:74%"></i><i class="dt n" style="left:74.1%;top:44%"></i><i class="dt n" style="left:75.2%;top:68%"></i><i class="dt n" style="left:76.1%;top:56%"></i><i class="dt n" style="left:82.8%;top:38%"></i><i class="dt n" style="left:83.5%;top:62%"></i><i class="dt n" style="left:84.2%;top:50%"></i><i class="dt n" style="left:86%;top:74%"></i><i class="dt n" style="left:90.2%;top:44%"></i><i class="dt n" style="left:93.8%;top:68%"></i><i class="dt n" style="left:93.9%;top:56%"></i><i class="dt n" style="left:95.3%;top:38%"></i><i class="dt n" style="left:95.8%;top:62%"></i><i class="dt n" style="left:97.1%;top:50%"></i><i class="dt n" style="left:99.3%;top:74%"></i><i class="dt n" style="left:99.7%;top:44%"></i><i class="md" style="left:84.2%"></i></div></div>
+          <div class="st-axis"><div></div><div class="ax"><span style="left:0">0%</span><span style="left:25%">25</span><span style="left:50%">50</span><span style="left:75%">75</span><span style="left:100%">100%</span></div></div>
+        </div>
+        <div class="m7-take">
+          <span class="chip strong">민감↓ 뚜렷</span>
+          <p>민감 1명·비민감 1명을 뽑으면 <b>85% 확률로 비민감 쪽이 더 많음</b></p>
+        </div>
+        <p class="src">세로선 = 중앙값 · <code>원자료/03_sensitive_ITS_genus_pct.tsv</code> · AUC 0.153 [0.05–0.29] · 원 논문 Keum 2020도 민감군에서 감소 보고</p>
+      </div>
+    </div>
+
+    <div class="pageno">7</div>
+  </section>
+
+  <!-- 8 · Malassezia ② -->
+  <section class="slide">
+    <div class="kicker">8 · 핵심 후보 — 진균 <em>Malassezia</em> ②</div>
+    <h1>이 차이는 진짜인가 — 착시 네 가지 점검</h1>
+
+    <div class="checks">
+      <div class="ck">
+        <div class="ck-q"><span class="ck-no">1</span>나이 때문 아닌가?</div>
+        <p><em>Malassezia</em>는 <b>나이 들수록 줄어듦</b> (다른 자료 58명: 고연령 66% vs 저연령 85%)</p>
+        <p>그런데 민감군이 <b>11살 더 젊음</b> (29세 vs 40세) → 나이 탓이면 민감군이 더 많아야 함</p>
+        <div class="ck-r">✓ 31–55세만 봐도 차이 유지 — 오히려 더 커짐</div>
+      </div>
+      <div class="ck">
+        <div class="ck-q"><span class="ck-no">2</span>오염 때문 아닌가?</div>
+        <p>시약 오염이면 <b>얕게 읽은 시료일수록 많아야</b> 함 → 그런 패턴 없음</p>
+        <p>시약만 돌린 음성대조에서도 <b>시료보다 적게</b> 나옴 (0.36배)</p>
+        <div class="ck-r">✓ 오염 신호 없음</div>
+      </div>
+      <div class="ck">
+        <div class="ck-q"><span class="ck-no">3</span>비율 계산 착시 아닌가?</div>
+        <p>한 사람 합이 100%라 계산 방식에 따라 결과가 흔들릴 수 있음</p>
+        <p>계산 방식 바꾸기 · 미분류 빼기 · 환경 진균 기준 · 품질 낮은 시료 25% 빼기</p>
+        <div class="ck-r">✓ 네 방식 모두 차이 유지</div>
+      </div>
+      <div class="ck">
+        <div class="ck-q"><span class="ck-no">4</span>이 자료에만 있는 균 아닌가?</div>
+        <p>진균 자료 4개 (볼·이마·두피 · <b>596시료</b>)에서 확인</p>
+        <p>모든 자료에서 <b>100% 검출</b> — 누구에게나 있는 균</p>
+        <div class="ck-r">✓ 어디서나 잡힘</div>
+      </div>
+    </div>
+
+    <div class="verdict"><span class="v-lab">결론</span><span>네 가지 착시를 지워도 <b>차이가 남음</b> — 원 논문(Keum 2020)의 결과를 같은 자료에서 다시 확인</span></div>
+    <p class="src">1 <code>분석표/진균_판별력.json</code>(01 노화 ITS 58명 · 31–55세 AUC 0.093) · 2 <code>오염점검.json</code>(심도 상관 ρ=+0.08 · 다른 연구 ITS 블랭크 1개) · 3 로그비 0.181 · 미분류 제거 0.181 · 환경진균 로그비 0.172 · 저품질 25% 제외 0.192 · 4 <code>판정표_이식성.json</code></p>
+
+    <div class="pageno">8</div>
+  </section>
+
+  <!-- 9 · Malassezia ③ -->
+  <section class="slide">
+    <div class="kicker">9 · 핵심 후보 — 진균 <em>Malassezia</em> ③</div>
+    <h1>종으로 내려가면 — 신호는 <em>M. restricta</em></h1>
+
+    <div class="sp-stack-wrap">
+      <div class="mini-h"><em>Malassezia</em> 서열(ASV) 116개 중 종 이름이 붙은 것</div>
+      <div class="sp-stack">
+        <b style="--w:39.7%;background:#14503f"><em>restricta</em> 46</b>
+        <b style="--w:12.9%;background:#3d8a73"><em>globosa</em> 15</b>
+        <b style="--w:11.2%;background:#8fbfae">기타 7종 13</b>
+        <b style="--w:36.2%;background:#c9ced6;color:#4a5263">종 미분류 42</b>
+      </div>
+    </div>
+
+    <div class="cmp s9">
+      <div class="cmp-row cmp-h">
+        <div>종</div>
+        <div><i class="sw s"></i>민감 <span>중앙값 %</span></div>
+        <div><i class="sw n"></i>비민감 <span>중앙값 %</span></div>
+        <div>차이</div>
+      </div>
+      <div class="cmp-row key">
+        <div class="g"><em><b>M. restricta</b></em></div>
+        <div class="bar s"><b style="--w:45.2%"></b><s>30.2</s></div>
+        <div class="bar n"><b style="--w:100%"></b><s>66.9</s></div>
+        <div><span class="chip strong">민감↓ 뚜렷</span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="g"><em>M. globosa</em></div>
+        <div class="bar s"><b style="--w:55%"></b><s>0.4</s></div>
+        <div class="bar n"><b style="--w:100%"></b><s>0.7</s></div>
+        <div><span class="chip none">차이 없음</span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="g">종 미분류</div>
+        <div class="bar s"><b style="--w:55.2%"></b><s>4.7</s></div>
+        <div class="bar n"><b style="--w:100%"></b><s>8.5</s></div>
+        <div><span class="chip none">차이 없음</span></div>
+      </div>
+    </div>
+
+    <div class="s4-take">
+      <div><span class="tk">1</span>속 전체의 감소는 사실상 <b><em>M. restricta</em> 하나</b>에서 옴</div>
+      <div><span class="tk">2</span>원 논문도 같은 종을 보고 (비민감 91.0% vs 민감 71.6%) — <b>종 수준까지 재현</b></div>
+      <div class="mk"><span class="mark">※</span>종 이름은 ITS 서열로 추정한 것 · 서열 36%는 여전히 종 미분류 · <em>restricta</em>가 속 전체보다 더 나은 지표라는 뜻은 아님</div>
+    </div>
+    <p class="src">42명 ITS ASV 표 <code>원자료/03_sensitive_ITS_asv_*.tsv</code> → <code>분석표/진균_종수준.json</code> · <em>M. restricta</em> AUC 0.165 [0.05–0.31] · 11개 종/그룹 보정 후 q=0.0024</p>
+
+    <div class="pageno">9</div>
+  </section>
+
+  <!-- 10 · Malassezia ④ -->
+  <section class="slide">
+    <div class="kicker">10 · 핵심 후보 — 진균 <em>Malassezia</em> ④</div>
+    <h1>아직 모르는 것</h1>
+
+    <div class="unk">
+      <div class="uk">
+        <div class="uk-q">왜 적은가?</div>
+        <p>알려진 기전은 전부 <b>많을 때</b> — 피지 분해 → 장벽 손상 (비듬·지루피부염)</p>
+        <p><b>적을 때의 의미는 문헌에 없음</b></p>
+        <div class="uk-a">→ 피지·지질을 함께 측정</div>
+      </div>
+      <div class="uk">
+        <div class="uk-q">실제로 줄었나, 비율만 줄었나?</div>
+        <p>진균 다양성과 거의 완벽히 반대로 움직임 (ρ = −0.979)</p>
+        <p>“<em>Malassezia</em>가 적다”와 “다른 진균이 많다”를 <b>구별 못 함</b></p>
+        <div class="uk-a">→ 실제 양 측정 (qPCR)</div>
+      </div>
+      <div class="uk">
+        <div class="uk-q">한 번 재서 믿을 수 있나?</div>
+        <p>같은 사람을 4계절 쟀더니 값이 크게 흔들림 (일관성 0.20)</p>
+        <p>단, 다른 대상에서 잰 값 (미국·중국 가구 이마 24명)</p>
+        <div class="uk-a">→ 우리 대상 반복 측정</div>
+      </div>
+      <div class="uk">
+        <div class="uk-q">어디서 어떻게 재야 하나?</div>
+        <p>부위마다 크게 다름 (두피 34% · 이마 78%)</p>
+        <p>나이·피지와의 관계를 볼 <b>대규모 진균 자료가 없음</b></p>
+        <div class="uk-a">→ 채취 부위 고정 + 대규모 진균 자료</div>
+      </div>
+    </div>
+
+    <div class="verdict"><span class="v-lab">판정</span><span><b>후속 검증 1순위</b> — 민감피부를 가르는 신호가 있는 유일한 후보. 다만 위 네 가지를 풀어야 지표로 쓸 수 있음</span></div>
+    <p class="src">1 <code>문헌/Malassezia_생리역할.md</code> (Cho &amp; Sugita 원문) · 2 <code>분석표/다양성_분리.json</code> · 3 <code>시간안정성.json</code> (15계절 ITS, ICC 0.195 [0.02–0.36]) · 4 <code>판정표_이식성.json</code> (16비듬 두피 33.9% · 15계절 이마 78.4%)</p>
+
+    <div class="pageno">10</div>
+  </section>
+
+  <!-- 11 · 최종 결과물 -->
+  <section class="slide">
+    <div class="kicker">11 · 그래서 무엇을 만드나</div>
+    <h1>최종 결과물 <span class="h1-ko"><em>Malassezia</em> 기반 민감피부 판별 지표 검증 설계서</span></h1>
+
+    <div class="aim">
+      <div class="aim-c"><span>누구에게</span><b>민감피부 판별 지표를 개발하려는<br>기업 R&amp;D 담당자</b></div>
+      <div class="aim-ar">→</div>
+      <div class="aim-c"><span>무엇을</span><b><em>M. restricta</em>를 1순위 후보로 한<br>검증 설계서를 제공해</b></div>
+      <div class="aim-ar">→</div>
+      <div class="aim-c"><span>그래서</span><b>효과 없는 균에 예산을 쓰지 않고<br>바로 검증 실험에 들어가게</b></div>
+    </div>
+
+    <div class="road">
+      <div class="rd done">
+        <div class="rd-st">● 이번에 한 것</div>
+        <div class="rd-t"><span>1</span>후보 찾기</div>
+        <p>807속 → 4개 → <b><em>M. restricta</em></b></p>
+        <p class="rd-s">착시 네 가지 점검 · 원 논문 재현</p>
+      </div>
+      <div class="rd now">
+        <div class="rd-st">● 설계서에 담을 것</div>
+        <div class="rd-t"><span>2</span>검증 설계</div>
+        <p>채취 부위 고정 · <b>qPCR로 실제 양</b> · <b>군당 65명</b> · 반복 측정 · 피지 함께 측정</p>
+        <p class="rd-s">10장의 “모르는 것 넷”을 푸는 설계</p>
+      </div>
+      <div class="rd next">
+        <div class="rd-st">○ 검증 후</div>
+        <div class="rd-t"><span>3</span>판별 기준</div>
+        <p>“몇 % 이하면 민감 가능성” 같은 <b>기준값</b></p>
+        <p class="rd-s">지금은 만들 수 없음 — 42명 · 기준값 없음</p>
+      </div>
+    </div>
+
+    <div class="toc">
+      <span class="toc-lab">설계서 목차</span>
+      <span class="tc">후보 균과 근거 <small>6–10장</small></span>
+      <span class="tc">채취·측정 방법 <small>10장</small></span>
+      <span class="tc">필요한 인원 <small>군당 65명</small></span>
+      <span class="tc">착시를 가르는 방법 <small>8·10장</small></span>
+      <span class="tc x">쓰면 안 되는 균과 이유 <small>5장</small></span>
+    </div>
+
+    <p class="src">큐레이션 축: <b>진단(판별)</b> — 예방·관리는 원인을 몰라 “이 균을 늘리자/줄이자”를 말할 수 없음 · 치료는 해당 없음(민감피부는 질환이 아님) · 군당 65명 = 신뢰구간 폭 ±0.10 기준(Hanley–McNeil)</p>
+
+    <div class="pageno">11</div>
+  </section>
+
+  <!-- 12 · 질문 모음 -->
+  <section class="slide">
+    <div class="kicker">12 · 여쭤보고 싶은 것</div>
+    <h1>질문 모음</h1>
+
+    <div class="qgrid">
+      <div class="qg">
+        <div class="qg-h">방향 <small>1장</small></div>
+        <div class="qq"><span>1</span><p>민감피부를 <b>미생물로 구별</b>하려는 방향, 말이 되나요?</p></div>
+      </div>
+      <div class="qg">
+        <div class="qg-h">자료 <small>2–3장</small></div>
+        <div class="qq"><span>2</span><p>채취법이 다른 두 자료(<b>볼 면봉 ↔ 얼굴 세척액</b>)를 같이 봐도 될까요?</p></div>
+      </div>
+      <div class="qg key">
+        <div class="qg-h"><em>Malassezia</em> <small>7–10장</small></div>
+        <div class="qq"><span>3</span><p>민감군에서 <b><em>Malassezia</em>가 적은 것</b>, 생물학적으로 무엇을 의미할 수 있을까요?</p></div>
+        <div class="qq"><span>4</span><p><b>실제로 줄었는지, 비율만 줄었는지</b> 가르려면 qPCR 말고 방법이 있을까요?</p></div>
+        <div class="qq"><span>5</span><p><em>M. restricta</em>만 줄고 <em>M. globosa</em>는 그대로인 게 의미가 있을까요?</p></div>
+      </div>
+      <div class="qg">
+        <div class="qg-h">환경 곰팡이 <small>4-1장</small></div>
+        <div class="qq"><span>6</span><p>알레르기원 <em>Epicoccum</em>이 민감군에 보이는 것, <b>검증해 볼 만한 가설</b>일까요?</p></div>
+      </div>
+      <div class="qg key">
+        <div class="qg-h">최종 결과물 <small>11장</small></div>
+        <div class="qq"><span>7</span><p>검증 설계서에 <b>빠진 것</b>이 있다면 무엇일까요?</p></div>
+        <div class="qq"><span>8</span><p>검증 규모(qPCR · 군당 65명 · 반복 측정)가 <b>현실적</b>인가요?</p></div>
+      </div>
+    </div>
+
+    <div class="pageno">12</div>
+  </section>
+
+</div>
+<div id="hint">← → 넘김 · F 전체화면 · P 인쇄</div>
+<script>
+  const stage=document.getElementById('stage');
+  const slides=[...document.querySelectorAll('.slide')];
+  let i=0;
+  const embed=window.self!==window.top; if(embed)document.documentElement.classList.add('embed');
+  function fit(){const s=Math.min(innerWidth/1600,innerHeight/900)*(embed?1:0.96);
+    stage.style.transform=`translate(-50%,-50%) scale(${s})`;}
+  function show(n){i=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach((el,k)=>el.classList.toggle('on',k===i));
+    try{location.hash=i+1}catch(e){}}
+  addEventListener('resize',fit);
+  addEventListener('keydown',e=>{
+    if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(i+1)}
+    else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(i-1)}
+    else if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}
+    else if(e.key==='p'||e.key==='P'){print()}
+  });
+  document.addEventListener('click',e=>{if(e.clientX>innerWidth/2)show(i+1);else show(i-1)});
+  fit();show((parseInt(location.hash.slice(1))||1)-1);
+</script>
+</body>
+</html>

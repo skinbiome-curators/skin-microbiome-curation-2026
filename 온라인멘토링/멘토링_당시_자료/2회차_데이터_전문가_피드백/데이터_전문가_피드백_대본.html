@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>데이터 피드백 대본</title>
+<style>
+  :root{
+    --bg:#e9ebee; --paper:#ffffff; --ink:#1d2330; --ink2:#4a5263; --mute:#8a909c;
+    --line:#e3e6eb; --accent:#1f6f5c; --accent-soft:#e7f2ee; --warn:#b4532a;
+    --q:#9a6b00; --q-bg:#fff8e6; --q-line:#ecd18a; --n-bg:#f4f5f7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+    -webkit-font-smoothing:antialiased;overflow:hidden}
+  #stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform-origin:center center}
+  .page{position:absolute;inset:0;background:var(--paper);border-radius:6px;
+    box-shadow:0 10px 40px rgba(20,30,50,.12);padding:40px 56px 40px;display:none;flex-direction:column}
+  .page.on{display:flex}
+  .head{display:flex;align-items:baseline;gap:18px;padding-bottom:18px;border-bottom:2px solid var(--ink)}
+  .head .no{white-space:nowrap;font-size:20px;font-weight:800;color:#fff;background:var(--accent);border-radius:8px;padding:4px 12px}
+  .head h1{font-size:34px;font-weight:800;letter-spacing:-.02em}
+  .head .tag{margin-left:auto;font-size:16px;color:var(--mute)}
+  .grid{flex:1;min-height:0;display:grid;grid-template-columns:560px 1fr;gap:26px;margin-top:22px}
+  .left,.right{display:flex;flex-direction:column;gap:18px;min-height:0}
+  .preview{width:560px;height:315px;border:1px solid var(--line);border-radius:8px;overflow:hidden;flex:none;position:relative}
+  .preview iframe{width:1600px;height:900px;border:0;transform:scale(.35);transform-origin:0 0;pointer-events:none}
+  .box{border-radius:12px;padding:18px 24px;min-height:0;overflow:auto}
+  .box h2{font-size:17px;font-weight:800;letter-spacing:.02em;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .box h2 i{font-style:normal;display:inline-flex;width:24px;height:24px;border-radius:6px;align-items:center;justify-content:center;font-size:14px;color:#fff}
+  .say{border:1px solid var(--line);flex:0 0 auto}
+  .say h2 i{background:var(--accent)} .say h2{color:var(--accent)}
+  .say p{font-size:19px;line-height:1.65;margin-bottom:6px}
+  .say p b{background:linear-gradient(transparent 60%,#d9efe7 60%)}
+  .ask{background:var(--q-bg);border:1px dashed var(--q-line);flex:1}
+  .ask h2{color:var(--q)} .ask h2 i{background:var(--q)}
+  .ask ol{padding-left:22px}
+  .ask li{font-size:19px;line-height:1.55;margin-bottom:10px}
+  .ask li::marker{font-weight:800;color:var(--q)}
+  .ask .none{font-size:18px;color:var(--mute)}
+  .know{background:var(--n-bg);flex:1}
+  .know h2{color:var(--warn)} .know h2 i{background:var(--warn)}
+  .know ul{list-style:none}
+  .know li{font-size:17px;line-height:1.5;padding:6px 0;border-bottom:1px solid #e6e8ec}
+  .know li:last-child{border-bottom:none}
+  .know li b{color:var(--ink)}
+  .know .sub{font-size:14px;color:var(--mute);margin-top:8px;line-height:1.5}
+  .gloss{display:grid;grid-template-columns:1fr 1fr;column-gap:22px}
+  .gloss div{font-size:15px;line-height:1.4;padding:4px 0;border-bottom:1px solid #e6e8ec}
+  .gloss em{font-weight:800;font-style:italic}
+  .gloss .ko{color:var(--ink2);font-weight:600}
+  .gloss .t{display:inline-block;font-size:12px;font-weight:700;color:#fff;border-radius:4px;padding:1px 6px;margin-right:4px;vertical-align:1px}
+  .t.skin{background:#1f6f5c} .t.oral{background:#3a6fb0} .t.env{background:#a0764a} .t.etc{background:#a3a9b3}
+  .gh{grid-column:1/-1;font-size:14px;font-weight:800;color:var(--ink2);padding:8px 0 2px;border-bottom:1.5px solid #d5d9df!important}
+  em{font-style:italic}
+  code{font-family:inherit}
+  #hint{position:fixed;left:16px;bottom:12px;font-size:12px;color:#8a909c}
+  @media print{
+    html,body{overflow:visible;background:#fff}
+    #stage{position:static;transform:none!important}
+    .page{display:flex!important;position:relative;box-shadow:none;page-break-after:always}
+    #hint{display:none}
+    @page{size:1600px 900px;margin:0}
+  }
+</style>
+</head>
+<body>
+<div id="stage">
+  <section class="page">
+    <div class="head"><span class="no">0</span><h1>표지</h1><span class="tag">데이터 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="데이터_전문가_피드백.html#1" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <p class="none">없음 — 인사만</p>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>안녕하세요, 우리를놓아조입니다. 오늘은 저희 분석을 <b>데이터 관점</b>에서 보여드리고 피드백을 받고 싶습니다.</p>
+          <p>질문은 “피부 미생물로 민감피부를 구별할 수 있을까”이고, 오늘은 결과보다 <b>분석 방법이 맞았는지</b>를 여쭤보려 합니다. 편하게 끊고 말씀해 주세요.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>시간</b> — 1시간. 설명은 짧게, 나머지는 질문과 피드백</li>
+            <li><b>기록</b> — 한 명은 슬라이드 번호와 들은 말을 받아 적기</li>
+            <li><b>이 세션의 초점</b> — 통계·자료 처리·재현성. 균의 생물학적 해석은 미생물 전문가 세션</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="head"><span class="no">1</span><h1>질문과 결론</h1><span class="tag">데이터 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="데이터_전문가_피드백.html#2" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li>결과를 이렇게 요약해도 <b>과장이 없을까요</b>?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>저희 질문은 피부 미생물로 민감피부를 구별할 수 있느냐였습니다.</p>
+          <p>결론부터 말씀드리면, 진균 <b>Malassezia</b>는 민감군에서 절반 이하로 낮고 나이를 넣어도 유지됩니다. 세균 셋은 <b>42명으로는 판단할 수 없었습니다.</b></p>
+          <p>그래서 최종 결과물은 기업 R&amp;D용 <b>검증 설계서</b>로 잡았습니다. 오늘은 여기까지 오는 동안 저희가 한 <b>분석 선택들</b>이 맞았는지를 여쭤보려 합니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>AUC 0.153</b> — 0.5면 무작위. 0.153은 “민감군에서 적다” 쪽으로 강함 (1−0.153 = 0.847)</li>
+            <li><b>나이를 넣어도 유지</b> — 나이 모형 위 증가분 +0.23 [0.07, 0.41], 교차검증 +0.27 (6장)</li>
+            <li><b>원 논문 재현</b> — <i>Malassezia</i> 감소는 Keum 2020이 이미 보고. 저희 기여는 발견이 아니라 적격성 판정</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="head"><span class="no">2</span><h1>자료 구조</h1><span class="tag">데이터 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="데이터_전문가_피드백.html#3" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li>라벨은 42명에만 있고 사용 조건은 595명으로 보는 <b>두 자료 조합</b>이 타당한가요?</li>
+            <li>채취 부위·시퀀싱 영역이 다른 자료를 <b>이식성 확인</b>에 쓰는 것, 괜찮을까요?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>자료는 모두 공개 자료이고, 질환 코호트는 쓰지 않았습니다.</p>
+          <p>핵심은 <b>민감 라벨이 42명에만 있다</b>는 점입니다. 그래서 판별력은 42명으로만 보고, 595명은 검출이나 나이·피지와의 관계 같은 <b>사용 조건</b>을 보는 데 썼습니다.</p>
+          <p>나머지 코호트는 판정표를 다른 자료에 돌려 보는 <b>이식성</b>과, 반복 측정이 있는 자료로 <b>시간 안정성</b>을 보는 데 썼습니다. 채취와 영역이 달라서 값을 직접 비교하지 않고 각 자료 안에서만 판정했습니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>595명</b> — 새로 모은 자료가 아님. 공개 코호트(EGA EGAS00001007334, 원 연구 950·989명)에서 20–79세 여성으로 추린 재분석 집합</li>
+            <li><b>42명 라벨</b> — 원 논문이 SLS 패치 + 유산 자통시험 + 설문 3종 모두 충족으로 정함. 우리 임상표엔 시험 수치가 없어 재현 불가</li>
+            <li><b>595명 설문 라벨(Baumann)</b> — 있지만 정답표로 못 씀: 붉은기와 무관(AUC 0.52), 나이(0.31)·피부 밝기(0.62)를 가려냄</li>
+            <li><b>공개 자료 전수 조사</b> — 민감 라벨이 붙은 한국인 코호트는 42명 외에 없었음</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="head"><span class="no">3</span><h1>분석 흐름</h1><span class="tag">데이터 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="데이터_전문가_피드백.html#4" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li>이 정도 <b>재현성 장치</b>(해시 · seed · 독립 재계산)면 충분한가요? 더 해야 할 것은?</li>
+            <li>통계 함수를 <b>직접 구현</b>한 것이 오히려 위험하진 않을까요?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>원자료 25개에서 시작해 1번 코드가 분석표를 만들고, 나머지 코드 12개가 관문별로 계산해서 분석표 17개를 남기고, 그걸 모아 판정표 한 장을 만듭니다.</p>
+          <p>원칙은 네 가지입니다. <b>외부 라이브러리 없이</b> 표준 라이브러리만 썼고, 부트스트랩 <b>seed를 고정</b>했고, 입력 파일을 <b>해시로 고정</b>했고, 문서 값을 베끼지 않고 원자료에서 <b>독립 재계산</b>해 불일치가 0건이었습니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>직접 구현한 것</b> — xlsx 파서, Spearman(t분포 p · 불완전 베타 함수), AUC, 부트스트랩, BH, ICC, 로지스틱+교차검증</li>
+            <li><b>검증에서 스스로 찾은 오류 10건</b> — 예: 진균 ⑤를 “불가”로 적었다가 ASV 표로 정정 · Spearman p를 정규근사로 계산했다가 t분포로 교체(진균 오염 의심 3속→2속) · 블랭크 “미검출”을 “문턱 미만”으로 정정</li>
+            <li><b>남은 약점</b> — <code>2_게이트_판정.py</code>의 Spearman p는 아직 정규근사(ρ만 인용) · 표본 크기 계산은 코드로 안 남음</li>
+            <li><b>OS 이식성</b> — 한글 Windows에서 cp949 인코딩 오류로 3개가 죽던 것을 UTF-8·LF 고정으로 해결</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="head"><span class="no">4</span><h1>함정 다섯 가지와 처리</h1><span class="tag">데이터 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="데이터_전문가_피드백.html#5" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li>빠진 <b>데이터 함정</b>이 있을까요?</li>
+            <li>조성 데이터 전용 모형(ALDEx2 · ANCOM 등)이나 <b>0 과다 모형</b>을 꼭 써야 할까요?</li>
+            <li>심도 차이는 <b>희박화(rarefaction)</b>나 보정 모형을 써야 했을까요?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>관문은 통계 교과서가 아니라 <b>마이크로바이옴 자료에만 있는 함정</b>에서 출발했습니다.</p>
+          <p><b>비율 데이터</b>는 로그비와 0 처리값 민감도로, <b>심도</b>는 저심도 구간을 따로 봐서, <b>라벨 오류</b>는 사례별로, <b>시약 오염</b>은 심도 상관과 블랭크로, <b>채취 방법</b>은 두 자료 배수 규칙으로 다뤘습니다.</p>
+          <p>오른쪽 칸이 각각 <b>남은 한계</b>입니다. 특히 정식 조성 모형과 음성대조가 없다는 게 큰 약점입니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>① 비율 데이터</b> — “몇 마리”가 아니라 “전체 중 %”라 합이 항상 100% · 파이 한 조각이 커지면 옆 조각이 작아지는 것 → 기준균으로 나눈 로그비로 재계산, 0 대신 더하는 작은 값(eps)을 100배 바꿔도 같은지 확인</li>
+            <li><b>② 시퀀싱 심도</b> — 시료마다 DNA를 읽은 양이 달라 적게 읽으면 있는 균도 0 · 해상도 낮은 사진 → 하위 10%(4,714 read 미만, 59명)를 따로 떼서 검출률 비교</li>
+            <li><b>③ 분류 라벨 오류</b> — DB 이름표가 틀림(<i>Cutibacterium</i> 칸에 물고기) · 속–종 불일치 212행(풍부도 1.2%) → 학명 개정 같은 정상 사례가 섞여 일괄 삭제 대신 하나씩 판단</li>
+            <li><b>④ 시약 오염</b> — 키트·시약에 묻은 균 DNA가 결과에 섞임 → DNA 적은 시료일수록 비율이 커지는 균(심도와 반대로 움직임)을 의심 · 다른 연구 음성대조와 대조 · 우리 음성대조 없어 확정 불가</li>
+            <li><b>⑤ 채취 방법</b> — 볼 면봉 vs 얼굴 세척액이면 균 구성이 크게 다름(<i>Streptococcus</i> 18.2% vs 0.6%) → 두 자료 5배 넘게 차이 나면 제외 · 단 채취법 차이와 실제 부위 차이는 구분 못 함</li>
+            <li><b>발표 팁</b> — 오른쪽 “남은 한계” 칸이 핵심 · 한계를 먼저 말하고 “어떻게 보완하면 될까요?”로 넘기기 · 관문을 교과서가 아니라 자료의 함정에서 세웠다는 점이 중간발표 피드백(“연구방법 큐레이션 같다”)에 대한 답</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="head"><span class="no">5</span><h1>판별력 측정</h1><span class="tag">데이터 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="데이터_전문가_피드백.html#6" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li><b>n=42</b>에서 AUC + 부트스트랩 신뢰구간이 적절한가요? 더 나은 방법이 있을까요?</li>
+            <li>표본 크기를 <b>신뢰구간 폭 기준(±0.10)</b>으로 잡은 게 맞나요? 검정력 기준이 나을까요?</li>
+            <li>다중비교 보정을 <b>세균·진균 따로</b> 한 것, 괜찮을까요?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>판별력은 AUC로 쟀습니다. 민감 1명과 비민감 1명을 뽑았을 때 민감 쪽이 더 많을 확률입니다. 신뢰구간은 부트스트랩 4,000회로 냈고, 구간이 0.5를 걸치면 근거 부족으로 판정했습니다.</p>
+          <p>오른쪽 그림에서 세균 셋은 모두 점선 0.5를 걸칩니다. <b>Malassezia만 확실히 왼쪽</b>, 민감군에서 적은 쪽에 있습니다.</p>
+          <p>지금 신뢰구간 반폭이 ±0.18이라, 군당 65명이면 ±0.10까지 좁아진다고 계산했습니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>AUC 방향</b> — 민감군이 더 많을 확률. 0.5 아래 = 민감군에서 적음</li>
+            <li><b>p값</b> — U의 정규근사 · 정확검정 대조는 두 값에서만 코드 밖으로 확인</li>
+            <li><b>BH 가족</b> — 세균 1차 통과 4속 + 탈락 공개 4속 = 8가설 · 진균 2가설 따로</li>
+            <li><b>65명 계산</b> — Hanley–McNeil 근사 · 검증 때 손으로 확인, 코드로 안 남음 (알려진 약점)</li>
+            <li><b>나이 자체 AUC 0.347</b> — 민감군이 젊어서 생기는 값 · 비교 기준으로 같이 표시</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="head"><span class="no">6</span><h1>나이 교란과 비율 데이터</h1><span class="tag">데이터 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="데이터_전문가_피드백.html#7" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li>나이 보정을 <b>로지스틱 + 한 명씩 빼는 교차검증</b>으로 한 것, 충분한가요?</li>
+            <li>계산 방식에 따라 결과가 뒤집히는 <b><i>Staphylococcus</i></b> 같은 경우, 어느 표현을 믿어야 할까요?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>결과를 흔드는 두 가지를 따로 점검했습니다.</p>
+          <p><b>나이</b> — 42명에서 민감군이 11살 젊어서 나이만으로도 어느 정도 갈립니다. 그래서 나이 모형에 후보를 더했을 때 오르는 몫을 쟀습니다. 세균 셋은 증가분 구간이 0을 걸치고, <b>Malassezia만 +0.23으로 나이 위에 더합니다.</b> 교차검증으로도 같은 방향입니다.</p>
+          <p><b>비율</b> — 595명 얼굴 세척액엔 구강균이 많아서 계산 방식을 세 가지로 바꿔 봤습니다. Cutibacterium은 견고하고, Staphylococcus는 부호가 뒤집히고, Corynebacterium은 사라집니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>교차검증을 한 이유</b> — 같은 42명으로 맞추고 재면 변수를 더할수록 AUC가 거의 항상 오름 → 한 명씩 빼고 다시 재서 그 편향을 걷어냄</li>
+            <li><b>나이 모형 AUC</b> — 재대입 0.653 · 교차검증 0.581</li>
+            <li><b><i>Staphylococcus</i></b> — 로그비 쪽(−0.15)이 595명 원 논문의 “여성에서 나이와 함께 감소”와 맞음</li>
+            <li><b>구강균 &lt;20% 부분집합</b> — 구강 10속 합이 20% 미만인 218명만 따로 계산</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="head"><span class="no">7</span><h1>오염 판별</h1><span class="tag">데이터 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="데이터_전문가_피드백.html#8" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li>음성대조 없이 <b>심도 상관</b>으로 오염을 보는 방식, 어디까지 믿을 수 있나요?</li>
+            <li>기준을 p가 아니라 <b>ρ &lt; −0.30</b>으로 잡은 것, 적절한가요?</li>
+            <li><b>다른 연구의 블랭크</b>로 대조한 것에 의미가 있을까요?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>저희 자료엔 음성대조가 공개돼 있지 않아서, 시약에서 온 균은 DNA가 적은 시료일수록 비율이 커진다는 원리로 <b>심도와의 상관</b>을 봤습니다.</p>
+          <p>42명 세균에서 8속이 걸렸고, 후보 중엔 <b>Corynebacterium</b>이 두 자료 모두에서 같은 방향이라 「주의」로 뒀습니다.</p>
+          <p>같은 수업 자료의 다른 연구 블랭크 5개와 대조했더니 지목한 12속 중 6속이 블랭크 전부에서 나왔습니다. 다만 이건 <b>대체 지표</b>이고 오염을 확정하지는 못합니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>근거 논문</b> — Salter 2014: 순수배양을 10⁸→10³ 세포로 희석하니 가장 묽은 단계에서 오염이 결과를 지배 · 권고는 사후 상관이 아니라 <b>사전 음성대조</b></li>
+            <li><b><i>Corynebacterium</i></b> — 42명 ρ=−0.385(q=0.063, 유의 아님) · 595명 ρ=−0.118(q=0.0086) · Salter 키트 오염균 목록에도 있음 → 피부 상재균이자 오염균 후보</li>
+            <li><b>블랭크 정정 이력</b> — 처음엔 “음성대조에서 미검출”로 적었다가, 블랭크 4개 모두에서 검출(평균 0.435%)·문턱 0.5% 미만이었음을 찾아 정정</li>
+            <li><b>방법이 작동한다는 근거</b> — 걸린 <i>Sphingomonas</i>·<i>Acinetobacter</i>가 Salter 목록과 일치</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="head"><span class="no">8</span><h1>후보 선정 규칙</h1><span class="tag">데이터 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="데이터_전문가_피드백.html#9" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li>결과를 본 뒤 정한 <b>사후 규칙</b>의 약점을 어떻게 보완하면 될까요?</li>
+            <li>채취법 차이와 <b>실제 부위 차이</b>를 가르려면 규칙을 어떻게 바꿔야 할까요?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>807속에서 후보를 고른 규칙은 두 단계입니다. 1차는 흔한가, 2차는 두 자료 사이에서 5배 넘게 차이 나지 않는가입니다.</p>
+          <p>솔직히 말씀드리면 <b>결과를 본 뒤 글로 정리한 사후 규칙</b>입니다. 다만 규칙이 쓰는 값은 모두 민감/비민감 라벨과 무관하고, 문턱을 3배에서 20배 사이 어디에 둬도 같은 3속이 나옵니다.</p>
+          <p>약점도 있습니다. 비교 상대를 다른 건강 코호트로 바꾸면 Cutibacterium도 걸립니다. 규칙이 실제 부위 차이를 채취법 차이로 오인하는 겁니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b><i>Rothia</i></b> — 42명 비교 p=0.024지만 8가설 보정 후 q=0.19 · 42명 검출률 59.5%라 1차 탈락 · 결과에 맞췄다면 남겼을 균</li>
+            <li><b><i>Lactobacillus</i></b> — 42명에선 민감군↑(AUC 0.689, p=0.038)지만 595명 검출 63% · 배수 18배 · 오염 신호 → “유의한데 못 쓰는” 사례</li>
+            <li><b>진균은 규칙이 다름</b> — 문턱 숫자는 같지만 595명에 진균이 없어 2차 미적용 → 세균보다 관문 하나 덜 거침</li>
+            <li><b>그래서 설계서 0단계</b> — “채취 프로토콜을 먼저 고정하라”</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="head"><span class="no">9</span><h1>판정표와 이식성</h1><span class="tag">데이터 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="데이터_전문가_피드백.html#10" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li>이 판정표를 <b>다른 연구에도 쓸 수 있는 도구</b>로 볼 수 있을까요?</li>
+            <li>⑥ 시간 안정성을 <b>참고 열로만</b> 둔 판단, 괜찮을까요?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>산출물은 후보 4개 × 관문 5개 판정표입니다. 세균 셋은 조건부, <b>Malassezia는 후속 검증 1순위</b>입니다.</p>
+          <p>중간발표에서 “네 편 논문에만 쓰는 것 아니냐”는 지적을 받아, 판정표를 <b>다른 코호트 11개에 그대로 돌려</b> 봤습니다.</p>
+          <p>라벨이 필요 없는 ①②는 11개 전부에서 판정되고, ③⑤는 속 요약표로는 0개, ④는 민감 라벨이 있는 자료만 됩니다. 판별력을 모른다는 결론이 <b>방법이 아니라 자료 형식의 문제</b>라는 게 여기서 보입니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>④ “1”</b> — 03 민감 한 연구(세균 16S · 진균 ITS 두 자료)뿐</li>
+            <li><b>⑤ 속 요약표 기준 0/11</b> — 같은 자료의 ASV 표로 내려가니 진균은 부분 가능이 됨(<i>M. restricta</i>)</li>
+            <li><b>⑥ 참고 열</b> — ICC 네 후보 모두 0.5 미만 · 하지만 15 계절(미국·중국 이마 24명×4계절)과 07 화장품(중재 볼 25명×3시점) 값이라 우리 대상이 아님</li>
+            <li><b>등급은 순위가 아님</b> — “후속 검증 1순위 / 조건부 / 근거 부족 / 제외”는 다음에 할 일</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="head"><span class="no">10</span><h1>검증 설계의 통계 부분</h1><span class="tag">데이터 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="데이터_전문가_피드백.html#11" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li>검증 설계의 <b>통계 부분에 빠진 것</b>이 있다면 무엇일까요?</li>
+            <li>예산이 제한되면 <b>무엇부터 줄여야</b> 할까요? (인원 · qPCR · 반복 측정)</li>
+            <li><b>사전등록</b>은 어느 수준까지 하는 게 현실적일까요?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>최종 결과물인 검증 설계서 중 통계 부분입니다.</p>
+          <p>표본은 군당 65명, 주 지표 <i>M. restricta</i>와 문턱·분석을 <b>미리 고정</b>하고, 비율과 함께 <b>qPCR 절대량</b>을 재고, 같은 사람을 두 번 이상 재고, 음성대조를 같이 시퀀싱합니다.</p>
+          <p>카드 아래 빨간 줄이 지금의 약점입니다. 결국 이 설계는 <b>오늘 보여드린 약점을 설계 단계에서 먼저 막는 것</b>입니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>군당 65명의 전제</b> — AUC 신뢰구간 반폭 ±0.10 목표 · 효과 크기에 따라 달라짐</li>
+            <li><b>반복 측정 목표</b> — ICC로 개인 내 변동 확인 · 지금 참고값 0.20은 다른 대상</li>
+            <li><b>qPCR이 필요한 이유</b> — <i>Malassezia</i>와 진균 다양성이 ρ=−0.979로 한 축 → 비율로는 “적다”와 “다른 게 많다”를 구별 못 함</li>
+            <li><b>미생물 자료 11장과 관계</b> — 그 장의 로드맵 2단계(검증 설계)를 통계 쪽에서 구체화</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="head"><span class="no">11</span><h1>질문 모음</h1><span class="tag">데이터 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="데이터_전문가_피드백.html#12" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>시간이 없을 때 여쭤볼 순서</h2>
+          <ol>
+            <li><b>3번</b> — n=42에서 AUC + 부트스트랩이 적절한가</li>
+            <li><b>8번</b> — 검증 설계의 통계 부분에 빠진 것</li>
+            <li><b>7번</b> — 사후 규칙의 약점 보완</li>
+            <li><b>6번</b> — 심도 상관 오염 판별의 신뢰도</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>여기까지가 준비한 내용입니다. 설명하면서 드린 질문 중 <b>꼭 여쭤보고 싶은 것</b>을 모았습니다.</p>
+          <p>특히 <b>42명으로 판별력을 잰 방식이 적절한지</b>, 그리고 <b>검증 설계에 빠진 것</b>을 듣고 싶습니다. 편하게 말씀해 주시면 받아 적겠습니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>이 장은 띄워 두는 용도</b> — 설명은 짧게, 나머지 시간은 듣기</li>
+            <li><b>기록</b> — 답을 적을 때 질문 번호를 같이 적기</li>
+            <li><b>이미 답을 들은 질문</b>은 건너뛰고 이어서 여쭤보기</li>
+            <li><b>장별 세부 질문</b>은 각 장 대본 페이지에 있음</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+<div id="hint">← → 넘김 · F 전체화면 · P 인쇄</div>
+<script>
+  const stage=document.getElementById('stage');
+  const pages=[...document.querySelectorAll('.page')];
+  let i=0;
+  function fit(){const s=Math.min(innerWidth/1600,innerHeight/900)*0.96;
+    stage.style.transform=`translate(-50%,-50%) scale(${s})`;}
+  function show(n){i=Math.max(0,Math.min(pages.length-1,n));
+    pages.forEach((el,k)=>el.classList.toggle('on',k===i));
+    try{history.replaceState(null,'','#'+(i+1))}catch(e){}}
+  addEventListener('resize',fit);
+  addEventListener('keydown',e=>{
+    if(['ArrowRight','PageDown'].includes(e.key)){e.preventDefault();show(i+1)}
+    else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(i-1)}
+    else if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}
+    else if(e.key==='p'||e.key==='P'){print()}
+  });
+  fit();show((parseInt(location.hash.slice(1))||1)-1);
+</script>
+</body>
+</html>

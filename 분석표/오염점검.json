@@ -1,0 +1,663 @@
+{
+  "method": "상대비율과 시퀀싱 심도의 스피어만 상관. 강한 음의 상관 = 시약 오염 의심.",
+  "rho_threshold": -0.3,
+  "cohorts": {
+    "42명": {
+      "n": 42,
+      "n_genus_screened": 80,
+      "suspect": [
+        {
+          "genus": "Acidocella",
+          "detect_pct": 100.0,
+          "median_pct": 0.1213,
+          "rho_depth": -0.751,
+          "p": 1.0054275327177807e-08,
+          "q_bh": 0.0
+        },
+        {
+          "genus": "Mycobacterium",
+          "detect_pct": 95.2,
+          "median_pct": 0.1711,
+          "rho_depth": -0.713,
+          "p": 1.1580980377485194e-07,
+          "q_bh": 0.0
+        },
+        {
+          "genus": "Altererythrobacter",
+          "detect_pct": 92.9,
+          "median_pct": 0.0905,
+          "rho_depth": -0.702,
+          "p": 2.2245421309780813e-07,
+          "q_bh": 0.0
+        },
+        {
+          "genus": "Rhodanobacter",
+          "detect_pct": 100.0,
+          "median_pct": 1.4931,
+          "rho_depth": -0.678,
+          "p": 8.039295626775598e-07,
+          "q_bh": 0.0
+        },
+        {
+          "genus": "Sphingomonas",
+          "detect_pct": 92.9,
+          "median_pct": 0.075,
+          "rho_depth": -0.579,
+          "p": 5.913546692962855e-05,
+          "q_bh": 0.0009
+        },
+        {
+          "genus": "Acinetobacter",
+          "detect_pct": 90.5,
+          "median_pct": 0.0797,
+          "rho_depth": -0.504,
+          "p": 0.0006734147733345717,
+          "q_bh": 0.009
+        },
+        {
+          "genus": "Veillonella",
+          "detect_pct": 66.7,
+          "median_pct": 3.0933,
+          "rho_depth": -0.477,
+          "p": 0.001397933356953659,
+          "q_bh": 0.016
+        },
+        {
+          "genus": "Neisseria",
+          "detect_pct": 85.7,
+          "median_pct": 0.091,
+          "rho_depth": -0.465,
+          "p": 0.001911368041923325,
+          "q_bh": 0.0191
+        }
+      ],
+      "candidates": {
+        "Corynebacterium": {
+          "genus": "Corynebacterium",
+          "detect_pct": 100.0,
+          "median_pct": 0.7718,
+          "rho_depth": -0.385,
+          "p": 0.011818787661917338,
+          "q_bh": 0.063
+        },
+        "Cutibacterium": {
+          "genus": "Cutibacterium",
+          "detect_pct": 100.0,
+          "median_pct": 21.7981,
+          "rho_depth": 0.212,
+          "p": 0.1772533203612069,
+          "q_bh": 0.4574
+        },
+        "Staphylococcus": {
+          "genus": "Staphylococcus",
+          "detect_pct": 100.0,
+          "median_pct": 2.3853,
+          "rho_depth": -0.203,
+          "p": 0.19621925774513693,
+          "q_bh": 0.4846
+        }
+      }
+    },
+    "595명": {
+      "n": 595,
+      "n_genus_screened": 19,
+      "suspect": [
+        {
+          "genus": "Lactobacillus",
+          "detect_pct": 63.2,
+          "median_pct": 0.0444,
+          "rho_depth": -0.308,
+          "p": 1.421299786583729e-14,
+          "q_bh": 0.0
+        }
+      ],
+      "candidates": {
+        "Corynebacterium": {
+          "genus": "Corynebacterium",
+          "detect_pct": 90.4,
+          "median_pct": 1.0678,
+          "rho_depth": -0.118,
+          "p": 0.004081357795914122,
+          "q_bh": 0.0086
+        },
+        "Cutibacterium": {
+          "genus": "Cutibacterium",
+          "detect_pct": 99.2,
+          "median_pct": 9.385,
+          "rho_depth": 0.161,
+          "p": 7.97059849865128e-05,
+          "q_bh": 0.0003
+        },
+        "Staphylococcus": {
+          "genus": "Staphylococcus",
+          "detect_pct": 99.3,
+          "median_pct": 5.5105,
+          "rho_depth": 0.154,
+          "p": 0.00015661909294522713,
+          "q_bh": 0.0004
+        }
+      }
+    },
+    "42명 진균(ITS)": {
+      "n": 42,
+      "n_genus_screened": 14,
+      "suspect": [
+        {
+          "genus": "g__Naganishia",
+          "detect_pct": 59.5,
+          "median_pct": 0.1008,
+          "rho_depth": -0.575,
+          "p": 6.857840121770757e-05,
+          "q_bh": 0.001
+        },
+        {
+          "genus": "g__Rhodotorula",
+          "detect_pct": 85.7,
+          "median_pct": 0.9087,
+          "rho_depth": -0.522,
+          "p": 0.0003974861948904637,
+          "q_bh": 0.0028
+        }
+      ],
+      "candidates": {}
+    },
+    "58명 진균(01 노화 ITS)": {
+      "n": 58,
+      "n_genus_screened": 20,
+      "suspect": [
+        {
+          "genus": "g__Rhodotorula",
+          "detect_pct": 100.0,
+          "median_pct": 1.5238,
+          "rho_depth": -0.449,
+          "p": 0.00040214222024824794,
+          "q_bh": 0.008
+        },
+        {
+          "genus": "g__Lasiobolus",
+          "detect_pct": 87.9,
+          "median_pct": 0.5795,
+          "rho_depth": -0.367,
+          "p": 0.004554690728440494,
+          "q_bh": 0.0455
+        }
+      ],
+      "candidates": {}
+    }
+  },
+  "fungal_displacement_42": {
+    "note": "Malassezia 가 ITS 조성의 66%를 차지한다. 그것이 줄면 나머지가 자동으로 오른다. 민감군에서 오르는 속이 피부 상재 진균인지 환경·미분류인지 본다.",
+    "n_screened": 15,
+    "top_rising": [
+      {
+        "genus": "Unassigned",
+        "detect_pct": 97.6,
+        "median_S": 11.382,
+        "median_N": 0.799,
+        "auc": 0.844,
+        "p": 0.00014282372929086407,
+        "rho_depth": -0.057,
+        "q_bh": 0.0011
+      },
+      {
+        "genus": "g__Fusarium",
+        "detect_pct": 59.5,
+        "median_S": 0.928,
+        "median_N": 0.0,
+        "auc": 0.751,
+        "p": 0.005655194141999775,
+        "rho_depth": 0.105,
+        "q_bh": 0.0283
+      },
+      {
+        "genus": "g__Lasiobolus",
+        "detect_pct": 78.6,
+        "median_S": 2.792,
+        "median_N": 0.447,
+        "auc": 0.725,
+        "p": 0.01280471968748964,
+        "rho_depth": 0.268,
+        "q_bh": 0.048
+      },
+      {
+        "genus": "g__Alternaria",
+        "detect_pct": 66.7,
+        "median_S": 0.414,
+        "median_N": 0.018,
+        "auc": 0.709,
+        "p": 0.020763328948563142,
+        "rho_depth": -0.291,
+        "q_bh": 0.054
+      },
+      {
+        "genus": "g__Mortierella",
+        "detect_pct": 50.0,
+        "median_S": 1.275,
+        "median_N": 0.0,
+        "auc": 0.707,
+        "p": 0.022196409762874625,
+        "rho_depth": 0.236,
+        "q_bh": 0.054
+      },
+      {
+        "genus": "g__Enterocarpus",
+        "detect_pct": 73.8,
+        "median_S": 1.584,
+        "median_N": 0.065,
+        "auc": 0.7,
+        "p": 0.02702350440042567,
+        "rho_depth": 0.203,
+        "q_bh": 0.054
+      },
+      {
+        "genus": "g__Mucor",
+        "detect_pct": 66.7,
+        "median_S": 1.561,
+        "median_N": 0.077,
+        "auc": 0.698,
+        "p": 0.028822371939176694,
+        "rho_depth": 0.064,
+        "q_bh": 0.054
+      },
+      {
+        "genus": "g__Arabidopsis",
+        "detect_pct": 52.4,
+        "median_S": 0.502,
+        "median_N": 0.0,
+        "auc": 0.691,
+        "p": 0.03485011370431024,
+        "rho_depth": 0.149,
+        "q_bh": 0.0581
+      }
+    ],
+    "malassezia": {
+      "genus": "g__Malassezia",
+      "detect_pct": 100.0,
+      "median_S": 36.373,
+      "median_N": 84.229,
+      "auc": 0.153,
+      "p": 0.00012892820940835215,
+      "rho_depth": 0.08,
+      "q_bh": 0.0011
+    }
+  },
+  "negative_control_reference": {
+    "source": "15_season (PRJNA390040) 의 음성대조 시료",
+    "caveat": "다른 연구·다른 키트·다른 실험실·소표본(16S n=4, ITS n=1). 우리 코호트(595·42·58)의 음성대조가 아니며 우리 시료의 오염을 확정하지 못한다. 경험적 참조 목록으로만 쓴다.",
+    "cohorts": {
+      "15_season_16S": {
+        "n_blank": 4,
+        "n_sample": 479,
+        "n_genus": 1328,
+        "top_in_blank": [
+          {
+            "genus": "Halomonas",
+            "median_blank": 39.8146,
+            "median_sample": 4.0523,
+            "detect_blank_pct": 100.0,
+            "blank_over_sample": 9.83
+          },
+          {
+            "genus": "Unassigned",
+            "median_blank": 14.9793,
+            "median_sample": 12.2434,
+            "detect_blank_pct": 100.0,
+            "blank_over_sample": 1.22
+          },
+          {
+            "genus": "Shewanella",
+            "median_blank": 14.2549,
+            "median_sample": 1.3559,
+            "detect_blank_pct": 100.0,
+            "blank_over_sample": 10.51
+          },
+          {
+            "genus": "Pseudomonas",
+            "median_blank": 1.3902,
+            "median_sample": 0.9834,
+            "detect_blank_pct": 100.0,
+            "blank_over_sample": 1.41
+          },
+          {
+            "genus": "Cutibacterium",
+            "median_blank": 1.3602,
+            "median_sample": 6.1447,
+            "detect_blank_pct": 100.0,
+            "blank_over_sample": 0.22
+          },
+          {
+            "genus": "Acinetobacter",
+            "median_blank": 1.297,
+            "median_sample": 2.8621,
+            "detect_blank_pct": 100.0,
+            "blank_over_sample": 0.45
+          },
+          {
+            "genus": "Alteriqipengyuania",
+            "median_blank": 0.788,
+            "median_sample": 0.0,
+            "detect_blank_pct": 50.0,
+            "blank_over_sample": null
+          },
+          {
+            "genus": "Staphylococcus",
+            "median_blank": 0.7394,
+            "median_sample": 3.3696,
+            "detect_blank_pct": 100.0,
+            "blank_over_sample": 0.22
+          },
+          {
+            "genus": "Enhydrobacter",
+            "median_blank": 0.7348,
+            "median_sample": 2.4548,
+            "detect_blank_pct": 100.0,
+            "blank_over_sample": 0.3
+          },
+          {
+            "genus": "Corynebacterium",
+            "median_blank": 0.4213,
+            "median_sample": 1.4224,
+            "detect_blank_pct": 100.0,
+            "blank_over_sample": 0.3
+          },
+          {
+            "genus": "Micrococcus",
+            "median_blank": 0.275,
+            "median_sample": 1.8757,
+            "detect_blank_pct": 100.0,
+            "blank_over_sample": 0.15
+          },
+          {
+            "genus": "Streptococcus",
+            "median_blank": 0.2523,
+            "median_sample": 2.3499,
+            "detect_blank_pct": 100.0,
+            "blank_over_sample": 0.11
+          }
+        ]
+      },
+      "15_season_ITS": {
+        "n_blank": 1,
+        "n_sample": 473,
+        "n_genus": 971,
+        "top_in_blank": [
+          {
+            "genus": "g__Cladosporium",
+            "median_blank": 35.6283,
+            "median_sample": 1.4178,
+            "detect_blank_pct": 100.0,
+            "blank_over_sample": 25.13
+          },
+          {
+            "genus": "g__Malassezia",
+            "median_blank": 22.5267,
+            "median_sample": 63.1606,
+            "detect_blank_pct": 100.0,
+            "blank_over_sample": 0.36
+          },
+          {
+            "genus": "g__Cutaneotrichosporon",
+            "median_blank": 20.5214,
+            "median_sample": 0.0314,
+            "detect_blank_pct": 100.0,
+            "blank_over_sample": 653.08
+          },
+          {
+            "genus": "g__Thyridium",
+            "median_blank": 15.7754,
+            "median_sample": 0.0,
+            "detect_blank_pct": 100.0,
+            "blank_over_sample": null
+          },
+          {
+            "genus": "g__Penicillium",
+            "median_blank": 5.1471,
+            "median_sample": 0.0,
+            "detect_blank_pct": 100.0,
+            "blank_over_sample": null
+          },
+          {
+            "genus": "g__Pseudogymnoascus",
+            "median_blank": 0.2005,
+            "median_sample": 0.0,
+            "detect_blank_pct": 100.0,
+            "blank_over_sample": null
+          },
+          {
+            "genus": "g__Rhodotorula",
+            "median_blank": 0.2005,
+            "median_sample": 0.1396,
+            "detect_blank_pct": 100.0,
+            "blank_over_sample": 1.44
+          },
+          {
+            "genus": "g__Abelmoschus",
+            "median_blank": 0.0,
+            "median_sample": 0.0,
+            "detect_blank_pct": 0.0,
+            "blank_over_sample": null
+          },
+          {
+            "genus": "g__Abrus",
+            "median_blank": 0.0,
+            "median_sample": 0.0,
+            "detect_blank_pct": 0.0,
+            "blank_over_sample": null
+          },
+          {
+            "genus": "g__Acacia",
+            "median_blank": 0.0,
+            "median_sample": 0.0,
+            "detect_blank_pct": 0.0,
+            "blank_over_sample": null
+          },
+          {
+            "genus": "g__Acanthocorticium",
+            "median_blank": 0.0,
+            "median_sample": 0.0,
+            "detect_blank_pct": 0.0,
+            "blank_over_sample": null
+          },
+          {
+            "genus": "g__Acanthophysellum",
+            "median_blank": 0.0,
+            "median_sample": 0.0,
+            "detect_blank_pct": 0.0,
+            "blank_over_sample": null
+          }
+        ]
+      }
+    },
+    "proxy_check": {
+      "note": "심도-상관으로 의심한 속이 블랭크에서도 검출되면 대체 지표가 같은 것을 잡았다는 뜻이다. 블랭크에 없다고 해서 오염이 아니라는 뜻은 아니다 — 키트가 다르기 때문이다. ITS 블랭크는 1개뿐이라 검출 여부만 보고 비율은 참고값이다.",
+      "n_flagged": 12,
+      "n_in_all_blanks": 6,
+      "detail": [
+        {
+          "assay": "16S",
+          "genus": "Acidocella",
+          "flagged_in": [
+            "42명"
+          ],
+          "in_blank": false,
+          "median_blank": null,
+          "median_sample": null,
+          "detect_blank_pct": null,
+          "blank_over_sample": null
+        },
+        {
+          "assay": "16S",
+          "genus": "Mycobacterium",
+          "flagged_in": [
+            "42명"
+          ],
+          "in_blank": true,
+          "median_blank": 0.2311,
+          "median_sample": 0.3113,
+          "detect_blank_pct": 100.0,
+          "blank_over_sample": 0.74
+        },
+        {
+          "assay": "16S",
+          "genus": "Altererythrobacter",
+          "flagged_in": [
+            "42명"
+          ],
+          "in_blank": true,
+          "median_blank": 0.0,
+          "median_sample": 0.0,
+          "detect_blank_pct": 0.0,
+          "blank_over_sample": null
+        },
+        {
+          "assay": "16S",
+          "genus": "Rhodanobacter",
+          "flagged_in": [
+            "42명"
+          ],
+          "in_blank": true,
+          "median_blank": 0.0,
+          "median_sample": 0.0,
+          "detect_blank_pct": 0.0,
+          "blank_over_sample": null
+        },
+        {
+          "assay": "16S",
+          "genus": "Sphingomonas",
+          "flagged_in": [
+            "42명"
+          ],
+          "in_blank": true,
+          "median_blank": 0.225,
+          "median_sample": 1.6255,
+          "detect_blank_pct": 100.0,
+          "blank_over_sample": 0.14
+        },
+        {
+          "assay": "16S",
+          "genus": "Acinetobacter",
+          "flagged_in": [
+            "42명"
+          ],
+          "in_blank": true,
+          "median_blank": 1.297,
+          "median_sample": 2.8621,
+          "detect_blank_pct": 100.0,
+          "blank_over_sample": 0.45
+        },
+        {
+          "assay": "16S",
+          "genus": "Veillonella",
+          "flagged_in": [
+            "42명"
+          ],
+          "in_blank": true,
+          "median_blank": 0.0251,
+          "median_sample": 0.2247,
+          "detect_blank_pct": 100.0,
+          "blank_over_sample": 0.11
+        },
+        {
+          "assay": "16S",
+          "genus": "Neisseria",
+          "flagged_in": [
+            "42명"
+          ],
+          "in_blank": true,
+          "median_blank": 0.0946,
+          "median_sample": 0.3985,
+          "detect_blank_pct": 100.0,
+          "blank_over_sample": 0.24
+        },
+        {
+          "assay": "16S",
+          "genus": "Lactobacillus",
+          "flagged_in": [
+            "595명"
+          ],
+          "in_blank": true,
+          "median_blank": 0.0796,
+          "median_sample": 0.0393,
+          "detect_blank_pct": 75.0,
+          "blank_over_sample": 2.02
+        },
+        {
+          "assay": "ITS",
+          "genus": "g__Naganishia",
+          "flagged_in": [
+            "42명 진균(ITS)"
+          ],
+          "in_blank": true,
+          "median_blank": 0.0,
+          "median_sample": 0.0054,
+          "detect_blank_pct": 0.0,
+          "blank_over_sample": 0.0
+        },
+        {
+          "assay": "ITS",
+          "genus": "g__Rhodotorula",
+          "flagged_in": [
+            "42명 진균(ITS)",
+            "58명 진균(01 노화 ITS)"
+          ],
+          "in_blank": true,
+          "median_blank": 0.2005,
+          "median_sample": 0.1396,
+          "detect_blank_pct": 100.0,
+          "blank_over_sample": 1.44
+        },
+        {
+          "assay": "ITS",
+          "genus": "g__Lasiobolus",
+          "flagged_in": [
+            "58명 진균(01 노화 ITS)"
+          ],
+          "in_blank": false,
+          "median_blank": null,
+          "median_sample": null,
+          "detect_blank_pct": null,
+          "blank_over_sample": null
+        }
+      ]
+    },
+    "cladosporium_note": {
+      "why": "§6.4 에서 Cladosporium 은 진균 1차를 통과했으나 심도 상관 rho=-0.378 로 오염이 의심돼 후보에서 뺐다. 그 판정을 블랭크가 독립적으로 뒷받침한다.",
+      "genus": "g__Cladosporium",
+      "median_blank": 35.6283,
+      "median_sample": 1.4178,
+      "detect_blank_pct": 100.0,
+      "blank_over_sample": 25.13,
+      "caveat": "ITS 블랭크는 1개다. 방향은 일치하지만 한 시료의 값이므로 근거 강도는 약하다."
+    },
+    "candidates_in_blank": {
+      "Cutibacterium": {
+        "genus": "Cutibacterium",
+        "median_blank": 1.3602,
+        "median_sample": 6.1447,
+        "detect_blank_pct": 100.0,
+        "blank_over_sample": 0.22
+      },
+      "Staphylococcus": {
+        "genus": "Staphylococcus",
+        "median_blank": 0.7394,
+        "median_sample": 3.3696,
+        "detect_blank_pct": 100.0,
+        "blank_over_sample": 0.22
+      },
+      "Corynebacterium": {
+        "genus": "Corynebacterium",
+        "median_blank": 0.4213,
+        "median_sample": 1.4224,
+        "detect_blank_pct": 100.0,
+        "blank_over_sample": 0.3
+      },
+      "g__Malassezia": {
+        "genus": "g__Malassezia",
+        "median_blank": 22.5267,
+        "median_sample": 63.1606,
+        "detect_blank_pct": 100.0,
+        "blank_over_sample": 0.36
+      }
+    }
+  }
+}

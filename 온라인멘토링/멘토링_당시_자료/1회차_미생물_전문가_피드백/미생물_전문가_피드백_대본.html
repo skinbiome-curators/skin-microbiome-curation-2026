@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>미생물 피드백 대본</title>
+<style>
+  :root{
+    --bg:#e9ebee; --paper:#ffffff; --ink:#1d2330; --ink2:#4a5263; --mute:#8a909c;
+    --line:#e3e6eb; --accent:#1f6f5c; --accent-soft:#e7f2ee; --warn:#b4532a;
+    --q:#9a6b00; --q-bg:#fff8e6; --q-line:#ecd18a; --n-bg:#f4f5f7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+    -webkit-font-smoothing:antialiased;overflow:hidden}
+  #stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform-origin:center center}
+  .page{position:absolute;inset:0;background:var(--paper);border-radius:6px;
+    box-shadow:0 10px 40px rgba(20,30,50,.12);padding:40px 56px 40px;display:none;flex-direction:column}
+  .page.on{display:flex}
+  .head{display:flex;align-items:baseline;gap:18px;padding-bottom:18px;border-bottom:2px solid var(--ink)}
+  .head .no{white-space:nowrap;font-size:20px;font-weight:800;color:#fff;background:var(--accent);border-radius:8px;padding:4px 12px}
+  .head h1{font-size:34px;font-weight:800;letter-spacing:-.02em}
+  .head .tag{margin-left:auto;font-size:16px;color:var(--mute)}
+  .grid{flex:1;min-height:0;display:grid;grid-template-columns:560px 1fr;gap:26px;margin-top:22px}
+  .left,.right{display:flex;flex-direction:column;gap:18px;min-height:0}
+  .preview{width:560px;height:315px;border:1px solid var(--line);border-radius:8px;overflow:hidden;flex:none;position:relative}
+  .preview iframe{width:1600px;height:900px;border:0;transform:scale(.35);transform-origin:0 0;pointer-events:none}
+  .box{border-radius:12px;padding:18px 24px;min-height:0;overflow:auto}
+  .box h2{font-size:17px;font-weight:800;letter-spacing:.02em;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .box h2 i{font-style:normal;display:inline-flex;width:24px;height:24px;border-radius:6px;align-items:center;justify-content:center;font-size:14px;color:#fff}
+  .say{border:1px solid var(--line);flex:0 0 auto}
+  .say h2 i{background:var(--accent)} .say h2{color:var(--accent)}
+  .say p{font-size:19px;line-height:1.65;margin-bottom:6px}
+  .say p b{background:linear-gradient(transparent 60%,#d9efe7 60%)}
+  .ask{background:var(--q-bg);border:1px dashed var(--q-line);flex:1}
+  .ask h2{color:var(--q)} .ask h2 i{background:var(--q)}
+  .ask ol{padding-left:22px}
+  .ask li{font-size:19px;line-height:1.55;margin-bottom:10px}
+  .ask li::marker{font-weight:800;color:var(--q)}
+  .ask .none{font-size:18px;color:var(--mute)}
+  .know{background:var(--n-bg);flex:1}
+  .know h2{color:var(--warn)} .know h2 i{background:var(--warn)}
+  .know ul{list-style:none}
+  .know li{font-size:17px;line-height:1.5;padding:6px 0;border-bottom:1px solid #e6e8ec}
+  .know li:last-child{border-bottom:none}
+  .know li b{color:var(--ink)}
+  .know .sub{font-size:14px;color:var(--mute);margin-top:8px;line-height:1.5}
+  .gloss{display:grid;grid-template-columns:1fr 1fr;column-gap:22px}
+  .gloss div{font-size:15px;line-height:1.4;padding:4px 0;border-bottom:1px solid #e6e8ec}
+  .gloss em{font-weight:800;font-style:italic}
+  .gloss .ko{color:var(--ink2);font-weight:600}
+  .gloss .t{display:inline-block;font-size:12px;font-weight:700;color:#fff;border-radius:4px;padding:1px 6px;margin-right:4px;vertical-align:1px}
+  .t.skin{background:#1f6f5c} .t.oral{background:#3a6fb0} .t.env{background:#a0764a} .t.etc{background:#a3a9b3}
+  .gh{grid-column:1/-1;font-size:14px;font-weight:800;color:var(--ink2);padding:8px 0 2px;border-bottom:1.5px solid #d5d9df!important}
+  em{font-style:italic}
+  code{font-family:inherit}
+  #hint{position:fixed;left:16px;bottom:12px;font-size:12px;color:#8a909c}
+  @media print{
+    html,body{overflow:visible;background:#fff}
+    #stage{position:static;transform:none!important}
+    .page{display:flex!important;position:relative;box-shadow:none;page-break-after:always}
+    #hint{display:none}
+    @page{size:1600px 900px;margin:0}
+  }
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- 0 · 표지 -->
+  <section class="page">
+    <div class="head"><span class="no">0</span><h1>표지</h1><span class="tag">미생물 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="미생물_전문가_피드백.html#1" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2><p class="none">없음 — 인사만</p></div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>안녕하세요, 우리를놓아조입니다. 오늘은 저희 주제를 <b>미생물 관점</b>에서 보여드리고 피드백을 받고 싶어서 자리를 만들었습니다.</p>
+          <p>저희 질문은 하나입니다 — <b>피부 미생물로 민감피부를 구별할 수 있을까?</b></p>
+          <p>설명 중간중간 편하게 끊고 말씀해 주시면 됩니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>시간</b> — 1시간. 슬라이드 설명은 짧게, 나머지는 질문과 피드백</li>
+            <li><b>기록</b> — 한 명은 말씀을 받아 적기 (슬라이드 번호 + 들은 말)</li>
+            <li><b>이 세션의 초점</b> — 균과 자료. 통계·코드 이야기는 데이터 전문가 세션으로 넘김</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1 · 왜 민감피부인가 -->
+  <section class="page">
+    <div class="head"><span class="no">1</span><h1>왜 민감피부인가</h1><span class="tag">미생물 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="미생물_전문가_피드백.html#2" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li>민감피부를 <b>미생물로 보려는 시도</b> 자체를 어떻게 보시나요? 방향이 말이 되나요?</li>
+            <li>민감피부와 미생물의 연관을 다룬 연구를 아시는 게 있을까요?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>민감피부는 보통은 자극이 되지 않는 자극에 따가움이나 화끈거림을 느끼는 <b>증후군</b>입니다. 질환이 아닙니다.</p>
+          <p>흔합니다. 메타분석에서 스스로 "약간이라도 민감하다"는 사람이 71%, 그중 "보통 이상"이 40%였습니다.</p>
+          <p>문제는 <b>민감한지 아닌지 객관적으로 가를 방법이 없다</b>는 겁니다. 설문은 본인 답이 곧 정답이고, 유산 자통시험은 본인이 따가움을 매기는 거라 결과가 일관되지 않고, TEWL은 기계로 재지만 장벽만 보고 기준선이 없습니다.</p>
+          <p>그래서 저희는 <b>피부 미생물로 민감피부를 구별할 수 있을까</b>를 질문으로 잡았습니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>증후군 vs 질환</b> — 증상 묶음일 뿐 원인·병변이 정해지지 않음. 아토피·주사 같은 피부 질환이 있으면 민감피부에서 제외</li>
+            <li><b>SS-10</b> — 따가움·화끈거림·당김 등 10문항에 본인이 답하는 민감도 설문</li>
+            <li><b>유산 자통시험</b> — 10% 젖산을 코 옆·볼에 바르고 2.5분·5분에 따가움 점수(4점 중 ≥3이면 민감)</li>
+            <li><b>TEWL</b> — 피부로 증발해 나가는 수분량. 높으면 장벽이 새는 것</li>
+            <li><b>71% · 40%</b> — 본인이 답한 설문 값. 저자도 과대추정 가능성을 적음 · 저희는 초록까지만 확인</li>
+            <li><b>물으시면</b> — 민감피부 기전 종설(장벽·신경·염증·유전)에는 미생물이 등장하지 않음 (<i>Ann Dermatol</i>, doi:10.5021/ad.24.157)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · 우리가 가진 자료 -->
+  <section class="page">
+    <div class="head"><span class="no">2</span><h1>우리가 가진 자료</h1><span class="tag">미생물 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="미생물_전문가_피드백.html#3" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li>채취법이 다른(<b>볼 면봉 ↔ 얼굴 세척액</b>) 두 자료를 같이 봐도 될까요? 조심할 점이 있을까요?</li>
+            <li><b>16S 속 수준</b>으로 민감피부를 보는 것, 어떻게 보시나요? 종 수준이 꼭 필요할까요?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>자료는 두 개입니다. <b>42명</b>은 민감 23명, 비민감 19명으로 나뉘어 있어서 <b>구별을 볼 수 있는 유일한 자료</b>입니다. 볼을 면봉으로 채취했고 세균과 진균을 둘 다 봤습니다. 민감 판정은 저희가 아니라 원 논문이 세 가지 시험을 모두 충족한 경우로 정했습니다.</p>
+          <p><b>595명</b>은 사람은 많지만 민감 구분이 없습니다. 대신 나이·피지 같은 측정값이 있어서, 찾은 균이 <b>얼굴에 늘 있는지, 나이나 피지에 끌려가는지</b> 확인하는 데 씁니다.</p>
+          <p>두 자료 모두 균 이름이 <b>속</b>까지만 붙어 있어서, 포도상구균속인 건 알지만 해로운 종인지 지켜주는 종인지는 모릅니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>16S / ITS</b> — 세균 / 진균을 알아보는 DNA 구간. 이 구간을 읽어 "무슨 균이 몇 %"를 셈</li>
+            <li><b>속(genus) / 종(species)</b> — 속이 성, 종이 이름. <i>Staphylococcus</i>(속) 안에 <i>aureus</i>, <i>epidermidis</i>(종)</li>
+            <li><b>SLS 패치</b> — 계면활성제(SLS)를 붙여 두고 피부 반응을 보는 자극 시험</li>
+            <li><b>면봉 vs 세척액</b> — 면봉은 한 부위를 문질러 채취, 세척액은 얼굴 전체를 물로 씻어 받음 → 입 주변 균까지 섞일 수 있음</li>
+            <li><b>595명의 정체</b> — 새로 모은 자료가 아니라 공개 코호트(원 연구 950·989명)에서 20–79세 여성으로 추린 재분석 집합</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · 얼굴 피부의 상위 균 -->
+  <section class="page">
+    <div class="head"><span class="no">3</span><h1>얼굴 피부의 상위 균</h1><span class="tag">미생물 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="미생물_전문가_피드백.html#4" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li>이 <b>역할 구분(피부 상재 · 구강 · 환경)</b>이 맞나요? 잘못 붙인 균이 있을까요?</li>
+            <li>얼굴 세척액에 <b>구강균</b>이 이렇게 많은 게 흔한 일인가요?</li>
+            <li>볼 면봉 자료의 <b>미분류 26%</b>와 환경균(<i>Delftia · Pseudomonas</i>)이 정상 범위인가요, 오염을 의심해야 하나요?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>얼굴에 어떤 균이 사는지 모아 봤습니다. 자료별로 <b>중앙값 상위 8개</b>이고, 색은 역할입니다.</p>
+          <p>세균은 <b>피부 상재균 3개</b>가 두 자료 모두 위에 있고, 진균은 <b>Malassezia 하나가 3분의 2</b>입니다. 595명 1위 <b>Streptococcus는 볼 면봉에선 0.6%</b>라 채취법이 만든 숫자일 수 있습니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것 — 균 이름</h2>
+          <div class="gloss">
+            <div class="gh">세균</div><div class="gh" style="display:none"></div>
+            <div><span class="t skin">상재</span><em>Cutibacterium</em> <span class="ko">큐티박테리움</span> — 피지 먹는 얼굴 최우점 세균 ("여드름균")</div>
+            <div><span class="t skin">상재</span><em>Staphylococcus</em> <span class="ko">포도상구균</span> — 해로운 종·지켜주는 종이 섞임</div>
+            <div><span class="t skin">상재</span><em>Corynebacterium</em> <span class="ko">코리네박테리움</span> — 피부 지질에 사는 세균</div>
+            <div><span class="t oral">구강</span><em>Streptococcus</em> <span class="ko">연쇄상구균</span> — 입·목에 가장 흔한 세균</div>
+            <div><span class="t oral">구강</span><em>Rothia</em> <span class="ko">로티아</span> — 혀·치태에 많은 세균</div>
+            <div><span class="t oral">구강</span><em>Actinomyces</em> <span class="ko">방선균</span> — 입안·치태 세균</div>
+            <div><span class="t oral">구강</span><em>Haemophilus</em> <span class="ko">헤모필루스</span> — 입·목·호흡기 세균</div>
+            <div><span class="t oral">구강</span><em>Neisseria</em> <span class="ko">나이세리아</span> — 입·목 세균</div>
+            <div><span class="t env">환경</span><em>Delftia</em> <span class="ko">델프티아</span> — 물·토양 세균</div>
+            <div><span class="t env">환경</span><em>Rhodanobacter</em> <span class="ko">로다노박터</span> — 토양 세균 · 오염 신호</div>
+            <div><span class="t env">환경</span><em>Pseudomonas</em> <span class="ko">슈도모나스</span> — 물·토양 · 시약 오염균 목록</div>
+            <div><span class="t etc">기타</span><em>Lactobacillus</em> <span class="ko">유산균</span> — 장·질 · 원 논문 민감군↑</div>
+            <div class="gh">진균</div><div class="gh" style="display:none"></div>
+            <div><span class="t skin">상재</span><em>Malassezia</em> <span class="ko">말라세지아</span> — 피지 먹는 효모, 얼굴 진균 대부분</div>
+            <div><span class="t env">환경</span><em>Cladosporium</em> <span class="ko">클라도스포리움</span> — 공기 중에 흔한 곰팡이</div>
+            <div><span class="t env">환경</span><em>Rhodotorula</em> <span class="ko">로도토룰라</span> — 붉은 효모 · 오염 신호</div>
+            <div><span class="t env">환경</span><em>Lasiobolus</em> <span class="ko">라시오볼루스</span> — 동물 분변 곰팡이</div>
+            <div><span class="t env">환경</span><em>Mucor</em> <span class="ko">털곰팡이</span> — 흙·썩은 음식 · 원 논문 민감군↑</div>
+            <div><span class="t env">환경</span><em>Fusarium</em> <span class="ko">푸사리움</span> — 식물 병원 곰팡이</div>
+            <div><span class="t env">환경</span><em>Enterocarpus</em> <span class="ko">엔테로카르푸스</span> — 환경 곰팡이 (문헌 미확인)</div>
+            <div><span class="t etc">기타</span>미분류 — 데이터베이스에서 이름을 못 붙인 서열</div>
+          </div>
+          <p class="sub">원문 확인: 세균 상재 3속 · <i>Malassezia</i> · <i>Pseudomonas</i>(Salter 2014) · <i>Lactobacillus · Mucor</i>(Keum 2020) — 나머지는 일반 지식 · 중앙값 = 줄 세웠을 때 가운데 사람의 값</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · 민감 vs 비민감 비교 -->
+  <section class="page">
+    <div class="head"><span class="no">4</span><h1>민감 vs 비민감 비교</h1><span class="tag">미생물 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="미생물_전문가_피드백.html#5" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li><b><i>Malassezia</i>가 민감군에서 낮은 것</b>, 생물학적으로 설명이 될까요? 문헌은 주로 “많을 때” 문제라고 하던데요.</li>
+            <li>민감군에서는 <i>Malassezia</i>가 줄어든 만큼 <b>미분류·환경 진균 비율이 늘어나는데</b>(미분류 0.8→11.4%), 실제 변화일까요, 비율 착시일까요?</li>
+            <li>피부에서 <b><i>Lactobacillus</i>가 민감군에 많은 것</b>, 의미 있어 보이나요?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>이제 42명을 민감 23명, 비민감 19명으로 나눠 앞의 상위 균을 비교했습니다. 숫자는 중앙값이고, 막대는 줄마다 둘 중 큰 쪽 기준입니다.</p>
+          <p>세균 쪽 상위 3개, <b>피부 상재균은 차이가 거의 없습니다.</b> <i>Lactobacillus</i>는 민감군에서 많지만 차이가 약하고, <i>Corynebacterium</i>은 경향만 있습니다.</p>
+          <p>뚜렷한 차이는 진균에서 나옵니다. <b><i>Malassezia</i>가 민감군에서 36%, 비민감군에서 84%</b>로 절반 이하입니다. 대신 민감군에서는 <b>미분류 진균</b>이 11%로 늘어나는데, 이건 다음 장에서 따로 보겠습니다.</p>
+          <p>이 결과는 저희가 처음 찾은 게 아니라 <b>원 논문이 이미 보고한 것</b>이고, 저희는 같은 자료에서 다시 확인했습니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>뚜렷 / 약함 / 경향만</b> — 뚜렷 = <i>Malassezia</i>(p=0.0001, 두 군 가운데 50%가 전혀 안 겹침) · 약함 = <i>Lactobacillus</i>(p=0.037)·<i>Mucor</i>(p=0.026), 580속을 보면 우연히 걸릴 수 있는 수준이고 <i>Mucor</i>는 42명 중 14명이 0% · 경향만 = <i>Corynebacterium</i>(p=0.22)</li>
+            <li><b>미분류 진균 (→ 4-1)</b> — <i>Malassezia</i> 감소의 거울상(다양성과 ρ=−0.979) · 미분류를 빼도 <i>Malassezia</i> 차이 유지(AUC 0.181)</li>
+            <li><b>원 논문 보고</b> — <i>M. restricta</i> 비민감 91.0% vs 민감 71.6% · <i>Mucor racemosus</i>·<i>Lactobacillus</i> 민감군↑ · <i>Cutibacterium</i>·<i>Staphylococcus</i>는 유의차 없음 (Keum 2020)</li>
+            <li><b>문헌과 방향이 반대</b> — <i>Malassezia</i>는 많을 때 피지 분해 → 장벽 손상(비듬·지루피부염)이 알려진 기전. 적을 때의 의미는 문헌에 없음</li>
+            <li><b><i>Lactobacillus</i>는 뒤에서 탈락</b> — 595명에선 검출 63%·중앙값 0.04%로 거의 없고 오염 신호도 있음 (다음 “고르기” 장)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4-1 · 미분류 진균의 정체 -->
+  <section class="page">
+    <div class="head"><span class="no">4-1</span><h1>미분류 진균의 정체</h1><span class="tag">미생물 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="미생물_전문가_피드백.html#6" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li>민감군에서 보이는 <b>공기·환경 곰팡이</b>(<i>Epicoccum</i> 등)는 피부에 실제로 붙어 사는 걸까요, <i>Malassezia</i>가 줄어든 빈자리 착시일까요?</li>
+            <li>볼 면봉 ITS 자료에서 <b>이름 없는 진균 서열</b>이 이 정도 나오는 게 흔한가요? 어떻게 다루는 게 맞을까요?</li>
+            <li>착시인지 가르려면 <b>qPCR 말고</b> 다른 방법이 있을까요?</li>
+            <li><i>Epicoccum</i>이 알레르기원이라는 점에서, <b>민감피부의 자극 반응과 관련 있을 수 있다는 가설</b>은 검증해 볼 만한 방향일까요?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>앞 장에서 민감군에 늘어난 미분류 진균이 대체 뭔지 궁금해서, 이름이 안 붙은 서열 72개를 <b>NCBI BLAST</b>에 돌려 가장 비슷한 서열을 찾아봤습니다.</p>
+          <p>결과는 <b>전부 진균</b>이었습니다. 사람이나 식물 DNA는 없었습니다. 그중 이름이 확실하게 붙는 건 <b><i>Epicoccum nigrum</i>, 공기와 식물에 흔한 곰팡이</b> 하나였고, 나머지는 배양된 적 없는 환경 진균이었습니다. 참고로 <b><i>Epicoccum</i>은 호흡기 알레르기를 일으키는 곰팡이로 알려져 있습니다.</b></p>
+          <p>즉 민감군에서 늘어난 건 <b>피부에 사는 균이 아니라 환경 곰팡이</b>입니다. 다만 몇 사람이 끌어올린 값이라, 실제로 붙어 사는지 비율 착시인지는 이 자료로는 모릅니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>BLAST</b> — 서열을 NCBI 전체 서열 DB와 대조해 가장 비슷한 기록을 찾는 검색. 일치도(%)와 겹친 길이(%)를 같이 봐야 함</li>
+            <li><b>무엇을 돌렸나</b> — 계(kingdom)도 모르는 67개 전부 + Didymellaceae 과 상위 5개 (16개 중). 나머지 속 미분류(다른 과 이름은 붙은 것)는 소량이라 안 돌림</li>
+            <li><b>“부분 일치” 56개</b> — 일치 84–86%이거나 서열의 20–54%만 겹침 → DB에 가까운 친척이 없거나 품질 낮은 서열일 수 있음</li>
+            <li><b><i>Epicoccum</i></b> — 중앙값은 두 군 모두 0%. 민감 11명·비민감 7명에게서만 나옴 → 소수가 평균을 끌어올림</li>
+            <li><b><i>Epicoccum</i> = 알레르기원</b> — 흡입 포자가 인구 5–7%의 호흡기 알레르기 원인 · 주요 알레르기 단백질 Epi p 1(단백질 분해효소)이 IgE 매개 과민반응을 일으킴 (Bisht 2004 <i>FEMS Immunol Med Microbiol</i> 42:205, PMID 15364105 · <i>E. purpurascens</i> = <i>E. nigrum</i>의 옛 이름). ⚠️ <b>피부 가려움·민감피부와 연결한 근거는 확인 못 함</b> — 주장 말고 질문으로만</li>
+            <li><b>한계</b> — 가장 비슷한 1개 기준 · “미배양 진균” 기록은 원래 채취 장소가 안 적혀 서식지는 모름 · 결과: <code>분석표/미분류진균_BLAST_요약·원본·입력_20260929</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · 후보 균 고르기 -->
+  <section class="page">
+    <div class="head"><span class="no">5</span><h1>후보 균 고르기</h1><span class="tag">미생물 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="미생물_전문가_피드백.html#7" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li><b>“흔하고, 채취법에 흔들리지 않는 균”</b>만 남기는 기준이 미생물학적으로 타당한가요?</li>
+            <li>이렇게 하면 <b>양은 적지만 중요한 균</b>(병원균 등)을 놓치지 않을까요?</li>
+            <li>얼굴 세척액의 <b>구강균</b>을 채취 때문에 섞인 것으로 보고 빼도 될까요?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>이제 후보를 골랐습니다. 세균 807속에서 시작해 두 가지만 물었습니다. <b>① 흔한가</b> — 두 자료 모두 90% 이상에서 나오고 중앙값 0.5% 이상. <b>② 채취법에 흔들리지 않나</b> — 두 자료에서 양이 5배 넘게 차이 나지 않는가.</p>
+          <p>여기서 595명 1위 <b>Streptococcus가 빠집니다.</b> 많지만 볼 면봉에선 30배 적어서 채취법이 만든 숫자로 봤습니다. 앞 장에서 민감군에 많았던 <b>Lactobacillus도</b> 595명에선 거의 없어서 빠집니다.</p>
+          <p>진균은 <i>Malassezia</i>와 <i>Cladosporium</i>이 남았는데, <i>Cladosporium</i>은 오염 신호가 있어 뺐습니다. 그래서 <b>세균 3개와 Malassezia, 4개</b>가 후보입니다. 이 기준에는 민감/비민감 결과를 쓰지 않았습니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>사후 규칙</b> — 90% · 0.5% · 5배는 결과를 본 뒤 글로 정리한 규칙. “미리 정했다”고 말하면 안 됨. 다만 문턱을 3배~20배 어디에 둬도 같은 3속 (남은 균 최대 2.3배 · 탈락 최소 30.7배)</li>
+            <li><b><i>Rothia</i></b> — 42명 비교에서 p=0.024로 유의해 보였지만 42명 검출률 59.5%라 ①에서 탈락. 결과에 맞춰 골랐다면 남겼을 균</li>
+            <li><b>이 규칙의 약점</b> — 비교 상대를 02 건강 코호트로 바꾸면 <i>Cutibacterium</i>도 5배를 넘음(이마 7.1배). 채취법 차이와 실제 부위 차이(이마는 피지 많음)를 구분 못 함</li>
+            <li><b>미분류 진균은 왜 후보가 아닌가</b> — 한 균이 아니라 여러 진균 서열 묶음(4-1)이라 규칙 적용 전에 제외 · 그 안의 <i>Epicoccum</i>은 민감 11 + 비민감 7 = 18/42명(43%)만 검출 → ① 90% 기준 탈락</li>
+            <li><b>오염 신호</b> — 시약에서 온 균은 DNA가 적은(얕게 읽힌) 시료일수록 비율이 커짐 → 심도와 음의 상관. <i>Cladosporium</i> ρ=−0.378 · 블랭크는 다른 연구의 ITS 1개라 보강 근거일 뿐</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="page">
+    <div class="head"><span class="no">6</span><h1>세균 후보 요약</h1><span class="tag">미생물 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="미생물_전문가_피드백.html#8" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li>세균 쪽에서 민감피부와 관련 있을 만한 <b>종이나 계통형</b>이 있다면 무엇일까요? (예: <i>S. aureus</i> vs <i>S. hominis</i>, <i>C. acnes</i> 계통형)</li>
+            <li><i>Corynebacterium</i>처럼 <b>피부 상재균이면서 시약 오염균</b>인 경우 어떻게 가르시나요?</li>
+            <li>16S 속 수준 결과로 더 볼 것이 있을까요, 아니면 <b>종 수준 자료를 새로 얻는 게</b> 맞을까요?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>남은 후보 중 세균 셋은 결론이 같아서 한 장으로 정리했습니다.</p>
+          <p><b>Cutibacterium</b>은 나이와 피지에 크게 끌려가고, <b>Staphylococcus</b>는 계산 방식에 따라 나이와의 관계가 뒤집히고 해로운 종과 지켜주는 종을 구분할 수 없습니다. <b>Corynebacterium</b>은 시약 오염균 목록에 올라 있는 균입니다.</p>
+          <p>그리고 셋 다 <b>민감과 비민감 사이에 차이가 없습니다.</b> 42명으로는 판단할 수 없어서, 군당 65명 정도와 종 수준 분석이 필요합니다. 판정은 셋 다 <b>조건부</b>입니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b><i>Cutibacterium</i></b> — 여드름과 갈리는 건 계통형(SLST) · 원 논문도 유의차 없음 · AUC 0.487 [0.32–0.67]</li>
+            <li><b><i>Staphylococcus</i></b> — 나이 상관이 원래% −0.05 · 로그비 −0.15 · 구강균 적은 사람만 +0.16으로 뒤집힘 · 595명 자료에 <i>aureus</i>·<i>epidermidis</i> 라벨 자체가 없음 (속 내 99.2% 미분류) · 아토피에선 <i>aureus</i>↑ <i>hominis</i>↓ (Edslev 2021)</li>
+            <li><b><i>Corynebacterium</i></b> — Salter 2014 키트 오염균 목록에 있음 · 다른 연구 음성대조 4개 모두에서 검출(평균 0.44%) · 한 부위에서 7종이 나와도 16S로는 5개로만 갈림 (겨드랑이 연구)</li>
+            <li><b>군당 65명</b> — 지금 신뢰구간 폭 ±0.18 → 군당 65명이면 ±0.10 (Hanley–McNeil)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="page">
+    <div class="head"><span class="no">7</span><h1><i>Malassezia</i> ① 어떤 균이고 무엇이 다른가</h1><span class="tag">미생물 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="미생물_전문가_피드백.html#9" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li>민감군 안에서도 <b>0%부터 90%까지 퍼져</b> 있는데, 민감군 안에 하위 유형이 있을 수 있을까요?</li>
+            <li>볼을 <b>면봉으로 한 번</b> 채취해 <i>Malassezia</i> 비율을 재는 방식이 적절한가요?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>이제 유일하게 신호가 있는 <b>Malassezia</b>를 네 장에 걸쳐 보겠습니다.</p>
+          <p>피지를 먹고 사는 효모이고, 얼굴 진균의 약 3분의 2를 차지합니다. 알려진 질환 연관은 비듬이나 지루피부염처럼 전부 <b>많을 때</b>의 이야기입니다.</p>
+          <p>점 하나가 한 사람입니다. 비민감군은 대부분 70% 이상에 몰려 있는데, <b>민감군은 넓게 퍼져 있고 중앙값이 36%</b>입니다. 민감 1명과 비민감 1명을 뽑으면 <b>85% 확률로 비민감 쪽이 더 많습니다.</b></p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>85%의 뜻</b> — AUC 0.153 → 1 − 0.153 = 0.847. AUC는 0.5면 동전 던지기, 0이나 1에 가까울수록 잘 가름</li>
+            <li><b>예외</b> — 비민감군 중 2명(19%, 38%)은 낮음 · 민감군 중 4명은 85% 이상</li>
+            <li><b>원 논문</b> — 전체 진균의 80.4%가 <i>Malassezia</i> · 민감군에서 <i>M. restricta</i> 감소 보고 (Keum 2020)</li>
+            <li><b>지방산 합성효소 없음</b> — 그래서 외부 지방산(피지)을 가져다 씀 (Cho &amp; Sugita, PMC9705927)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="page">
+    <div class="head"><span class="no">8</span><h1><i>Malassezia</i> ② 이 차이는 진짜인가</h1><span class="tag">미생물 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="미생물_전문가_피드백.html#10" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li>저희가 <b>놓친 착시</b>가 있을까요? (예: 세안·화장품 사용, 채취 시각, 계절)</li>
+            <li>음성대조가 <b>다른 연구의 ITS 블랭크 1개</b>뿐인데, 이 정도로 오염을 배제해도 될까요?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>이 차이가 진짜인지, 착시일 가능성 네 가지를 하나씩 지웠습니다.</p>
+          <p><b>나이</b> — 이 균은 나이 들수록 주는데 민감군이 11살 더 젊습니다. 나이 탓이면 민감군이 더 많아야 합니다. 나이대를 맞춰도 차이는 오히려 커집니다.</p>
+          <p><b>오염</b> — 오염 패턴이 없고, 음성대조에서도 시료보다 적게 나옵니다. <b>비율 계산</b> — 계산 방식을 네 가지로 바꿔도 유지됩니다. <b>이 자료만의 균</b> — 진균 자료 네 개 모두에서 100% 검출됩니다.</p>
+          <p>그래서 <b>차이는 남는다</b>고 봤고, 원 논문 결과를 같은 자료에서 다시 확인한 것입니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>나이 비교 자료</b> — 01 노화 ITS 58명은 19–29세 26명·60–63세 32명뿐 (30–50대 없음) → 두 군 비교로만 봄 · 31–55세만: AUC 0.093 (민감 10 · 비민감 15)</li>
+            <li><b>오염 판별 원리</b> — 시약에서 온 균은 DNA가 적은 시료일수록 비율↑ → 심도와 음의 상관. <i>Malassezia</i>는 +0.08</li>
+            <li><b>비율 계산 네 가지</b> — 로그비 0.181 · 미분류 제거 0.181 · 환경진균 기준 로그비 0.172 · 품질 낮은 25% 제외 0.192 (모두 0.5에서 멂)</li>
+            <li><b>진균 자료 4개</b> — 42명 볼 · 58명 볼·이마 · 96시료 이마(계절) · 400시료 두피(비듬)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="page">
+    <div class="head"><span class="no">9</span><h1><i>Malassezia</i> ③ 종으로 내려가면</h1><span class="tag">미생물 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="미생물_전문가_피드백.html#11" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li><i>M. restricta</i>만 줄고 <i>M. globosa</i>는 그대로인 게 <b>생물학적으로 의미</b>가 있을까요?</li>
+            <li>ITS1 서열로 붙인 <b>종 이름을 어느 정도 믿어도</b> 될까요?</li>
+            <li>종 수준을 확정하려면 어떤 방법이 좋을까요? (<b>종 특이 qPCR</b> 등)</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>같은 자료의 서열 단위 표를 열어 보니 <i>Malassezia</i> 서열 116개 중 74개에 종 이름이 붙어 있었습니다.</p>
+          <p>종으로 나눠 보면 감소는 <b>M. restricta 하나</b>에서 옵니다. 민감 30%, 비민감 67%. <i>globosa</i>나 종 미분류는 차이가 없습니다.</p>
+          <p>원 논문도 <b>같은 종</b>의 감소를 보고했습니다. 그러니까 종 수준까지 재현된 겁니다. 다만 종 이름은 서열로 추정한 것이고 36%는 여전히 미분류입니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>ASV</b> — 서열을 한 글자까지 구분해 센 최소 단위. 속 요약표보다 한 단계 아래라 종이 갈리기도 함</li>
+            <li><b>정정 이력</b> — 처음엔 “진균도 종 구분 불가”라고 적었다가, 같은 수업 자료의 ASV 표를 열어 보고 고침</li>
+            <li><b>더 나은 지표는 아님</b> — <i>restricta</i> AUC 0.165 vs 속 전체 0.153 · 거의 같음 · 11개 종/그룹 보정 후 q=0.0024</li>
+            <li><b>종마다 다른 점</b> — 피지 분해 효소(리파아제) 유전자 구성이 종마다 다름 → 종 수준이 필요한 이유 (Cho &amp; Sugita)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="page">
+    <div class="head"><span class="no">10</span><h1><i>Malassezia</i> ④ 아직 모르는 것</h1><span class="tag">미생물 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="미생물_전문가_피드백.html#12" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li>이 네 가지 중 <b>가장 먼저 풀어야 할 것</b>은 무엇일까요?</li>
+            <li><i>Malassezia</i>가 <b>적다는 것</b>은 무엇을 의미할 수 있을까요?</li>
+            <li>실제로 검증한다면 <b>최소한의 설계</b>(인원 · 측정 항목 · 반복 횟수)는 어느 정도일까요?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>마지막으로 아직 모르는 네 가지입니다.</p>
+          <p><b>왜 적은가</b> — 알려진 기전은 전부 많을 때의 이야기라 적을 때의 의미는 문헌에 없습니다. <b>실제로 줄었나</b> — 진균 다양성과 거의 한 축이라 비율만으로는 구별이 안 됩니다.</p>
+          <p><b>한 번 재서 믿을 수 있나</b> — 같은 사람도 계절에 따라 크게 흔들립니다. <b>어디서 재야 하나</b> — 부위마다 다르고, 대규모 진균 자료가 없습니다.</p>
+          <p>그래서 판정은 <b>후속 검증 1순위</b>입니다. 신호가 있는 유일한 후보지만, 이 네 가지를 풀어야 지표로 쓸 수 있습니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>적을 때의 가능한 설명 셋</b> — ① 피지 분해 기전이 민감피부의 축이 아님 ② <i>Malassezia</i> 우점 자체가 건강한 피지 생태의 표지 ③ 비율 착시</li>
+            <li><b>다양성과 한 축</b> — ρ=−0.979 · <i>Malassezia</i>를 빼고 다양성을 다시 재면 −0.305, 그 다양성엔 구별력 없음(AUC 0.627) → 축은 하나</li>
+            <li><b>일관성 0.20</b> — ICC(1이면 완벽). 미국·중국 가구 이마 24명×4계절 값이라 우리 대상 아님 · 신뢰구간 0.02–0.36</li>
+            <li><b>부위 차이</b> — 16비듬 두피 33.9% · 15계절 이마 78.4% (서로 다른 연구끼리 비교) · 595명 자료엔 진균 없음</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · 최종 결과물 -->
+  <section class="page">
+    <div class="head"><span class="no">11</span><h1>최종 결과물 — 검증 설계서</h1><span class="tag">미생물 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="미생물_전문가_피드백.html#13" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>질문</h2>
+          <ol>
+            <li>이 설계서에 <b>빠진 것</b>이 있다면 무엇일까요?</li>
+            <li>검증 규모(<b>qPCR · 군당 65명 · 반복 측정</b>)가 현실적인가요? 줄인다면 무엇부터?</li>
+            <li>진단 말고, 화장품 사용 전후처럼 <b>관리 효과를 따라가는 지표</b>로 쓸 가능성은 어떻게 보시나요?</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>그래서 저희가 최종적으로 만들려는 것은 <b>민감피부 판별 지표를 개발하려는 기업 R&amp;D 담당자</b>에게 주는 <b><i>Malassezia</i> 기반 검증 설계서</b>입니다.</p>
+          <p>이번에 한 것은 1단계, <b>후보 찾기</b>입니다. 807속에서 <i>M. restricta</i>까지 좁혔습니다. 설계서에는 2단계, 앞 장의 모르는 것 넷을 풀 <b>검증 방법</b>을 담습니다. 채취 부위를 고정하고, qPCR로 실제 양을 재고, 군당 65명 정도로 반복 측정하는 설계입니다.</p>
+          <p>판별 기준값은 검증 결과가 나와야 만들 수 있어서 3단계로 남겨 뒀습니다. 이 설계에서 <b>빠진 것</b>을 여쭤보고 싶습니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>교수님 피드백에 대한 답</b> — “최종 결과물이 뭔지 · 타겟을 하나로” → 타겟 기업 R&amp;D, 결과물 검증 설계서</li>
+            <li><b>왜 진단 도구가 아니라 설계서인가</b> — 42명뿐이고 기준값을 정할 근거가 없음. 지금 도구라고 하면 과장</li>
+            <li><b>예방·관리·치료</b> — 치료: 해당 없음(질환 아님) · 예방·관리: 원인을 몰라 “늘리자/줄이자” 불가 · 관리 효과 추적 지표는 가능성만 (질문 3)</li>
+            <li><b>기존 발표의 판정표와 관계</b> — 판정표 = 후보를 걸러낸 도구 · 설계서 = 걸러서 남은 후보를 다음 단계로 넘기는 문서</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 · 질문 모음 -->
+  <section class="page">
+    <div class="head"><span class="no">12</span><h1>질문 모음</h1><span class="tag">미생물 전문가 피드백 · 대본</span></div>
+    <div class="grid">
+      <div class="left">
+        <div class="preview"><iframe src="미생물_전문가_피드백.html#14" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="box ask"><h2><i>?</i>시간이 없을 때 여쭤볼 순서</h2>
+          <ol>
+            <li><b>3번</b> — <i>Malassezia</i>가 적은 것의 의미</li>
+            <li><b>7번</b> — 설계서에 빠진 것</li>
+            <li><b>4번</b> — 실제 감소인지 비율 착시인지 가르는 방법</li>
+            <li><b>1번</b> — 방향 자체가 말이 되는지</li>
+          </ol>
+        </div>
+      </div>
+      <div class="right">
+        <div class="box say"><h2><i>▶</i>이 슬라이드는 이렇게</h2>
+          <p>여기까지가 저희가 준비한 내용입니다. 설명하면서 드린 질문 중 <b>꼭 여쭤보고 싶은 것</b>을 한 장에 모았습니다.</p>
+          <p>특히 두 가지를 듣고 싶습니다. <b>민감군에서 <i>Malassezia</i>가 적다는 게 무엇을 의미할 수 있는지</b>, 그리고 <b>저희 검증 설계서에 빠진 것이 무엇인지</b>입니다.</p>
+          <p>편하게 말씀해 주시면 받아 적겠습니다.</p>
+        </div>
+        <div class="box know"><h2><i>※</i>알아둘 것</h2>
+          <ul>
+            <li><b>이 장은 띄워 두는 용도</b> — 설명은 짧게, 나머지 시간은 전부 듣기</li>
+            <li><b>기록</b> — 답을 적을 때 질문 번호를 같이 적기 (예: “3번 — …”)</li>
+            <li><b>설명 중 이미 답을 들은 질문</b>은 건너뛰고, “앞에서 말씀하신 ○○, 조금 더 여쭤봐도 될까요?”로 이어가기</li>
+            <li><b>장별 세부 질문</b>은 각 장의 대본 페이지에 그대로 있음 — 시간이 남으면 거기서 추가로</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+<div id="hint">← → 넘김 · F 전체화면 · P 인쇄</div>
+<script>
+  const stage=document.getElementById('stage');
+  const pages=[...document.querySelectorAll('.page')];
+  let i=0;
+  function fit(){const s=Math.min(innerWidth/1600,innerHeight/900)*0.96;
+    stage.style.transform=`translate(-50%,-50%) scale(${s})`;}
+  function show(n){i=Math.max(0,Math.min(pages.length-1,n));
+    pages.forEach((el,k)=>el.classList.toggle('on',k===i));
+    try{history.replaceState(null,'','#'+(i+1))}catch(e){}}
+  addEventListener('resize',fit);
+  addEventListener('keydown',e=>{
+    if(['ArrowRight','PageDown'].includes(e.key)){e.preventDefault();show(i+1)}
+    else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(i-1)}
+    else if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}
+    else if(e.key==='p'||e.key==='P'){print()}
+  });
+  fit();show((parseInt(location.hash.slice(1))||1)-1);
+</script>
+</body>
+</html>

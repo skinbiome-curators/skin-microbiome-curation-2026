@@ -1,0 +1,164 @@
+{
+  "rule": {
+    "note": "결과를 본 뒤 명문화한 사후 규칙. 사전등록 규칙이 아님.",
+    "stage1": "양쪽 검출률 >= 90% AND 595 중앙값 >= 0.5%",
+    "stage2": "두 코호트 중앙값 배수 < 5.0배",
+    "excluded_labels": [
+      "Unassigned",
+      "metagenome",
+      "unidentified"
+    ],
+    "cohort_difference": "595 = 얼굴 전체 세척액 · 16S V3-V4 / 42명 = 오른쪽 볼 swab · 16S V4-V5"
+  },
+  "n_genus_595": 807,
+  "n_genus_42": 580,
+  "stage1_passed": 4,
+  "stage2_passed": 3,
+  "selected": [
+    "Cutibacterium",
+    "Staphylococcus",
+    "Corynebacterium"
+  ],
+  "matches_hardcoded_candidates": true,
+  "table": [
+    {
+      "genus": "Streptococcus",
+      "detect_595": 99.3,
+      "detect_42": 100.0,
+      "median_595": 18.205,
+      "median_42": 0.594,
+      "fold": 30.7,
+      "stage2_pass": false,
+      "verdict": "제외 — 두 자료 중앙값 30.7배 차이",
+      "auc_42": 0.579,
+      "ci_42": [
+        0.396,
+        0.757
+      ],
+      "p_42": 0.3833,
+      "q_bh_42": 0.7595,
+      "q_bh_all": 0.6243
+    },
+    {
+      "genus": "Cutibacterium",
+      "detect_595": 99.2,
+      "detect_42": 100.0,
+      "median_595": 9.385,
+      "median_42": 21.798,
+      "fold": 2.3,
+      "stage2_pass": true,
+      "verdict": "후보 채택",
+      "auc_42": 0.487,
+      "ci_42": [
+        0.311,
+        0.668
+      ],
+      "p_42": 0.8895,
+      "q_bh_42": 0.8895,
+      "q_bh_all": 0.9698
+    },
+    {
+      "genus": "Staphylococcus",
+      "detect_595": 99.3,
+      "detect_42": 100.0,
+      "median_595": 5.511,
+      "median_42": 2.385,
+      "fold": 2.3,
+      "stage2_pass": true,
+      "verdict": "후보 채택",
+      "auc_42": 0.449,
+      "ci_42": [
+        0.268,
+        0.634
+      ],
+      "p_42": 0.5696,
+      "q_bh_42": 0.7595,
+      "q_bh_all": 0.7595
+    },
+    {
+      "genus": "Corynebacterium",
+      "detect_595": 90.4,
+      "detect_42": 100.0,
+      "median_595": 1.068,
+      "median_42": 0.772,
+      "fold": 1.4,
+      "stage2_pass": true,
+      "verdict": "후보 채택",
+      "auc_42": 0.389,
+      "ci_42": [
+        0.224,
+        0.568
+      ],
+      "p_42": 0.2203,
+      "q_bh_42": 0.7595,
+      "q_bh_all": 0.5875
+    }
+  ],
+  "disclosed_stage1_fail": [
+    {
+      "genus": "Actinomyces",
+      "detect_595": 89.2,
+      "detect_42": 64.3,
+      "median_595": 1.057,
+      "median_42": 0.024,
+      "fold": 44.3,
+      "auc_42": 0.348,
+      "ci_42": [
+        0.18,
+        0.517
+      ],
+      "p_42": 0.0929,
+      "why_dropped": "595 검출률 89.2% < 90% · 42명 검출률 64.3% < 90%",
+      "q_bh_all": 0.3716
+    },
+    {
+      "genus": "Haemophilus",
+      "detect_595": 88.6,
+      "detect_42": 90.5,
+      "median_595": 0.767,
+      "median_42": 0.047,
+      "fold": 16.5,
+      "auc_42": 0.503,
+      "ci_42": [
+        0.323,
+        0.693
+      ],
+      "p_42": 0.9698,
+      "why_dropped": "595 검출률 88.6% < 90%",
+      "q_bh_all": 0.9698
+    },
+    {
+      "genus": "Neisseria",
+      "detect_595": 87.4,
+      "detect_42": 85.7,
+      "median_595": 0.722,
+      "median_42": 0.091,
+      "fold": 7.9,
+      "auc_42": 0.578,
+      "ci_42": [
+        0.396,
+        0.757
+      ],
+      "p_42": 0.3902,
+      "why_dropped": "595 검출률 87.4% < 90% · 42명 검출률 85.7% < 90%",
+      "q_bh_all": 0.6243
+    },
+    {
+      "genus": "Rothia",
+      "detect_595": 95.0,
+      "detect_42": 59.5,
+      "median_595": 4.209,
+      "median_42": 0.009,
+      "fold": 475.8,
+      "auc_42": 0.295,
+      "ci_42": [
+        0.149,
+        0.46
+      ],
+      "p_42": 0.0237,
+      "why_dropped": "42명 검출률 59.5% < 90%",
+      "q_bh_all": 0.1896
+    }
+  ],
+  "multiplicity": "1차 통과 4속 + 공개 4속 = 8가설에 BH 보정"
+}

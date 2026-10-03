@@ -1,0 +1,77 @@
+{
+  "depth": {
+    "16S_read_count": {
+      "n_sensitive": 23,
+      "n_non_sensitive": 19,
+      "median_sensitive": 22297.0,
+      "median_non_sensitive": 19904.0,
+      "auc_sensitive_higher": 0.513,
+      "p_mann_whitney_normal_approx": 0.8895,
+      "q_bh_6tests": 0.8895
+    },
+    "16S_read_depth_final": {
+      "n_sensitive": 23,
+      "n_non_sensitive": 19,
+      "median_sensitive": 19477.0,
+      "median_non_sensitive": 17403.0,
+      "auc_sensitive_higher": 0.513,
+      "p_mann_whitney_normal_approx": 0.8895,
+      "q_bh_6tests": 0.8895
+    },
+    "ITS_read_count": {
+      "n_sensitive": 23,
+      "n_non_sensitive": 19,
+      "median_sensitive": 30664.0,
+      "median_non_sensitive": 52696.0,
+      "auc_sensitive_higher": 0.458,
+      "p_mann_whitney_normal_approx": 0.6401,
+      "q_bh_6tests": 0.8895
+    },
+    "ITS_read_depth_final": {
+      "n_sensitive": 23,
+      "n_non_sensitive": 19,
+      "median_sensitive": 21659.0,
+      "median_non_sensitive": 36457.0,
+      "auc_sensitive_higher": 0.453,
+      "p_mann_whitney_normal_approx": 0.6044,
+      "q_bh_6tests": 0.8895
+    }
+  },
+  "taxa_its": {
+    "g__Rhodotorula": {
+      "n_sensitive": 23,
+      "n_non_sensitive": 19,
+      "median_sensitive": 1.4048,
+      "median_non_sensitive": 0.4155,
+      "auc_sensitive_higher": 0.636,
+      "p_mann_whitney_normal_approx": 0.1327,
+      "detect_pct_sensitive": 91.3,
+      "detect_pct_non_sensitive": 78.9,
+      "q_bh_6tests": 0.7962
+    },
+    "g__Naganishia": {
+      "n_sensitive": 23,
+      "n_non_sensitive": 19,
+      "median_sensitive": 0.1152,
+      "median_non_sensitive": 0.0147,
+      "auc_sensitive_higher": 0.563,
+      "p_mann_whitney_normal_approx": 0.4871,
+      "detect_pct_sensitive": 65.2,
+      "detect_pct_non_sensitive": 52.6,
+      "q_bh_6tests": 0.8895
+    }
+  },
+  "reference_its": {
+    "g__Malassezia": {
+      "n_sensitive": 23,
+      "n_non_sensitive": 19,
+      "median_sensitive": 36.3731,
+      "median_non_sensitive": 84.2288,
+      "auc_sensitive_higher": 0.153,
+      "p_mann_whitney_normal_approx": 0.0001,
+      "detect_pct_sensitive": 100.0,
+      "detect_pct_non_sensitive": 100.0
+    }
+  },
+  "note": "read 수는 생물량이 아니다(DNA 농도 없음 · 대리 지표). 판정 등급은 바꾸지 않는다. AUC = 민감군이 클 확률. BH 는 심도 4 + 진균 2 = 6개 검정. Malassezia 는 기준으로만 표시."
+}

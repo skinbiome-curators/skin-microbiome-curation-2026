@@ -1,0 +1,95 @@
+{
+  "seed": 20260918,
+  "n_boot": 4000,
+  "question": "민감군의 Malassezia 감소가 피지 차이로 설명되는가",
+  "limitation": "피지는 한 번·볼 한 곳에서 잰 기기값. 01 노화는 다른 연구라 재현이 아니라 일관성 확인.",
+  "cohort03": {
+    "n": 42,
+    "sensitive": 23,
+    "non_sensitive": 19,
+    "site": "오른쪽 볼",
+    "sebum_col": "sebumeter_sebum_rigth"
+  },
+  "sebum_by_group": {
+    "median_sensitive": 13.0,
+    "median_non_sensitive": 11.0,
+    "auc_sensitive_higher": 0.493,
+    "ci": [
+      0.315,
+      0.675
+    ],
+    "p_mann_whitney_normal_approx": 0.94
+  },
+  "sebum_vs_malassezia_03": {
+    "all": {
+      "n": 42,
+      "rho": 0.278,
+      "p": 0.0742
+    },
+    "sensitive": {
+      "n": 23,
+      "rho": 0.281,
+      "p": 0.1946
+    },
+    "non_sensitive": {
+      "n": 19,
+      "rho": 0.495,
+      "p": 0.0312
+    }
+  },
+  "adjusted": {
+    "sebum": {
+      "base_vars": [
+        "sebum"
+      ],
+      "auc_base": 0.507,
+      "auc_plus_malassezia": 0.838,
+      "delta": 0.331,
+      "ci": [
+        0.118,
+        0.471
+      ],
+      "crosses_zero": false,
+      "auc_base_loocv": 0.288,
+      "auc_plus_malassezia_loocv": 0.789,
+      "delta_loocv": 0.501,
+      "loocv_agrees": true
+    },
+    "age_sebum": {
+      "base_vars": [
+        "age",
+        "sebum"
+      ],
+      "auc_base": 0.698,
+      "auc_plus_malassezia": 0.886,
+      "delta": 0.188,
+      "ci": [
+        0.046,
+        0.365
+      ],
+      "crosses_zero": false,
+      "auc_base_loocv": 0.565,
+      "auc_plus_malassezia_loocv": 0.842,
+      "delta_loocv": 0.277,
+      "loocv_agrees": true
+    }
+  },
+  "cross_check_01_aging": {
+    "all": {
+      "n": 58,
+      "rho": 0.667,
+      "p": 0.0
+    },
+    "cheek_only": {
+      "n": 30,
+      "rho": 0.793,
+      "p": 0.0
+    },
+    "forehead_only": {
+      "n": 28,
+      "rho": 0.495,
+      "p": 0.0074
+    },
+    "note": "민감 라벨 없음. 피지와 Malassezia 가 같이 움직이는지만 본다. 볼만 따로 본 것은 03(오른쪽 볼)과 부위를 맞추기 위해서."
+  }
+}
