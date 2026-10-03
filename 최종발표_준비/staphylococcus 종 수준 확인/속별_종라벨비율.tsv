@@ -1,0 +1,10 @@
+data	genus	asv_labeled	asv_total	reads_labeled	reads_total	labeled_read_pct	top1_species	top1_pct	top2_species	top2_pct	top3_species	top3_pct	top4_species	top4_pct
+16S	Cutibacterium	5	53	320090	657781	48.66	acnes	48.01	granulosum	0.37	namnetense	0.29		
+16S	Staphylococcus	2	20	744	44398	1.68	haemolyticus	1.66	equorum	0.01				
+16S	Corynebacterium	18	46	1758	15653	11.23	kroppenstedtii	2.9	macginleyi	2.5	durum	1.32	matruchotii	1.32
+16S	Streptococcus	3	25	63	11504	0.55	infantis	0.3	equi	0.17	anginosus	0.08		
+16S	Lactobacillus	4	29	3413	29393	11.61	kitasatonis	6.84	iners	4.63	intestinalis	0.13	delbrueckii	0.01
+16S	(전체)	274	3760	399501	1553287	25.72	acnes	20.33	irgensii	1.99	temperata	0.39	caccae	0.35
+ITS	Malassezia	74	116	1322098	1449661	91.2	restricta	86.37	globosa	4.34	dermatis	0.22	sympodialis	0.13
+ITS	Cladosporium	17	19	32546	32631	99.74	herbarum	95.95	halotolerans	3.71	succulentum	0.08		
+ITS	(전체)	716	1169	1871424	2594134	72.14	restricta	48.27	grenotii	3.57	racemosus	2.87	globosa	2.44

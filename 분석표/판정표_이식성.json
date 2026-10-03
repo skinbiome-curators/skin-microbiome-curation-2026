@@ -1,0 +1,664 @@
+{
+  "question": "5관문 중 무엇이 새 자료에서 라벨 없이 판정되는가",
+  "not_a_replication_test": "질환 연관이 독립 자료에서 반복되는지를 묻는 검정이 아니다. 도구의 적용 가능성만 본다. 질환 코호트(04·08·09·10·11·12·13·14·17)는 쓰지 않았다.",
+  "thresholds": {
+    "gate1_pass": 95.0,
+    "gate1_warn": 90.0,
+    "gate2_weak": 0.3,
+    "gate2_warn": 0.15,
+    "note": "15차 판정표의 판정을 문턱으로 명문화한 사후 규칙"
+  },
+  "bacteria": {
+    "595명 · 얼굴 세척액": {
+      "region": "V3-V4",
+      "subjects": "여 595",
+      "role": "우리 주 자료",
+      "n": 595,
+      "depth_median": 23683.0,
+      "has_age": true,
+      "genera": {
+        "Cutibacterium": {
+          "genus": "Cutibacterium",
+          "n": 595,
+          "detect_pct": 99.16,
+          "median_pct": 9.385,
+          "detect_lowdepth_pct": 96.6,
+          "detect_rest_pct": 99.4,
+          "rho_depth": 0.161,
+          "p_depth": 0.0001,
+          "gate1": "통과",
+          "rho_age": -0.379,
+          "p_age": 0.0,
+          "n_age": 595,
+          "gate2_age": "취약"
+        },
+        "Staphylococcus": {
+          "genus": "Staphylococcus",
+          "n": 595,
+          "detect_pct": 99.33,
+          "median_pct": 5.511,
+          "detect_lowdepth_pct": 96.6,
+          "detect_rest_pct": 99.6,
+          "rho_depth": 0.154,
+          "p_depth": 0.0002,
+          "gate1": "통과",
+          "rho_age": -0.053,
+          "p_age": 0.1977,
+          "n_age": 595,
+          "gate2_age": "통과"
+        },
+        "Corynebacterium": {
+          "genus": "Corynebacterium",
+          "n": 595,
+          "detect_pct": 90.42,
+          "median_pct": 1.068,
+          "detect_lowdepth_pct": 81.4,
+          "detect_rest_pct": 91.4,
+          "rho_depth": -0.118,
+          "p_depth": 0.0041,
+          "gate1": "주의",
+          "rho_age": 0.105,
+          "p_age": 0.0106,
+          "n_age": 595,
+          "gate2_age": "통과"
+        }
+      },
+      "unassigned_median_pct": 0.17
+    },
+    "42명 · 오른쪽 볼": {
+      "region": "V4-V5",
+      "subjects": "여 42",
+      "role": "우리 판별 자료",
+      "n": 42,
+      "depth_median": 18500.0,
+      "has_age": true,
+      "genera": {
+        "Cutibacterium": {
+          "genus": "Cutibacterium",
+          "n": 42,
+          "detect_pct": 100.0,
+          "median_pct": 21.798,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": 0.212,
+          "p_depth": 0.1773,
+          "gate1": "통과",
+          "rho_age": -0.303,
+          "p_age": 0.0508,
+          "n_age": 42,
+          "gate2_age": "취약"
+        },
+        "Staphylococcus": {
+          "genus": "Staphylococcus",
+          "n": 42,
+          "detect_pct": 100.0,
+          "median_pct": 2.385,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": -0.203,
+          "p_depth": 0.1962,
+          "gate1": "통과",
+          "rho_age": 0.049,
+          "p_age": 0.7587,
+          "n_age": 42,
+          "gate2_age": "통과"
+        },
+        "Corynebacterium": {
+          "genus": "Corynebacterium",
+          "n": 42,
+          "detect_pct": 100.0,
+          "median_pct": 0.772,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": -0.385,
+          "p_depth": 0.0118,
+          "gate1": "주의 — 심도 의존",
+          "rho_age": -0.106,
+          "p_age": 0.5024,
+          "n_age": 42,
+          "gate2_age": "통과"
+        }
+      },
+      "unassigned_median_pct": 26.18
+    },
+    "02건강 · 이마": {
+      "region": "V3-V4",
+      "subjects": "한국 남녀",
+      "role": "새 자료",
+      "n": 51,
+      "depth_median": 48129.0,
+      "has_age": true,
+      "genera": {
+        "Cutibacterium": {
+          "genus": "Cutibacterium",
+          "n": 51,
+          "detect_pct": 100.0,
+          "median_pct": 66.176,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": 0.121,
+          "p_depth": 0.3991,
+          "gate1": "통과",
+          "rho_age": -0.153,
+          "p_age": 0.2825,
+          "n_age": 51,
+          "gate2_age": "주의"
+        },
+        "Staphylococcus": {
+          "genus": "Staphylococcus",
+          "n": 51,
+          "detect_pct": 100.0,
+          "median_pct": 8.155,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": 0.177,
+          "p_depth": 0.214,
+          "gate1": "통과",
+          "rho_age": 0.034,
+          "p_age": 0.8105,
+          "n_age": 51,
+          "gate2_age": "통과"
+        },
+        "Corynebacterium": {
+          "genus": "Corynebacterium",
+          "n": 51,
+          "detect_pct": 100.0,
+          "median_pct": 1.885,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": -0.076,
+          "p_depth": 0.5982,
+          "gate1": "통과",
+          "rho_age": 0.116,
+          "p_age": 0.4174,
+          "n_age": 51,
+          "gate2_age": "통과"
+        }
+      },
+      "age_design_caveat": "설계상 Old(49-67) 52 · Young(21-36) 50 두 군. 중간 연령이 없어 |rho| 가 커지는 쪽으로 치우친다",
+      "unassigned_median_pct": 3.13
+    },
+    "02건강 · 볼": {
+      "region": "V3-V4",
+      "subjects": "한국 남녀",
+      "role": "새 자료",
+      "n": 51,
+      "depth_median": 47926.0,
+      "has_age": true,
+      "genera": {
+        "Cutibacterium": {
+          "genus": "Cutibacterium",
+          "n": 51,
+          "detect_pct": 100.0,
+          "median_pct": 50.864,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": 0.232,
+          "p_depth": 0.102,
+          "gate1": "통과",
+          "rho_age": -0.175,
+          "p_age": 0.22,
+          "n_age": 51,
+          "gate2_age": "주의"
+        },
+        "Staphylococcus": {
+          "genus": "Staphylococcus",
+          "n": 51,
+          "detect_pct": 100.0,
+          "median_pct": 5.552,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": -0.007,
+          "p_depth": 0.9628,
+          "gate1": "통과",
+          "rho_age": -0.057,
+          "p_age": 0.6904,
+          "n_age": 51,
+          "gate2_age": "통과"
+        },
+        "Corynebacterium": {
+          "genus": "Corynebacterium",
+          "n": 51,
+          "detect_pct": 100.0,
+          "median_pct": 3.39,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": -0.206,
+          "p_depth": 0.1478,
+          "gate1": "통과",
+          "rho_age": 0.122,
+          "p_age": 0.395,
+          "n_age": 51,
+          "gate2_age": "통과"
+        }
+      },
+      "age_design_caveat": "설계상 Old(49-67) 52 · Young(21-36) 50 두 군. 중간 연령이 없어 |rho| 가 커지는 쪽으로 치우친다",
+      "unassigned_median_pct": 4.94
+    },
+    "07화장품 · 볼": {
+      "region": "V3-V4",
+      "subjects": "여",
+      "role": "새 자료",
+      "n": 75,
+      "depth_median": 31479.0,
+      "has_age": false,
+      "genera": {
+        "Cutibacterium": {
+          "genus": "Cutibacterium",
+          "n": 75,
+          "detect_pct": 100.0,
+          "median_pct": 14.719,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": 0.205,
+          "p_depth": 0.077,
+          "gate1": "통과",
+          "rho_age": null,
+          "p_age": null,
+          "n_age": 0,
+          "gate2_age": "판정 불가 — 나이 없음"
+        },
+        "Staphylococcus": {
+          "genus": "Staphylococcus",
+          "n": 75,
+          "detect_pct": 100.0,
+          "median_pct": 8.83,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": -0.211,
+          "p_depth": 0.0693,
+          "gate1": "통과",
+          "rho_age": null,
+          "p_age": null,
+          "n_age": 0,
+          "gate2_age": "판정 불가 — 나이 없음"
+        },
+        "Corynebacterium": {
+          "genus": "Corynebacterium",
+          "n": 75,
+          "detect_pct": 100.0,
+          "median_pct": 1.121,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": 0.118,
+          "p_depth": 0.312,
+          "gate1": "통과",
+          "rho_age": null,
+          "p_age": null,
+          "n_age": 0,
+          "gate2_age": "판정 불가 — 나이 없음"
+        }
+      },
+      "unassigned_median_pct": 7.32
+    },
+    "15계절 · 이마": {
+      "region": "V4",
+      "subjects": "미기재",
+      "role": "새 자료",
+      "n": 96,
+      "depth_median": 19552.0,
+      "has_age": false,
+      "genera": {
+        "Cutibacterium": {
+          "genus": "Cutibacterium",
+          "n": 96,
+          "detect_pct": 100.0,
+          "median_pct": 13.228,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": 0.356,
+          "p_depth": 0.0004,
+          "gate1": "통과",
+          "rho_age": null,
+          "p_age": null,
+          "n_age": 0,
+          "gate2_age": "판정 불가 — 나이 없음"
+        },
+        "Staphylococcus": {
+          "genus": "Staphylococcus",
+          "n": 96,
+          "detect_pct": 100.0,
+          "median_pct": 4.636,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": 0.179,
+          "p_depth": 0.0811,
+          "gate1": "통과",
+          "rho_age": null,
+          "p_age": null,
+          "n_age": 0,
+          "gate2_age": "판정 불가 — 나이 없음"
+        },
+        "Corynebacterium": {
+          "genus": "Corynebacterium",
+          "n": 96,
+          "detect_pct": 100.0,
+          "median_pct": 1.375,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": 0.119,
+          "p_depth": 0.249,
+          "gate1": "통과",
+          "rho_age": null,
+          "p_age": null,
+          "n_age": 0,
+          "gate2_age": "판정 불가 — 나이 없음"
+        }
+      },
+      "unassigned_median_pct": 11.38
+    },
+    "16비듬 · 두피": {
+      "region": "V3",
+      "subjects": "여",
+      "role": "새 자료 · 다른 부위",
+      "n": 398,
+      "depth_median": 249400.0,
+      "has_age": true,
+      "genera": {
+        "Cutibacterium": {
+          "genus": "Cutibacterium",
+          "n": 398,
+          "detect_pct": 100.0,
+          "median_pct": 26.596,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": 0.005,
+          "p_depth": 0.913,
+          "gate1": "통과",
+          "rho_age": -0.136,
+          "p_age": 0.0066,
+          "n_age": 398,
+          "gate2_age": "통과"
+        },
+        "Staphylococcus": {
+          "genus": "Staphylococcus",
+          "n": 398,
+          "detect_pct": 100.0,
+          "median_pct": 17.275,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": 0.079,
+          "p_depth": 0.1175,
+          "gate1": "통과",
+          "rho_age": -0.015,
+          "p_age": 0.7692,
+          "n_age": 398,
+          "gate2_age": "통과"
+        },
+        "Corynebacterium": {
+          "genus": "Corynebacterium",
+          "n": 398,
+          "detect_pct": 100.0,
+          "median_pct": 0.793,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": -0.108,
+          "p_depth": 0.0317,
+          "gate1": "통과",
+          "rho_age": 0.185,
+          "p_age": 0.0002,
+          "n_age": 398,
+          "gate2_age": "주의"
+        }
+      },
+      "unassigned_median_pct": 7.27
+    }
+  },
+  "fungi": {
+    "42명 · 오른쪽 볼": {
+      "region": "ITS1",
+      "subjects": "여 42",
+      "role": "우리 판별 자료",
+      "n": 42,
+      "depth_median": 29098.0,
+      "has_age": true,
+      "genera": {
+        "g__Malassezia": {
+          "genus": "g__Malassezia",
+          "n": 42,
+          "detect_pct": 100.0,
+          "median_pct": 66.393,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": 0.08,
+          "p_depth": 0.6161,
+          "gate1": "통과",
+          "rho_age": -0.036,
+          "p_age": 0.8229,
+          "n_age": 42,
+          "gate2_age": "통과"
+        }
+      },
+      "unassigned_median_pct": 3.7
+    },
+    "58명 01노화 · 볼·이마": {
+      "region": "ITS1",
+      "subjects": "여 58",
+      "role": "우리 교차 자료",
+      "n": 58,
+      "depth_median": 3910.0,
+      "has_age": true,
+      "genera": {
+        "g__Malassezia": {
+          "genus": "g__Malassezia",
+          "n": 58,
+          "detect_pct": 100.0,
+          "median_pct": 77.773,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": 0.052,
+          "p_depth": 0.6985,
+          "gate1": "통과",
+          "rho_age": -0.665,
+          "p_age": 0.0,
+          "n_age": 58,
+          "gate2_age": "취약"
+        }
+      },
+      "age_design_caveat": "설계상 19-29세 26명 · 60-63세 32명. 30-50대가 0명이다. 연속 상관으로 읽으면 안 되고 두 군 비교로 봐야 한다. 15차 §6.2 가 이미 고연령 65.96% 대 저연령 84.71% 로 보고한 것과 같은 현상이다",
+      "unassigned_median_pct": 0.5
+    },
+    "15계절 · 이마": {
+      "region": "ITS1",
+      "subjects": "미기재",
+      "role": "새 자료",
+      "n": 96,
+      "depth_median": 23488.0,
+      "has_age": false,
+      "genera": {
+        "g__Malassezia": {
+          "genus": "g__Malassezia",
+          "n": 96,
+          "detect_pct": 100.0,
+          "median_pct": 78.356,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": 0.065,
+          "p_depth": 0.5321,
+          "gate1": "통과",
+          "rho_age": null,
+          "p_age": null,
+          "n_age": 0,
+          "gate2_age": "판정 불가 — 나이 없음"
+        }
+      },
+      "unassigned_median_pct": 1.31
+    },
+    "16비듬 · 두피": {
+      "region": "ITS1",
+      "subjects": "여",
+      "role": "새 자료 · 다른 부위",
+      "n": 400,
+      "depth_median": 97495.0,
+      "has_age": true,
+      "genera": {
+        "g__Malassezia": {
+          "genus": "g__Malassezia",
+          "n": 400,
+          "detect_pct": 100.0,
+          "median_pct": 33.904,
+          "detect_lowdepth_pct": 100.0,
+          "detect_rest_pct": 100.0,
+          "rho_depth": 0.241,
+          "p_depth": 0.0,
+          "gate1": "통과",
+          "rho_age": -0.06,
+          "p_age": 0.2309,
+          "n_age": 400,
+          "gate2_age": "통과"
+        }
+      },
+      "unassigned_median_pct": 23.84
+    }
+  },
+  "requirement_table": [
+    {
+      "gate": "① 검출 안정성",
+      "needs": "시료별 read 심도",
+      "availability": "모든 코호트",
+      "label_free": true
+    },
+    {
+      "gate": "② 교란 취약성",
+      "needs": "심도 + 교란변수(나이·피지)",
+      "availability": "심도는 모두 · 나이는 일부",
+      "label_free": true
+    },
+    {
+      "gate": "③ 분류 신뢰성",
+      "needs": "종 수준 분류표 또는 ASV",
+      "availability": "속 수준 표만 있으면 불가",
+      "label_free": false
+    },
+    {
+      "gate": "④ 판별력",
+      "needs": "군 라벨(민감/비민감)",
+      "availability": "라벨 있는 코호트만",
+      "label_free": false
+    },
+    {
+      "gate": "⑤ 방향성",
+      "needs": "종 수준 상대량 + 표현형 연계",
+      "availability": "속 수준 표만 있으면 불가",
+      "label_free": false
+    }
+  ],
+  "summary": {
+    "n_cohort_16S": 7,
+    "n_cohort_ITS": 4,
+    "gate1_judged": "11/11 코호트",
+    "gate2_depth_judged": "11/11 코호트",
+    "gate2_age_judged": "5/7 세균 코호트 (나이가 기재된 자료만)",
+    "gate3_judged": "0 (속 요약표 11개 기준) — 수업 공개 자료의 속 수준 표로는 종 수준 분류 신뢰성을 볼 수 없다. 단 같은 자료의 asv/ 표를 쓰면 달라질 수 있다 — 2026-09-19 현재 ③은 ASV로 다시 재지 않았다",
+    "gate4_judged": "2 — 03민감(민감/비민감) 뿐. 나머지는 군 라벨이 없다",
+    "gate5_judged": "0 (속 요약표 11개 기준) — 속 수준 계수가 없다. 단 같은 자료의 asv/ 표로 내려가니 진균 ⑤는 부분 가능이었다(11_진균_종수준.py · M. restricta AUC 0.165 q=0.0024). 세균은 그대로 불가"
+  },
+  "fold_vs_595": {
+    "note": "595(얼굴 세척액·V3-V4) 중앙값 대비 배수. 2차 규칙의 문턱은 5배다.",
+    "threshold": 5.0,
+    "pairs": {
+      "42명 · 오른쪽 볼": {
+        "region": "V4-V5",
+        "fold_vs_595": {
+          "Cutibacterium": 2.3,
+          "Staphylococcus": 2.3,
+          "Corynebacterium": 1.4
+        }
+      },
+      "02건강 · 이마": {
+        "region": "V3-V4",
+        "fold_vs_595": {
+          "Cutibacterium": 7.1,
+          "Staphylococcus": 1.5,
+          "Corynebacterium": 1.8
+        }
+      },
+      "02건강 · 볼": {
+        "region": "V3-V4",
+        "fold_vs_595": {
+          "Cutibacterium": 5.4,
+          "Staphylococcus": 1.0,
+          "Corynebacterium": 3.2
+        }
+      },
+      "07화장품 · 볼": {
+        "region": "V3-V4",
+        "fold_vs_595": {
+          "Cutibacterium": 1.6,
+          "Staphylococcus": 1.6,
+          "Corynebacterium": 1.0
+        }
+      },
+      "15계절 · 이마": {
+        "region": "V4",
+        "fold_vs_595": {
+          "Cutibacterium": 1.4,
+          "Staphylococcus": 1.2,
+          "Corynebacterium": 1.3
+        }
+      },
+      "16비듬 · 두피": {
+        "region": "V3",
+        "fold_vs_595": {
+          "Cutibacterium": 2.8,
+          "Staphylococcus": 3.1,
+          "Corynebacterium": 1.3
+        }
+      }
+    }
+  },
+  "cross_cohort_spread": {
+    "note": "같은 속의 중앙값이 연구마다 몇 배까지 벌어지는가. 채취 방식·영역·부위·파이프라인이 섞인 폭이다. 어느 한쪽이 틀린 것이 아니라 셋 다 그 자료 안에서는 맞는 값이다.",
+    "implication": "패널 기준을 \"Cutibacterium 20% 이상\" 같은 절대 문턱으로 쓸 수 없다. 기준은 반드시 같은 채취 프로토콜 안에서 정의돼야 하고, 프로토콜이 바뀌면 다시 정해야 한다.",
+    "genera": {
+      "Cutibacterium": {
+        "n_cohort": 7,
+        "min": {
+          "cohort": "595명 · 얼굴 세척액",
+          "median_pct": 9.385
+        },
+        "max": {
+          "cohort": "02건강 · 이마",
+          "median_pct": 66.176
+        },
+        "max_over_min": 7.1
+      },
+      "Staphylococcus": {
+        "n_cohort": 7,
+        "min": {
+          "cohort": "42명 · 오른쪽 볼",
+          "median_pct": 2.385
+        },
+        "max": {
+          "cohort": "16비듬 · 두피",
+          "median_pct": 17.275
+        },
+        "max_over_min": 7.2
+      },
+      "Corynebacterium": {
+        "n_cohort": 7,
+        "min": {
+          "cohort": "42명 · 오른쪽 볼",
+          "median_pct": 0.772
+        },
+        "max": {
+          "cohort": "02건강 · 볼",
+          "median_pct": 3.39
+        },
+        "max_over_min": 4.4
+      },
+      "g__Malassezia": {
+        "n_cohort": 4,
+        "min": {
+          "cohort": "16비듬 · 두피",
+          "median_pct": 33.904
+        },
+        "max": {
+          "cohort": "15계절 · 이마",
+          "median_pct": 78.356
+        },
+        "max_over_min": 2.3
+      }
+    }
+  }
+}

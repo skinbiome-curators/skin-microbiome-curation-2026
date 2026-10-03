@@ -1,0 +1,11 @@
+# Python 캐시 — 실행하면 저절로 생긴다
+__pycache__/
+*.pyc
+
+# Windows · Office 임시 파일
+Thumbs.db
+desktop.ini
+~$*
+
+# 중간발표 영상(51MB)과 595명 자료(원자료/AAML_*)는 올린다 — 2026-10-03 결정 (private 저장소)
+# 공개로 바꾸기 전에 두 가지를 다시 확인할 것: AAML 입수 경로 · 녹취/영상 공개 여부

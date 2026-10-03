@@ -1,0 +1,5 @@
+auc	n_per_group_power80	n_per_group_with_failure_power80	simulated_power_at_n_power80	n_per_group_power90	n_per_group_with_failure_power90	simulated_power_at_n_power90
+0.65	57	74	0.783	75	97	0.905
+0.7	32	42	0.816	41	53	0.896
+0.75	20	26	0.815	26	34	0.908
+0.8	14	19	0.828	17	22	0.909

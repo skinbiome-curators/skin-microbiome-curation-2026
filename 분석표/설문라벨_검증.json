@@ -1,0 +1,100 @@
+{
+  "n": 595,
+  "n_S": 284,
+  "n_R": 311,
+  "note": "붉은기는 홍반계 측정이 아니라 색측정 기기의 CIELAB a* 축이다.",
+  "measures": {
+    "나이": {
+      "column": "Age",
+      "auc": 0.3143,
+      "discrimination": 0.1857,
+      "p": 4.884981308350689e-15,
+      "median_S": 40.0,
+      "median_R": 54.0,
+      "n_S": 284,
+      "n_R": 311,
+      "q_bh": 0.0
+    },
+    "피지": {
+      "column": "Oil_avg",
+      "auc": 0.5833,
+      "discrimination": 0.0833,
+      "p": 0.00044175335390095327,
+      "median_S": 27.5,
+      "median_R": 20.0,
+      "n_S": 284,
+      "n_R": 311,
+      "q_bh": 0.0009
+    },
+    "수분손실(TEWL, 볼)": {
+      "column": "TEWL_Cheek_avg",
+      "auc": 0.5665,
+      "discrimination": 0.0665,
+      "p": 0.005053745583273095,
+      "median_S": 16.1,
+      "median_R": 15.13,
+      "n_S": 284,
+      "n_R": 311,
+      "q_bh": 0.0076
+    },
+    "수분(볼)": {
+      "column": "Hydration_Cheek_avg",
+      "auc": 0.5477,
+      "discrimination": 0.0477,
+      "p": 0.04409685376250172,
+      "median_S": 49.635,
+      "median_R": 48.37,
+      "n_S": 284,
+      "n_R": 311,
+      "q_bh": 0.0529
+    },
+    "피부 밝기(ITA)": {
+      "column": "Color_Cheek_ITA",
+      "auc": 0.6222,
+      "discrimination": 0.1222,
+      "p": 2.574953752443321e-07,
+      "median_S": 38.659,
+      "median_R": 35.948,
+      "n_S": 284,
+      "n_R": 311,
+      "q_bh": 0.0
+    },
+    "붉은기(CIELAB a*)": {
+      "column": "Color_Cheek_a_value",
+      "auc": 0.5225,
+      "discrimination": 0.0225,
+      "p": 0.34314091934233626,
+      "median_S": 10.99,
+      "median_R": 10.803,
+      "n_S": 284,
+      "n_R": 311,
+      "q_bh": 0.3431
+    }
+  },
+  "redness_by_age_band": {
+    "20-39세": {
+      "auc": 0.5255,
+      "p": 0.5726,
+      "median_S": 10.8,
+      "median_R": 10.493,
+      "n_S": 138,
+      "n_R": 58
+    },
+    "40-54세": {
+      "auc": 0.5201,
+      "p": 0.6676,
+      "median_S": 11.303,
+      "median_R": 11.203,
+      "n_S": 63,
+      "n_R": 98
+    },
+    "55-79세": {
+      "auc": 0.5651,
+      "p": 0.098,
+      "median_S": 11.117,
+      "median_R": 10.713,
+      "n_S": 83,
+      "n_R": 155
+    }
+  }
+}

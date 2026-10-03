@@ -1,0 +1,157 @@
+{
+  "gate123_595": {
+    "n": 595,
+    "n_low_depth": 59,
+    "n_low_richness": 15,
+    "genera": {
+      "Cutibacterium": {
+        "detect_pct": 99.16,
+        "median_pct": 9.385,
+        "detect_pct_lowdepth": 96.6,
+        "detect_pct_rest": 99.4,
+        "rho_depth": 0.161,
+        "p_depth": 7.09710339852343e-05,
+        "rho_age": -0.379,
+        "p_age": 0.0,
+        "rho_oil": 0.367,
+        "p_oil": 0.0,
+        "median_pct_by_ageband": {
+          "20-39": 20.787,
+          "40-54": 11.75,
+          "55-79": 3.137
+        },
+        "median_pct_excl_lowrich": 9.247,
+        "mismatch_rows": 5,
+        "mismatch_share_of_genus": 0.00129,
+        "mismatch_examples": [
+          "Lepisosteus_oculatus",
+          "Propionibacterium_humerusii",
+          "Aureobasidium_melanogenum"
+        ],
+        "expected_age_shift_pct": {
+          "25-34세": 19.888,
+          "36-45세": 20.093,
+          "n": [
+            97,
+            93
+          ]
+        }
+      },
+      "Staphylococcus": {
+        "detect_pct": 99.33,
+        "median_pct": 5.511,
+        "detect_pct_lowdepth": 96.6,
+        "detect_pct_rest": 99.6,
+        "rho_depth": 0.154,
+        "p_depth": 0.00014189418335597281,
+        "rho_age": -0.053,
+        "p_age": 0.19720160356537209,
+        "rho_oil": 0.103,
+        "p_oil": 0.011343480648167148,
+        "median_pct_by_ageband": {
+          "20-39": 5.554,
+          "40-54": 6.019,
+          "55-79": 4.732
+        },
+        "median_pct_excl_lowrich": 5.793,
+        "mismatch_rows": 1,
+        "mismatch_share_of_genus": 0.0,
+        "mismatch_examples": [
+          "Pseudomonas_sp."
+        ],
+        "expected_age_shift_pct": {
+          "25-34세": 5.979,
+          "36-45세": 6.019,
+          "n": [
+            97,
+            93
+          ]
+        }
+      },
+      "Corynebacterium": {
+        "detect_pct": 90.42,
+        "median_pct": 1.068,
+        "detect_pct_lowdepth": 81.4,
+        "detect_pct_rest": 91.4,
+        "rho_depth": -0.118,
+        "p_depth": 0.003938568542936949,
+        "rho_age": 0.105,
+        "p_age": 0.010312035692915167,
+        "rho_oil": -0.099,
+        "p_oil": 0.01535048577921172,
+        "median_pct_by_ageband": {
+          "20-39": 0.753,
+          "40-54": 1.068,
+          "55-79": 1.483
+        },
+        "median_pct_excl_lowrich": 1.081,
+        "mismatch_rows": 0,
+        "mismatch_share_of_genus": 0.0,
+        "mismatch_examples": [],
+        "expected_age_shift_pct": {
+          "25-34세": 0.838,
+          "36-45세": 1.081,
+          "n": [
+            97,
+            93
+          ]
+        }
+      }
+    }
+  },
+  "gate4_03": {
+    "n": 42,
+    "n_sensitive": 23,
+    "n_nonsensitive": 19,
+    "age_median": {
+      "Sensitive": 29.0,
+      "Non-sensitive": 40.0
+    },
+    "genera": {
+      "Cutibacterium": {
+        "median_S": 24.764,
+        "median_N": 21.744,
+        "auc": 0.487,
+        "ci": [
+          0.316,
+          0.67
+        ],
+        "p": 0.8895,
+        "rho_age_in03": -0.303,
+        "detect_pct": 100.0
+      },
+      "Staphylococcus": {
+        "median_S": 1.962,
+        "median_N": 2.941,
+        "auc": 0.449,
+        "ci": [
+          0.27,
+          0.632
+        ],
+        "p": 0.5696,
+        "rho_age_in03": 0.049,
+        "detect_pct": 100.0
+      },
+      "Corynebacterium": {
+        "median_S": 0.474,
+        "median_N": 1.123,
+        "auc": 0.389,
+        "ci": [
+          0.227,
+          0.563
+        ],
+        "p": 0.2203,
+        "rho_age_in03": -0.106,
+        "detect_pct": 100.0
+      }
+    },
+    "auc_age": {
+      "auc": 0.347,
+      "ci": [
+        0.18,
+        0.524
+      ],
+      "p": 0.0904
+    }
+  }
+}

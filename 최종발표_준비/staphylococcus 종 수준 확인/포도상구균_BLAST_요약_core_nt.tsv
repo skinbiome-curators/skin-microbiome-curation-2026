@@ -1,0 +1,21 @@
+asv	len	share_of_staph_reads_pct	silva_species	n_detected_42	best_ident_cov95	n_hits_at_best	n_uncultured_at_best	named_species_at_best(count)	all_50_hits_tied
+ASV0006	375	88.882		42	100.00	50	27	Staphylococcus aureus(9); Staphylococcus epidermidis(7); Staphylococcus haemolyticus(1); Bacilli bacterium(1); Staphylococcus hominis(1); Staphylococcus borealis(1); Listeria monocytogenes(1); Staphylococcus warneri(1); Staphylococcus sp.(1)	Y
+ASV0126	375	3.243		20	100.00	50	49	Staphylococcus capitis(1)	Y
+ASV0145	375	2.759		18	100.00	50	42	Staphylococcus epidermidis(3); Staphylococcus sp.(2); Staphylococcus warneri(2); Staphylococcus aureus(1)	Y
+ASV0161	375	1.908		14	100.00	50	44	Staphylococcus epidermidis(5); Staphylococcus sp.(1)	Y
+ASV0174	375	1.662	haemolyticus	20	100.00	50	42	Staphylococcus haemolyticus(8)	Y
+ASV0260	375	0.669		8	100.00	50	20	Staphylococcus aureus(27); Staphylococcus epidermidis(3)	Y
+ASV0494	319	0.18		7		0	0		
+ASV0510	375	0.164		1	100.00	50	50		Y
+ASV0590	375	0.117		1	99.73	11	8	Staphylococcus aureus(1); Staphylococcus hominis(1); Staphylococcus sp.(1)	
+ASV0619	375	0.106		1	100.00	22	21	Staphylococcus aureus(1)	
+ASV0819	375	0.061		1	100.00	50	36	Staphylococcus epidermidis(12); Staphylococcus sp.(1); Staphylococcus aureus(1)	Y
+ASV0973	319	0.047		3		0	0		
+ASV1006	375	0.045		1	100.00	15	14	Staphylococcus aureus(1)	
+ASV1090	376	0.041		1	100.00	1	1		
+ASV1215	375	0.036		1	98.12	1	1		
+ASV1552	375	0.027		1	100.00	50	27	Staphylococcus sp.(7); Staphylococcus cohnii(4); Staphylococcaceae bacterium(3); Staphylococcus nepalensis(2); Staphylococcus xylosus(2); Staphylococcus saprophyticus(1); Staphylococcus gallinarum(1); Staphylococcus succinus(1); Staphylococcus edaphicus(1); Bacterium strain(1)	Y
+ASV2205	373	0.018		1	100.00	3	3		
+ASV2483	373	0.016		1	99.73	1	1		
+ASV2715	375	0.014	equorum	1	100.00	4	0	Staphylococcus equorum(3); Staphylococcus sp.(1)	
+ASV3620	346	0.005		1		0	0		

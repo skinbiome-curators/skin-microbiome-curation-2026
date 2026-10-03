@@ -1,0 +1,153 @@
+{
+  "n_people": 595,
+  "note": "종 라벨은 16S 기반 추정이며 이 자료에서 오류가 확인됐다.",
+  "genera": {
+    "Cutibacterium": {
+      "n_species_rows": 11,
+      "n_named_species": 9,
+      "unidentified_share_pct": 98.58,
+      "top_species": [
+        {
+          "species": "unidentified",
+          "share_of_genus": 98.58,
+          "n_detected": 590,
+          "known_direction": "미상"
+        },
+        {
+          "species": "Cutibacterium_acnes",
+          "share_of_genus": 0.58,
+          "n_detected": 70,
+          "known_direction": "양방향"
+        },
+        {
+          "species": "Cutibacterium_granulosum",
+          "share_of_genus": 0.57,
+          "n_detected": 272,
+          "known_direction": "미상"
+        },
+        {
+          "species": "Lepisosteus_oculatus",
+          "share_of_genus": 0.11,
+          "n_detected": 74,
+          "known_direction": "미상"
+        },
+        {
+          "species": "uncultured_Propionibacterium",
+          "share_of_genus": 0.09,
+          "n_detected": 84,
+          "known_direction": "미상"
+        },
+        {
+          "species": "Cutibacterium_avidum",
+          "share_of_genus": 0.06,
+          "n_detected": 44,
+          "known_direction": "미상"
+        }
+      ],
+      "known_species_found": {
+        "Cutibacterium_acnes": {
+          "direction": "양방향",
+          "basis": "균주(phylotype)에 따라 역할이 갈림",
+          "n_detected": 70
+        }
+      },
+      "known_species_absent": [],
+      "direction_verdict": "불가 — 속 내 98.58%가 종 수준 미분류"
+    },
+    "Staphylococcus": {
+      "n_species_rows": 15,
+      "n_named_species": 14,
+      "unidentified_share_pct": 99.21,
+      "top_species": [
+        {
+          "species": "unidentified",
+          "share_of_genus": 99.21,
+          "n_detected": 591,
+          "known_direction": "미상"
+        },
+        {
+          "species": "Staphylococcus_sciuri",
+          "share_of_genus": 0.36,
+          "n_detected": 4,
+          "known_direction": "미상"
+        },
+        {
+          "species": "Staphylococcus_saprophyticus",
+          "share_of_genus": 0.14,
+          "n_detected": 13,
+          "known_direction": "미상"
+        },
+        {
+          "species": "Staphylococcus_pseudintermedius",
+          "share_of_genus": 0.1,
+          "n_detected": 4,
+          "known_direction": "미상"
+        },
+        {
+          "species": "Staphylococcus_lugdunensis",
+          "share_of_genus": 0.09,
+          "n_detected": 20,
+          "known_direction": "미상"
+        },
+        {
+          "species": "Staphylococcus_pasteuri",
+          "share_of_genus": 0.07,
+          "n_detected": 10,
+          "known_direction": "미상"
+        }
+      ],
+      "known_species_found": {},
+      "known_species_absent": [
+        "Staphylococcus_aureus",
+        "Staphylococcus_epidermidis"
+      ],
+      "direction_verdict": "불가 — 속 내 99.21%가 종 수준 미분류"
+    },
+    "Corynebacterium": {
+      "n_species_rows": 39,
+      "n_named_species": 37,
+      "unidentified_share_pct": 64.14,
+      "top_species": [
+        {
+          "species": "unidentified",
+          "share_of_genus": 64.0,
+          "n_detected": 417,
+          "known_direction": "미상"
+        },
+        {
+          "species": "Corynebacterium_propinquum",
+          "share_of_genus": 23.92,
+          "n_detected": 81,
+          "known_direction": "미상"
+        },
+        {
+          "species": "Corynebacterium_tuberculostearicum",
+          "share_of_genus": 4.73,
+          "n_detected": 225,
+          "known_direction": "미상"
+        },
+        {
+          "species": "Corynebacterium_durum",
+          "share_of_genus": 2.83,
+          "n_detected": 252,
+          "known_direction": "미상"
+        },
+        {
+          "species": "Corynebacterium_bovis",
+          "share_of_genus": 1.1,
+          "n_detected": 20,
+          "known_direction": "미상"
+        },
+        {
+          "species": "Corynebacterium_matruchotii",
+          "share_of_genus": 0.92,
+          "n_detected": 121,
+          "known_direction": "미상"
+        }
+      ],
+      "known_species_found": {},
+      "known_species_absent": [],
+      "direction_verdict": "불가 — 속 내 64.14%가 종 수준 미분류"
+    }
+  }
+}

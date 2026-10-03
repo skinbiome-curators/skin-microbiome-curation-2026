@@ -1,0 +1,173 @@
+{
+  "question": "후보균 값이 같은 사람 안에서 시간이 지나도 유지되는가",
+  "metric": "ICC(1) — 전체 변동 중 사람 사이 차이의 몫. 높을수록 그 사람의 특징이다.",
+  "thresholds": {
+    "안정": ">=0.75",
+    "보통": "0.50-0.75",
+    "취약": "0.40-0.50",
+    "불안정": "<0.40"
+  },
+  "threshold_note": "문턱은 재현성 연구의 관례를 따랐고 사전등록한 것이 아니다.",
+  "caveats": [
+    "두 코호트 다 우리 대상(한국인 여성 얼굴)이 아니다. 참고값이다.",
+    "ICC 가 낮다고 측정이 나쁘다는 뜻이 아니다 — 계절에 따라 진짜로 변했을 수 있다. 어느 쪽이든 패널에는 같은 문제다: 한 번 재서 판정할 수 없다.",
+    "07 은 화장품 중재 연구라 사람 안 변동에 처치 효과가 섞인다. 07 의 ICC 는 하한이다."
+  ],
+  "cohorts": {
+    "15계절 · 이마 (세균)": {
+      "cohort": "15_season_16S",
+      "site": "Forehead",
+      "n_subject": 24,
+      "n_repeat": 4,
+      "n_sample": 96,
+      "note": "2014년 1·4·8·11월 · 관찰 연구",
+      "genera": {
+        "Cutibacterium": {
+          "median_pct": 13.228,
+          "icc_raw": 0.312,
+          "icc_raw_ci": [
+            0.102,
+            0.516
+          ],
+          "icc_logratio": 0.349,
+          "icc_logratio_ci": [
+            0.139,
+            0.504
+          ],
+          "ci_upper_below_0_5": false,
+          "within_subject_fold_median": 7.3,
+          "within_subject_fold_max": 47.1,
+          "verdict": "불안정"
+        },
+        "Staphylococcus": {
+          "median_pct": 4.636,
+          "icc_raw": 0.102,
+          "icc_raw_ci": [
+            -0.095,
+            0.377
+          ],
+          "icc_logratio": 0.156,
+          "icc_logratio_ci": [
+            -0.091,
+            0.365
+          ],
+          "ci_upper_below_0_5": true,
+          "within_subject_fold_median": 6.4,
+          "within_subject_fold_max": 50.9,
+          "verdict": "불안정"
+        },
+        "Corynebacterium": {
+          "median_pct": 1.375,
+          "icc_raw": 0.381,
+          "icc_raw_ci": [
+            -0.112,
+            0.486
+          ],
+          "icc_logratio": 0.174,
+          "icc_logratio_ci": [
+            -0.179,
+            0.471
+          ],
+          "ci_upper_below_0_5": true,
+          "within_subject_fold_median": 4.1,
+          "within_subject_fold_max": 27.0,
+          "verdict": "불안정"
+        }
+      }
+    },
+    "15계절 · 이마 (진균)": {
+      "cohort": "15_season_ITS",
+      "site": "Forehead",
+      "n_subject": 24,
+      "n_repeat": 4,
+      "n_sample": 96,
+      "note": "2014년 1·4·8·11월 · 관찰 연구",
+      "genera": {
+        "g__Malassezia": {
+          "median_pct": 78.356,
+          "icc_raw": 0.195,
+          "icc_raw_ci": [
+            0.018,
+            0.356
+          ],
+          "icc_logratio": 0.18,
+          "icc_logratio_ci": [
+            0.03,
+            0.31
+          ],
+          "ci_upper_below_0_5": true,
+          "within_subject_fold_median": 1.9,
+          "within_subject_fold_max": 1275.8,
+          "verdict": "불안정"
+        }
+      }
+    },
+    "07화장품 · 볼 (세균)": {
+      "cohort": "07_skincare_16S",
+      "site": "Cheek",
+      "n_subject": 25,
+      "n_repeat": 3,
+      "n_sample": 75,
+      "note": "0W·2W·4W · ⚠️ 중재 연구이므로 ICC 는 하한",
+      "genera": {
+        "Cutibacterium": {
+          "median_pct": 14.719,
+          "icc_raw": 0.424,
+          "icc_raw_ci": [
+            0.208,
+            0.607
+          ],
+          "icc_logratio": 0.441,
+          "icc_logratio_ci": [
+            0.236,
+            0.586
+          ],
+          "ci_upper_below_0_5": false,
+          "within_subject_fold_median": 2.6,
+          "within_subject_fold_max": 60.4,
+          "verdict": "취약"
+        },
+        "Staphylococcus": {
+          "median_pct": 8.83,
+          "icc_raw": 0.34,
+          "icc_raw_ci": [
+            0.15,
+            0.5
+          ],
+          "icc_logratio": 0.336,
+          "icc_logratio_ci": [
+            0.079,
+            0.509
+          ],
+          "ci_upper_below_0_5": false,
+          "within_subject_fold_median": 4.6,
+          "within_subject_fold_max": 10.9,
+          "verdict": "불안정"
+        },
+        "Corynebacterium": {
+          "median_pct": 1.121,
+          "icc_raw": 0.18,
+          "icc_raw_ci": [
+            0.015,
+            0.322
+          ],
+          "icc_logratio": -0.027,
+          "icc_logratio_ci": [
+            -0.203,
+            0.127
+          ],
+          "ci_upper_below_0_5": true,
+          "within_subject_fold_median": 8.0,
+          "within_subject_fold_max": 47.8,
+          "verdict": "불안정"
+        }
+      }
+    }
+  },
+  "implementation_selftest": {
+    "note": "사람 안 변동이 0 이면 ICC=1, 사람 사이 차이가 0 이면 ICC<=0 이어야 한다.",
+    "no_within_variation": 1.0,
+    "no_between_variation": -0.5,
+    "passed": true
+  }
+}
