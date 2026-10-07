@@ -13,7 +13,7 @@
 ⚠️ 종 라벨은 16S·ITS 짧은 구간 기반 추정이다. 라벨이 붙었다고 종이 확정된 것이 아니다
    (예: Staphylococcus 최다 ASV 는 BLAST 에서 여러 종과 동률 — 같은 폴더 점검 문서 §5).
 
-입력: ../../원자료/03_sensitive_{16S,ITS}_asv_{taxonomy,count}.tsv
+입력: ../../data/03_sensitive_{16S,ITS}_asv_{taxonomy,count}.tsv
 결과: 같은 폴더 속별_종라벨비율.tsv (행 = 자료·속, matrix 형태) + 화면 출력
 의존성: Python 3 표준 라이브러리만
 """
@@ -28,7 +28,7 @@ T0 = time.perf_counter()
 tracemalloc.start()
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-RAW = os.path.join(os.path.dirname(os.path.dirname(HERE)), '원자료')
+RAW = os.path.join(os.path.dirname(os.path.dirname(HERE)), 'data')   # 2026-10-07 폴더 이름 변경: 원자료 → data
 OUT = os.path.join(HERE, '속별_종라벨비율.tsv')
 TOP = 4   # 표에 남길 상위 종 수
 

@@ -1,6 +1,6 @@
 """Staphylococcus 종 수준 점검 (2026-09-30) — 595명 SILVA 종 라벨 + 42명 16S ASV 종 라벨을 센다. 결과: 같은 폴더 staph_out.json"""
 import os, sys, csv, json
-CODE = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), '코드')
+CODE = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'code')   # 2026-10-07 폴더 이름 변경: 코드 → code
 sys.path.insert(0, CODE)
 from stats_util import RAW, TAB, f, load_595
 from xlsx import rows as xrows

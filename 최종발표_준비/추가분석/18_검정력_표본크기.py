@@ -18,8 +18,8 @@
 방향: AUC 0.65 는 반대 방향 0.35 와 같은 크기다(*Malassezia* 는 민감군에서 적어 AUC < 0.5).
 ⚠️ 기대 AUC 는 가정값이다. 42명 *Malassezia* AUC 0.153(=0.847)은 작은 표본이라 부풀려졌을 수 있어 쓰지 않았다.
 
-결과: ../../분석표/검정력_표본크기.json · ../../분석표/검정력_표본크기.tsv (행 = 기대 AUC, matrix 형태)
-의존성: Python 3 표준 라이브러리만 (+ ../../코드/stats_util.py)
+결과: ../../results/검정력_표본크기.json · ../../results/검정력_표본크기.tsv (행 = 기대 AUC, matrix 형태)
+의존성: Python 3 표준 라이브러리만 (+ ../../code/stats_util.py)
 """
 import os, sys, math, time, random, statistics, tracemalloc
 
@@ -32,7 +32,7 @@ T0 = time.perf_counter()
 tracemalloc.start()
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(HERE)), '코드'))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(HERE)), 'code'))   # 2026-10-07 코드 → code
 from stats_util import save_json, TAB, auc_p   # noqa: E402
 
 ALPHA = 0.05
@@ -143,7 +143,7 @@ with open(tsv, 'w', encoding='utf-8', newline='\n') as fh:
             r = next(x for x in rows if x['auc'] == a and x['power'] == p)
             vals += [str(r[c]) for c in cols]
         fh.write(f'{a}\t' + '\t'.join(vals) + '\n')
-print(f'\n저장: 분석표/검정력_표본크기.json · 분석표/검정력_표본크기.tsv')
+print(f'\n저장: results/검정력_표본크기.json · results/검정력_표본크기.tsv')
 
 cur, peak = tracemalloc.get_traced_memory()
 tracemalloc.stop()

@@ -26,13 +26,13 @@
 
 ## 자료 출처 — 섞여 있다는 것을 밝힌다
 
-  · Shannon · *Malassezia* 속  → `원자료/03_sensitive_ITS_genus_pct.tsv` (패키지 안, 해시 등록됨)
-  · *restricta* · *globosa*    → `원자료/03_sensitive_ITS_asv_*.tsv` (2026-09-19 부터 **패키지 안**)
+  · Shannon · *Malassezia* 속  → `data/03_sensitive_ITS_genus_pct.tsv` (패키지 안, 해시 등록됨)
+  · *restricta* · *globosa*    → `data/03_sensitive_ITS_asv_*.tsv` (2026-09-19 부터 **패키지 안** · 2026-10-07 폴더 이름 원자료 → data)
 
 Shannon 정의: **속 수준 상대비율의 자연로그 기반 H = −Σ p·ln p.** 미분류 라벨도 한 칸으로 센다.
 (원자료 `sample_info` 의 `Shannon` 열은 산출 방식이 달라 값이 다르다 — 패키지 README 경고 참조)
 
-결과: 분석표/다양성_분리.json
+결과: results/다양성_분리.json
 """
 import csv, math, os, random, statistics as st
 from stats_util import save_json, TAB, RAW, f, spearman, auc_p, auc_ci, bh
@@ -296,7 +296,7 @@ if res:
           f'{"  (0.5 를 걸침)" if lo <= 0.5 <= hi else ""}')
 
 print('\n[한계] n=42(23/19) 라 증가분 신뢰구간이 넓다. 이 계산은 «모른다의 크기» 를 재는 것이다.')
-print('       restricta·globosa 는 원자료/ 의 ASV 표에서 왔다 (15.13 해소 · 해시 등록됨).')
+print('       restricta·globosa 는 data/ 의 ASV 표에서 왔다 (15.13 해소 · 해시 등록됨).')
 
 save_json(out, os.path.join(TAB, '다양성_분리.json'))
 print(f"\n저장: {os.path.join(TAB, '다양성_분리.json')}")

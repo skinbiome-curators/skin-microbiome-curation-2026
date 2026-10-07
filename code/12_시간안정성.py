@@ -26,7 +26,7 @@
      어느 쪽이든 **패널에는 같은 문제** — 한 번 재서 판정할 수 없다는 뜻이다.
   3. 07 은 **중재 연구**라 사람 안 변동에 처치 효과가 섞인다. 그래서 07 의 ICC 는 **하한**이다.
 
-결과: 분석표/시간안정성.json
+결과: results/시간안정성.json
 """
 import csv, math, os, statistics as st
 from stats_util import save_json, TAB, RAW, CAND, f

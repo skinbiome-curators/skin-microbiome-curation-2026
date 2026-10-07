@@ -29,12 +29,12 @@ Malassezia 는 지방산 합성효소가 없어 피지에 의존한다. 그러�
 ⚠️ 한계: 피지는 한 번, 볼 한 곳에서 잰 값이다. 01 노화는 다른 연구이므로 '재현'이 아니라
    '조건이 다른 자료에서의 일관성'이다.
 
-결과: 분석표/피지_점검.json
+결과: results/피지_점검.json
 """
 import os, sys, csv, math, random, statistics as st
-# 이 파일은 온라인멘토링_정리.md 옆(새주제_v11/온라인멘토링/)에 둔다 — 공유 통계 함수는 ../코드/stats_util.py 에서 불러온다
-# (2026-09-30 폴더 최상위 → 온라인멘토링/ 으로 옮기며 한 단계 위를 보도록 수정)
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '코드'))
+# 이 파일은 온라인멘토링_정리.md 옆(새주제_v11/온라인멘토링/)에 둔다 — 공유 통계 함수는 ../code/stats_util.py 에서 불러온다
+# (2026-09-30 폴더 최상위 → 온라인멘토링/ 으로 옮기며 한 단계 위를 보도록 수정 · 2026-10-07 폴더 이름 코드 → code)
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'code'))
 from stats_util import save_json, RAW, TAB, f, spearman, auc_p, auc_ci
 
 SEED, N_BOOT = 20260918, 4000
@@ -228,4 +228,4 @@ print('\n읽는 법')
 print('  (1) 두 군 피지가 같으면 → Malassezia 차이를 "피지가 적어서"로 설명할 수 없다')
 print('  (3) 증가분 CI 가 0 을 제외하고 교차검증도 같은 방향 → 피지를 넣어도 Malassezia 가 더한다')
 save_json(out, os.path.join(TAB, '피지_점검.json'))
-print('\n저장: 분석표/피지_점검.json')
+print('\n저장: results/피지_점검.json')

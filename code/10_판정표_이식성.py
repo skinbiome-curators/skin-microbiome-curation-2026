@@ -17,7 +17,7 @@
         15계절(이마) · 16비듬(두피)
    ITS: 42명 03민감(볼) · 58명 01노화(볼·이마) · 15계절(이마) · 16비듬(두피)
 
-결과: 분석표/판정표_이식성.json
+결과: results/판정표_이식성.json
 """
 import csv, os, statistics as st
 from stats_util import save_json, TAB, RAW, CAND, f, spearman, load_595, load_42

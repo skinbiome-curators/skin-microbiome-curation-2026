@@ -15,7 +15,7 @@
 1차를 통과했으나 2차에서 탈락한 속도 판별력(AUC)까지 계산해 전부 기록한다.
 유의해 보이는 것을 빼고 보고하지 않는 것이 선택적 보고이기 때문이다.
 
-결과: 분석표/후보선정규칙.json
+결과: results/후보선정규칙.json
 """
 import json, os, statistics as st
 from stats_util import save_json, TAB, CAND, f, auc_p, auc_ci, bh, load_595, load_42

@@ -7,10 +7,10 @@
 함께 있다. 원자료의 종 라벨을 실제로 세어 이 한계를 수치로 보인다.
 
 주의: 여기 나오는 종 라벨은 16S 기반 추정이며, 이 자료의 종 라벨에는 이미 오류가 확인됐다
-(분석표/595_taxonomy_mismatch.tsv). 종 수준 결론의 근거로 쓰지 않고, '종을 가릴 수 없다'는
+(results/595_taxonomy_mismatch.tsv). 종 수준 결론의 근거로 쓰지 않고, '종을 가릴 수 없다'는
 판정의 근거로만 쓴다.
 
-결과: 분석표/종수준_한계.json
+결과: results/종수준_한계.json
 """
 import json, os, sys, statistics as st
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

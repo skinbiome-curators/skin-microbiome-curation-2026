@@ -16,7 +16,7 @@ n=4 이고 ITS 는 n=1 이라 비율은 참고값이다.
 **그것이 줄어든 자리에 무엇이 들어왔는지**를 같이 본다. 한 속이 조성의 66%를 차지하는
 자료에서는 그 속이 줄면 나머지가 자동으로 오르기 때문이다.
 
-결과: 분석표/오염점검.json
+결과: results/오염점검.json
 """
 import csv, json, os, statistics as st
 from stats_util import save_json, TAB, RAW, CAND, f, spearman, bh, auc_p, load_595, load_42
