@@ -1,0 +1,7 @@
+model	auc_9번_json	auc_gd_9번방식	auc_mle	converged	delta_9번_json	delta_mle	loocv_9번_json	loocv_auc_mle	delta_loocv_9번_json	delta_loocv_mle	lr	lr_p	wald_p_last	boot_ci_lo_mle	boot_ci_hi_mle	boot_mle_failed	boot_refit_sklearn	boot_not_converged_or_separation
+bacteria:age	0.653	0.6533	0.6533	True			0.581	0.5812					0.05333903998341329					
+bacteria:age+Cutibacterium	0.696	0.6957	0.7002	True	0.042	0.0469	0.581	0.5858	0.0	0.0046	0.9028	0.34203085652300275	0.34809174604881243	-0.0172	0.1759	0	0	0
+bacteria:age+Staphylococcus	0.668	0.6682	0.6682	True	0.015	0.0149	0.581	0.5812	0.0	0.0	0.7034	0.4016375374813891	0.427317294539015	-0.0309	0.1193	0	0	0
+bacteria:age+Corynebacterium	0.682	0.6819	0.6819	True	0.029	0.0286	0.57	0.5721	-0.011	-0.0091	0.4174	0.5182240023205106	0.5276716990739501	-0.0173	0.1945	0	0	0
+fungi:age	0.653	0.6533	0.6533	True			0.581	0.5812					0.05333903998341329					
+fungi:age+g__Malassezia	0.883	0.8833	0.8833	True	0.23	0.23	0.854	0.8467	0.272	0.2655	18.5015	1.697683543769115e-05	0.0007114938285192897	0.075	0.4091	0	17	20

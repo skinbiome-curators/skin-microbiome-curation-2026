@@ -1,0 +1,139 @@
+{
+  "seed": 20260918,
+  "n_boot": 4000,
+  "note": "9번과 같은 계산에서 후보 열만 비율 → 로그비로 바꿨다. 증가분 CI 가 0 을 포함하는지와 LOOCV 증가분의 부호(|증가분|<0.01 이면 0)가 9번(비율)과 같으면 「비율을 그대로 넣었기 때문」이라는 반론은 결론을 바꾸지 못한다. 둘을 따로 저장한다.",
+  "logratio_definition": {
+    "bacteria": "4번 ④ 와 같음 — log10((후보+1e-5)/(후보·구강 의심·미분류를 뺀 나머지 합+1e-5))",
+    "fungi": "8번 ② 와 같음 — log10((속+1e-3)/(그 속·미분류를 뺀 나머지 합+1e-3))"
+  },
+  "bacteria": {
+    "n": 42,
+    "n_sensitive": 23,
+    "auc_age_only": 0.653,
+    "auc_age_only_loocv": 0.581,
+    "auc_age_only_9번_json": 0.653,
+    "candidates": {
+      "Cutibacterium": {
+        "auc_logratio_alone": 0.449,
+        "auc_logratio_alone_stored_4or8": 0.449,
+        "definition_matches_4or8": true,
+        "auc_age_plus_logratio": 0.716,
+        "delta_logratio": 0.063,
+        "ci_logratio": [
+          -0.015,
+          0.209
+        ],
+        "crosses_zero_logratio": true,
+        "auc_age_plus_logratio_loocv": 0.606,
+        "delta_logratio_loocv": 0.025,
+        "ratio_9번": {
+          "auc_age_plus": 0.696,
+          "delta": 0.042,
+          "ci": [
+            -0.018,
+            0.177
+          ],
+          "crosses_zero": true,
+          "delta_loocv": 0.0
+        },
+        "ci_conclusion_same_as_9번": true,
+        "loocv_sign_logratio": 1,
+        "loocv_sign_9번": 0,
+        "loocv_sign_same_as_9번": false
+      },
+      "Staphylococcus": {
+        "auc_logratio_alone": 0.4,
+        "auc_logratio_alone_stored_4or8": 0.4,
+        "definition_matches_4or8": true,
+        "auc_age_plus_logratio": 0.686,
+        "delta_logratio": 0.033,
+        "ci_logratio": [
+          -0.026,
+          0.208
+        ],
+        "crosses_zero_logratio": true,
+        "auc_age_plus_logratio_loocv": 0.565,
+        "delta_logratio_loocv": -0.016,
+        "ratio_9번": {
+          "auc_age_plus": 0.668,
+          "delta": 0.015,
+          "ci": [
+            -0.03,
+            0.12
+          ],
+          "crosses_zero": true,
+          "delta_loocv": 0.0
+        },
+        "ci_conclusion_same_as_9번": true,
+        "loocv_sign_logratio": -1,
+        "loocv_sign_9번": 0,
+        "loocv_sign_same_as_9번": false
+      },
+      "Corynebacterium": {
+        "auc_logratio_alone": 0.368,
+        "auc_logratio_alone_stored_4or8": 0.368,
+        "definition_matches_4or8": true,
+        "auc_age_plus_logratio": 0.76,
+        "delta_logratio": 0.106,
+        "ci_logratio": [
+          -0.005,
+          0.28
+        ],
+        "crosses_zero_logratio": true,
+        "auc_age_plus_logratio_loocv": 0.698,
+        "delta_logratio_loocv": 0.117,
+        "ratio_9번": {
+          "auc_age_plus": 0.682,
+          "delta": 0.029,
+          "ci": [
+            -0.018,
+            0.195
+          ],
+          "crosses_zero": true,
+          "delta_loocv": -0.011
+        },
+        "ci_conclusion_same_as_9번": true,
+        "loocv_sign_logratio": 1,
+        "loocv_sign_9번": -1,
+        "loocv_sign_same_as_9번": false
+      }
+    }
+  },
+  "fungi": {
+    "n": 42,
+    "n_sensitive": 23,
+    "auc_age_only": 0.653,
+    "auc_age_only_loocv": 0.581,
+    "auc_age_only_9번_json": 0.653,
+    "candidates": {
+      "g__Malassezia": {
+        "auc_logratio_alone": 0.181,
+        "auc_logratio_alone_stored_4or8": 0.181,
+        "definition_matches_4or8": true,
+        "auc_age_plus_logratio": 0.872,
+        "delta_logratio": 0.219,
+        "ci_logratio": [
+          0.077,
+          0.399
+        ],
+        "crosses_zero_logratio": false,
+        "auc_age_plus_logratio_loocv": 0.856,
+        "delta_logratio_loocv": 0.275,
+        "ratio_9번": {
+          "auc_age_plus": 0.883,
+          "delta": 0.23,
+          "ci": [
+            0.074,
+            0.408
+          ],
+          "crosses_zero": false,
+          "delta_loocv": 0.272
+        },
+        "ci_conclusion_same_as_9번": true,
+        "loocv_sign_logratio": 1,
+        "loocv_sign_9번": 1,
+        "loocv_sign_same_as_9번": true
+      }
+    }
+  }
+}
