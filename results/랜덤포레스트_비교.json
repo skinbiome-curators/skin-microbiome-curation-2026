@@ -1,0 +1,156 @@
+{
+  "seed": 20260918,
+  "n_splits": 5,
+  "n_repeats": 50,
+  "n_trees": 300,
+  "n_jobs": 20,
+  "note": "반복마다 out-of-fold AUC 하나. 범위(2.5–97.5%)는 분할을 바꿨을 때의 흔들림이지 모집단 신뢰구간이 아니다. 모든 모형이 같은 분할을 쓰고 증가분은 반복마다 짝지어 뺐다. 두 자료를 사람(subject) 순서로 정렬해 같은 분할을 쓴다. n=42 라 랜덤포레스트는 흔들림이 크다.",
+  "bacteria": {
+    "n": 42,
+    "n_sensitive": 23,
+    "candidates": {
+      "Cutibacterium": {
+        "rf": {
+          "auc_age_plus": {
+            "mean": 0.471,
+            "p2_5": 0.374,
+            "p97_5": 0.586
+          },
+          "delta": {
+            "mean": -0.041,
+            "p2_5": -0.157,
+            "p97_5": 0.063
+          },
+          "share_delta_positive": 0.28
+        },
+        "logistic": {
+          "auc_age_plus": {
+            "mean": 0.62,
+            "p2_5": 0.542,
+            "p97_5": 0.665
+          },
+          "delta": {
+            "mean": -0.0,
+            "p2_5": -0.069,
+            "p97_5": 0.055
+          },
+          "share_delta_positive": 0.58
+        }
+      },
+      "Staphylococcus": {
+        "rf": {
+          "auc_age_plus": {
+            "mean": 0.517,
+            "p2_5": 0.429,
+            "p97_5": 0.595
+          },
+          "delta": {
+            "mean": 0.005,
+            "p2_5": -0.075,
+            "p97_5": 0.107
+          },
+          "share_delta_positive": 0.54
+        },
+        "logistic": {
+          "auc_age_plus": {
+            "mean": 0.61,
+            "p2_5": 0.511,
+            "p97_5": 0.66
+          },
+          "delta": {
+            "mean": -0.011,
+            "p2_5": -0.109,
+            "p97_5": 0.027
+          },
+          "share_delta_positive": 0.48
+        }
+      },
+      "Corynebacterium": {
+        "rf": {
+          "auc_age_plus": {
+            "mean": 0.509,
+            "p2_5": 0.401,
+            "p97_5": 0.586
+          },
+          "delta": {
+            "mean": -0.003,
+            "p2_5": -0.101,
+            "p97_5": 0.096
+          },
+          "share_delta_positive": 0.48
+        },
+        "logistic": {
+          "auc_age_plus": {
+            "mean": 0.596,
+            "p2_5": 0.517,
+            "p97_5": 0.649
+          },
+          "delta": {
+            "mean": -0.024,
+            "p2_5": -0.081,
+            "p97_5": 0.019
+          },
+          "share_delta_positive": 0.28
+        }
+      }
+    },
+    "age_only": {
+      "rf": {
+        "mean": 0.512,
+        "p2_5": 0.396,
+        "p97_5": 0.593
+      },
+      "logistic": {
+        "mean": 0.62,
+        "p2_5": 0.584,
+        "p97_5": 0.645
+      }
+    }
+  },
+  "fungi": {
+    "n": 42,
+    "n_sensitive": 23,
+    "candidates": {
+      "g__Malassezia": {
+        "rf": {
+          "auc_age_plus": {
+            "mean": 0.816,
+            "p2_5": 0.766,
+            "p97_5": 0.859
+          },
+          "delta": {
+            "mean": 0.303,
+            "p2_5": 0.215,
+            "p97_5": 0.425
+          },
+          "share_delta_positive": 1.0
+        },
+        "logistic": {
+          "auc_age_plus": {
+            "mean": 0.846,
+            "p2_5": 0.815,
+            "p97_5": 0.873
+          },
+          "delta": {
+            "mean": 0.226,
+            "p2_5": 0.196,
+            "p97_5": 0.252
+          },
+          "share_delta_positive": 1.0
+        }
+      }
+    },
+    "age_only": {
+      "rf": {
+        "mean": 0.512,
+        "p2_5": 0.396,
+        "p97_5": 0.593
+      },
+      "logistic": {
+        "mean": 0.62,
+        "p2_5": 0.584,
+        "p97_5": 0.645
+      }
+    }
+  }
+}

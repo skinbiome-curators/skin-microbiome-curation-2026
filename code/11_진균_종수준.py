@@ -133,7 +133,9 @@ if res:
     print(f"\n  [원저 대조] Keum 2020 은 민감군에서 M. restricta 감소를 보고했다.")
     print(f"    우리 자료: 민감 {res['median_sensitive']}% 대 비민감 {res['median_non_sensitive']}% · "
           f"AUC {res['auc']} [{res['ci'][0]}-{res['ci'][1]}] · q={res['q_bh']}")
-    print(f"    재현 여부: {'재현됨 (감소 방향 · CI 가 0.5 를 넘지 않음)' if out['restricta_vs_original_paper']['reproduced'] else '방향은 같으나 CI 가 0.5 를 걸침'}")
+    # 2026-10-07 출력 문구만 수정 — 원저 본문에 종 수치가 없어(그림 3b·S2 에만) 「재현」이라 말할 수 없다.
+    # JSON 키 'reproduced' 는 결과 파일을 바꾸지 않으려고 그대로 둔다(뜻: 감소 방향 + CI 가 0.5 를 넘지 않음).
+    print(f"    원저와 방향: {'같은 방향 (감소 · CI 가 0.5 를 넘지 않음 — 원저 본문에 종 수치가 없어 「재현」은 아님)' if out['restricta_vs_original_paper']['reproduced'] else '방향은 같으나 CI 가 0.5 를 걸침'}")
 
 print('\n  ⚠️ 이것으로 ⑤가 통과가 되는 것이 아니다. 「불가」 → 「부분 가능 — 진균에 한정」 이다.')
 print('     세균은 16S ASV 에서도 종 라벨이 Cutibacterium 9% · Staphylococcus 10% 라 그대로 불가다.')

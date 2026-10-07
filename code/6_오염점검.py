@@ -44,8 +44,11 @@ def scan(name, val, depth, n, top=8):
     suspect = sorted([r for r in rows if r['rho_depth'] <= RHO_CUT and r['q_bh'] < 0.05],
                      key=lambda r: r['rho_depth'])
     cand = {r['genus']: r for r in rows if r['genus'] in CAND}
+    # 2026-10-07 추가: 의심 목록(q<0.05)에 안 든 속의 q 값도 남긴다 — 예전엔 Cladosporium q=0.064 처럼
+    # 문턱 밖 값이 어느 파일에도 없어 문서에 적힌 값을 대조할 수 없었다. 기존 키는 그대로 두고 키만 더한다.
     out['cohorts'][name] = {'n': n, 'n_genus_screened': len(rows),
-                            'suspect': suspect[:top], 'candidates': cand}
+                            'suspect': suspect[:top], 'candidates': cand,
+                            'all_screened': sorted(rows, key=lambda r: r['rho_depth'])}
     print(f'\n[{name}] 검출률 {DET_MIN:.0f}% 이상 {len(rows)}속 중 의심 {len(suspect)}속')
     if suspect:
         print(f"  {'속':18s} {'검출':>7s} {'중앙값':>9s} {'rho(심도)':>10s} {'q':>8s}")

@@ -1,0 +1,9 @@
+candidate	model	auc_age_only_mean	auc_age_plus_mean	delta_mean	delta_p2_5	delta_p97_5	share_delta_positive
+Cutibacterium	rf	0.512	0.471	-0.041	-0.157	0.063	0.28
+Cutibacterium	logistic	0.62	0.62	-0.0	-0.069	0.055	0.58
+Staphylococcus	rf	0.512	0.517	0.005	-0.075	0.107	0.54
+Staphylococcus	logistic	0.62	0.61	-0.011	-0.109	0.027	0.48
+Corynebacterium	rf	0.512	0.509	-0.003	-0.101	0.096	0.48
+Corynebacterium	logistic	0.62	0.596	-0.024	-0.081	0.019	0.28
+g__Malassezia	rf	0.512	0.816	0.303	0.215	0.425	1.0
+g__Malassezia	logistic	0.62	0.846	0.226	0.196	0.252	1.0

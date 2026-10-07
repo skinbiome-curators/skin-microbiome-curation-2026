@@ -96,7 +96,649 @@
           "p": 0.19621925774513693,
           "q_bh": 0.4846
         }
-      }
+      },
+      "all_screened": [
+        {
+          "genus": "Acidocella",
+          "detect_pct": 100.0,
+          "median_pct": 0.1213,
+          "rho_depth": -0.751,
+          "p": 1.0054275327177807e-08,
+          "q_bh": 0.0
+        },
+        {
+          "genus": "Mycobacterium",
+          "detect_pct": 95.2,
+          "median_pct": 0.1711,
+          "rho_depth": -0.713,
+          "p": 1.1580980377485194e-07,
+          "q_bh": 0.0
+        },
+        {
+          "genus": "Altererythrobacter",
+          "detect_pct": 92.9,
+          "median_pct": 0.0905,
+          "rho_depth": -0.702,
+          "p": 2.2245421309780813e-07,
+          "q_bh": 0.0
+        },
+        {
+          "genus": "Rhodanobacter",
+          "detect_pct": 100.0,
+          "median_pct": 1.4931,
+          "rho_depth": -0.678,
+          "p": 8.039295626775598e-07,
+          "q_bh": 0.0
+        },
+        {
+          "genus": "Sphingomonas",
+          "detect_pct": 92.9,
+          "median_pct": 0.075,
+          "rho_depth": -0.579,
+          "p": 5.913546692962855e-05,
+          "q_bh": 0.0009
+        },
+        {
+          "genus": "Acinetobacter",
+          "detect_pct": 90.5,
+          "median_pct": 0.0797,
+          "rho_depth": -0.504,
+          "p": 0.0006734147733345717,
+          "q_bh": 0.009
+        },
+        {
+          "genus": "Veillonella",
+          "detect_pct": 66.7,
+          "median_pct": 3.0933,
+          "rho_depth": -0.477,
+          "p": 0.001397933356953659,
+          "q_bh": 0.016
+        },
+        {
+          "genus": "Neisseria",
+          "detect_pct": 85.7,
+          "median_pct": 0.091,
+          "rho_depth": -0.465,
+          "p": 0.001911368041923325,
+          "q_bh": 0.0191
+        },
+        {
+          "genus": "Streptococcus",
+          "detect_pct": 100.0,
+          "median_pct": 0.5937,
+          "rho_depth": -0.46,
+          "p": 0.002149614758590722,
+          "q_bh": 0.0191
+        },
+        {
+          "genus": "Micrococcus",
+          "detect_pct": 85.7,
+          "median_pct": 0.0384,
+          "rho_depth": -0.45,
+          "p": 0.002803167872122478,
+          "q_bh": 0.0224
+        },
+        {
+          "genus": "Haemophilus",
+          "detect_pct": 90.5,
+          "median_pct": 0.0465,
+          "rho_depth": -0.427,
+          "p": 0.004839306651873186,
+          "q_bh": 0.0352
+        },
+        {
+          "genus": "Paracoccus",
+          "detect_pct": 85.7,
+          "median_pct": 0.0534,
+          "rho_depth": -0.406,
+          "p": 0.007640339534104095,
+          "q_bh": 0.0509
+        },
+        {
+          "genus": "Chryseobacterium",
+          "detect_pct": 88.1,
+          "median_pct": 0.0676,
+          "rho_depth": -0.402,
+          "p": 0.008287495185160433,
+          "q_bh": 0.051
+        },
+        {
+          "genus": "Amaricoccus",
+          "detect_pct": 61.9,
+          "median_pct": 1.4913,
+          "rho_depth": -0.389,
+          "p": 0.010866266055691697,
+          "q_bh": 0.0621
+        },
+        {
+          "genus": "Corynebacterium",
+          "detect_pct": 100.0,
+          "median_pct": 0.7718,
+          "rho_depth": -0.385,
+          "p": 0.011818787661917338,
+          "q_bh": 0.063
+        },
+        {
+          "genus": "Brevundimonas",
+          "detect_pct": 71.4,
+          "median_pct": 0.0204,
+          "rho_depth": -0.356,
+          "p": 0.020773341613645475,
+          "q_bh": 0.1039
+        },
+        {
+          "genus": "Ralstonia",
+          "detect_pct": 59.5,
+          "median_pct": 1.0187,
+          "rho_depth": -0.352,
+          "p": 0.022145861509292077,
+          "q_bh": 0.1042
+        },
+        {
+          "genus": "Caldimonas",
+          "detect_pct": 59.5,
+          "median_pct": 0.6748,
+          "rho_depth": -0.336,
+          "p": 0.02968531965032693,
+          "q_bh": 0.1319
+        },
+        {
+          "genus": "Enhydrobacter",
+          "detect_pct": 92.9,
+          "median_pct": 0.0943,
+          "rho_depth": -0.323,
+          "p": 0.036667938829851324,
+          "q_bh": 0.1544
+        },
+        {
+          "genus": "Clostridium",
+          "detect_pct": 95.2,
+          "median_pct": 0.231,
+          "rho_depth": -0.317,
+          "p": 0.0410760732274349,
+          "q_bh": 0.1643
+        },
+        {
+          "genus": "Clade Ia",
+          "detect_pct": 71.4,
+          "median_pct": 0.0607,
+          "rho_depth": -0.306,
+          "p": 0.04902023254905728,
+          "q_bh": 0.1867
+        },
+        {
+          "genus": "Anaerococcus",
+          "detect_pct": 78.6,
+          "median_pct": 0.033,
+          "rho_depth": -0.292,
+          "p": 0.06082791047648434,
+          "q_bh": 0.2116
+        },
+        {
+          "genus": "Polaribacter",
+          "detect_pct": 69.0,
+          "median_pct": 0.45,
+          "rho_depth": -0.292,
+          "p": 0.06083180848747253,
+          "q_bh": 0.2116
+        },
+        {
+          "genus": "Fusobacterium",
+          "detect_pct": 54.8,
+          "median_pct": 0.4392,
+          "rho_depth": -0.286,
+          "p": 0.06613434932493846,
+          "q_bh": 0.2203
+        },
+        {
+          "genus": "Janibacter",
+          "detect_pct": 69.0,
+          "median_pct": 2.4805,
+          "rho_depth": -0.284,
+          "p": 0.06882860813589371,
+          "q_bh": 0.2203
+        },
+        {
+          "genus": "Gordonia",
+          "detect_pct": 88.1,
+          "median_pct": 0.1398,
+          "rho_depth": -0.269,
+          "p": 0.08437680611384543,
+          "q_bh": 0.2596
+        },
+        {
+          "genus": "Ellin6067",
+          "detect_pct": 85.7,
+          "median_pct": 0.4399,
+          "rho_depth": -0.218,
+          "p": 0.16523026221375503,
+          "q_bh": 0.4574
+        },
+        {
+          "genus": "Agrobacterium",
+          "detect_pct": 97.6,
+          "median_pct": 0.1982,
+          "rho_depth": -0.214,
+          "p": 0.17389050821120466,
+          "q_bh": 0.4574
+        },
+        {
+          "genus": "Staphylococcus",
+          "detect_pct": 100.0,
+          "median_pct": 2.3853,
+          "rho_depth": -0.203,
+          "p": 0.19621925774513693,
+          "q_bh": 0.4846
+        },
+        {
+          "genus": "Ruminococcus",
+          "detect_pct": 69.0,
+          "median_pct": 0.0538,
+          "rho_depth": -0.199,
+          "p": 0.20612346663200032,
+          "q_bh": 0.4846
+        },
+        {
+          "genus": "Rothia",
+          "detect_pct": 59.5,
+          "median_pct": 0.8846,
+          "rho_depth": -0.197,
+          "p": 0.21200517887816894,
+          "q_bh": 0.4846
+        },
+        {
+          "genus": "Oleiharenicola",
+          "detect_pct": 88.1,
+          "median_pct": 0.6346,
+          "rho_depth": -0.186,
+          "p": 0.2379538689004289,
+          "q_bh": 0.5288
+        },
+        {
+          "genus": "Pseudomonas",
+          "detect_pct": 100.0,
+          "median_pct": 1.3015,
+          "rho_depth": -0.182,
+          "p": 0.2493352084973104,
+          "q_bh": 0.5345
+        },
+        {
+          "genus": "Erythrobacter",
+          "detect_pct": 78.6,
+          "median_pct": 8.4593,
+          "rho_depth": -0.18,
+          "p": 0.25390741048015975,
+          "q_bh": 0.5345
+        },
+        {
+          "genus": "Lactobacillus",
+          "detect_pct": 97.6,
+          "median_pct": 0.8004,
+          "rho_depth": -0.175,
+          "p": 0.26870628198500024,
+          "q_bh": 0.551
+        },
+        {
+          "genus": "UCG-005",
+          "detect_pct": 92.9,
+          "median_pct": 0.3565,
+          "rho_depth": -0.172,
+          "p": 0.27683069814838057,
+          "q_bh": 0.551
+        },
+        {
+          "genus": "Opitutus",
+          "detect_pct": 71.4,
+          "median_pct": 0.0471,
+          "rho_depth": -0.168,
+          "p": 0.286874446407689,
+          "q_bh": 0.551
+        },
+        {
+          "genus": "GOUTA6",
+          "detect_pct": 90.5,
+          "median_pct": 0.1899,
+          "rho_depth": -0.164,
+          "p": 0.2981725358167089,
+          "q_bh": 0.551
+        },
+        {
+          "genus": "Pygmaiobacter",
+          "detect_pct": 88.1,
+          "median_pct": 0.2086,
+          "rho_depth": -0.164,
+          "p": 0.2982154335869913,
+          "q_bh": 0.551
+        },
+        {
+          "genus": "Rhodoplanes",
+          "detect_pct": 88.1,
+          "median_pct": 0.2895,
+          "rho_depth": -0.163,
+          "p": 0.303073950996984,
+          "q_bh": 0.551
+        },
+        {
+          "genus": "Caulobacter",
+          "detect_pct": 81.0,
+          "median_pct": 0.22,
+          "rho_depth": -0.159,
+          "p": 0.31391353388577936,
+          "q_bh": 0.5522
+        },
+        {
+          "genus": "Planktomarina",
+          "detect_pct": 61.9,
+          "median_pct": 0.048,
+          "rho_depth": -0.157,
+          "p": 0.31928175198440145,
+          "q_bh": 0.5522
+        },
+        {
+          "genus": "Actinomyces",
+          "detect_pct": 64.3,
+          "median_pct": 2.3851,
+          "rho_depth": -0.156,
+          "p": 0.32439062571321287,
+          "q_bh": 0.5522
+        },
+        {
+          "genus": "Dietzia",
+          "detect_pct": 50.0,
+          "median_pct": 0.2186,
+          "rho_depth": -0.14,
+          "p": 0.37575034054985734,
+          "q_bh": 0.5958
+        },
+        {
+          "genus": "Porphyromonas",
+          "detect_pct": 54.8,
+          "median_pct": 0.613,
+          "rho_depth": -0.14,
+          "p": 0.37742139635669325,
+          "q_bh": 0.5958
+        },
+        {
+          "genus": "Gemella",
+          "detect_pct": 73.8,
+          "median_pct": 0.0261,
+          "rho_depth": -0.139,
+          "p": 0.37972093498144244,
+          "q_bh": 0.5958
+        },
+        {
+          "genus": "Bacteroides",
+          "detect_pct": 95.2,
+          "median_pct": 0.4288,
+          "rho_depth": -0.138,
+          "p": 0.3817703911539234,
+          "q_bh": 0.5958
+        },
+        {
+          "genus": "Microbacterium",
+          "detect_pct": 50.0,
+          "median_pct": 0.2186,
+          "rho_depth": -0.136,
+          "p": 0.39081664644721614,
+          "q_bh": 0.5958
+        },
+        {
+          "genus": "Stenotrophomonas",
+          "detect_pct": 90.5,
+          "median_pct": 9.8791,
+          "rho_depth": -0.133,
+          "p": 0.40216458420092605,
+          "q_bh": 0.5958
+        },
+        {
+          "genus": "Romboutsia",
+          "detect_pct": 76.2,
+          "median_pct": 17.8321,
+          "rho_depth": -0.13,
+          "p": 0.4135459525721751,
+          "q_bh": 0.5958
+        },
+        {
+          "genus": "Methylobacterium",
+          "detect_pct": 57.1,
+          "median_pct": 0.57,
+          "rho_depth": -0.127,
+          "p": 0.4233323611806785,
+          "q_bh": 0.5958
+        },
+        {
+          "genus": "Sulfitobacter",
+          "detect_pct": 81.0,
+          "median_pct": 0.1719,
+          "rho_depth": -0.121,
+          "p": 0.4465611157581446,
+          "q_bh": 0.6118
+        },
+        {
+          "genus": "Delftia",
+          "detect_pct": 100.0,
+          "median_pct": 2.8903,
+          "rho_depth": -0.116,
+          "p": 0.46587335894277804,
+          "q_bh": 0.6118
+        },
+        {
+          "genus": "Escherichia-Shigella",
+          "detect_pct": 83.3,
+          "median_pct": 0.1534,
+          "rho_depth": -0.116,
+          "p": 0.46422196091054524,
+          "q_bh": 0.6118
+        },
+        {
+          "genus": "Deinococcus",
+          "detect_pct": 85.7,
+          "median_pct": 8.0545,
+          "rho_depth": -0.095,
+          "p": 0.5494501361802853,
+          "q_bh": 0.6967
+        },
+        {
+          "genus": "Anaerobutyricum",
+          "detect_pct": 59.5,
+          "median_pct": 6.2515,
+          "rho_depth": -0.093,
+          "p": 0.5573453805889106,
+          "q_bh": 0.6967
+        },
+        {
+          "genus": "Prevotella",
+          "detect_pct": 54.8,
+          "median_pct": 0.4061,
+          "rho_depth": -0.089,
+          "p": 0.5749191524727973,
+          "q_bh": 0.7076
+        },
+        {
+          "genus": "Finegoldia",
+          "detect_pct": 85.7,
+          "median_pct": 0.0816,
+          "rho_depth": -0.086,
+          "p": 0.5891400692271707,
+          "q_bh": 0.7141
+        },
+        {
+          "genus": "Pseudaminobacter",
+          "detect_pct": 73.8,
+          "median_pct": 0.082,
+          "rho_depth": -0.08,
+          "p": 0.6128735978486891,
+          "q_bh": 0.7229
+        },
+        {
+          "genus": "Massilia",
+          "detect_pct": 52.4,
+          "median_pct": 0.1832,
+          "rho_depth": -0.079,
+          "p": 0.6208484909983061,
+          "q_bh": 0.7229
+        },
+        {
+          "genus": "Prevotellaceae UCG-001",
+          "detect_pct": 66.7,
+          "median_pct": 0.0257,
+          "rho_depth": -0.077,
+          "p": 0.6288573256131613,
+          "q_bh": 0.7229
+        },
+        {
+          "genus": "Flavobacterium",
+          "detect_pct": 73.8,
+          "median_pct": 5.3603,
+          "rho_depth": -0.076,
+          "p": 0.6325807838520386,
+          "q_bh": 0.7229
+        },
+        {
+          "genus": "Cephaloticoccus",
+          "detect_pct": 64.3,
+          "median_pct": 6.1009,
+          "rho_depth": -0.053,
+          "p": 0.7381071971605166,
+          "q_bh": 0.8022
+        },
+        {
+          "genus": "Allomeiothermus",
+          "detect_pct": 100.0,
+          "median_pct": 0.2258,
+          "rho_depth": -0.049,
+          "p": 0.7578491054606252,
+          "q_bh": 0.8084
+        },
+        {
+          "genus": "Lachnospiraceae NK4A136 group",
+          "detect_pct": 78.6,
+          "median_pct": 7.0823,
+          "rho_depth": -0.044,
+          "p": 0.7801984073378047,
+          "q_bh": 0.8213
+        },
+        {
+          "genus": "Atopostipes",
+          "detect_pct": 73.8,
+          "median_pct": 7.3145,
+          "rho_depth": -0.029,
+          "p": 0.8568281970908236,
+          "q_bh": 0.8874
+        },
+        {
+          "genus": "Monoglobus",
+          "detect_pct": 61.9,
+          "median_pct": 5.3416,
+          "rho_depth": -0.027,
+          "p": 0.8651798551987652,
+          "q_bh": 0.8874
+        },
+        {
+          "genus": "RB41",
+          "detect_pct": 64.3,
+          "median_pct": 4.4551,
+          "rho_depth": -0.016,
+          "p": 0.9198612127119065,
+          "q_bh": 0.9315
+        },
+        {
+          "genus": "Peptoniphilus",
+          "detect_pct": 54.8,
+          "median_pct": 0.0089,
+          "rho_depth": -0.003,
+          "p": 0.9842192765640602,
+          "q_bh": 0.9842
+        },
+        {
+          "genus": "Turicibacter",
+          "detect_pct": 64.3,
+          "median_pct": 4.9839,
+          "rho_depth": 0.052,
+          "p": 0.7420517709602299,
+          "q_bh": 0.8022
+        },
+        {
+          "genus": "Rhizobium",
+          "detect_pct": 52.4,
+          "median_pct": 0.4349,
+          "rho_depth": 0.062,
+          "p": 0.6967900982655737,
+          "q_bh": 0.7742
+        },
+        {
+          "genus": "Dermacoccus",
+          "detect_pct": 57.1,
+          "median_pct": 0.8194,
+          "rho_depth": 0.072,
+          "p": 0.6485283096960133,
+          "q_bh": 0.7307
+        },
+        {
+          "genus": "Paucibacter",
+          "detect_pct": 73.8,
+          "median_pct": 5.3642,
+          "rho_depth": 0.105,
+          "p": 0.508515126258966,
+          "q_bh": 0.6561
+        },
+        {
+          "genus": "[Eubacterium] siraeum group",
+          "detect_pct": 57.1,
+          "median_pct": 1.7832,
+          "rho_depth": 0.115,
+          "p": 0.46647398173637455,
+          "q_bh": 0.6118
+        },
+        {
+          "genus": "Adhaeribacter",
+          "detect_pct": 50.0,
+          "median_pct": 0.1236,
+          "rho_depth": 0.127,
+          "p": 0.4245397288399476,
+          "q_bh": 0.5958
+        },
+        {
+          "genus": "Pseudolabrys",
+          "detect_pct": 59.5,
+          "median_pct": 2.9775,
+          "rho_depth": 0.128,
+          "p": 0.4190434574955576,
+          "q_bh": 0.5958
+        },
+        {
+          "genus": "Ligilactobacillus",
+          "detect_pct": 64.3,
+          "median_pct": 0.0387,
+          "rho_depth": 0.199,
+          "p": 0.20575906667351218,
+          "q_bh": 0.4846
+        },
+        {
+          "genus": "Cutibacterium",
+          "detect_pct": 100.0,
+          "median_pct": 21.7981,
+          "rho_depth": 0.212,
+          "p": 0.1772533203612069,
+          "q_bh": 0.4574
+        },
+        {
+          "genus": "Novosphingobium",
+          "detect_pct": 50.0,
+          "median_pct": 0.1236,
+          "rho_depth": 0.216,
+          "p": 0.16997057679235983,
+          "q_bh": 0.4574
+        },
+        {
+          "genus": "Afipia",
+          "detect_pct": 50.0,
+          "median_pct": 0.0309,
+          "rho_depth": 0.218,
+          "p": 0.16579401714364084,
+          "q_bh": 0.4574
+        }
+      ]
     },
     "595명": {
       "n": 595,
@@ -136,7 +778,161 @@
           "p": 0.00015661909294522713,
           "q_bh": 0.0004
         }
-      }
+      },
+      "all_screened": [
+        {
+          "genus": "Lactobacillus",
+          "detect_pct": 63.2,
+          "median_pct": 0.0444,
+          "rho_depth": -0.308,
+          "p": 1.421299786583729e-14,
+          "q_bh": 0.0
+        },
+        {
+          "genus": "Rothia",
+          "detect_pct": 95.0,
+          "median_pct": 4.2086,
+          "rho_depth": -0.249,
+          "p": 7.926265771781723e-10,
+          "q_bh": 0.0
+        },
+        {
+          "genus": "Actinomyces",
+          "detect_pct": 89.2,
+          "median_pct": 1.0571,
+          "rho_depth": -0.214,
+          "p": 1.4559031231741902e-07,
+          "q_bh": 0.0
+        },
+        {
+          "genus": "Streptococcus",
+          "detect_pct": 99.3,
+          "median_pct": 18.2047,
+          "rho_depth": -0.19,
+          "p": 3.0037802213378044e-06,
+          "q_bh": 0.0
+        },
+        {
+          "genus": "Corynebacterium",
+          "detect_pct": 90.4,
+          "median_pct": 1.0678,
+          "rho_depth": -0.118,
+          "p": 0.004081357795914122,
+          "q_bh": 0.0086
+        },
+        {
+          "genus": "Lautropia",
+          "detect_pct": 75.1,
+          "median_pct": 0.1623,
+          "rho_depth": -0.109,
+          "p": 0.007548686576137476,
+          "q_bh": 0.0143
+        },
+        {
+          "genus": "Haemophilus",
+          "detect_pct": 88.6,
+          "median_pct": 0.7667,
+          "rho_depth": -0.048,
+          "p": 0.24041975910472924,
+          "q_bh": 0.3514
+        },
+        {
+          "genus": "Fusobacterium",
+          "detect_pct": 72.6,
+          "median_pct": 0.1327,
+          "rho_depth": -0.023,
+          "p": 0.5795878995936856,
+          "q_bh": 0.6662
+        },
+        {
+          "genus": "Neisseria",
+          "detect_pct": 87.4,
+          "median_pct": 0.7223,
+          "rho_depth": -0.004,
+          "p": 0.9285525499855607,
+          "q_bh": 0.9801
+        },
+        {
+          "genus": "uncultured",
+          "detect_pct": 60.8,
+          "median_pct": 0.0384,
+          "rho_depth": -0.0,
+          "p": 0.997966946465482,
+          "q_bh": 0.998
+        },
+        {
+          "genus": "Prevotella",
+          "detect_pct": 66.4,
+          "median_pct": 0.0654,
+          "rho_depth": 0.022,
+          "p": 0.59604653978598,
+          "q_bh": 0.6662
+        },
+        {
+          "genus": "Veillonella",
+          "detect_pct": 78.5,
+          "median_pct": 0.3717,
+          "rho_depth": 0.035,
+          "p": 0.38965645344326283,
+          "q_bh": 0.4936
+        },
+        {
+          "genus": "Granulicatella",
+          "detect_pct": 77.8,
+          "median_pct": 0.2127,
+          "rho_depth": 0.04,
+          "p": 0.32406453670557056,
+          "q_bh": 0.4398
+        },
+        {
+          "genus": "Gemella",
+          "detect_pct": 81.3,
+          "median_pct": 0.2132,
+          "rho_depth": 0.056,
+          "p": 0.17283910220016852,
+          "q_bh": 0.2737
+        },
+        {
+          "genus": "Lawsonella",
+          "detect_pct": 50.4,
+          "median_pct": 0.0066,
+          "rho_depth": 0.081,
+          "p": 0.04705812590467675,
+          "q_bh": 0.0813
+        },
+        {
+          "genus": "Porphyromonas",
+          "detect_pct": 57.8,
+          "median_pct": 0.0341,
+          "rho_depth": 0.131,
+          "p": 0.0014086166653406393,
+          "q_bh": 0.0033
+        },
+        {
+          "genus": "Staphylococcus",
+          "detect_pct": 99.3,
+          "median_pct": 5.5105,
+          "rho_depth": 0.154,
+          "p": 0.00015661909294522713,
+          "q_bh": 0.0004
+        },
+        {
+          "genus": "Cutibacterium",
+          "detect_pct": 99.2,
+          "median_pct": 9.385,
+          "rho_depth": 0.161,
+          "p": 7.97059849865128e-05,
+          "q_bh": 0.0003
+        },
+        {
+          "genus": "Leptotrichia",
+          "detect_pct": 53.4,
+          "median_pct": 0.016,
+          "rho_depth": 0.184,
+          "p": 5.924460808805855e-06,
+          "q_bh": 0.0
+        }
+      ]
     },
     "42명 진균(ITS)": {
       "n": 42,
@@ -159,7 +955,121 @@
           "q_bh": 0.0028
         }
       ],
-      "candidates": {}
+      "candidates": {},
+      "all_screened": [
+        {
+          "genus": "g__Naganishia",
+          "detect_pct": 59.5,
+          "median_pct": 0.1008,
+          "rho_depth": -0.575,
+          "p": 6.857840121770757e-05,
+          "q_bh": 0.001
+        },
+        {
+          "genus": "g__Rhodotorula",
+          "detect_pct": 85.7,
+          "median_pct": 0.9087,
+          "rho_depth": -0.522,
+          "p": 0.0003974861948904637,
+          "q_bh": 0.0028
+        },
+        {
+          "genus": "g__Cladosporium",
+          "detect_pct": 95.2,
+          "median_pct": 1.171,
+          "rho_depth": -0.378,
+          "p": 0.013662815982851823,
+          "q_bh": 0.0638
+        },
+        {
+          "genus": "g__Alternaria",
+          "detect_pct": 66.7,
+          "median_pct": 0.052,
+          "rho_depth": -0.291,
+          "p": 0.061560856767824135,
+          "q_bh": 0.2155
+        },
+        {
+          "genus": "g__Aspergillus",
+          "detect_pct": 64.3,
+          "median_pct": 0.134,
+          "rho_depth": -0.221,
+          "p": 0.16050904188772286,
+          "q_bh": 0.321
+        },
+        {
+          "genus": "g__Cercozoa_gen_Incertae_sedis",
+          "detect_pct": 59.5,
+          "median_pct": 0.1403,
+          "rho_depth": -0.043,
+          "p": 0.785977297866868,
+          "q_bh": 0.786
+        },
+        {
+          "genus": "g__Mucor",
+          "detect_pct": 66.7,
+          "median_pct": 0.329,
+          "rho_depth": 0.064,
+          "p": 0.6853304207352621,
+          "q_bh": 0.738
+        },
+        {
+          "genus": "g__Malassezia",
+          "detect_pct": 100.0,
+          "median_pct": 66.3933,
+          "rho_depth": 0.08,
+          "p": 0.6160677717797219,
+          "q_bh": 0.7187
+        },
+        {
+          "genus": "g__Fusarium",
+          "detect_pct": 59.5,
+          "median_pct": 0.2032,
+          "rho_depth": 0.105,
+          "p": 0.5078540247899925,
+          "q_bh": 0.6464
+        },
+        {
+          "genus": "g__Arabidopsis",
+          "detect_pct": 52.4,
+          "median_pct": 0.0218,
+          "rho_depth": 0.149,
+          "p": 0.3462872956453089,
+          "q_bh": 0.4848
+        },
+        {
+          "genus": "g__Neurospora",
+          "detect_pct": 50.0,
+          "median_pct": 0.0131,
+          "rho_depth": 0.177,
+          "p": 0.26273667007050194,
+          "q_bh": 0.4087
+        },
+        {
+          "genus": "g__Enterocarpus",
+          "detect_pct": 73.8,
+          "median_pct": 0.5438,
+          "rho_depth": 0.203,
+          "p": 0.19686597015504392,
+          "q_bh": 0.3445
+        },
+        {
+          "genus": "g__Mortierella",
+          "detect_pct": 50.0,
+          "median_pct": 0.0093,
+          "rho_depth": 0.236,
+          "p": 0.1326651159795461,
+          "q_bh": 0.3096
+        },
+        {
+          "genus": "g__Lasiobolus",
+          "detect_pct": 78.6,
+          "median_pct": 0.9654,
+          "rho_depth": 0.268,
+          "p": 0.08639236769415962,
+          "q_bh": 0.2419
+        }
+      ]
     },
     "58명 진균(01 노화 ITS)": {
       "n": 58,
@@ -182,7 +1092,169 @@
           "q_bh": 0.0455
         }
       ],
-      "candidates": {}
+      "candidates": {},
+      "all_screened": [
+        {
+          "genus": "g__Rhodotorula",
+          "detect_pct": 100.0,
+          "median_pct": 1.5238,
+          "rho_depth": -0.449,
+          "p": 0.00040214222024824794,
+          "q_bh": 0.008
+        },
+        {
+          "genus": "g__Lasiobolus",
+          "detect_pct": 87.9,
+          "median_pct": 0.5795,
+          "rho_depth": -0.367,
+          "p": 0.004554690728440494,
+          "q_bh": 0.0455
+        },
+        {
+          "genus": "g__Mucor",
+          "detect_pct": 94.8,
+          "median_pct": 1.6093,
+          "rho_depth": -0.321,
+          "p": 0.013878543025678458,
+          "q_bh": 0.0786
+        },
+        {
+          "genus": "g__Enterocarpus",
+          "detect_pct": 69.0,
+          "median_pct": 0.2784,
+          "rho_depth": -0.316,
+          "p": 0.015721580487983413,
+          "q_bh": 0.0786
+        },
+        {
+          "genus": "g__Cercozoa_gen_Incertae_sedis",
+          "detect_pct": 77.6,
+          "median_pct": 0.4571,
+          "rho_depth": -0.278,
+          "p": 0.03447519180170083,
+          "q_bh": 0.1379
+        },
+        {
+          "genus": "g__Naganishia",
+          "detect_pct": 94.8,
+          "median_pct": 0.8037,
+          "rho_depth": -0.214,
+          "p": 0.10670880972416885,
+          "q_bh": 0.3557
+        },
+        {
+          "genus": "g__Lasiobolidium",
+          "detect_pct": 65.5,
+          "median_pct": 0.3931,
+          "rho_depth": -0.193,
+          "p": 0.14740659791691724,
+          "q_bh": 0.3685
+        },
+        {
+          "genus": "g__Stagonosporopsis",
+          "detect_pct": 62.1,
+          "median_pct": 0.1683,
+          "rho_depth": -0.177,
+          "p": 0.18492217731079585,
+          "q_bh": 0.4109
+        },
+        {
+          "genus": "g__Mortierella",
+          "detect_pct": 62.1,
+          "median_pct": 0.2583,
+          "rho_depth": -0.136,
+          "p": 0.3100852010299361,
+          "q_bh": 0.6202
+        },
+        {
+          "genus": "g__Debaryomycetaceae_gen_Incertae_sedis",
+          "detect_pct": 81.0,
+          "median_pct": 0.6081,
+          "rho_depth": -0.116,
+          "p": 0.38475917428170525,
+          "q_bh": 0.6996
+        },
+        {
+          "genus": "g__Raphanus",
+          "detect_pct": 58.6,
+          "median_pct": 0.0988,
+          "rho_depth": -0.048,
+          "p": 0.7182120506999436,
+          "q_bh": 0.8978
+        },
+        {
+          "genus": "g__Saccharomyces",
+          "detect_pct": 70.7,
+          "median_pct": 0.3735,
+          "rho_depth": -0.017,
+          "p": 0.8997015531710468,
+          "q_bh": 0.8997
+        },
+        {
+          "genus": "g__Candida",
+          "detect_pct": 51.7,
+          "median_pct": 0.0146,
+          "rho_depth": 0.019,
+          "p": 0.8883719831521898,
+          "q_bh": 0.8997
+        },
+        {
+          "genus": "g__Neurospora",
+          "detect_pct": 74.1,
+          "median_pct": 0.5272,
+          "rho_depth": 0.029,
+          "p": 0.8306460031957624,
+          "q_bh": 0.8997
+        },
+        {
+          "genus": "g__Penicillium",
+          "detect_pct": 65.5,
+          "median_pct": 0.2974,
+          "rho_depth": 0.03,
+          "p": 0.8240391476540995,
+          "q_bh": 0.8997
+        },
+        {
+          "genus": "g__Fusarium",
+          "detect_pct": 69.0,
+          "median_pct": 0.3006,
+          "rho_depth": 0.051,
+          "p": 0.7031180550014193,
+          "q_bh": 0.8978
+        },
+        {
+          "genus": "g__Malassezia",
+          "detect_pct": 100.0,
+          "median_pct": 77.7733,
+          "rho_depth": 0.052,
+          "p": 0.6985158472615999,
+          "q_bh": 0.8978
+        },
+        {
+          "genus": "g__Cladosporium",
+          "detect_pct": 94.8,
+          "median_pct": 0.7193,
+          "rho_depth": 0.095,
+          "p": 0.47769811066843126,
+          "q_bh": 0.7349
+        },
+        {
+          "genus": "g__Arabidopsis",
+          "detect_pct": 51.7,
+          "median_pct": 0.1,
+          "rho_depth": 0.097,
+          "p": 0.47108420226115544,
+          "q_bh": 0.7349
+        },
+        {
+          "genus": "g__Alternaria",
+          "detect_pct": 56.9,
+          "median_pct": 0.0639,
+          "rho_depth": 0.2,
+          "p": 0.1329816144507463,
+          "q_bh": 0.3685
+        }
+      ]
     }
   },
   "fungal_displacement_42": {
