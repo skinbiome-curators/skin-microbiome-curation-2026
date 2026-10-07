@@ -20,8 +20,8 @@ def save_json(obj, path):
 # ────────────────────────────────────────────────────────────────────────────
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-EV   = os.path.join(BASE, '원자료')
-OUT  = os.path.join(BASE, '분석표')
+EV   = os.path.join(BASE, 'data')      # 2026-10-07 폴더 이름 변경: 원자료 → data
+OUT  = os.path.join(BASE, 'results')   # 2026-10-07 폴더 이름 변경: 분석표 → results
 os.makedirs(OUT, exist_ok=True)
 
 def f(x):

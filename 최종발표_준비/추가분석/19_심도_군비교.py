@@ -15,9 +15,9 @@
 ⚠️ 결과를 본 뒤 고른 점검이 아니라 사전에 합의한 점검이지만, 판정 이후의 **사후 점검**이다.
 
 군 판정 규칙: 9_나이보정_판별력.py 와 같다('Non' 이 있으면 비민감, 'ensitive' 이면 민감).
-입력: ../../원자료/03_sensitive_{16S,ITS}_sample_info.tsv · 03_sensitive_ITS_genus_pct.tsv
-결과: ../../분석표/심도_군비교.json
-의존성: Python 3 표준 라이브러리만 (+ ../../코드/stats_util.py)
+입력: ../../data/03_sensitive_{16S,ITS}_sample_info.tsv · 03_sensitive_ITS_genus_pct.tsv
+결과: ../../results/심도_군비교.json
+의존성: Python 3 표준 라이브러리만 (+ ../../code/stats_util.py)
 """
 import os, sys, csv, time, statistics, tracemalloc
 
@@ -30,7 +30,7 @@ T0 = time.perf_counter()
 tracemalloc.start()
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(HERE)), '코드'))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(HERE)), 'code'))   # 2026-10-07 코드 → code
 from stats_util import save_json, TAB, RAW, auc_p, bh, f   # noqa: E402
 
 DEPTH_COLS = ('read_count', 'read_depth_final')
@@ -97,7 +97,7 @@ for k in ('depth', 'taxa_its', 'reference_its'):
         qv = r.get('q_bh_6tests', float('nan'))
         print(f"{name:<28}{r['median_sensitive']:>12}{r['median_non_sensitive']:>12}"
               f"{r['auc_sensitive_higher']:>11.3f}{r['p_mann_whitney_normal_approx']:>8.4f}{qv:>8.4f}")
-print('\n저장: 분석표/심도_군비교.json')
+print('\n저장: results/심도_군비교.json')
 
 cur, peak = tracemalloc.get_traced_memory()
 tracemalloc.stop()

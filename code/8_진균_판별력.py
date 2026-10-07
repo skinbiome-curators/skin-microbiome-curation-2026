@@ -20,7 +20,7 @@
              '재현'이 아니라 '조건이 다른 자료에서의 일관성'이며, 부위를 볼로 맞춰 비교한다.
   ①③⑤    : 595명에 진균이 없어 세균만큼 넓게 볼 수 없다. 이 한계를 판정에 적는다.
 
-결과: 분석표/진균_판별력.json
+결과: results/진균_판별력.json
 """
 import csv, json, math, os, sys, statistics as st
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

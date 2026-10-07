@@ -10,7 +10,7 @@
 
 세 표현에서 방향과 크기가 유지되면 견고, 부호가 바뀌거나 사라지면 표현 의존이다.
 
-결과: 분석표/조성효과_점검.json
+결과: results/조성효과_점검.json
 """
 import json, math, os, statistics as st
 from stats_util import save_json, TAB, CAND, ORAL, f, spearman, auc_p, auc_ci, load_595, load_42

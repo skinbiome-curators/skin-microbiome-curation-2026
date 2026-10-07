@@ -18,7 +18,7 @@
    판정은 「불가」에서 **「부분 가능 — 진균에 한정」** 으로 바뀔 뿐이다. 세균은 그대로 불가다
    (16S ASV 에서 *Cutibacterium* 종 라벨 **9%** · *Staphylococcus* **10%**).
 
-결과: 분석표/진균_종수준.json
+결과: results/진균_종수준.json
 """
 import csv, json, os, statistics as st
 from stats_util import save_json, TAB, RAW, f, auc_p, auc_ci, bh

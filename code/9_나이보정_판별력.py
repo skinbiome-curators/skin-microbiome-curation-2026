@@ -17,7 +17,7 @@
 n=42 라 검정력이 거의 없다. 이 계산의 목적은 "얼마나 모르는가" 를 재는 것이다.
 부트스트랩은 사람 단위, seed 20260918 (다른 스크립트와 동일).
 
-결과: 분석표/나이보정_판별력.json
+결과: results/나이보정_판별력.json
 """
 import os, sys, csv, math, random
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -190,4 +190,4 @@ print('  동시에 상한이 크면 → 안 더한다고도 말할 수 없다')
 print('  교차검증 증가분 → 낙관 편향을 걷어낸 값. 재대입과 방향이 같아야 결론을 믿을 수 있다')
 
 save_json(out, os.path.join(TAB, '나이보정_판별력.json'))
-print('\n저장: 분석표/나이보정_판별력.json')
+print('\n저장: results/나이보정_판별력.json')

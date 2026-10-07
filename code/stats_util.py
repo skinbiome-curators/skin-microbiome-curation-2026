@@ -19,8 +19,8 @@ def save_json(obj, path):
 
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TAB  = os.path.join(BASE, '분석표')
-RAW  = os.path.join(BASE, '원자료')
+TAB  = os.path.join(BASE, 'results')   # 2026-10-07 폴더 이름 변경: 분석표 → results
+RAW  = os.path.join(BASE, 'data')      # 2026-10-07 폴더 이름 변경: 원자료 → data
 
 CAND = ['Cutibacterium', 'Staphylococcus', 'Corynebacterium']
 
