@@ -1,0 +1,29 @@
+========================================================================================
+피지 때문 아닌가 — Malassezia 착시 점검 ⑤
+========================================================================================
+
+(1) 피지 — 민감 중앙 13.0 vs 비민감 11.0 · 민감군이 클 확률 AUC 0.493 [0.315, 0.675] · p=0.940
+(2) 피지 ~ Malassezia (Spearman)
+  all            n=42  rho=+0.278  p=0.0742
+  sensitive      n=23  rho=+0.281  p=0.1946
+  non_sensitive  n=19  rho=+0.495  p=0.0312
+(3) 피지를 넣어도 Malassezia 가 더하나
+  (가) 피지만                      기준 0.507 → +Malassezia 0.838  증가분 +0.331 [+0.118, +0.471]  · 교차검증 0.288 → 0.789 (+0.501)
+  (다) 나이+피지                    기준 0.698 → +Malassezia 0.886  증가분 +0.188 [+0.046, +0.365]  · 교차검증 0.565 → 0.842 (+0.277)
+(4) 01 노화 — 피지 ~ Malassezia (Spearman)
+  all            n=58  rho=+0.667  p=0.0000
+  cheek_only     n=30  rho=+0.793  p=0.0000
+  forehead_only  n=28  rho=+0.495  p=0.0074
+
+(5) scipy 교차 확인 — JSON 에는 저장하지 않음
+  Malassezia 출처 대조  genus_pct vs sample_info(g_g__Malassezia)  최대 차이 0
+  (1) AUC stats_util 0.493 · scipy 0.493   p stats_util 0.940 · scipy 0.950  ← p 차이는 scipy 기본의 연속성 보정
+  (2) all            rho stats_util +0.278 · scipy +0.278   p stats_util 0.0742 · scipy 0.0742
+  (2) sensitive      rho stats_util +0.281 · scipy +0.281   p stats_util 0.1946 · scipy 0.1946
+  (2) non_sensitive  rho stats_util +0.495 · scipy +0.495   p stats_util 0.0312 · scipy 0.0312
+
+읽는 법
+  (1) 두 군 피지가 같으면 → Malassezia 차이를 "피지가 적어서"로 설명할 수 없다
+  (3) 증가분 CI 가 0 을 제외하고 교차검증도 같은 방향 → 피지를 넣어도 Malassezia 가 더한다
+
+저장: results/피지_점검.json
