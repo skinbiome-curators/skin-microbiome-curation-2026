@@ -1,0 +1,45 @@
+{
+  "n_people": 595,
+  "n_taxa_rows": 2423,
+  "n_genera": 807,
+  "samples_missing_in_microbiome_table": [],
+  "genus_relabund_colsum": {
+    "min": 1.0,
+    "median": 1.0,
+    "max": 1.0
+  },
+  "n_genus_detected": {
+    "min": 2,
+    "median": 39,
+    "max": 116
+  },
+  "non_chimeric_reads": {
+    "n": 595,
+    "min": 1555.0,
+    "p10_cutoff": 4714.0,
+    "median": 23683.0,
+    "max": 150818.0
+  },
+  "qc_rows_missing": [],
+  "taxonomy_mismatch_rows": 212,
+  "taxonomy_mismatch_total_relabund_share": 0.011771,
+  "domains": {
+    "Bacteria": 2423
+  },
+  "baumann_sr": {
+    "S": 284,
+    "R": 311
+  },
+  "Cutibacterium": {
+    "detected": 590,
+    "median_relabund": 0.09385
+  },
+  "Staphylococcus": {
+    "detected": 591,
+    "median_relabund": 0.055105
+  },
+  "Corynebacterium": {
+    "detected": 538,
+    "median_relabund": 0.010678
+  }
+}

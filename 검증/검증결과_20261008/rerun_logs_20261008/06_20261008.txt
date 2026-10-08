@@ -1,0 +1,100 @@
+
+[42명] 검출률 50% 이상 80속 중 의심 11속
+  속                       검출       중앙값    rho(심도)        q
+  Acidocella          100.0%     0.121     -0.751   0.0000
+  Mycobacterium        95.2%     0.171     -0.713   0.0000
+  Altererythrobacter   92.9%     0.090     -0.702   0.0000
+  Rhodanobacter       100.0%     1.493     -0.678   0.0000
+  Sphingomonas         92.9%     0.075     -0.579   0.0009
+  Acinetobacter        90.5%     0.080     -0.504   0.0090
+  Veillonella          66.7%     3.093     -0.477   0.0160
+  Neisseria            85.7%     0.091     -0.465   0.0191
+  후보 3속 —
+    Cutibacterium      rho=+0.212 (q=0.457)  해당 없음
+    Staphylococcus     rho=-0.203 (q=0.485)  해당 없음
+    Corynebacterium    rho=-0.385 (q=0.063)  의심
+
+[595명] 검출률 50% 이상 19속 중 의심 1속
+  속                       검출       중앙값    rho(심도)        q
+  Lactobacillus        63.2%     0.044     -0.308   0.0000
+  후보 3속 —
+    Cutibacterium      rho=+0.161 (q=0.000)  해당 없음
+    Staphylococcus     rho=+0.154 (q=0.000)  해당 없음
+    Corynebacterium    rho=-0.118 (q=0.009)  해당 없음
+
+[42명 진균(ITS)] 검출률 50% 이상 14속 중 의심 2속
+  속                       검출       중앙값    rho(심도)        q
+  g__Naganishia        59.5%     0.101     -0.575   0.0010
+  g__Rhodotorula       85.7%     0.909     -0.522   0.0028
+  후보 3속 —
+
+[58명 진균(01 노화 ITS)] 검출률 50% 이상 20속 중 의심 2속
+  속                       검출       중앙값    rho(심도)        q
+  g__Rhodotorula      100.0%     1.524     -0.449   0.0080
+  g__Lasiobolus        87.9%     0.580     -0.367   0.0455
+  후보 3속 —
+
+[42명 진균] Malassezia 가 줄어든 자리에 무엇이 오르는가
+  속                                검출       민감중앙      비민감중앙      AUC   rho(심도)
+  Unassigned                    97.6%      11.38       0.80    0.844    -0.057
+  g__Fusarium                   59.5%       0.93       0.00    0.751    +0.105
+  g__Lasiobolus                 78.6%       2.79       0.45    0.725    +0.268
+  g__Alternaria                 66.7%       0.41       0.02    0.709    -0.291
+  g__Mortierella                50.0%       1.27       0.00    0.707    +0.236
+  g__Enterocarpus               73.8%       1.58       0.07    0.700    +0.203
+  g__Mucor                      66.7%       1.56       0.08    0.698    +0.064
+  g__Arabidopsis                52.4%       0.50       0.00    0.691    +0.149
+  g__Malassezia                100.0%      36.37      84.23    0.153    +0.080   ← 유일한 ④ 통과 후보
+  → 오르는 쪽이 피부 상재가 아니면, "Malassezia 감소" 와 "시료 품질 저하" 가 구별되지 않는다.
+
+[음성대조 참조] 15_season 블랭크 — 다른 연구·다른 키트. 우리 런의 대조가 아니다.
+
+  15_season_16S — 블랭크 4개 대 시료 479개, 1328속
+    속                               블랭크중앙       시료중앙       배수
+    Halomonas                      39.81%      4.05%      9.8
+    Unassigned                     14.98%     12.24%      1.2
+    Shewanella                     14.25%      1.36%     10.5
+    Pseudomonas                     1.39%      0.98%      1.4
+    Cutibacterium                   1.36%      6.14%      0.2
+    Acinetobacter                   1.30%      2.86%      0.5
+    Alteriqipengyuania              0.79%      0.00%      inf
+    Staphylococcus                  0.74%      3.37%      0.2
+
+  15_season_ITS — 블랭크 1개 대 시료 473개, 971속
+    속                               블랭크중앙       시료중앙       배수
+    g__Cladosporium                35.63%      1.42%     25.1
+    g__Malassezia                  22.53%     63.16%      0.4
+    g__Cutaneotrichosporon         20.52%      0.03%    653.1
+    g__Thyridium                   15.78%      0.00%      inf
+    g__Penicillium                  5.15%      0.00%      inf
+    g__Pseudogymnoascus             0.20%      0.00%      inf
+    g__Rhodotorula                  0.20%      0.14%      1.4
+    g__Abelmoschus                  0.00%      0.00%      inf
+
+  [대체 지표 작동 점검] 심도-상관 의심 속이 블랭크에도 나오는가
+        속                                       지목한 코호트      블랭크검출      블랭크중앙      블랭크/시료
+    16S Acidocella                                  42명          -          -          -
+    16S Mycobacterium                               42명       100%     0.231%        0.7배
+    16S Altererythrobacter                          42명         0%     0.000%          -
+    16S Rhodanobacter                               42명         0%     0.000%          -
+    16S Sphingomonas                                42명       100%     0.225%        0.1배
+    16S Acinetobacter                               42명       100%     1.297%        0.5배
+    16S Veillonella                                 42명       100%     0.025%        0.1배
+    16S Neisseria                                   42명       100%     0.095%        0.2배
+    16S Lactobacillus                              595명        75%     0.080%        2.0배
+    ITS g__Naganishia                           42명·ITS         0%     0.000%        0.0배
+    ITS g__Rhodotorula                  42명·ITS/58명·ITS       100%     0.201%        1.4배
+    ITS g__Lasiobolus                           58명·ITS          -          -          -
+    → 의심 12속 중 6속이 해당 블랭크 전부에서 검출된다.
+
+    [Cladosporium] ITS 블랭크 1위 — 블랭크 35.63% / 시료 1.42% (25.13배)
+      심도-상관(rho=-0.378)으로 이미 뺀 후보다. 블랭크가 같은 방향을 가리킨다. 단 블랭크 1개이므로 보강 근거일 뿐이다.
+
+  [후보 속의 블랭크 수준] — 낮다고 오염이 아니고, 있다고 오염도 아니다
+    Cutibacterium            블랭크   1.360% / 시료   6.145%  (0.220배)
+    Staphylococcus           블랭크   0.739% / 시료   3.370%  (0.220배)
+    Corynebacterium          블랭크   0.421% / 시료   1.422%  (0.300배)
+    g__Malassezia            블랭크  22.527% / 시료  63.161%  (0.360배)
+    → Corynebacterium 은 Salter 2014 의 키트 오염균 목록에도 있다. 판정 「주의」는 유지된다.
+
+저장: <재실행 사본>\results\오염점검.json

@@ -1,0 +1,31 @@
+595명 종 라벨 구성 (사람 595명)
+
+Cutibacterium — 종 라벨 11행 (이름 붙은 것 9개), 미분류 비중 98.58%
+   unidentified                             속 내 비중  98.58%  검출 590명  미상
+   Cutibacterium_acnes                      속 내 비중   0.58%  검출  70명  양방향
+   Cutibacterium_granulosum                 속 내 비중   0.57%  검출 272명  미상
+   Lepisosteus_oculatus                     속 내 비중   0.11%  검출  74명  미상
+   uncultured_Propionibacterium             속 내 비중   0.09%  검출  84명  미상
+   Cutibacterium_avidum                     속 내 비중   0.06%  검출  44명  미상
+   → ⑤ 방향성 판정: 불가 — 속 내 98.58%가 종 수준 미분류
+
+Staphylococcus — 종 라벨 15행 (이름 붙은 것 14개), 미분류 비중 99.21%
+   unidentified                             속 내 비중  99.21%  검출 591명  미상
+   Staphylococcus_sciuri                    속 내 비중   0.36%  검출   4명  미상
+   Staphylococcus_saprophyticus             속 내 비중   0.14%  검출  13명  미상
+   Staphylococcus_pseudintermedius          속 내 비중   0.10%  검출   4명  미상
+   Staphylococcus_lugdunensis               속 내 비중   0.09%  검출  20명  미상
+   Staphylococcus_pasteuri                  속 내 비중   0.07%  검출  10명  미상
+   방향이 알려졌으나 이 자료에 라벨이 없는 종: Staphylococcus_aureus, Staphylococcus_epidermidis
+   → ⑤ 방향성 판정: 불가 — 속 내 99.21%가 종 수준 미분류
+
+Corynebacterium — 종 라벨 39행 (이름 붙은 것 37개), 미분류 비중 64.14%
+   unidentified                             속 내 비중  64.00%  검출 417명  미상
+   Corynebacterium_propinquum               속 내 비중  23.92%  검출  81명  미상
+   Corynebacterium_tuberculostearicum       속 내 비중   4.73%  검출 225명  미상
+   Corynebacterium_durum                    속 내 비중   2.83%  검출 252명  미상
+   Corynebacterium_bovis                    속 내 비중   1.10%  검출  20명  미상
+   Corynebacterium_matruchotii              속 내 비중   0.92%  검출 121명  미상
+   → ⑤ 방향성 판정: 불가 — 속 내 64.14%가 종 수준 미분류
+
+저장: <재실행 사본>\results\종수준_한계.json
