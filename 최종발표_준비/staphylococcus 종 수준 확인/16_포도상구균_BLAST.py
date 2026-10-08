@@ -3,7 +3,8 @@
 DB 두 개:
   rRNA_typestrains/16S_ribosomal_RNA — NCBI 16S 기준균주(type strain) DB. 종 동정의 표준 참조
   core_nt           — 미분류 진균 BLAST(results/미분류진균_BLAST_*)와 같은 DB
-결과: 포도상구균_BLAST_입력.fa · 포도상구균_BLAST_원본_<db>.json · 포도상구균_BLAST_요약_<db>.tsv
+결과: 포도상구균_BLAST_입력.fa · 포도상구균_BLAST_원본_<db>.json · 포도상구균_BLAST_요약_<db>.tsv — ../../results/ 에 쓴다
+      (2026-10-07 이 폴더에서 results/ 로 옮김 · --summarize-only 도 results/ 의 원본 JSON 을 읽는다)
 NCBI DB 가 갱신되면 hit 가 달라질 수 있다.
 
 실행
@@ -32,6 +33,7 @@ tracemalloc.start()
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RAW = os.path.join(os.path.dirname(os.path.dirname(HERE)), 'data')   # 2026-10-07 폴더 이름 변경: 원자료 → data
+RES = os.path.join(os.path.dirname(os.path.dirname(HERE)), 'results')   # 2026-10-07 결과 파일을 이 폴더에서 results/ 로 옮김
 URL = 'https://blast.ncbi.nlm.nih.gov/Blast.cgi'
 DBS = ['core_nt', 'rRNA_typestrains/16S_ribosomal_RNA']
 SUMMARIZE_ONLY = '--summarize-only' in sys.argv[1:]
@@ -41,7 +43,7 @@ h = tax[0]
 asvs = [(r[0], r[h.index('Species')], r[h.index('sequence')]) for r in tax[1:] if r[h.index('Genus')] == 'Staphylococcus']
 fa = ''.join(f'>{a}\n{s}\n' for a, _, s in asvs)
 if not SUMMARIZE_ONLY:
-    open(os.path.join(HERE, '포도상구균_BLAST_입력.fa'), 'w', encoding='utf-8', newline='\n').write(fa)
+    open(os.path.join(RES, '포도상구균_BLAST_입력.fa'), 'w', encoding='utf-8', newline='\n').write(fa)
 
 # 요약의 read 비중·검출 인원용 — 42명 ASV count (15_포도상구균_종수준.py 와 같은 계산)
 cnt = list(csv.reader(open(os.path.join(RAW, '03_sensitive_16S_asv_count.tsv'), encoding='utf-8'), delimiter='\t'))
@@ -76,7 +78,7 @@ def run(db):
         if 'BlastOutput2' in d:
             reports += [x['report'] for x in (d['BlastOutput2'] if isinstance(d['BlastOutput2'], list) else [d['BlastOutput2']])]
     json.dump({'rid': rid, 'db': db, 'reports': reports},
-              open(os.path.join(HERE, f'포도상구균_BLAST_원본_{db.split("/")[-1]}.json'), 'w', encoding='utf-8'), ensure_ascii=False)
+              open(os.path.join(RES, f'포도상구균_BLAST_원본_{db.split("/")[-1]}.json'), 'w', encoding='utf-8'), ensure_ascii=False)
     return reports
 
 def label(title):
@@ -107,7 +109,7 @@ def summarize(db, reports):
                                  '; '.join(f'{k}({v})' for k, v in named.most_common()), 'Y' if len(labs) == 50 else '']))
         else:
             rows.append((share, [q, qlen, share, SILVA.get(q, ''), det, '', 0, 0, '', '']))
-    path = os.path.join(HERE, f'포도상구균_BLAST_요약_{db.split("/")[-1]}.tsv')
+    path = os.path.join(RES, f'포도상구균_BLAST_요약_{db.split("/")[-1]}.tsv')
     with open(path, 'w', encoding='utf-8', newline='\n') as fh:
         w = csv.writer(fh, delimiter='\t', lineterminator='\n')
         w.writerow(['asv', 'len', 'share_of_staph_reads_pct', 'silva_species', 'n_detected_42', 'best_ident_cov95',
@@ -118,7 +120,7 @@ def summarize(db, reports):
 
 
 for db in DBS:
-    raw_json = os.path.join(HERE, f'포도상구균_BLAST_원본_{db.split("/")[-1]}.json')
+    raw_json = os.path.join(RES, f'포도상구균_BLAST_원본_{db.split("/")[-1]}.json')
     if SUMMARIZE_ONLY:
         if not os.path.exists(raw_json):
             print(f'{db}: 원본 JSON 없음 → 건너뜀')

@@ -16,7 +16,7 @@
 
 군 판정 규칙: 9_나이보정_판별력.py 와 같다('Non' 이 있으면 비민감, 'ensitive' 이면 민감).
 입력: ../../data/03_sensitive_{16S,ITS}_sample_info.tsv · 03_sensitive_ITS_genus_pct.tsv
-결과: ../../results/심도_군비교.json
+결과: ../../results/심도_군비교_261003.json
 의존성: Python 3 표준 라이브러리만 (+ ../../code/stats_util.py)
 """
 import os, sys, csv, time, statistics, tracemalloc
@@ -89,7 +89,7 @@ for (k, name), qq in zip(tests, q):
 
 out['note'] = ('read 수는 생물량이 아니다(DNA 농도 없음 · 대리 지표). 판정 등급은 바꾸지 않는다. '
                'AUC = 민감군이 클 확률. BH 는 심도 4 + 진균 2 = 6개 검정. Malassezia 는 기준으로만 표시.')
-save_json(out, os.path.join(TAB, '심도_군비교.json'))
+save_json(out, os.path.join(TAB, '심도_군비교_261003.json'))
 
 print(f"{'항목':<28}{'민감 중앙':>12}{'비민감 중앙':>12}{'AUC(민감>)':>11}{'p':>8}{'q':>8}")
 for k in ('depth', 'taxa_its', 'reference_its'):
@@ -97,7 +97,7 @@ for k in ('depth', 'taxa_its', 'reference_its'):
         qv = r.get('q_bh_6tests', float('nan'))
         print(f"{name:<28}{r['median_sensitive']:>12}{r['median_non_sensitive']:>12}"
               f"{r['auc_sensitive_higher']:>11.3f}{r['p_mann_whitney_normal_approx']:>8.4f}{qv:>8.4f}")
-print('\n저장: results/심도_군비교.json')
+print('\n저장: results/심도_군비교_261003.json')
 
 cur, peak = tracemalloc.get_traced_memory()
 tracemalloc.stop()

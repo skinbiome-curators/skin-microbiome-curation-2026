@@ -13,8 +13,8 @@
   - 여러 검정이므로 BH 보정 q 값도 함께 적는다
 ⚠️ 정규성을 기각하지 못했다고 정규분포라는 뜻은 아니다(n=19–23 이라 검정력이 낮다).
 
-결과: ../../results/정규성_점검.json · ../../results/정규성_점검.tsv (행 = 변수 × 군, matrix 형태)
-의존성: scipy (conda bio_proj) + ./common42.py · ../../code/stats_util.py
+결과: ../../results/정규성_점검_261007.json · ../../results/정규성_점검_261007.tsv (행 = 변수 × 군, matrix 형태)
+의존성: scipy (conda bio_proj) + ./common42_261007.py · ../../code/stats_util.py
 """
 import os, sys, time, statistics, tracemalloc
 
@@ -28,7 +28,7 @@ tracemalloc.start()
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from common42 import load, save_json, TAB, CAND, FUNGI, mem_time_line   # noqa: E402
+from common42_261007 import load, save_json, TAB, CAND, FUNGI, mem_time_line   # noqa: E402
 from stats_util import bh                                              # noqa: E402
 
 from scipy import stats                                                # noqa: E402
@@ -83,15 +83,15 @@ out = {'method': 'scipy.stats.shapiro(군별) · 0 비율 · 표본 보정 왜�
        'summary': summary,
        'caution': '정규성을 기각하지 못했다고 정규분포인 것은 아니다(n=19–23 이라 검정력이 낮다). 나이는 참고(로지스틱 입력).',
        'rows': rows_all}
-save_json(out, os.path.join(TAB, '정규성_점검.json'))
+save_json(out, os.path.join(TAB, '정규성_점검_261007.json'))
 
-tsv = os.path.join(TAB, '정규성_점검.tsv')
+tsv = os.path.join(TAB, '정규성_점검_261007.tsv')
 cols_t = ['n', 'shapiro_W', 'shapiro_p', 'shapiro_q_bh', 'zero_n', 'zero_pct', 'skewness', 'median', 'mean']
 with open(tsv, 'w', encoding='utf-8', newline='\n') as fh:
     fh.write('variable_group\t' + '\t'.join(cols_t) + '\n')
     for r in rows_all:
         fh.write(f"{r['variable']}:{r['group']}\t" + '\t'.join(str(r.get(c, '')) for c in cols_t) + '\n')
 
-print('\n저장: results/정규성_점검.json · results/정규성_점검.tsv')
+print('\n저장: results/정규성_점검_261007.json · results/정규성_점검_261007.tsv')
 print(mem_time_line(T0))
 tracemalloc.stop()

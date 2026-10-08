@@ -1,4 +1,4 @@
-"""Staphylococcus 종 수준 점검 (2026-09-30) — 595명 SILVA 종 라벨 + 42명 16S ASV 종 라벨을 센다. 결과: 같은 폴더 staph_out.json"""
+"""Staphylococcus 종 수준 점검 (2026-09-30) — 595명 SILVA 종 라벨 + 42명 16S ASV 종 라벨을 센다. 결과: ../../results/staph_out.json (2026-10-07 이 폴더에서 results/ 로 옮기고 줄바꿈을 LF 로 고정)"""
 import os, sys, csv, json
 CODE = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'code')   # 2026-10-07 폴더 이름 변경: 코드 → code
 sys.path.insert(0, CODE)
@@ -92,4 +92,4 @@ print('groups', {g: sum(1 for s in samples if grp.get(s) == g) for g in set(grp.
 out['03'] = {'asvs': asv_rows, 'n_samples': len(samples), 'n_with_staph': sum(1 for g in G if g > 0),
              'pp_named_median': st.median(pp3), 'pp_named_mean': st.mean(pp3), 'pp_any': sum(1 for x in pp3 if x > 0),
              'staph_reads': GT, 'total_reads': sum(tot_reads)}
-json.dump(out, open(os.path.join(os.path.dirname(__file__), 'staph_out.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+json.dump(out, open(os.path.join(TAB, 'staph_out.json'), 'w', encoding='utf-8', newline='\n'), ensure_ascii=False, indent=1)

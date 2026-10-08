@@ -18,8 +18,8 @@
     25분을 넘겨도 끝나지 않았다. 반복 50회를 코어에 나눠 동시에 돌린다(joblib). 분할 · seed · 모형 설정은 같아
     결과는 순서대로 돌린 것과 같다. 메모리 기록은 주 프로세스 기준이다(작업 프로세스 제외).
 
-결과: ../../results/랜덤포레스트_비교.json · ../../results/랜덤포레스트_비교.tsv (행 = 후보 × 모형, matrix 형태)
-의존성: numpy · scikit-learn · joblib (conda bio_proj) + ./common42.py
+결과: ../../results/랜덤포레스트_비교_261007.json · ../../results/랜덤포레스트_비교_261007.tsv (행 = 후보 × 모형, matrix 형태)
+의존성: numpy · scikit-learn · joblib (conda bio_proj) + ./common42_261007.py
 """
 import os, sys, time, warnings, tracemalloc
 
@@ -33,7 +33,7 @@ tracemalloc.start()
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from common42 import load, save_json, TAB, CAND, FUNGI, SEED, mem_time_line   # noqa: E402
+from common42_261007 import load, save_json, TAB, CAND, FUNGI, SEED, mem_time_line   # noqa: E402
 
 import numpy as np                                                        # noqa: E402
 from sklearn.ensemble import RandomForestClassifier                       # noqa: E402
@@ -117,9 +117,9 @@ def main():
            'bacteria': run('세균 (16S V4-V5)', load('16S', CAND), CAND),
            'fungi': run('진균 (ITS1)', load('ITS', FUNGI), FUNGI)}
 
-    save_json(out, os.path.join(TAB, '랜덤포레스트_비교.json'))
+    save_json(out, os.path.join(TAB, '랜덤포레스트_비교_261007.json'))
 
-    tsv = os.path.join(TAB, '랜덤포레스트_비교.tsv')
+    tsv = os.path.join(TAB, '랜덤포레스트_비교_261007.tsv')
     with open(tsv, 'w', encoding='utf-8', newline='\n') as fh:
         fh.write('candidate\tmodel\tauc_age_only_mean\tauc_age_plus_mean\tdelta_mean\tdelta_p2_5\tdelta_p97_5\tshare_delta_positive\n')
         for grp in ('bacteria', 'fungi'):
@@ -128,7 +128,7 @@ def main():
                     fh.write(f"{c}\t{k}\t{out[grp]['age_only'][k]['mean']}\t{m['auc_age_plus']['mean']}\t{m['delta']['mean']}\t"
                              f"{m['delta']['p2_5']}\t{m['delta']['p97_5']}\t{m['share_delta_positive']}\n")
 
-    print('\n저장: results/랜덤포레스트_비교.json · results/랜덤포레스트_비교.tsv')
+    print('\n저장: results/랜덤포레스트_비교_261007.json · results/랜덤포레스트_비교_261007.tsv')
     print(mem_time_line(T0) + ' (주 프로세스 기준 — 병렬 작업 프로세스 제외)')
     tracemalloc.stop()
 

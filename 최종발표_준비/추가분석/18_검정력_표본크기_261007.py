@@ -18,7 +18,7 @@
 방향: AUC 0.65 는 반대 방향 0.35 와 같은 크기다(*Malassezia* 는 민감군에서 적어 AUC < 0.5).
 ⚠️ 기대 AUC 는 가정값이다. 42명 *Malassezia* AUC 0.153(=0.847)은 작은 표본이라 부풀려졌을 수 있어 쓰지 않았다.
 
-결과: ../../results/검정력_표본크기.json · ../../results/검정력_표본크기.tsv (행 = 기대 AUC, matrix 형태)
+결과: ../../results/검정력_표본크기_261003.json · ../../results/검정력_표본크기_261003.tsv (행 = 기대 AUC, matrix 형태)
 의존성: Python 3 표준 라이브러리만 (+ ../../code/stats_util.py)
 """
 import os, sys, math, time, random, statistics, tracemalloc
@@ -130,10 +130,10 @@ out = {'settings': {'alpha_two_sided': ALPHA, 'powers': list(POWERS), 'aucs': li
        'precision': prec,
        'min_detectable_auc_at_65_per_group': mda,
        'min_detectable_auc_at_65_after_failure': {'n_per_group': math.floor(65 * SUCCESS), **mda_adj}}
-save_json(out, os.path.join(TAB, '검정력_표본크기.json'))
+save_json(out, os.path.join(TAB, '검정력_표본크기_261003.json'))
 
 # TSV — matrix 형태(행 = 기대 AUC, 열 = 검정력별 값)
-tsv = os.path.join(TAB, '검정력_표본크기.tsv')
+tsv = os.path.join(TAB, '검정력_표본크기_261003.tsv')
 cols = ['n_per_group', 'n_per_group_with_failure', 'simulated_power_at_n']
 with open(tsv, 'w', encoding='utf-8', newline='\n') as fh:
     fh.write('auc\t' + '\t'.join(f'{c}_power{int(p * 100)}' for p in POWERS for c in cols) + '\n')
@@ -143,7 +143,7 @@ with open(tsv, 'w', encoding='utf-8', newline='\n') as fh:
             r = next(x for x in rows if x['auc'] == a and x['power'] == p)
             vals += [str(r[c]) for c in cols]
         fh.write(f'{a}\t' + '\t'.join(vals) + '\n')
-print(f'\n저장: results/검정력_표본크기.json · results/검정력_표본크기.tsv')
+print(f'\n저장: results/검정력_표본크기_261003.json · results/검정력_표본크기_261003.tsv')
 
 cur, peak = tracemalloc.get_traced_memory()
 tracemalloc.stop()
