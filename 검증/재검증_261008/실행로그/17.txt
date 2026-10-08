@@ -1,0 +1,13 @@
+자료   속                    ASV(라벨/전체)    종 라벨 read %   상위 종
+16S  Cutibacterium              5/53          48.66   acnes 48.01 · granulosum 0.37 · namnetense 0.29
+16S  Staphylococcus             2/20           1.68   haemolyticus 1.66 · equorum 0.01
+16S  Corynebacterium           18/46          11.23   kroppenstedtii 2.9 · macginleyi 2.5 · durum 1.32 · matruchotii 1.32
+16S  Streptococcus              3/25           0.55   infantis 0.3 · equi 0.17 · anginosus 0.08
+16S  Lactobacillus              4/29          11.61   kitasatonis 6.84 · iners 4.63 · intestinalis 0.13 · delbrueckii 0.01
+16S  (전체)                   274/3760          25.72   acnes 20.33 · irgensii 1.99 · temperata 0.39 · caccae 0.35
+ITS  Malassezia               74/116          91.20   restricta 86.37 · globosa 4.34 · dermatis 0.22 · sympodialis 0.13
+ITS  Cladosporium              17/19          99.74   herbarum 95.95 · halotolerans 3.71 · succulentum 0.08
+ITS  (전체)                   716/1169          72.14   restricta 48.27 · grenotii 3.57 · racemosus 2.87 · globosa 2.44
+
+저장: ../../results/속별_종라벨비율_261002.tsv
+메모리(Python 할당 기준) 현재 0.0006 GB · peak 0.0062 GB · 소요 시간 0.000013 Hour

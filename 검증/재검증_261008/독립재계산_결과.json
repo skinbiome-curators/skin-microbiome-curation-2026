@@ -1,0 +1,409 @@
+{
+  "hashes": [
+    {
+      "file": "01_aging_ITS_genus_pct.tsv",
+      "ok": true
+    },
+    {
+      "file": "01_aging_ITS_sample_info.tsv",
+      "ok": true
+    },
+    {
+      "file": "02_healthy_16S_genus_pct.tsv",
+      "ok": true
+    },
+    {
+      "file": "02_healthy_16S_sample_info.tsv",
+      "ok": true
+    },
+    {
+      "file": "03_sensitive_16S_asv_count.tsv",
+      "ok": true
+    },
+    {
+      "file": "03_sensitive_16S_asv_taxonomy.tsv",
+      "ok": true
+    },
+    {
+      "file": "03_sensitive_16S_genus_pct.tsv",
+      "ok": true
+    },
+    {
+      "file": "03_sensitive_16S_sample_info.tsv",
+      "ok": true
+    },
+    {
+      "file": "03_sensitive_ITS_asv_count.tsv",
+      "ok": true
+    },
+    {
+      "file": "03_sensitive_ITS_asv_taxonomy.tsv",
+      "ok": true
+    },
+    {
+      "file": "03_sensitive_ITS_genus_pct.tsv",
+      "ok": true
+    },
+    {
+      "file": "03_sensitive_ITS_sample_info.tsv",
+      "ok": true
+    },
+    {
+      "file": "07_skincare_16S_genus_pct.tsv",
+      "ok": true
+    },
+    {
+      "file": "07_skincare_16S_sample_info.tsv",
+      "ok": true
+    },
+    {
+      "file": "15_season_16S_genus_pct.tsv",
+      "ok": true
+    },
+    {
+      "file": "15_season_16S_sample_info.tsv",
+      "ok": true
+    },
+    {
+      "file": "15_season_ITS_genus_pct.tsv",
+      "ok": true
+    },
+    {
+      "file": "15_season_ITS_sample_info.tsv",
+      "ok": true
+    },
+    {
+      "file": "16_dandruff_16S_genus_pct.tsv",
+      "ok": true
+    },
+    {
+      "file": "16_dandruff_16S_sample_info.tsv",
+      "ok": true
+    },
+    {
+      "file": "16_dandruff_ITS_genus_pct.tsv",
+      "ok": true
+    },
+    {
+      "file": "16_dandruff_ITS_sample_info.tsv",
+      "ok": true
+    },
+    {
+      "file": "AAML_merged_data.csv",
+      "ok": true
+    },
+    {
+      "file": "AAML_마이크로바이옴 분석 데이터_final.xlsx",
+      "ok": true
+    },
+    {
+      "file": "AAML_피부 임상 측정.xlsx",
+      "ok": true
+    }
+  ],
+  "n42": {
+    "n": 42,
+    "sensitive": 23,
+    "unique_subjects": 42
+  },
+  "auc": {
+    "Malassezia": {
+      "auc": 0.15331807780320367,
+      "ci_10000": [
+        0.04576659038901602,
+        0.28832951945080093
+      ],
+      "median_sensitive": 36.3730753646677,
+      "median_non_sensitive": 84.2287926316492,
+      "p_asymptotic_tie_adjusted_no_continuity": 0.0001289282094083418,
+      "zero_count": 0,
+      "tie_count": 0
+    },
+    "Cutibacterium": {
+      "auc": 0.4874141876430206,
+      "ci_10000": [
+        0.3112128146453089,
+        0.6681922196796338
+      ],
+      "median_sensitive": 24.7640685075149,
+      "median_non_sensitive": 21.7442407146215,
+      "p_asymptotic_tie_adjusted_no_continuity": 0.8894593633866265,
+      "zero_count": 0,
+      "tie_count": 0
+    },
+    "Staphylococcus": {
+      "auc": 0.448512585812357,
+      "ci_10000": [
+        0.2723112128146453,
+        0.6247139588100686
+      ],
+      "median_sensitive": 1.96243933319266,
+      "median_non_sensitive": 2.94062907128234,
+      "p_asymptotic_tie_adjusted_no_continuity": 0.5696353214020751,
+      "zero_count": 0,
+      "tie_count": 0
+    },
+    "Corynebacterium": {
+      "auc": 0.38901601830663624,
+      "ci_10000": [
+        0.2219679633867277,
+        0.5675057208237986
+      ],
+      "median_sensitive": 0.473773784517257,
+      "median_non_sensitive": 1.12262521588946,
+      "p_asymptotic_tie_adjusted_no_continuity": 0.22034003339544916,
+      "zero_count": 0,
+      "tie_count": 0
+    },
+    "Malassezia_logratio": {
+      "auc": 0.18077803203661327,
+      "ci_10000": [
+        0.06178489702517163,
+        0.3295194508009153
+      ],
+      "median_sensitive": -0.13331523789837119,
+      "median_non_sensitive": 0.7889880174128285,
+      "p_asymptotic_tie_adjusted_no_continuity": 0.00042308378669457715,
+      "zero_count": 0,
+      "tie_count": 0
+    },
+    "sebum": {
+      "auc": 0.4931350114416476,
+      "ci_10000": [
+        0.3112128146453089,
+        0.6727688787185355
+      ],
+      "median_sensitive": 13.0,
+      "median_non_sensitive": 11.0,
+      "p_asymptotic_tie_adjusted_no_continuity": 0.9395198775332584,
+      "zero_count": 2,
+      "tie_count": 13
+    }
+  },
+  "shapiro": {
+    "Malassezia": {
+      "0": 0.0016308813065153537,
+      "1": 0.11960251750101554
+    },
+    "Cutibacterium": {
+      "0": 0.0011026559979288673,
+      "1": 0.0027140888478082667
+    },
+    "Staphylococcus": {
+      "0": 0.00717194934119145,
+      "1": 1.7137512612930943e-06
+    },
+    "Corynebacterium": {
+      "0": 0.00031471837367484114,
+      "1": 4.25182732157779e-05
+    }
+  },
+  "all_fungal_bh": {
+    "n": 234,
+    "malassezia_q": 0.030169201001551977
+  },
+  "corynebacterium_depth_rho": -0.3849769062474678,
+  "restricta": {
+    "total_sample": {
+      "auc": 0.1647597254004577,
+      "ci_10000": [
+        0.05034324942791762,
+        0.30663615560640733
+      ],
+      "median_sensitive": 30.24337753584201,
+      "median_non_sensitive": 66.94461968894862,
+      "p_asymptotic_tie_adjusted_no_continuity": 0.00021378525770414364,
+      "zero_count": 0,
+      "tie_count": 0
+    },
+    "within_malassezia": {
+      "auc": 0.44393592677345545,
+      "ci_10000": [
+        0.2700228832951945,
+        0.6247139588100686
+      ],
+      "median_sensitive": 0.8210327347710284,
+      "median_non_sensitive": 0.8283967131664437,
+      "p_asymptotic_tie_adjusted_no_continuity": 0.5358308033397944,
+      "zero_count": 0,
+      "tie_count": 0
+    },
+    "rho_genus": 0.9654809172676445,
+    "share_of_malassezia_reads": 0.8637274507626266,
+    "species_labeled_malassezia_fraction": 0.9120049446042903
+  },
+  "shannon": {
+    "rho_mal": -0.978769953812495,
+    "auc": 0.8237986270022883,
+    "rho_without_mal": -0.30508062555708615
+  },
+  "logistic": {
+    "auc_age": 0.6533180778032036,
+    "auc_age_mal": 0.8832951945080092,
+    "lr": 18.501525590208303,
+    "lr_p": 1.69768354376912e-05,
+    "loocv_mle": [
+      0.5812356979405034,
+      0.8466819221967964
+    ],
+    "leave_pair_out": [
+      0.6533180778032036,
+      0.8741418764302059
+    ],
+    "logratio_mle_delta": 0.2231121281464532
+  },
+  "sample_size": {
+    "0.65": {
+      "analyzable_per_group": 57,
+      "recruit_if_success_93_120": 74
+    },
+    "0.7": {
+      "analyzable_per_group": 32,
+      "recruit_if_success_93_120": 42
+    },
+    "0.75": {
+      "analyzable_per_group": 20,
+      "recruit_if_success_93_120": 26
+    },
+    "0.8": {
+      "analyzable_per_group": 14,
+      "recruit_if_success_93_120": 19
+    }
+  },
+  "precision": {
+    "current_halfwidth": 0.17748063639390077,
+    "65_halfwidth": 0.09962762082168951,
+    "65_after_dropout_required": 84,
+    "57_with_two_independent_successes": 95
+  },
+  "aaml_meta": {
+    "rows": 677,
+    "selected_n": 595,
+    "sex": {
+      "F": 595
+    },
+    "unique_ids": 595
+  },
+  "selection": {
+    "n_genera595": 807,
+    "stage1": [
+      "Corynebacterium",
+      "Cutibacterium",
+      "Streptococcus",
+      "Staphylococcus"
+    ],
+    "stage2": [
+      "Corynebacterium",
+      "Cutibacterium",
+      "Staphylococcus"
+    ],
+    "details": {
+      "Haemophilus": {
+        "det595": 88.57142857142857,
+        "det42": 90.47619047619048,
+        "median595_pct": 0.7667294198185863,
+        "fold": 16.48296004733534
+      },
+      "Streptococcus": {
+        "det595": 99.32773109243698,
+        "det42": 100.0,
+        "median595_pct": 18.204703544219935,
+        "fold": 30.66059096426816
+      },
+      "Corynebacterium": {
+        "det595": 90.4201680672269,
+        "det42": 100.0,
+        "median595_pct": 1.0677604149011901,
+        "fold": 1.3834816023179197
+      },
+      "Neisseria": {
+        "det595": 87.39495798319328,
+        "det42": 85.71428571428571,
+        "median595_pct": 0.7222824124232575,
+        "fold": 7.940745419968187
+      },
+      "Staphylococcus": {
+        "det595": 99.32773109243698,
+        "det42": 100.0,
+        "median595_pct": 5.510544869812605,
+        "fold": 2.310208474649899
+      },
+      "Cutibacterium": {
+        "det595": 99.15966386554622,
+        "det42": 100.0,
+        "median595_pct": 9.38504190032134,
+        "fold": 2.3226458717754466
+      }
+    }
+  },
+  "detection595": {
+    "Cutibacterium": 590,
+    "Staphylococcus": 591,
+    "Corynebacterium": 538
+  },
+  "cutibacterium_age_rho": -0.37939204677324356,
+  "raw_table_row_totals": {
+    "16S": 1695,
+    "ITS": 974
+  },
+  "analysis_cohorts": {
+    "16S:03_sensitive:None": {
+      "n": 42,
+      "malassezia_detected": null
+    },
+    "16S:02_healthy:Forehead": {
+      "n": 51,
+      "malassezia_detected": null
+    },
+    "16S:02_healthy:Cheek": {
+      "n": 51,
+      "malassezia_detected": null
+    },
+    "16S:07_skincare:Cheek": {
+      "n": 75,
+      "malassezia_detected": null
+    },
+    "16S:15_season:Forehead": {
+      "n": 96,
+      "malassezia_detected": null
+    },
+    "16S:16_dandruff:Scalp": {
+      "n": 398,
+      "malassezia_detected": null
+    },
+    "ITS:03_sensitive:None": {
+      "n": 42,
+      "malassezia_detected": 42
+    },
+    "ITS:01_aging:None": {
+      "n": 58,
+      "malassezia_detected": 58
+    },
+    "ITS:15_season:Forehead": {
+      "n": 96,
+      "malassezia_detected": 96
+    },
+    "ITS:16_dandruff:Scalp": {
+      "n": 400,
+      "malassezia_detected": 400
+    }
+  },
+  "all_cohorts": {
+    "16S": 1308,
+    "ITS": 596
+  },
+  "aging_cheek": {
+    "O": {
+      "n": 16,
+      "malassezia_median": 65.96224953445966
+    },
+    "Y": {
+      "n": 14,
+      "malassezia_median": 84.71208147574335
+    }
+  },
+  "environment": {
+    "python": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 17:06:34) [Clang 19.1.7 ]",
+    "seed": 261008
+  }
+}

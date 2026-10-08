@@ -1,0 +1,49 @@
+{
+  "cv": [
+    {
+      "pooled_mean": 0.620045766590389,
+      "foldwise_mean": 0.6557333333333334
+    },
+    {
+      "pooled_mean": 0.845995423340961,
+      "foldwise_mean": 0.8683166666666666
+    }
+  ],
+  "icc": {
+    "15_season_16S:Cutibacterium": {
+      "n_subjects": 24,
+      "n_repeat": 4,
+      "icc": 0.31240275133278866
+    },
+    "15_season_16S:Staphylococcus": {
+      "n_subjects": 24,
+      "n_repeat": 4,
+      "icc": 0.10168922455536833
+    },
+    "15_season_16S:Corynebacterium": {
+      "n_subjects": 24,
+      "n_repeat": 4,
+      "icc": 0.38103218459157945
+    },
+    "15_season_ITS:g__Malassezia": {
+      "n_subjects": 24,
+      "n_repeat": 4,
+      "icc": 0.1952723157471168
+    },
+    "07_skincare_16S:Cutibacterium": {
+      "n_subjects": 25,
+      "n_repeat": 3,
+      "icc": 0.4236157245612678
+    },
+    "07_skincare_16S:Staphylococcus": {
+      "n_subjects": 25,
+      "n_repeat": 3,
+      "icc": 0.33978632036242806
+    },
+    "07_skincare_16S:Corynebacterium": {
+      "n_subjects": 25,
+      "n_repeat": 3,
+      "icc": 0.17976509644629782
+    }
+  }
+}

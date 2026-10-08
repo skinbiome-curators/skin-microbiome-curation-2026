@@ -1,0 +1,3 @@
+요약 저장: 포도상구균_BLAST_요약_core_nt.tsv (20 ASV)
+rRNA_typestrains/16S_ribosomal_RNA: 원본 JSON 없음 → 건너뜀
+메모리(Python 할당 기준) 현재 0.0119 GB · peak 0.0142 GB · 소요 시간 0.000015 Hour

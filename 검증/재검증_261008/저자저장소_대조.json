@@ -1,0 +1,23 @@
+[
+  {
+    "file": "AAML_merged_data.csv",
+    "url": "https://raw.githubusercontent.com/parksb0518/AAML/main/Data/merged_data.csv",
+    "remote_sha256": "febab0c88031ceccb301431a81cc13e08d709a5d8858e282fe70f45ae4d5f5b2",
+    "local_sha256": "febab0c88031ceccb301431a81cc13e08d709a5d8858e282fe70f45ae4d5f5b2",
+    "equal": true
+  },
+  {
+    "file": "AAML_마이크로바이옴 분석 데이터_final.xlsx",
+    "url": "https://raw.githubusercontent.com/parksb0518/AAML/main/Data/%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EB%B0%94%EC%9D%B4%EC%98%B4%20%EB%B6%84%EC%84%9D%20%EB%8D%B0%EC%9D%B4%ED%84%B0_final.xlsx",
+    "remote_sha256": "96b1355bc2417a40b5611f0940664130549de49c964a9f63c6e7d4d240add05d",
+    "local_sha256": "96b1355bc2417a40b5611f0940664130549de49c964a9f63c6e7d4d240add05d",
+    "equal": true
+  },
+  {
+    "file": "AAML_피부 임상 측정.xlsx",
+    "url": "https://raw.githubusercontent.com/parksb0518/AAML/main/Data/%ED%94%BC%EB%B6%80%20%EC%9E%84%EC%83%81%20%EC%B8%A1%EC%A0%95.xlsx",
+    "remote_sha256": "7917bde09663fac04eaf5bcd3b8727d902f3b1241b83e8dc9b89fedc55a55a18",
+    "local_sha256": "7917bde09663fac04eaf5bcd3b8727d902f3b1241b83e8dc9b89fedc55a55a18",
+    "equal": true
+  }
+]
