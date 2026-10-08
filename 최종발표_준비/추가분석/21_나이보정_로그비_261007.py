@@ -8,13 +8,13 @@
 
 방법 — 9번 run() 과 같다. 바꾼 것은 후보 열 하나뿐이다(비율 → 로그비).
   (가) 나이만  (나) 나이 + 후보 로그비  (다) 증가분 = (나) − (가)
-  로지스틱은 9번과 같은 경사하강 200회(common42.logistic_gd) · z-표준화 · 재대입 AUC
+  로지스틱은 9번과 같은 경사하강 200회(common42_261007.logistic_gd) · z-표준화 · 재대입 AUC
   부트스트랩 4,000회(9번과 같은 seed · 같은 재표집 순서) · LOOCV(표준화는 학습 폴드 안에서)
   로그비 정의: 세균 = 4번 ④(분모 = 후보·구강 의심·미분류를 뺀 나머지, EPS 1e-5) · 진균 = 8번 ②(분모 = 그 속·미분류를 뺀 나머지, EPS 1e-3)
   자체 점검: 로그비 「단독」 AUC 가 4번 · 8번 저장값과 같아야 같은 정의다.
 
-결과: ../../results/나이보정_로그비.json · ../../results/나이보정_로그비.tsv (행 = 후보, matrix 형태)
-의존성: Python 3 표준 라이브러리만 (+ ./common42.py · ../../code/stats_util.py)
+결과: ../../results/나이보정_로그비_261007.json · ../../results/나이보정_로그비_261007.tsv (행 = 후보, matrix 형태)
+의존성: Python 3 표준 라이브러리만 (+ ./common42_261007.py · ../../code/stats_util.py)
 """
 import os, sys, json, math, time, random, tracemalloc
 
@@ -28,7 +28,7 @@ tracemalloc.start()
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from common42 import (load, add_logratio, auc, zscore, logistic_gd, score, save_json, TAB, CAND, FUNGI,   # noqa: E402
+from common42_261007 import (load, add_logratio, auc, zscore, logistic_gd, score, save_json, TAB, CAND, FUNGI,   # noqa: E402
                       SEED, mem_time_line)
 
 N_BOOT = 4000
@@ -141,9 +141,9 @@ out = {'seed': SEED, 'n_boot': N_BOOT,
        'bacteria': run('세균 (16S V4-V5)', '16S', CAND, NINE['bacteria']),
        'fungi': run('진균 (ITS1)', 'ITS', FUNGI, NINE['fungi'])}
 
-save_json(out, os.path.join(TAB, '나이보정_로그비.json'))
+save_json(out, os.path.join(TAB, '나이보정_로그비_261007.json'))
 
-tsv = os.path.join(TAB, '나이보정_로그비.tsv')
+tsv = os.path.join(TAB, '나이보정_로그비_261007.tsv')
 cols_t = ['auc_logratio_alone', 'auc_logratio_alone_stored_4or8', 'auc_age_plus_logratio', 'delta_logratio',
           'ci_lo_logratio', 'ci_hi_logratio', 'delta_logratio_loocv',
           'ratio_9번_delta', 'ratio_9번_ci_lo', 'ratio_9번_ci_hi', 'ratio_9번_delta_loocv',
@@ -159,6 +159,6 @@ with open(tsv, 'w', encoding='utf-8', newline='\n') as fh:
             row['ratio_9번_delta_loocv'] = m['ratio_9번']['delta_loocv']
             fh.write(c + '\t' + '\t'.join(str(row.get(k, '')) for k in cols_t) + '\n')
 
-print('\n저장: results/나이보정_로그비.json · results/나이보정_로그비.tsv')
+print('\n저장: results/나이보정_로그비_261007.json · results/나이보정_로그비_261007.tsv')
 print(mem_time_line(T0))
 tracemalloc.stop()

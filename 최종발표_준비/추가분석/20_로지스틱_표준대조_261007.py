@@ -16,8 +16,8 @@
        완전분리 · 미수렴은 버리지 않고 세어서 밝힌다(AUC 는 순위만 쓰므로 값이 정해진다).
        (2026-10-07 독립 검수 반영 — 처음 판은 Newton 실패 17건을 버려 증가분이 큰 쪽이 빠졌다)
 
-결과: ../../results/로지스틱_표준대조.json · ../../results/로지스틱_표준대조.tsv (행 = 모형, matrix 형태)
-의존성: numpy · scipy · statsmodels · scikit-learn (conda bio_proj) + ./common42.py
+결과: ../../results/로지스틱_표준대조_261007.json · ../../results/로지스틱_표준대조_261007.tsv (행 = 모형, matrix 형태)
+의존성: numpy · scipy · statsmodels · scikit-learn (conda bio_proj) + ./common42_261007.py
 """
 import os, sys, json, math, time, random, warnings, tracemalloc
 
@@ -31,7 +31,7 @@ tracemalloc.start()
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from common42 import (load, auc, zscore, logistic_gd, score, save_json, TAB, CAND, FUNGI,   # noqa: E402
+from common42_261007 import (load, auc, zscore, logistic_gd, score, save_json, TAB, CAND, FUNGI,   # noqa: E402
                       SEED, mem_time_line)
 
 import numpy as np                                    # noqa: E402
@@ -211,9 +211,9 @@ out = {'seed': SEED, 'n_boot': N_BOOT,
        'bacteria': run('세균 (16S V4-V5)', load('16S', CAND), CAND, NINE['bacteria']),
        'fungi': run('진균 (ITS1)', load('ITS', FUNGI), FUNGI, NINE['fungi'])}
 
-save_json(out, os.path.join(TAB, '로지스틱_표준대조.json'))
+save_json(out, os.path.join(TAB, '로지스틱_표준대조_261007.json'))
 
-tsv = os.path.join(TAB, '로지스틱_표준대조.tsv')
+tsv = os.path.join(TAB, '로지스틱_표준대조_261007.tsv')
 cols_t = ['auc_9번_json', 'auc_gd_9번방식', 'auc_mle', 'converged', 'delta_9번_json', 'delta_mle',
           'loocv_9번_json', 'loocv_auc_mle', 'delta_loocv_9번_json', 'delta_loocv_mle',
           'lr', 'lr_p', 'wald_p_last', 'boot_ci_lo_mle', 'boot_ci_hi_mle', 'boot_mle_failed',
@@ -233,6 +233,6 @@ with open(tsv, 'w', encoding='utf-8', newline='\n') as fh:
             label = f'{grp}:age' if name == 'age' else f'{grp}:age+{name}'
             fh.write(label + '\t' + '\t'.join(str(row.get(c, '')) for c in cols_t) + '\n')
 
-print('\n저장: results/로지스틱_표준대조.json · results/로지스틱_표준대조.tsv')
+print('\n저장: results/로지스틱_표준대조_261007.json · results/로지스틱_표준대조_261007.tsv')
 print(mem_time_line(T0))
 tracemalloc.stop()
