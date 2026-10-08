@@ -1,0 +1,369 @@
+{
+  "commit": "2879173dd5699f80d3e40f9df4fa729be8ade5dc",
+  "python": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 17:06:34) [Clang 19.1.7 ]",
+  "workdir": "/var/folders/cx/yv0d68y91y9gv2t11vfkxxc40000gn/T/microbiome_reaudit_261008_xbcke5bi",
+  "scripts": [
+    {
+      "number": 1,
+      "script": "code/1_분석표_생성.py",
+      "exit_code": 0,
+      "seconds": 3.23
+    },
+    {
+      "number": 2,
+      "script": "code/2_게이트_판정.py",
+      "exit_code": 0,
+      "seconds": 0.34
+    },
+    {
+      "number": 3,
+      "script": "code/3_설문라벨_검증.py",
+      "exit_code": 0,
+      "seconds": 0.11
+    },
+    {
+      "number": 4,
+      "script": "code/4_조성효과_점검.py",
+      "exit_code": 0,
+      "seconds": 0.35
+    },
+    {
+      "number": 5,
+      "script": "code/5_후보선정규칙.py",
+      "exit_code": 0,
+      "seconds": 0.68
+    },
+    {
+      "number": 6,
+      "script": "code/6_오염점검.py",
+      "exit_code": 0,
+      "seconds": 0.27
+    },
+    {
+      "number": 7,
+      "script": "code/7_종수준_한계.py",
+      "exit_code": 0,
+      "seconds": 3.03
+    },
+    {
+      "number": 8,
+      "script": "code/8_진균_판별력.py",
+      "exit_code": 0,
+      "seconds": 0.31
+    },
+    {
+      "number": 9,
+      "script": "code/9_나이보정_판별력.py",
+      "exit_code": 0,
+      "seconds": 101.58
+    },
+    {
+      "number": 10,
+      "script": "code/10_판정표_이식성.py",
+      "exit_code": 0,
+      "seconds": 0.48
+    },
+    {
+      "number": 11,
+      "script": "code/11_진균_종수준.py",
+      "exit_code": 0,
+      "seconds": 0.77
+    },
+    {
+      "number": 12,
+      "script": "code/12_시간안정성.py",
+      "exit_code": 0,
+      "seconds": 0.53
+    },
+    {
+      "number": 13,
+      "script": "code/13_다양성_분리.py",
+      "exit_code": 0,
+      "seconds": 34.46
+    },
+    {
+      "number": 14,
+      "script": "온라인멘토링/14_피지_점검.py",
+      "exit_code": 0,
+      "seconds": 75.97
+    },
+    {
+      "number": 15,
+      "script": "최종발표_준비/staphylococcus 종 수준 확인/15_포도상구균_종수준.py",
+      "exit_code": 0,
+      "seconds": 3.27
+    },
+    {
+      "number": 16,
+      "script": "최종발표_준비/staphylococcus 종 수준 확인/16_포도상구균_BLAST.py",
+      "exit_code": 0,
+      "seconds": 0.1
+    },
+    {
+      "number": 17,
+      "script": "최종발표_준비/staphylococcus 종 수준 확인/17_속별_종라벨비율_261007.py",
+      "exit_code": 0,
+      "seconds": 0.06
+    },
+    {
+      "number": 18,
+      "script": "최종발표_준비/추가분석/18_검정력_표본크기_261007.py",
+      "exit_code": 0,
+      "seconds": 2.71
+    },
+    {
+      "number": 19,
+      "script": "최종발표_준비/추가분석/19_심도_군비교_261007.py",
+      "exit_code": 0,
+      "seconds": 0.03
+    },
+    {
+      "number": 20,
+      "script": "최종발표_준비/추가분석/20_로지스틱_표준대조_261007.py",
+      "exit_code": 0,
+      "seconds": 18.61
+    },
+    {
+      "number": 21,
+      "script": "최종발표_준비/추가분석/21_나이보정_로그비_261007.py",
+      "exit_code": 0,
+      "seconds": 382.06
+    },
+    {
+      "number": 22,
+      "script": "최종발표_준비/추가분석/22_랜덤포레스트_비교_261007.py",
+      "exit_code": 0,
+      "seconds": 38.48
+    },
+    {
+      "number": 23,
+      "script": "최종발표_준비/추가분석/23_정규성_점검_261007.py",
+      "exit_code": 0,
+      "seconds": 1.0
+    }
+  ],
+  "comparisons": [
+    {
+      "file": "595_genus_relabund.tsv",
+      "equal": true,
+      "original_sha256": "9a43f1d0e38f0dfb08e7427b495ffc042b64092e3dd302a65e31c76f32262aec",
+      "rerun_sha256": "9a43f1d0e38f0dfb08e7427b495ffc042b64092e3dd302a65e31c76f32262aec"
+    },
+    {
+      "file": "595_metadata.tsv",
+      "equal": true,
+      "original_sha256": "89bb624bc129de5702f34db9e8d047696861fd611c219865429c5fb11f35eb34",
+      "rerun_sha256": "89bb624bc129de5702f34db9e8d047696861fd611c219865429c5fb11f35eb34"
+    },
+    {
+      "file": "595_qc_flags.tsv",
+      "equal": true,
+      "original_sha256": "3f01f4472a53c7ef1d6333d26dedced59ab5833d186a40140a0cd32f5749a67f",
+      "rerun_sha256": "3f01f4472a53c7ef1d6333d26dedced59ab5833d186a40140a0cd32f5749a67f"
+    },
+    {
+      "file": "595_taxonomy_mismatch.tsv",
+      "equal": true,
+      "original_sha256": "0093e530384db300cb4b51e4144de435ff7a19babc411b6ce3a2314144c34f35",
+      "rerun_sha256": "0093e530384db300cb4b51e4144de435ff7a19babc411b6ce3a2314144c34f35"
+    },
+    {
+      "file": "build_summary.json",
+      "equal": true,
+      "original_sha256": "3216a06ff331e93c80d9075612d513a0ea89417ff76382de618cb0ed42df1f72",
+      "rerun_sha256": "3216a06ff331e93c80d9075612d513a0ea89417ff76382de618cb0ed42df1f72"
+    },
+    {
+      "file": "gate_results.json",
+      "equal": true,
+      "original_sha256": "a01e9a149f8db9f3848b622c122e4d3aebff61ccbbb86de5b622d59821b8c5fe",
+      "rerun_sha256": "a01e9a149f8db9f3848b622c122e4d3aebff61ccbbb86de5b622d59821b8c5fe"
+    },
+    {
+      "file": "staph_out.json",
+      "equal": true,
+      "original_sha256": "cf52bfef78832a805103fb664213f54ce1a655464bedf236606e25f649180000",
+      "rerun_sha256": "cf52bfef78832a805103fb664213f54ce1a655464bedf236606e25f649180000"
+    },
+    {
+      "file": "검정력_표본크기_261003.json",
+      "equal": true,
+      "original_sha256": "3c13a95da96ecc5fc6073551b6865fd58a70d0ca78f5ccfd3195fd0a453a6a8e",
+      "rerun_sha256": "3c13a95da96ecc5fc6073551b6865fd58a70d0ca78f5ccfd3195fd0a453a6a8e"
+    },
+    {
+      "file": "검정력_표본크기_261003.tsv",
+      "equal": true,
+      "original_sha256": "3d744e7f8abe89ac71c430f0fa18aba4f5a20c5b08c91eab614240e67cb04643",
+      "rerun_sha256": "3d744e7f8abe89ac71c430f0fa18aba4f5a20c5b08c91eab614240e67cb04643"
+    },
+    {
+      "file": "나이보정_로그비_261007.json",
+      "equal": true,
+      "original_sha256": "b436c6ee0df88fc099bcb5a63cdad382cdf7fc0760ed620bfab0f2c30af1b622",
+      "rerun_sha256": "b436c6ee0df88fc099bcb5a63cdad382cdf7fc0760ed620bfab0f2c30af1b622"
+    },
+    {
+      "file": "나이보정_로그비_261007.tsv",
+      "equal": true,
+      "original_sha256": "d254ce2733e40ea9bc1adec535ff55cb3dc643f5d77a9675c9a07601df3f84b2",
+      "rerun_sha256": "d254ce2733e40ea9bc1adec535ff55cb3dc643f5d77a9675c9a07601df3f84b2"
+    },
+    {
+      "file": "나이보정_판별력.json",
+      "equal": true,
+      "original_sha256": "1505cf289ad4d5a9421e7a601b87dba8142df023b18ba52bba7e65bd8974690c",
+      "rerun_sha256": "1505cf289ad4d5a9421e7a601b87dba8142df023b18ba52bba7e65bd8974690c"
+    },
+    {
+      "file": "다양성_분리.json",
+      "equal": true,
+      "original_sha256": "4a7a2a5e6f89c6293122027b7cfef025eeded9d77eb0ccdb46a4068cbe79354d",
+      "rerun_sha256": "4a7a2a5e6f89c6293122027b7cfef025eeded9d77eb0ccdb46a4068cbe79354d"
+    },
+    {
+      "file": "랜덤포레스트_비교_261007.json",
+      "equal": false,
+      "original_sha256": "3ac562f1fa94fb8fb6d144de1c1c302208660c6f62ffcf215b8052b20b844b94",
+      "rerun_sha256": "c4c34bd5680b3e0ed4e45a939eedd429305abee9a3d59a72d40c4b80c469082a"
+    },
+    {
+      "file": "랜덤포레스트_비교_261007.tsv",
+      "equal": false,
+      "original_sha256": "b0b38816a84743f824a4e5dc99f01b8562dcdada725dc12bec595a99b1819d45",
+      "rerun_sha256": "3879ea8801858bbda6ff61ee6f127d504e94378b851ec79cf81428218c9380b5"
+    },
+    {
+      "file": "로지스틱_표준대조_261007.json",
+      "equal": false,
+      "original_sha256": "3c01510b4fff6bca5e79451aa6036012fe78f8db2e8251f456d92928a5042031",
+      "rerun_sha256": "9d737c4ca5ddec70e724f2ccd5b1d22279188965034bf0ff3103b28abfdb50ea"
+    },
+    {
+      "file": "로지스틱_표준대조_261007.tsv",
+      "equal": false,
+      "original_sha256": "d36975261b0780766774666bdb16ac75dd5fe4ec9a2fec361f06e53a3ccb9144",
+      "rerun_sha256": "86dd7d38d686495c4618c5f3552ca5b45b3a463672d74c2dc0da33db9971fc44"
+    },
+    {
+      "file": "미분류진균_BLAST_요약_20260929.tsv",
+      "equal": true,
+      "original_sha256": "a06206cac9fd54c63c670a091805eec6e523f138d1e06f9c7abe761a37e85b60",
+      "rerun_sha256": "a06206cac9fd54c63c670a091805eec6e523f138d1e06f9c7abe761a37e85b60"
+    },
+    {
+      "file": "미분류진균_BLAST_원본_20260929.json",
+      "equal": true,
+      "original_sha256": "e94aed3c115ef942ec11c148bc981b93cf8ea424a33313af962265bbe57d4762",
+      "rerun_sha256": "e94aed3c115ef942ec11c148bc981b93cf8ea424a33313af962265bbe57d4762"
+    },
+    {
+      "file": "미분류진균_BLAST_입력_20260929.fa",
+      "equal": true,
+      "original_sha256": "e10ef50a0b58e643e49c46a9e58291e6787e0ec3a1f6597d33bef87dde3ac79e",
+      "rerun_sha256": "e10ef50a0b58e643e49c46a9e58291e6787e0ec3a1f6597d33bef87dde3ac79e"
+    },
+    {
+      "file": "설문라벨_검증.json",
+      "equal": true,
+      "original_sha256": "c5a95df66ec61d61f0e152b7bf6f3ab452a6883e5e4e2c9eb6b44c21889d8d95",
+      "rerun_sha256": "c5a95df66ec61d61f0e152b7bf6f3ab452a6883e5e4e2c9eb6b44c21889d8d95"
+    },
+    {
+      "file": "속별_종라벨비율_261002.tsv",
+      "equal": true,
+      "original_sha256": "52570a9b463e3445d8955604500e34f58e223e7bbf82f38531f1a572ee029a17",
+      "rerun_sha256": "52570a9b463e3445d8955604500e34f58e223e7bbf82f38531f1a572ee029a17"
+    },
+    {
+      "file": "시간안정성.json",
+      "equal": true,
+      "original_sha256": "a665ff12f21346080799ca770b01854b797ac75eb5a0a17370c8b136520a3720",
+      "rerun_sha256": "a665ff12f21346080799ca770b01854b797ac75eb5a0a17370c8b136520a3720"
+    },
+    {
+      "file": "심도_군비교_261003.json",
+      "equal": true,
+      "original_sha256": "ce3af98ebe45a016438b40d2e81b63f33f7d663236ac6b08bca81c497c54e126",
+      "rerun_sha256": "ce3af98ebe45a016438b40d2e81b63f33f7d663236ac6b08bca81c497c54e126"
+    },
+    {
+      "file": "오염점검.json",
+      "equal": false,
+      "original_sha256": "966f903b54382727e6b6adf8beb20b9633f1991ea3359c2ab39b08fce4e6cfb1",
+      "rerun_sha256": "c677784dd9d76ee09c0d4051b0ef13093a456b71fce4dc01c77597daa119601b"
+    },
+    {
+      "file": "정규성_점검_261007.json",
+      "equal": false,
+      "original_sha256": "86e945e9f537cb61dd257c4177e9ef51d8ddf291cbec70a27c448d9edd0fe8db",
+      "rerun_sha256": "63cbf46c3a90522bc87e1db5ff477993a7dc71bcdeb2df15f18930ee6714e368"
+    },
+    {
+      "file": "정규성_점검_261007.tsv",
+      "equal": false,
+      "original_sha256": "fafc25cd9103f0d9f9dba1cc972e86cdfe78b73681b06844fac3822d6ea3b4fb",
+      "rerun_sha256": "c7c7a8c70b8e173252c6be1a90b78064452e72be32fa6e8223e7aada65832fb7"
+    },
+    {
+      "file": "조성효과_점검.json",
+      "equal": false,
+      "original_sha256": "d2576e20ac48954a115ee0d77f0a6713503125e3409ef766e276135600b01d18",
+      "rerun_sha256": "857b7d1463be34d378cef7e438c4bc5b1a0632a0e4b2067667e825fd3bad30e7"
+    },
+    {
+      "file": "종수준_한계.json",
+      "equal": true,
+      "original_sha256": "e3d8929cd4beeb437a9479681912f4bf96ad7afc35e7eba5890c91b2f499a783",
+      "rerun_sha256": "e3d8929cd4beeb437a9479681912f4bf96ad7afc35e7eba5890c91b2f499a783"
+    },
+    {
+      "file": "진균_종수준.json",
+      "equal": true,
+      "original_sha256": "81149ef75a56ee2d001ccb511e0e455ae1e6844c5a3c1391ad39209ebee2d57c",
+      "rerun_sha256": "81149ef75a56ee2d001ccb511e0e455ae1e6844c5a3c1391ad39209ebee2d57c"
+    },
+    {
+      "file": "진균_판별력.json",
+      "equal": true,
+      "original_sha256": "ba4ae83babed8b5e7ae8fb09357937ebb8cdeba621536f68119540378632568b",
+      "rerun_sha256": "ba4ae83babed8b5e7ae8fb09357937ebb8cdeba621536f68119540378632568b"
+    },
+    {
+      "file": "판정표_이식성.json",
+      "equal": true,
+      "original_sha256": "722cc6afec2af4f6e2c88d51b30535e07aa8dcda7d21650b21cfe3e27b65002d",
+      "rerun_sha256": "722cc6afec2af4f6e2c88d51b30535e07aa8dcda7d21650b21cfe3e27b65002d"
+    },
+    {
+      "file": "포도상구균_BLAST_요약_core_nt.tsv",
+      "equal": true,
+      "original_sha256": "7790aefbb9c2fc10660fa612937f872f5670fcd0c81581cdac96d694bb14fe1b",
+      "rerun_sha256": "7790aefbb9c2fc10660fa612937f872f5670fcd0c81581cdac96d694bb14fe1b"
+    },
+    {
+      "file": "포도상구균_BLAST_원본_core_nt.json",
+      "equal": true,
+      "original_sha256": "e1fb51240329c6f07b43985e14c40d2ebd771d55e07c670493d81335dd3e4b85",
+      "rerun_sha256": "e1fb51240329c6f07b43985e14c40d2ebd771d55e07c670493d81335dd3e4b85"
+    },
+    {
+      "file": "포도상구균_BLAST_입력.fa",
+      "equal": true,
+      "original_sha256": "4f9767c229251c633abe64a92a156227fa0789e453df7c6fe5db1b45d028dfa9",
+      "rerun_sha256": "4f9767c229251c633abe64a92a156227fa0789e453df7c6fe5db1b45d028dfa9"
+    },
+    {
+      "file": "피지_점검.json",
+      "equal": true,
+      "original_sha256": "253c2242fc6c7078a0d465f15097f9858df82a2f11f5ab974e0d065d2ce2ce9a",
+      "rerun_sha256": "253c2242fc6c7078a0d465f15097f9858df82a2f11f5ab974e0d065d2ce2ce9a"
+    },
+    {
+      "file": "후보선정규칙.json",
+      "equal": true,
+      "original_sha256": "0a40ead85877ca361730177c27f9ce1483dfc6f3f8e44f62b3f2eb6cd88cb7d2",
+      "rerun_sha256": "0a40ead85877ca361730177c27f9ce1483dfc6f3f8e44f62b3f2eb6cd88cb7d2"
+    }
+  ]
+}

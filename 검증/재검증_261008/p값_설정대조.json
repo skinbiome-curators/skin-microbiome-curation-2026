@@ -1,0 +1,26 @@
+{
+  "Lactobacillus": {
+    "auc": 0.6887871853546911,
+    "project_p_without_tie": 0.03708518021731695,
+    "scipy_p_default": 0.038247745381953524,
+    "scipy_p_no_continuity": 0.03708518021731689
+  },
+  "Rothia": {
+    "auc": 0.2951945080091533,
+    "project_p_without_tie": 0.02371474894126767,
+    "scipy_p_default": 0.01994701719512425,
+    "scipy_p_no_continuity": 0.019262170118547268
+  },
+  "g__Rhodotorula": {
+    "auc": 0.6361556064073226,
+    "project_p_without_tie": 0.1326841008667906,
+    "scipy_p_default": 0.13541504936697704,
+    "scipy_p_no_continuity": 0.13213448716022802
+  },
+  "g__Naganishia": {
+    "auc": 0.562929061784897,
+    "project_p_without_tie": 0.4870918400480442,
+    "scipy_p_default": 0.4801583657182785,
+    "scipy_p_no_continuity": 0.47206523860570415
+  }
+}

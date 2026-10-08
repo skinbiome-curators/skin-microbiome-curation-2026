@@ -1,0 +1,347 @@
+{
+  "랜덤포레스트_비교_261007.json": [
+    {
+      "path": "/n_jobs",
+      "original": 20,
+      "rerun": 8
+    },
+    {
+      "path": "/bacteria/candidates/Cutibacterium/rf/auc_age_plus/p2_5",
+      "original": 0.374,
+      "rerun": 0.373
+    },
+    {
+      "path": "/bacteria/candidates/Cutibacterium/rf/auc_age_plus/p97_5",
+      "original": 0.586,
+      "rerun": 0.588
+    },
+    {
+      "path": "/bacteria/candidates/Staphylococcus/rf/auc_age_plus/p2_5",
+      "original": 0.429,
+      "rerun": 0.431
+    },
+    {
+      "path": "/bacteria/candidates/Corynebacterium/rf/auc_age_plus/p97_5",
+      "original": 0.586,
+      "rerun": 0.587
+    },
+    {
+      "path": "/bacteria/candidates/Corynebacterium/rf/share_delta_positive",
+      "original": 0.48,
+      "rerun": 0.46
+    }
+  ],
+  "로지스틱_표준대조_261007.json": [
+    {
+      "path": "/fungi/models/age/wald_p_last",
+      "original": 0.05333903998341329,
+      "rerun": 0.0533390399834133
+    },
+    {
+      "path": "/fungi/models/g__Malassezia/lr_test_vs_age/p",
+      "original": 1.697683543769115e-05,
+      "rerun": 1.697683543769126e-05
+    },
+    {
+      "path": "/fungi/models/g__Malassezia/wald_p_last",
+      "original": 0.0007114938285192897,
+      "rerun": 0.00071149382851929
+    },
+    {
+      "path": "/bacteria/models/Cutibacterium/wald_p_last",
+      "original": 0.34809174604881243,
+      "rerun": 0.34809174604881266
+    },
+    {
+      "path": "/bacteria/models/Staphylococcus/lr_test_vs_age/p",
+      "original": 0.4016375374813891,
+      "rerun": 0.40163753748138886
+    },
+    {
+      "path": "/bacteria/models/Staphylococcus/wald_p_last",
+      "original": 0.427317294539015,
+      "rerun": 0.42731729453901524
+    },
+    {
+      "path": "/bacteria/models/age/wald_p_last",
+      "original": 0.05333903998341329,
+      "rerun": 0.0533390399834133
+    },
+    {
+      "path": "/bacteria/models/Corynebacterium/lr_test_vs_age/p",
+      "original": 0.5182240023205106,
+      "rerun": 0.5182240023205071
+    },
+    {
+      "path": "/bacteria/models/Corynebacterium/wald_p_last",
+      "original": 0.5276716990739501,
+      "rerun": 0.5276716990739502
+    }
+  ],
+  "오염점검.json": [
+    {
+      "path": "/cohorts/595명/candidates/Cutibacterium/p",
+      "original": 7.97059849865128e-05,
+      "rerun": 7.970598498653092e-05
+    },
+    {
+      "path": "/cohorts/595명/candidates/Staphylococcus/p",
+      "original": 0.00015661909294522713,
+      "rerun": 0.00015661909294526275
+    },
+    {
+      "path": "/cohorts/595명/candidates/Corynebacterium/p",
+      "original": 0.004081357795914122,
+      "rerun": 0.004081357795915049
+    },
+    {
+      "path": "/cohorts/595명/all_screened/0/p",
+      "original": 1.421299786583729e-14,
+      "rerun": 1.421299786584052e-14
+    },
+    {
+      "path": "/cohorts/595명/all_screened/1/p",
+      "original": 7.926265771781723e-10,
+      "rerun": 7.926265771783526e-10
+    },
+    {
+      "path": "/cohorts/595명/all_screened/2/p",
+      "original": 1.4559031231741902e-07,
+      "rerun": 1.4559031231745214e-07
+    },
+    {
+      "path": "/cohorts/595명/all_screened/3/p",
+      "original": 3.0037802213378044e-06,
+      "rerun": 3.0037802213384876e-06
+    },
+    {
+      "path": "/cohorts/595명/all_screened/4/p",
+      "original": 0.004081357795914122,
+      "rerun": 0.004081357795915049
+    },
+    {
+      "path": "/cohorts/595명/all_screened/5/p",
+      "original": 0.007548686576137476,
+      "rerun": 0.007548686576139191
+    },
+    {
+      "path": "/cohorts/595명/all_screened/6/p",
+      "original": 0.24041975910472924,
+      "rerun": 0.24041975910455649
+    },
+    {
+      "path": "/cohorts/595명/all_screened/7/p",
+      "original": 0.5795878995936856,
+      "rerun": 0.57958789959359
+    },
+    {
+      "path": "/cohorts/595명/all_screened/8/p",
+      "original": 0.9285525499855607,
+      "rerun": 0.9285525499855444
+    },
+    {
+      "path": "/cohorts/595명/all_screened/9/p",
+      "original": 0.997966946465482,
+      "rerun": 0.9979669464654816
+    },
+    {
+      "path": "/cohorts/595명/all_screened/10/p",
+      "original": 0.59604653978598,
+      "rerun": 0.5960465397858881
+    },
+    {
+      "path": "/cohorts/595명/all_screened/11/p",
+      "original": 0.38965645344326283,
+      "rerun": 0.38965645344312405
+    },
+    {
+      "path": "/cohorts/595명/all_screened/12/p",
+      "original": 0.32406453670557056,
+      "rerun": 0.3240645367054168
+    },
+    {
+      "path": "/cohorts/595명/all_screened/13/p",
+      "original": 0.17283910220016852,
+      "rerun": 0.17283910219998044
+    },
+    {
+      "path": "/cohorts/595명/all_screened/14/p",
+      "original": 0.04705812590467675,
+      "rerun": 0.04705812590468745
+    },
+    {
+      "path": "/cohorts/595명/all_screened/15/p",
+      "original": 0.0014086166653406393,
+      "rerun": 0.0014086166653409595
+    },
+    {
+      "path": "/cohorts/595명/all_screened/16/p",
+      "original": 0.00015661909294522713,
+      "rerun": 0.00015661909294526275
+    },
+    {
+      "path": "/cohorts/595명/all_screened/17/p",
+      "original": 7.97059849865128e-05,
+      "rerun": 7.970598498653092e-05
+    },
+    {
+      "path": "/cohorts/595명/all_screened/18/p",
+      "original": 5.924460808805855e-06,
+      "rerun": 5.924460808807203e-06
+    },
+    {
+      "path": "/cohorts/595명/suspect/0/p",
+      "original": 1.421299786583729e-14,
+      "rerun": 1.421299786584052e-14
+    }
+  ],
+  "정규성_점검_261007.json": [
+    {
+      "path": "/rows/0/shapiro_p",
+      "original": 0.0027140888478083304,
+      "rerun": 0.0027140888478082667
+    },
+    {
+      "path": "/rows/1/shapiro_p",
+      "original": 0.0011026559979288569,
+      "rerun": 0.0011026559979288673
+    },
+    {
+      "path": "/rows/3/shapiro_p",
+      "original": 0.007171949341191342,
+      "rerun": 0.00717194934119145
+    },
+    {
+      "path": "/rows/4/shapiro_p",
+      "original": 4.251827321577797e-05,
+      "rerun": 4.25182732157779e-05
+    },
+    {
+      "path": "/rows/5/shapiro_p",
+      "original": 0.0003147183736748385,
+      "rerun": 0.00031471837367484114
+    },
+    {
+      "path": "/rows/6/shapiro_p",
+      "original": 0.008587031909372276,
+      "rerun": 0.008587031909372253
+    },
+    {
+      "path": "/rows/7/shapiro_p",
+      "original": 0.2131077823196718,
+      "rerun": 0.2131077823196684
+    },
+    {
+      "path": "/rows/8/shapiro_p",
+      "original": 0.11960251750101553,
+      "rerun": 0.11960251750101554
+    },
+    {
+      "path": "/rows/9/shapiro_p",
+      "original": 0.001630881306515355,
+      "rerun": 0.0016308813065153537
+    }
+  ],
+  "조성효과_점검.json": [
+    {
+      "path": "/oral_sum_vs_age/p",
+      "original": 8.408781149763316e-18,
+      "rerun": 8.408781149765227e-18
+    },
+    {
+      "path": "/gate2_eps_ladder/genera/Cutibacterium/by_eps/0/p",
+      "original": 2.844839211373232e-16,
+      "rerun": 2.8448392113738796e-16
+    },
+    {
+      "path": "/gate2_eps_ladder/genera/Cutibacterium/by_eps/1/p",
+      "original": 3.381337229038471e-16,
+      "rerun": 3.3813372290392405e-16
+    },
+    {
+      "path": "/gate2_eps_ladder/genera/Cutibacterium/by_eps/2/p",
+      "original": 7.812447941618431e-16,
+      "rerun": 7.812447941620208e-16
+    },
+    {
+      "path": "/gate2_eps_ladder/genera/Staphylococcus/by_eps/0/p",
+      "original": 0.0003053371732550323,
+      "rerun": 0.0003053371732551017
+    },
+    {
+      "path": "/gate2_eps_ladder/genera/Staphylococcus/by_eps/1/p",
+      "original": 0.000367452119776329,
+      "rerun": 0.00036745211977641247
+    },
+    {
+      "path": "/gate2_eps_ladder/genera/Staphylococcus/by_eps/2/p",
+      "original": 0.0007246563397318085,
+      "rerun": 0.0007246563397319733
+    },
+    {
+      "path": "/gate2_eps_ladder/genera/Corynebacterium/by_eps/0/p",
+      "original": 0.6730069715691884,
+      "rerun": 0.673006971569114
+    },
+    {
+      "path": "/gate2_eps_ladder/genera/Corynebacterium/by_eps/1/p",
+      "original": 0.8165820763551971,
+      "rerun": 0.8165820763551553
+    },
+    {
+      "path": "/gate2_eps_ladder/genera/Corynebacterium/by_eps/2/p",
+      "original": 0.8398297545483269,
+      "rerun": 0.8398297545482905
+    },
+    {
+      "path": "/gate2/Cutibacterium/sebum/logratio/p",
+      "original": 3.2937548956947548e-15,
+      "rerun": 3.2937548956955034e-15
+    },
+    {
+      "path": "/gate2/Cutibacterium/age/raw/p",
+      "original": 8.310977245972136e-22,
+      "rerun": 8.310977245974025e-22
+    },
+    {
+      "path": "/gate2/Cutibacterium/age/logratio/p",
+      "original": 2.844839211373232e-16,
+      "rerun": 2.8448392113738796e-16
+    },
+    {
+      "path": "/gate2/Staphylococcus/sebum/logratio/p",
+      "original": 0.00010448146030738042,
+      "rerun": 0.00010448146030740418
+    },
+    {
+      "path": "/gate2/Staphylococcus/age/raw/p",
+      "original": 0.19770432998131082,
+      "rerun": 0.1977043299811284
+    },
+    {
+      "path": "/gate2/Staphylococcus/age/logratio/p",
+      "original": 0.0003053371732550323,
+      "rerun": 0.0003053371732551017
+    },
+    {
+      "path": "/gate2/Corynebacterium/sebum/logratio/p",
+      "original": 0.569756341851968,
+      "rerun": 0.5697563418518701
+    },
+    {
+      "path": "/gate2/Corynebacterium/age/raw/p",
+      "original": 0.010556840554344351,
+      "rerun": 0.010556840554346752
+    },
+    {
+      "path": "/gate2/Corynebacterium/age/logratio/p",
+      "original": 0.6730069715691884,
+      "rerun": 0.673006971569114
+    },
+    {
+      "path": "/oral_sum_vs_cutibacterium/p",
+      "original": 3.313088350647687e-53,
+      "rerun": 3.3130883506484406e-53
+    }
+  ]
+}
