@@ -2,7 +2,7 @@
 
 > **계기** 1회차 멘토링 [19:42–19:50] — 「*Staphylococcus* 속 안에는 병원성(*S. aureus*)과 상재성(*S. epidermidis*, *S. hominis*)이 있다 … **병원성 대표 1개, 상재성 대표 1개**를 보자」, 2회차 [20:52] — 「우리 데이터는 종까지 동정된 비율이 이 정도라 속까지만 봤다」는 자료를 미리 만들어라 (`온라인멘토링_정리.md` 4-1장 · 2회차 4장)
 >
-> **방법** 원자료를 직접 세었다. 생성 스크립트 `code/15_포도상구균_종수준.py` → 결과 `results/staph_out.json` (Python 3만 필요 · 2026-10-07 결과 파일을 이 폴더에서 `results/` 로 옮김 · 2026-10-09 스크립트 15–17 은 `code/` 로, 이 문서는 `최종발표_준비/생물학_근거/` 로 옮김 — 경로는 저장소 최상위 기준)
+> **방법** 원자료를 직접 세었다. 생성 스크립트 `code/15_포도상구균_종수준.py` → 결과 `results/staph_out.json` (Python 3만 필요 · 2026-10-07 결과 파일을 이 폴더에서 `results/` 로 옮김 · 2026-10-09 스크립트 15–17 은 `code/` 로, 이 문서는 `최종발표_준비/생물학_근거/` 로 옮김 → 같은 날 밤 `results/추가분석_정리/` 로 — 경로는 저장소 최상위 기준)
 > - 595명: `원자료/AAML_마이크로바이옴 분석 데이터_final.xlsx` 시트 `SILVA138v_Species`의 `Genus = Staphylococcus` 행 전부 (분석 집합 595명 열만)
 > - 42명: `원자료/03_sensitive_16S_asv_taxonomy.tsv` + `03_sensitive_16S_asv_count.tsv`의 `Genus = Staphylococcus` ASV 전부
 > - 나머지 16S 코호트: `원자료/*_16S_genus_pct.tsv` 열 구성 확인
