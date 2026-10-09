@@ -15,9 +15,9 @@
 ⚠️ 결과를 본 뒤 고른 점검이 아니라 사전에 합의한 점검이지만, 판정 이후의 **사후 점검**이다.
 
 군 판정 규칙: 9_나이보정_판별력.py 와 같다('Non' 이 있으면 비민감, 'ensitive' 이면 민감).
-입력: ../../data/03_sensitive_{16S,ITS}_sample_info.tsv · 03_sensitive_ITS_genus_pct.tsv
-결과: ../../results/심도_군비교_261003.json
-의존성: Python 3 표준 라이브러리만 (+ ../../code/stats_util.py)
+입력: ../data/03_sensitive_{16S,ITS}_sample_info.tsv · 03_sensitive_ITS_genus_pct.tsv
+결과: ../results/심도_군비교_261003.json
+의존성: Python 3 표준 라이브러리만 (+ ./stats_util.py) · 2026-10-09 최종발표_준비/추가분석/ → code/ 로 옮김
 """
 import os, sys, csv, time, statistics, tracemalloc
 
@@ -30,7 +30,7 @@ T0 = time.perf_counter()
 tracemalloc.start()
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(HERE)), 'code'))   # 2026-10-07 코드 → code
+sys.path.insert(0, HERE)   # 2026-10-09 code/ 로 옮김 — stats_util.py 가 같은 폴더
 from stats_util import save_json, TAB, RAW, auc_p, bh, f   # noqa: E402
 
 DEPTH_COLS = ('read_count', 'read_depth_final')

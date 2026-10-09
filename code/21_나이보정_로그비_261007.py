@@ -13,8 +13,8 @@
   로그비 정의: 세균 = 4번 ④(분모 = 후보·구강 의심·미분류를 뺀 나머지, EPS 1e-5) · 진균 = 8번 ②(분모 = 그 속·미분류를 뺀 나머지, EPS 1e-3)
   자체 점검: 로그비 「단독」 AUC 가 4번 · 8번 저장값과 같아야 같은 정의다.
 
-결과: ../../results/나이보정_로그비_261007.json · ../../results/나이보정_로그비_261007.tsv (행 = 후보, matrix 형태)
-의존성: Python 3 표준 라이브러리만 (+ ./common42_261007.py · ../../code/stats_util.py)
+결과: ../results/나이보정_로그비_261007.json · ../results/나이보정_로그비_261007.tsv (행 = 후보, matrix 형태)
+의존성: Python 3 표준 라이브러리만 (+ ./common42_261007.py · ./stats_util.py) · 2026-10-09 최종발표_준비/추가분석/ → code/ 로 옮김
 """
 import os, sys, json, math, time, random, tracemalloc
 
