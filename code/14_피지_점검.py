@@ -32,9 +32,9 @@ Malassezia 는 지방산 합성효소가 없어 피지에 의존한다. 그러�
 결과: results/피지_점검.json
 """
 import os, sys, csv, math, random, statistics as st
-# 이 파일은 온라인멘토링_정리.md 옆(새주제_v11/온라인멘토링/)에 둔다 — 공유 통계 함수는 ../code/stats_util.py 에서 불러온다
-# (2026-09-30 폴더 최상위 → 온라인멘토링/ 으로 옮기며 한 단계 위를 보도록 수정 · 2026-10-07 폴더 이름 코드 → code)
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'code'))
+# 이 파일은 code/ 에 둔다 — 공유 통계 함수는 같은 폴더의 stats_util.py 에서 불러온다
+# (2026-09-30 폴더 최상위 → 온라인멘토링/ · 2026-10-07 폴더 이름 코드 → code · 2026-10-09 온라인멘토링/ → code/ 로 옮김)
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from stats_util import save_json, RAW, TAB, f, spearman, auc_p, auc_ci
 
 SEED, N_BOOT = 20260918, 4000

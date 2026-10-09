@@ -18,8 +18,8 @@
 방향: AUC 0.65 는 반대 방향 0.35 와 같은 크기다(*Malassezia* 는 민감군에서 적어 AUC < 0.5).
 ⚠️ 기대 AUC 는 가정값이다. 42명 *Malassezia* AUC 0.153(=0.847)은 작은 표본이라 부풀려졌을 수 있어 쓰지 않았다.
 
-결과: ../../results/검정력_표본크기_261003.json · ../../results/검정력_표본크기_261003.tsv (행 = 기대 AUC, matrix 형태)
-의존성: Python 3 표준 라이브러리만 (+ ../../code/stats_util.py)
+결과: ../results/검정력_표본크기_261003.json · ../results/검정력_표본크기_261003.tsv (행 = 기대 AUC, matrix 형태)
+의존성: Python 3 표준 라이브러리만 (+ ./stats_util.py) · 2026-10-09 최종발표_준비/추가분석/ → code/ 로 옮김
 """
 import os, sys, math, time, random, statistics, tracemalloc
 
@@ -32,7 +32,7 @@ T0 = time.perf_counter()
 tracemalloc.start()
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(HERE)), 'code'))   # 2026-10-07 코드 → code
+sys.path.insert(0, HERE)   # 2026-10-09 code/ 로 옮김 — stats_util.py 가 같은 폴더
 from stats_util import save_json, TAB, auc_p   # noqa: E402
 
 ALPHA = 0.05

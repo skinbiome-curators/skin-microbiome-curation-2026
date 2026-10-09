@@ -3,8 +3,9 @@
 DB 두 개:
   rRNA_typestrains/16S_ribosomal_RNA — NCBI 16S 기준균주(type strain) DB. 종 동정의 표준 참조
   core_nt           — 미분류 진균 BLAST(results/미분류진균_BLAST_*)와 같은 DB
-결과: 포도상구균_BLAST_입력.fa · 포도상구균_BLAST_원본_<db>.json · 포도상구균_BLAST_요약_<db>.tsv — ../../results/ 에 쓴다
-      (2026-10-07 이 폴더에서 results/ 로 옮김 · --summarize-only 도 results/ 의 원본 JSON 을 읽는다)
+결과: 포도상구균_BLAST_입력.fa · 포도상구균_BLAST_원본_<db>.json · 포도상구균_BLAST_요약_<db>.tsv — ../results/ 에 쓴다
+      (2026-10-09 이 스크립트를 최종발표_준비/staphylococcus 종 수준 확인/ 에서 code/ 로 옮김)
+      (2026-10-07 결과 파일을 results/ 로 옮김 · --summarize-only 도 results/ 의 원본 JSON 을 읽는다)
 NCBI DB 가 갱신되면 hit 가 달라질 수 있다.
 
 실행
@@ -32,8 +33,8 @@ T0 = time.perf_counter()
 tracemalloc.start()
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-RAW = os.path.join(os.path.dirname(os.path.dirname(HERE)), 'data')   # 2026-10-07 폴더 이름 변경: 원자료 → data
-RES = os.path.join(os.path.dirname(os.path.dirname(HERE)), 'results')   # 2026-10-07 결과 파일을 이 폴더에서 results/ 로 옮김
+RAW = os.path.join(os.path.dirname(HERE), 'data')   # 2026-10-09 code/ 로 옮김 — 한 단계 위가 저장소 최상위
+RES = os.path.join(os.path.dirname(HERE), 'results')   # 2026-10-07 결과 파일을 results/ 로 옮김
 URL = 'https://blast.ncbi.nlm.nih.gov/Blast.cgi'
 DBS = ['core_nt', 'rRNA_typestrains/16S_ribosomal_RNA']
 SUMMARIZE_ONLY = '--summarize-only' in sys.argv[1:]
