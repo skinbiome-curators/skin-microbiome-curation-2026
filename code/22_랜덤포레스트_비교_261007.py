@@ -18,7 +18,8 @@
     25분을 넘겨도 끝나지 않았다. 반복 50회를 코어에 나눠 동시에 돌린다(joblib). 분할 · seed · 모형 설정은 같아
     결과는 순서대로 돌린 것과 같다. 메모리 기록은 주 프로세스 기준이다(작업 프로세스 제외).
 
-결과: ../../results/랜덤포레스트_비교_261007.json · ../../results/랜덤포레스트_비교_261007.tsv (행 = 후보 × 모형, matrix 형태)
+결과: ../results/랜덤포레스트_비교_261007.json · ../results/랜덤포레스트_비교_261007.tsv (행 = 후보 × 모형, matrix 형태)
+      (2026-10-09 최종발표_준비/추가분석/ → code/ 로 옮김)
 의존성: numpy · scikit-learn · joblib (conda bio_proj) + ./common42_261007.py
 """
 import os, sys, time, warnings, tracemalloc

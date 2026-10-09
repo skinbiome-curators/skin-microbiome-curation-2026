@@ -1,6 +1,6 @@
-"""Staphylococcus 종 수준 점검 (2026-09-30) — 595명 SILVA 종 라벨 + 42명 16S ASV 종 라벨을 센다. 결과: ../../results/staph_out.json (2026-10-07 이 폴더에서 results/ 로 옮기고 줄바꿈을 LF 로 고정)"""
+"""Staphylococcus 종 수준 점검 (2026-09-30) — 595명 SILVA 종 라벨 + 42명 16S ASV 종 라벨을 센다. 결과: ../results/staph_out.json (2026-10-07 결과를 results/ 로 옮기고 줄바꿈을 LF 로 고정 · 2026-10-09 이 스크립트를 code/ 로 옮김)"""
 import os, sys, csv, json
-CODE = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'code')   # 2026-10-07 폴더 이름 변경: 코드 → code
+CODE = os.path.dirname(os.path.abspath(__file__))   # 2026-10-09 code/ 로 옮김 — 공유 함수는 같은 폴더
 sys.path.insert(0, CODE)
 from stats_util import RAW, TAB, f, load_595
 from xlsx import rows as xrows

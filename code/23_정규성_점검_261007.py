@@ -13,8 +13,8 @@
   - 여러 검정이므로 BH 보정 q 값도 함께 적는다
 ⚠️ 정규성을 기각하지 못했다고 정규분포라는 뜻은 아니다(n=19–23 이라 검정력이 낮다).
 
-결과: ../../results/정규성_점검_261007.json · ../../results/정규성_점검_261007.tsv (행 = 변수 × 군, matrix 형태)
-의존성: scipy (conda bio_proj) + ./common42_261007.py · ../../code/stats_util.py
+결과: ../results/정규성_점검_261007.json · ../results/정규성_점검_261007.tsv (행 = 변수 × 군, matrix 형태)
+의존성: scipy (conda bio_proj) + ./common42_261007.py · ./stats_util.py · 2026-10-09 최종발표_준비/추가분석/ → code/ 로 옮김
 """
 import os, sys, time, statistics, tracemalloc
 

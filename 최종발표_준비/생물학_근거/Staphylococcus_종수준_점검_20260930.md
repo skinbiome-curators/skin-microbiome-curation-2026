@@ -2,7 +2,7 @@
 
 > **계기** 1회차 멘토링 [19:42–19:50] — 「*Staphylococcus* 속 안에는 병원성(*S. aureus*)과 상재성(*S. epidermidis*, *S. hominis*)이 있다 … **병원성 대표 1개, 상재성 대표 1개**를 보자」, 2회차 [20:52] — 「우리 데이터는 종까지 동정된 비율이 이 정도라 속까지만 봤다」는 자료를 미리 만들어라 (`온라인멘토링_정리.md` 4-1장 · 2회차 4장)
 >
-> **방법** 원자료를 직접 세었다. 생성 스크립트 `15_포도상구균_종수준.py` → 결과 `results/staph_out.json` (Python 3만 필요 · 2026-10-07 결과 파일을 이 폴더에서 `results/` 로 옮김)
+> **방법** 원자료를 직접 세었다. 생성 스크립트 `code/15_포도상구균_종수준.py` → 결과 `results/staph_out.json` (Python 3만 필요 · 2026-10-07 결과 파일을 이 폴더에서 `results/` 로 옮김 · 2026-10-09 스크립트 15–17 은 `code/` 로, 이 문서는 `최종발표_준비/생물학_근거/` 로 옮김 — 경로는 저장소 최상위 기준)
 > - 595명: `원자료/AAML_마이크로바이옴 분석 데이터_final.xlsx` 시트 `SILVA138v_Species`의 `Genus = Staphylococcus` 행 전부 (분석 집합 595명 열만)
 > - 42명: `원자료/03_sensitive_16S_asv_taxonomy.tsv` + `03_sensitive_16S_asv_count.tsv`의 `Genus = Staphylococcus` ASV 전부
 > - 나머지 16S 코호트: `원자료/*_16S_genus_pct.tsv` 열 구성 확인
@@ -130,7 +130,7 @@
 
 ## 5. 🆕 NCBI BLAST 결과 — 42명 *Staphylococcus* ASV 20개
 
-> **방법** `16_포도상구균_BLAST.py` — `포도상구균_BLAST_입력.fa`(ASV 20개)를 NCBI 웹 BLAST(blastn megablast, DB `core_nt`, hit 50개)에 제출. RID `BTX4CXM3016` (2026-09-30).
+> **방법** `code/16_포도상구균_BLAST.py` — `포도상구균_BLAST_입력.fa`(ASV 20개)를 NCBI 웹 BLAST(blastn megablast, DB `core_nt`, hit 50개)에 제출. RID `BTX4CXM3016` (2026-09-30).
 > 결과 원본 `포도상구균_BLAST_원본_core_nt.json` · 요약 `포도상구균_BLAST_요약_core_nt.tsv` (입력 FASTA 와 함께 `results/` — 2026-10-07 이 폴더에서 옮김)
 > 🔧 **2026-10-02** 요약 TSV 는 처음에 16번이 아닌 별도 계산으로 만들어져 다시 만들 수 없었다. 16번의 요약 단계를 이 파일 형식으로 고쳤고, `python 16_포도상구균_BLAST.py --summarize-only`(NCBI 재제출 없음)로 원본 JSON 에서 다시 만든 결과가 **기존 파일과 바이트 단위로 같음**을 확인했다. 요약 규칙: 종 이름 = hit 제목 첫 두 단어 · "Uncultured <속명> …"은 그 속명으로, "Uncultured bacterium/organism …"은 uncultured 로 센다
 > **판정 기준:** 질의 길이의 95% 이상 정렬된 hit 중 **최고 일치도와 같은 값**을 가진 hit를 "동률"로 보고, 그 안의 종 이름을 셌다.

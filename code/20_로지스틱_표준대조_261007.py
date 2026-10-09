@@ -16,8 +16,8 @@
        완전분리 · 미수렴은 버리지 않고 세어서 밝힌다(AUC 는 순위만 쓰므로 값이 정해진다).
        (2026-10-07 독립 검수 반영 — 처음 판은 Newton 실패 17건을 버려 증가분이 큰 쪽이 빠졌다)
 
-결과: ../../results/로지스틱_표준대조_261007.json · ../../results/로지스틱_표준대조_261007.tsv (행 = 모형, matrix 형태)
-의존성: numpy · scipy · statsmodels · scikit-learn (conda bio_proj) + ./common42_261007.py
+결과: ../results/로지스틱_표준대조_261007.json · ../results/로지스틱_표준대조_261007.tsv (행 = 모형, matrix 형태)
+의존성: numpy · scipy · statsmodels · scikit-learn (conda bio_proj) + ./common42_261007.py · 2026-10-09 최종발표_준비/추가분석/ → code/ 로 옮김
 """
 import os, sys, json, math, time, random, warnings, tracemalloc
 

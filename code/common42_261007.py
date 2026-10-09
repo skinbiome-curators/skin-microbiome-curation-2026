@@ -14,7 +14,7 @@
 import csv, math, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(HERE)), 'code'))
+sys.path.insert(0, HERE)   # 2026-10-09 최종발표_준비/추가분석/ → code/ 로 옮김 — stats_util.py 가 같은 폴더
 from stats_util import RAW, TAB, CAND, ORAL, f, save_json   # noqa: E402,F401
 
 SEED = 20260918
