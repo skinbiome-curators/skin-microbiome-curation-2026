@@ -5,7 +5,8 @@ import hashlib, io, json, os, re, subprocess, sys, tarfile, tempfile, time
 ROOT = Path(__file__).resolve().parents[2]
 OUT = Path(__file__).resolve().parent
 WORK = Path(tempfile.mkdtemp(prefix='microbiome_reaudit_261008_'))
-archive = subprocess.check_output(['git', 'archive', 'HEAD', 'code', 'data', 'results', '온라인멘토링/14_피지_점검.py', '최종발표_준비/추가분석', '최종발표_준비/staphylococcus 종 수준 확인'], cwd=ROOT)
+# 2026-10-09 14–23 이 code/ 로 옮겨져 경로만 고침(옛 목록: + 온라인멘토링/14_피지_점검.py · 최종발표_준비/추가분석 · 최종발표_준비/staphylococcus 종 수준 확인)
+archive = subprocess.check_output(['git', 'archive', 'HEAD', 'code', 'data', 'results'], cwd=ROOT)
 with tarfile.open(fileobj=io.BytesIO(archive)) as tf:
     tf.extractall(WORK)
 scripts = sorted((p for p in WORK.rglob('*.py') if re.match(r'^\d+_', p.name)), key=lambda p: int(p.name.split('_')[0]))

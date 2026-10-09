@@ -11,11 +11,11 @@
   대상 = §7 표의 7개 속 + 자료 전체
 
 ⚠️ 종 라벨은 16S·ITS 짧은 구간 기반 추정이다. 라벨이 붙었다고 종이 확정된 것이 아니다
-   (예: Staphylococcus 최다 ASV 는 BLAST 에서 여러 종과 동률 — 같은 폴더 점검 문서 §5).
+   (예: Staphylococcus 최다 ASV 는 BLAST 에서 여러 종과 동률 — 최종발표_준비/생물학_근거/Staphylococcus_종수준_점검_20260930.md §5).
 
-입력: ../../data/03_sensitive_{16S,ITS}_asv_{taxonomy,count}.tsv
-결과: ../../results/속별_종라벨비율_261002.tsv (행 = 자료·속, matrix 형태) + 화면 출력
-      (2026-10-07 이 폴더에서 results/ 로 옮김 · 이름 끝은 만든 날 10/2)
+입력: ../data/03_sensitive_{16S,ITS}_asv_{taxonomy,count}.tsv
+결과: ../results/속별_종라벨비율_261002.tsv (행 = 자료·속, matrix 형태) + 화면 출력
+      (2026-10-07 결과를 results/ 로 옮김 · 이름 끝은 만든 날 10/2 · 2026-10-09 이 스크립트를 code/ 로 옮김)
 의존성: Python 3 표준 라이브러리만
 """
 import os, sys, csv, time, tracemalloc
@@ -29,8 +29,8 @@ T0 = time.perf_counter()
 tracemalloc.start()
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-RAW = os.path.join(os.path.dirname(os.path.dirname(HERE)), 'data')   # 2026-10-07 폴더 이름 변경: 원자료 → data
-OUT = os.path.join(os.path.dirname(os.path.dirname(HERE)), 'results', '속별_종라벨비율_261002.tsv')
+RAW = os.path.join(os.path.dirname(HERE), 'data')   # 2026-10-09 code/ 로 옮김 — 한 단계 위가 저장소 최상위
+OUT = os.path.join(os.path.dirname(HERE), 'results', '속별_종라벨비율_261002.tsv')
 TOP = 4   # 표에 남길 상위 종 수
 
 TARGETS = {'16S': ['Cutibacterium', 'Staphylococcus', 'Corynebacterium', 'Streptococcus', 'Lactobacillus'],
