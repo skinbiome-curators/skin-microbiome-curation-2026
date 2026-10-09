@@ -1,0 +1,1128 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>최종발표 대본 v2</title>
+<style>:root{
+  --ink:#16191D; --paper:#FAFAF7; --paper2:#F1F0EA; --muted:#5A6068; --faint:#8A8F96;
+  --line:#D8D6CE; --green:#1B4D3E; --green2:#0f8f63; --red:#8A1C2B; --steel:#3C6E91;
+  --non:#2a78d6; --sen:#eb6834; --env:#1baf7a; --etc:#B9B7AF;
+  --good:#0ca30c; --warn:#fab219; --crit:#d03b3b;
+  --W:1280px; --H:720px; --pad:50px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#2b2e33;color:var(--ink);
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"맑은 고딕","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;
+  font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;word-break:keep-all}
+i{font-style:italic}
+svg.chart{display:block;overflow:visible;font-family:inherit}
+svg.chart text{font-family:inherit}
+
+/* 무대 */
+#stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:26px 26px 60px;transition:padding .18s ease}
+#stage.with-notes{padding-right:406px}
+#deck{position:relative;width:var(--W);height:var(--H);flex:none;transform-origin:center center}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;padding:34px var(--pad) 44px;background:var(--paper);box-shadow:0 18px 60px rgba(0,0,0,.45);opacity:0;transition:opacity .16s ease;overflow:hidden}
+.slide.on{display:flex;opacity:1}
+.slide.bg-paper2{background:var(--paper2)}
+.slide.bg-ink{background:var(--ink);color:#EDECE6}
+
+/* 머리 */
+.s-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;min-height:24px}
+.eye{font-size:12.5px;font-weight:800;letter-spacing:1.5px;color:var(--green)}
+.bg-ink .eye{color:#7FA895}
+.part{font-size:12px;letter-spacing:1px;color:#9AA0A6}
+.steps{display:flex;gap:3px}
+.steps span{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:11px;background:#ECEBE4;color:#A3A7AC;white-space:nowrap}
+.steps span.done{color:#6B7178}
+.steps span.cur{background:var(--green);color:#fff}
+.bg-ink .steps span{background:#2A2E33;color:#6B7178}
+.bg-ink .steps span.cur{background:#0f8f63;color:#fff}
+.title{font-size:32px;font-weight:800;line-height:1.22;margin:0 0 4px;letter-spacing:-.6px}
+.bg-ink .title{color:#FAFAF7}
+.sub{font-size:14px;color:var(--muted);margin:0 0 6px}
+.s-body{flex:1;min-height:0;display:flex;flex-direction:column;gap:12px;transform-origin:top left;margin-top:10px}
+.foot{position:absolute;left:var(--pad);right:var(--pad);bottom:12px;font-size:10.5px;color:var(--faint);line-height:1.4}
+.bg-ink .foot{color:#8A9199}
+.small{font-size:12px;color:var(--muted);line-height:1.5}
+.ctr{text-align:center}
+.lbl{font-size:13.5px;font-weight:800;color:var(--muted);margin-bottom:6px;letter-spacing:.2px}
+.todo{display:inline-block;background:#FBE6E5;color:#A32B26;border:1px dashed #D9827D;font-size:11px;font-weight:700;padding:1px 7px;border-radius:4px;margin-left:6px}
+
+/* AI · 사람 띠 */
+.ai{display:flex;align-items:center;gap:8px;font-size:12.5px;color:#3E444B;background:#EEEDE6;border-radius:8px;padding:6px 12px;margin-top:8px;margin-bottom:6px;line-height:1.4}
+.ai .t{flex:none;font-weight:800;font-size:10.5px;padding:2px 7px;border-radius:4px;letter-spacing:.6px}
+.ai .t.a{background:#22303A;color:#fff}
+.ai .t.p{background:var(--green2);color:#fff;margin-left:6px}
+
+/* 띠 · 상자 */
+.band{background:var(--green);color:#fff;border-radius:9px;padding:11px 18px;font-size:16px;font-weight:700;line-height:1.5;text-align:center}
+.band.soft{background:#E5EFE9;color:var(--green)}
+.band.dark{background:#22303A;color:#E6EEF2}
+.callout{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 16px}
+.callout.green{border-left:5px solid var(--green2)}
+.callout.red{border-left:5px solid #C0504D}
+.callout-h{font-size:15px;font-weight:800;margin-bottom:4px}
+.callout-b{font-size:13.5px;line-height:1.6;color:#30353B}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+/* 칩 */
+.chip{display:inline-block;padding:2px 8px;border-radius:6px;font-weight:800;font-size:12.5px;line-height:1.45;white-space:nowrap}
+.chip.pass{background:#E1F3E1;color:#0B6B0B}
+.chip.warn{background:#FDF1D3;color:#7A5500}
+.chip.unk{background:#ECECEA;color:#4A5057}
+.chip.fail{background:#FBE3E3;color:#A32B2B}
+
+/* 표 */
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl.sm{font-size:12.5px}
+.tbl th,.tbl td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:middle}
+.tbl thead th{background:#E9E8E1;font-weight:800}
+.tbl tbody th{background:#fff;font-weight:800}
+.tbl td{background:#fff}
+.tbl .c{text-align:center}
+.tbl tr.hi td,.tbl tr.hi th{background:#EAF4EE}
+
+/* 표지 */
+.slide.cover{padding:58px 64px}
+.cover-g{display:grid;grid-template-columns:1.55fr 1fr;gap:40px;height:100%;align-items:center}
+.cover-org{font-size:13px;font-weight:700;letter-spacing:1px;color:#7FA895;margin-bottom:26px}
+.cover-t{font-size:54px;font-weight:800;line-height:1.16;margin:0 0 22px;color:#FAFAF7;letter-spacing:-1.2px}
+.cover-s{font-size:19px;line-height:1.65;color:#BFC4C9;margin:0 0 40px}
+.cover-by{font-size:16px;color:#E4E6E8;font-weight:700}
+.cover-d{font-size:12.5px;color:#8A9199;margin-top:8px}
+.cover-road{background:#1F2328;border:1px solid #30353B;border-radius:14px;padding:22px 24px}
+.cover-road-h{font-size:12px;font-weight:800;letter-spacing:2px;color:#7FA895;margin-bottom:12px}
+.cover-road ol{list-style:none;margin:0;padding:0}
+.cover-road li{display:flex;align-items:center;gap:12px;font-size:16px;color:#D7DBE0;padding:9px 0;border-bottom:1px solid #2C3137}
+.cover-road li:last-child{border-bottom:0}
+.cover-road li b{flex:none;width:26px;height:26px;border-radius:50%;background:#0f8f63;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center}
+
+/* 1 배경 */
+.g-bg{display:grid;grid-template-columns:360px 1fr;gap:28px;align-items:stretch}
+.hero-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px 28px;display:flex;flex-direction:column;justify-content:center}
+.hero-n{font-size:112px;font-weight:800;line-height:1;color:var(--green);letter-spacing:-3px}
+.hero-n span,.hero-n2 span{font-size:.45em;margin-left:2px}
+.hero-n2{font-size:64px;font-weight:800;line-height:1;color:#3C6E91;margin-top:14px;letter-spacing:-2px}
+.hero-l{font-size:17px;font-weight:700;margin-top:6px}
+.hero-src{font-size:11.5px;color:var(--faint);margin-top:12px}
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tool{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px 20px;min-height:208px;display:flex;flex-direction:column}
+.tool-i{margin-bottom:10px}.tool-i svg{width:52px;height:52px}
+.tool-n{font-size:21px;font-weight:800}
+.tool-w{font-size:14.5px;color:var(--muted);margin:4px 0 12px}
+.tool-x{margin-top:auto;font-size:16px;font-weight:800;color:#A32B2B;display:flex;gap:6px;align-items:center}
+.tool-x span{flex:none;width:20px;height:20px;border-radius:50%;background:#FBE3E3;display:flex;align-items:center;justify-content:center;font-size:12px}
+.defn{margin-top:14px;font-size:15.5px;color:#30353B;background:#fff;border:1px dashed var(--line);border-radius:10px;padding:10px 14px}
+.q-band{margin-top:14px;background:var(--ink);color:#fff;border-radius:12px;padding:18px 24px;font-size:28px;font-weight:800;letter-spacing:-.5px;display:flex;align-items:center;gap:18px}
+.q-band span{font-size:13px;font-weight:700;color:#7FA895;letter-spacing:1px;flex:none}
+
+/* 2 데이터 */
+.g-data{display:grid;grid-template-columns:1fr 1.05fr;gap:24px;align-items:start}
+.needs{display:flex;flex-direction:column;gap:10px}
+.need{display:grid;grid-template-columns:30px 1fr 22px 206px;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 14px}
+.nn{font-size:22px;font-weight:800;color:var(--green)}
+.nt b{display:block;font-size:17px}
+.nt span{font-size:13.5px;color:var(--muted)}
+.na{font-size:20px;color:var(--faint);font-weight:800}
+.nd{border-radius:9px;padding:8px 11px;font-size:15px;font-weight:800;color:#fff}
+.nd small{display:block;font-size:11px;font-weight:600;opacity:.9;margin-top:2px;line-height:1.35}
+.bigstat{font-size:18px;margin-top:6px;padding:10px 4px}
+.bigstat b{font-size:26px;color:var(--green)}
+.bigstat span{color:var(--muted);font-size:14px}
+.dtgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.dt{border-radius:9px;padding:8px 9px;min-height:92px;display:flex;flex-direction:column}
+.dt b{font-size:21px;font-weight:800;line-height:1.1}
+.dt span{font-size:11.5px;font-weight:700;margin-top:2px;line-height:1.25}
+.dt em{font-style:normal;font-size:10.5px;margin-top:auto;opacity:.9;line-height:1.25}
+.r-l{background:#1B4D3E;color:#fff}
+.r-e{background:#0f8f63;color:#fff}
+.r-t{background:#3C6E91;color:#fff}
+.r-x{background:#7FA895;color:#fff}
+.r-n{background:#E4E2DB;color:#8A8F96}
+.r-n2{background:#EFEEE8;color:#9AA0A6;border:1px dashed #D3D1C9}
+.dt.r-e{grid-column:span 1;outline:2px dashed #0f8f63;outline-offset:2px}
+.dtleg{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:12px;color:var(--muted)}
+.dtleg span{display:flex;align-items:center;gap:5px}
+.dtleg i{width:12px;height:12px;border-radius:3px;display:inline-block}
+
+/* 3 흐름 */
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.facts div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 16px;font-size:14px;color:var(--muted)}
+.facts b{display:block;font-size:16px;color:var(--ink);margin-bottom:2px}
+
+/* 4 얼굴 균 */
+.legend{display:flex;gap:18px;font-size:13px;color:var(--muted);flex-wrap:wrap;align-items:center}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.legend .lg-n{margin-left:auto;font-size:12px}
+i.skin,.rank li.skin b{background:var(--non)}
+i.oral,.rank li.oral b{background:var(--sen)}
+i.env,.rank li.env b{background:var(--env)}
+i.etc,.rank li.etc b{background:var(--etc)}
+.ranks{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rank{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.rank-h{font-size:15px;font-weight:800;margin-bottom:8px;display:flex;justify-content:space-between;align-items:baseline}
+.rank-h span{font-size:12px;color:var(--muted);font-weight:600}
+.rank ol{list-style:none;margin:0;padding:0}
+.rank li{display:grid;grid-template-columns:132px 1fr 42px;align-items:center;gap:8px;height:34px;font-size:14px}
+.rank li em{font-style:normal}
+.rank li b{display:block;height:14px;width:var(--w);min-width:3px;border-radius:0 4px 4px 0}
+.rank li s{text-decoration:none;text-align:right;font-weight:800;font-size:13px}
+.takes{display:grid;grid-template-columns:1fr 1fr 1.25fr;gap:12px}
+.takes div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:15px;display:flex;gap:8px;align-items:center}
+.takes div.hot{border-color:var(--sen);background:#FFF5EF}
+.tk{flex:none;width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}
+
+/* 5 고르기 */
+.g-sel{display:grid;grid-template-columns:1.45fr 1fr;gap:20px}
+.funnel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.fh,.fr{display:grid;grid-template-columns:48px 1fr 1fr 1.25fr 1.1fr;gap:8px;align-items:stretch}
+.fh div{font-size:13.5px;font-weight:800;text-align:center;line-height:1.3}
+.fh small{display:block;font-size:10.5px;font-weight:600;color:var(--muted);margin-top:2px}
+.fr{margin-top:8px}
+.fk{font-size:14px;font-weight:800;color:var(--muted);display:flex;align-items:center}
+.fn{background:#E8F0EC;border-radius:8px;text-align:center;font-size:36px;font-weight:800;color:var(--green);padding:10px 4px;line-height:1.1}
+.fn em{display:block;font-style:normal;font-size:11px;font-weight:700;color:#A3502A;margin-top:2px}
+.fn em i{font-style:italic}
+.fn.na{background:#F3F2EE;color:#B0B4B8;font-size:22px}
+.fn.na em{color:#8A8F96}
+.cands{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.cands .lb{font-size:13px;font-weight:800;color:var(--muted)}
+.cd{background:#EEF2F7;border-radius:7px;padding:5px 10px;font-size:14px;font-weight:700}
+.cd.hi{background:var(--green);color:#fff}
+.nolabel{margin-top:10px;font-size:13.5px;font-weight:800;color:var(--green)}
+.drops{display:flex;flex-direction:column;gap:9px}
+.drop{background:#fff;border:1px solid var(--line);border-left:5px solid var(--sen);border-radius:10px;padding:12px 14px}
+.dh{font-size:15.5px;font-weight:800;display:flex;justify-content:space-between;align-items:baseline}
+.dh span{font-size:11.5px;font-weight:700;color:#A3502A}
+.dn{font-size:13px;margin-top:3px}
+.db{font-size:12.5px;color:var(--muted);margin-top:2px}
+
+/* 6 비교 */
+.g-cmp{display:grid;grid-template-columns:1.55fr 1fr;gap:22px;align-items:start}
+.what{font-size:13.5px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 14px;margin-top:6px;color:#30353B}
+.hero2{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:12px}
+.hn{font-size:64px;font-weight:800;color:var(--green);line-height:1;letter-spacing:-2px}
+.hn span{font-size:.45em}
+.hl2{font-size:14px;line-height:1.45;color:#30353B}
+
+/* 7 착시 */
+.chks{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.chk{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 13px;display:flex;flex-direction:column;min-height:372px}
+.ck-h{font-size:15.5px;font-weight:800;display:flex;align-items:center;gap:6px}
+.ck-n{flex:none;width:24px;height:24px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center}
+.ck-ok{margin-left:auto;flex:none;width:26px;height:26px;border-radius:50%;background:#E1F3E1;color:#0B6B0B;display:flex;align-items:center;justify-content:center;font-size:15px}
+.ck-v{flex:1;display:flex;flex-direction:column;justify-content:center;padding:10px 0}
+.ck-t{font-size:13.5px;color:#30353B;line-height:1.5;border-top:1px solid #ECEBE5;padding-top:8px}
+.mb{display:flex;flex-direction:column;gap:7px}
+.mbr{display:grid;grid-template-columns:1fr;gap:2px;font-size:12.5px;color:var(--muted)}
+.mb.tight{gap:4px}.mb.tight .mbr{grid-template-columns:86px 1fr 34px;align-items:center;gap:6px;font-size:11.5px}.mb.tight .mbr b{height:11px}.mb.tight .mbr s{font-size:12px}
+.mbr b{display:block;height:13px;width:var(--w);background:var(--c);border-radius:0 4px 4px 0}
+.mbr s{text-decoration:none;font-weight:800;font-size:13px;color:var(--ink)}
+.mdots{position:relative;height:34px;margin:6px 6px 0;border-bottom:1px solid #C3C2B7}
+.mdots i{position:absolute;top:10px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--green2);border:2px solid #fff}
+.mdots em{position:absolute;bottom:-17px;font-style:normal;font-size:10.5px;color:var(--faint)}
+.mdots .m0{left:-4px}.mdots .m1{right:-4px}
+.mcap{font-size:13px;font-weight:800;text-align:center;margin-top:12px;color:var(--green)}
+.tnum{display:flex;align-items:baseline;gap:8px;margin:4px 0}
+.tnum b{font-size:32px;font-weight:800;color:var(--green);letter-spacing:-1px}
+.tnum span{font-size:11.5px;color:var(--muted);line-height:1.35}
+
+/* 8 종 */
+.sp{align-items:stretch}
+.spc{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px;display:flex;flex-direction:column;gap:8px}
+.sph{font-size:17px;font-weight:800;display:flex;justify-content:space-between;align-items:center}
+.spbig{display:flex;align-items:center;gap:12px}
+.spbig b{font-size:54px;font-weight:800;line-height:1;color:var(--ink);letter-spacing:-1.5px}
+.spbig b small{font-size:.5em}
+.spbig span{font-size:12.5px;color:var(--muted);line-height:1.4}
+.blast{display:grid;grid-template-columns:132px 56px 1fr;gap:6px;align-items:center}
+.bl-in{background:#22303A;color:#fff;border-radius:8px;padding:8px 10px;font-size:13px;font-weight:800;line-height:1.3}
+.bl-in small{display:block;font-size:10.5px;font-weight:600;color:#C9D3DA;margin-top:3px}
+.bl-ar{font-size:11.5px;font-weight:800;color:var(--muted);text-align:center}
+.blr{display:grid;grid-template-columns:118px 1fr 40px 74px;align-items:center;gap:6px;height:31px;font-size:13.5px}
+.bb{background:#EFEEE8;height:12px;border-radius:0 4px 4px 0}
+.bb b{display:block;height:12px;width:100%;background:#9AA3AD;border-radius:0 4px 4px 0}
+.bv{font-weight:800}
+.blr em{font-style:normal;font-size:11px;font-weight:800;padding:1px 6px;border-radius:5px;text-align:center}
+.blr em.bad{background:#FBE3E3;color:#A32B2B}
+.blr em.good{background:#E1F3E1;color:#0B6B0B}
+.spt{font-size:15px;margin-top:auto;padding-top:6px;border-top:1px solid #F0EFE9}
+
+/* 9 성적표 */
+.mtx{width:100%;border-collapse:separate;border-spacing:0 6px;font-size:13.5px}
+.mtx thead th{font-size:12.5px;font-weight:800;color:var(--muted);text-align:left;padding:0 8px 2px;line-height:1.3}
+.mtx tbody th{background:#fff;font-size:17px;font-weight:800;text-align:left;padding:15px 12px;border:1px solid var(--line);border-right:0;border-radius:10px 0 0 10px}
+.mtx tbody td{background:#fff;padding:10px 8px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.mtx tbody td:last-child{border-right:1px solid var(--line);border-radius:0 10px 10px 0}
+.mtx tbody td small{display:block;font-size:11.5px;color:var(--muted)}
+.mtx td.icc{font-weight:800;color:var(--muted);text-align:center}
+.mtx tr.hi th,.mtx tr.hi td{background:#EAF4EE;border-color:#B9D8C7}
+.tk2 .callout-h{font-size:15px}
+.mleg{display:flex;gap:10px;justify-content:flex-end;margin-top:-4px}
+
+/* 10 AI */
+.wfrow{display:flex;align-items:stretch;gap:6px}
+.wf{flex:1;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 11px}
+.wf b{display:block;font-size:14.5px;margin-bottom:2px}
+.wf span{font-size:12px;color:var(--muted);line-height:1.4}
+.wfa{align-self:center;color:var(--green2);font-weight:800;font-size:18px}
+.wfback{font-size:13px;background:#E5EFE9;color:var(--green);border-radius:8px;padding:8px 14px;font-weight:600}
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.case{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:7px}
+.cl{font-size:12px;font-weight:800;letter-spacing:.5px;color:#fff;background:#22303A;align-self:flex-start;padding:3px 9px;border-radius:5px}
+.cb,.ca{font-size:13.5px;line-height:1.45;padding:7px 10px;border-radius:8px}
+.cb{background:#FBEDEC}
+.ca{background:#E9F4EE}
+.cb span,.ca span{display:block;font-size:10.5px;font-weight:800;letter-spacing:.5px;margin-bottom:1px}
+.cb span{color:#A32B2B}.ca span{color:#0B6B4A}
+.cr{font-size:13px;font-weight:800;color:var(--green)}
+
+/* 11 질문 넷 */
+.qs{display:flex;flex-direction:column;gap:8px}
+.qrow{display:grid;grid-template-columns:170px 1fr 34px 260px;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 14px}
+.qq{font-size:16px;font-weight:800;line-height:1.3}
+.qe{display:flex;align-items:center;gap:16px}
+.qe .mb{width:230px}
+.qv svg{display:block}
+.qn{display:grid;grid-template-columns:auto auto;gap:0 8px;align-items:baseline;width:230px}
+.qn b{font-size:24px;font-weight:800;color:var(--ink)}
+.qn span{font-size:11.5px;color:var(--muted)}
+.qt{font-size:13px;color:#30353B}
+.qar{font-size:22px;font-weight:800;color:var(--green2);text-align:center}
+.qm{background:var(--green);color:#fff;border-radius:9px;padding:10px 14px;font-size:16px;font-weight:800;text-align:center}
+
+/* 12 큐레이션 축 */
+.axes{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:14px}
+.ax{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;opacity:.85;min-height:250px}
+.ax.on{border:2.5px solid var(--green);opacity:1;box-shadow:0 4px 16px rgba(27,77,62,.12)}
+.ax-k{font-size:30px;font-weight:800}
+.ax-v{display:inline-block;font-size:13px;font-weight:800;margin:4px 0 10px;padding:2px 9px;border-radius:6px;background:#ECECEA;color:#4A5057}
+.ax.on .ax-v{background:var(--green);color:#fff}
+.ax-t{font-size:15.5px;line-height:1.6;color:#30353B;margin-top:8px}
+.chain{display:grid;grid-template-columns:1fr 34px 1.2fr 34px 1fr;align-items:center;gap:6px}
+.ch{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 16px;font-size:16px;line-height:1.5;text-align:center}
+.ch span{display:block;font-size:11.5px;font-weight:800;letter-spacing:1px;color:var(--muted);margin-bottom:3px}
+.ch.hi{background:var(--green);color:#fff;border-color:var(--green)}
+.ch.hi span{color:#BFE3D2}
+.cha{font-size:22px;font-weight:800;color:var(--green2);text-align:center}
+
+/* 13 서비스 */
+.svc{display:flex;flex-direction:column;gap:10px}
+.stg{background:#fff;border:2px solid var(--green2);border-radius:14px;padding:10px 16px}
+.stg.s2{border-color:var(--steel)}
+.stg-h{font-size:15px;font-weight:800;margin-bottom:8px;color:var(--green)}
+.stg.s2 .stg-h{color:var(--steel)}
+.stg-h b{background:var(--green2);color:#fff;border-radius:6px;padding:2px 8px;margin-right:6px}
+.stg.s2 .stg-h b{background:var(--steel)}
+.sflow{display:grid;grid-template-columns:1fr 30px 1fr 30px 1.3fr;align-items:stretch;gap:6px}
+.sbx{border-radius:10px;padding:12px 14px;font-size:16.5px;font-weight:800}
+.sbx small{display:block;font-size:13px;font-weight:600;margin-top:3px;line-height:1.4}
+.sbx.c{background:#F1F0EA}
+.sbx.w{background:#E5EFE9;color:var(--green)}
+.stg.s2 .sbx.w{background:#E4EDF4;color:var(--steel)}
+.sbx.o{background:var(--green);color:#fff}
+.stg.s2 .sbx.o{background:var(--steel)}
+.sar{align-self:center;text-align:center;font-weight:800;color:var(--faint);font-size:18px}
+.tl{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.tl-h{font-size:13.5px;font-weight:800;margin-bottom:6px}
+.tlr{display:grid;grid-template-columns:120px 1fr 64px;gap:8px;font-size:14.5px;padding:6px 0;border-top:1px solid #F0EFE9}
+.tld{color:var(--muted);font-weight:700}
+.tla{color:var(--green2);font-weight:800}
+
+/* 14 화면 */
+.vcards{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:14px;align-items:start}
+.vcap{font-size:13px;font-weight:800;color:var(--muted);margin-bottom:6px}
+.vcard{background:#fff;border:1px solid #C9CDD2;border-radius:12px;overflow:hidden;font-size:12.8px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.vcard .vh{background:#22303A;color:#fff;padding:9px 13px;display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px}
+.vcard .vh .nx{font-weight:700;color:#B9E3CF;font-size:11.5px}
+.vcard table{width:100%;border-collapse:collapse}
+.vcard td{padding:6px 11px;border-bottom:1px solid #EEE;vertical-align:middle;line-height:1.45}
+.vcard td:first-child{width:30%;color:#4A5057;font-weight:700;white-space:nowrap}
+.vcard .chip{font-size:11.5px;padding:1px 6px}
+.vcard .vf{padding:8px 13px;background:#F7F7F4;font-size:12px;line-height:1.5}
+.vcard table.rule{margin:4px 0}
+.vcard table.rule th{font-size:11.5px;background:#F1F0EA;padding:5px 8px;text-align:center}
+.vcard table.rule td{text-align:center;width:auto;white-space:normal;font-weight:600;color:var(--ink);padding:5px 8px}
+.blank{display:inline-block;min-width:40px;border-bottom:1.5px solid #9AA0A6}
+
+/* 15 활용 */
+.secs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.sec{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;border-top:6px solid var(--green2)}
+.sec-k{font-size:19px;font-weight:800;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.sec-k span{font-size:11px;font-weight:800;background:#E5EFE9;color:var(--green);padding:2px 8px;border-radius:5px}
+.sec-r{font-size:15px;line-height:1.5;padding:9px 0;border-top:1px solid #F0EFE9}
+.sec-r strong{font-weight:800}
+.sec-r b{display:block;font-size:11px;letter-spacing:1px;color:var(--faint);margin-bottom:1px}
+.sec-r.g{color:var(--green)}
+.ready{display:grid;grid-template-columns:1fr 30px 1fr 30px 1fr;align-items:stretch;gap:6px}
+.rd{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:13px;color:var(--muted)}
+.rd span{display:inline-block;font-size:11px;font-weight:800;letter-spacing:1px;background:#ECECEA;color:#4A5057;padding:2px 8px;border-radius:5px;margin-bottom:5px}
+.rd b{display:block;font-size:16px;color:var(--ink);margin-bottom:2px}
+.rd.now{border:2px solid var(--green2)}
+.rd.now span{background:var(--green2);color:#fff}
+.rda{align-self:center;text-align:center;font-weight:800;color:var(--faint);font-size:18px}
+
+/* 16 시장 */
+.g-mkt{display:grid;grid-template-columns:330px 1fr;gap:20px;align-items:start}
+.mk-h{font-size:14px;font-weight:800;color:var(--muted)}
+.mk{display:flex;align-items:center;gap:10px;margin:6px 0 4px}
+.mk b{display:block;font-size:40px;font-weight:800;letter-spacing:-1.5px;line-height:1;color:var(--green)}
+.mk div:last-child b{color:var(--ink)}
+.mk span{font-size:12px;color:var(--muted)}
+.mk-a{font-size:24px;color:var(--faint);font-weight:800}
+.quote{margin-top:14px;background:#fff;border-left:4px solid var(--ink);padding:10px 14px;font-size:14.5px;line-height:1.5;border-radius:0 10px 10px 0}
+.quote span{display:block;font-size:11.5px;color:var(--muted);margin-top:4px}
+.comp td,.comp th{padding:6px 8px}
+.comp td.x{color:#A32B2B;font-weight:800;font-size:15px}
+
+/* 17 비용 */
+.g-cost{display:grid;grid-template-columns:1.6fr 1fr;gap:22px;align-items:start}
+.hl-note{font-size:16px;font-weight:700;margin-top:6px;background:#E5EFE9;color:var(--green);border-radius:9px;padding:9px 14px}
+.pc{background:#fff;border:1px solid var(--line);border-left:5px solid var(--green2);border-radius:10px;padding:10px 14px;margin-bottom:9px}
+.pc.s2{border-left-color:var(--steel)}
+.pc.ref{border-left-color:#9AA0A6;background:#F6F5F0}
+.pc-h{font-size:14.5px;font-weight:800;margin-bottom:3px}
+.pc-b{font-size:13.5px;line-height:1.5;color:#30353B}
+.pc-b small{color:var(--muted)}
+
+/* 18 실증 */
+.road{display:grid;grid-template-columns:1fr 30px 1.25fr 30px 1fr;align-items:stretch;gap:6px}
+.rs{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.rs.hi{border:2px solid var(--green2);background:#F3F8F5}
+.rs-k{font-size:16px;font-weight:800;margin-bottom:4px}
+.rs ul{margin:0;padding-left:17px;font-size:14px;line-height:1.55;color:#30353B}
+.rsa{align-self:center;text-align:center;font-weight:800;color:var(--faint);font-size:18px}
+.rd2{align-items:start}
+
+/* 19 한계 */
+.g-lim{display:grid;grid-template-columns:1.35fr 1fr;gap:20px;align-items:start}
+.lms{display:flex;flex-direction:column;gap:6px}
+.lm{display:grid;grid-template-columns:52px 1fr 24px 210px;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 12px}
+.lk{font-size:13px;font-weight:800;background:#ECECEA;border-radius:6px;text-align:center;padding:3px 0}
+.ll{font-size:14px;color:#30353B}
+.la{color:var(--green2);font-weight:800;text-align:center}
+.lr{font-size:14px;font-weight:800;color:var(--green)}
+.rgs{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.rg{display:grid;grid-template-columns:110px 1fr;gap:8px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 12px}
+.rg b{font-size:14px;background:#22303A;color:#fff;border-radius:6px;text-align:center;padding:3px 0}
+.rg span{font-size:13px;color:var(--muted)}
+
+/* 20 마무리 */
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:10px}
+.th{background:#1F2328;border:1px solid #30353B;border-radius:14px;padding:26px 26px;min-height:250px}
+.th-k{font-size:15px;font-weight:800;letter-spacing:2px;color:#4FC79E;margin-bottom:10px}
+.th-t{font-size:21px;line-height:1.6;color:#E4E6E8}
+.th-t b{color:#fff}
+.honest{margin-top:22px;text-align:center;font-size:16px;color:#BFC4C9;border-top:1px solid #30353B;padding-top:16px}
+.team{text-align:center;font-size:15px;color:#D7DBE0;margin-top:auto}
+
+/* 부록 */
+.qa{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}
+.qa-i{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:12.8px;line-height:1.5}
+.qa-i b{display:block;font-size:13.5px;margin-bottom:2px}
+.gl{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}
+.gl-i{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13px;line-height:1.5;display:grid;grid-template-columns:150px 1fr;gap:10px}
+.gl-i b{font-size:14px;color:var(--green)}
+.src2{display:flex;flex-direction:column;gap:8px}
+.src2 div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:13px;line-height:1.55}
+.src2 b{display:inline-block;width:110px;color:var(--green)}
+
+/* 막대 · 진행 · 노트 · 개요 */
+#bar{position:fixed;left:0;right:0;bottom:0;height:34px;background:#121417;color:#9AA0A6;display:flex;align-items:center;gap:10px;padding:0 14px;font-size:12px;z-index:50}
+#bar b{color:#fff}
+#bar .sp{flex:1}
+#bar button{background:transparent;border:1px solid #4A4F56;color:#C9CDD2;border-radius:5px;padding:3px 9px;font:inherit;cursor:pointer}
+#bar button:hover{background:#2A2E34;color:#fff}
+#prog{position:fixed;left:0;bottom:34px;height:3px;background:var(--green2);z-index:51;transition:width .2s}
+#notes{position:fixed;right:0;top:0;bottom:34px;width:380px;background:#1B1E22;color:#D7DBE0;padding:18px 20px;overflow:auto;font-size:13.5px;line-height:1.8;z-index:49;border-left:1px solid #34383F;white-space:pre-wrap;display:none}
+#notes.on{display:block}
+#notes h4{margin:0 0 10px;font-size:11px;letter-spacing:2px;color:#8A9199;font-weight:700}
+#ov{position:fixed;inset:0;background:rgba(14,16,19,.97);z-index:60;overflow:auto;padding:26px;display:none;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+#ov.on{display:grid}
+.ov-i{cursor:pointer;border-radius:7px;overflow:hidden;border:2px solid #34383F;position:relative;background:#22262B}
+.ov-i:hover,.ov-i.cur{border-color:var(--green2)}
+.ov-n{position:absolute;left:6px;top:6px;z-index:2;background:rgba(0,0,0,.7);color:#fff;font-size:11px;padding:2px 7px;border-radius:4px}
+.ov-thumb{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#fff}
+.ov-thumb .slide{display:flex!important;opacity:1!important;box-shadow:none;position:absolute;inset:auto;left:0;top:0;width:1280px;height:720px;transform-origin:top left;pointer-events:none}
+.ov-t{padding:8px 11px;background:#22262B;color:#D7DBE0;font-size:11.5px;line-height:1.4;min-height:44px;display:flex;align-items:center}
+
+/* 인쇄 — 장마다 한 쪽(16:9) */
+@page{size:338.7mm 190.5mm;margin:0}
+@media print{
+  html,body{background:#fff}
+  #bar,#prog,#notes,#ov{display:none!important}
+  #stage{position:static;display:block;overflow:visible;padding:0}
+  #deck{position:static;width:auto;height:auto;transform:none!important}
+  .slide{display:flex!important;opacity:1!important;position:relative;inset:auto;box-shadow:none;page-break-after:always;break-after:page;width:1280px;height:720px;zoom:1}
+  .slide:last-child{page-break-after:auto}
+}
+*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+/* 화면 확인용 — ?shot 이면 장 하나를 1280×720 그대로 */
+body.shot{background:#fff}
+body.shot #bar,body.shot #prog{display:none}
+body.shot #stage{padding:0}
+/* v3 (2026-10-09) 추가 — 팀 확인 표시 · 아이디어 형태 배지 · 알약 · 자료 흐름도 */
+.tbc{display:inline-block;background:#FFF4C2;color:#6B5200;border:1px dashed #D9A900;font-size:10.5px;font-weight:800;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:middle;letter-spacing:0}
+.bg-ink .tbc{background:#4A3F12;color:#FFE58A;border-color:#B8930A}
+.idea{display:inline-flex;align-items:center;gap:8px;background:#E5EFE9;color:var(--green);border:1.5px solid var(--green2);border-radius:999px;padding:3px 14px 3px 4px;font-size:14px;font-weight:800;white-space:nowrap}
+.idea b{background:var(--green2);color:#fff;border-radius:999px;padding:1px 10px;font-size:12px}
+.bg-ink .idea{background:#1F3A30;color:#CFE6DA;border-color:#0f8f63}
+.pills{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.pills span{font-size:11px;font-weight:800;background:#EAF4EE;color:var(--green);border-radius:999px;padding:2px 8px;white-space:nowrap}
+.flow7{display:block;width:100%;height:auto}
+.qa.q3{grid-template-columns:repeat(3,1fr);gap:7px 12px}.qa.q3 .qa-i{font-size:11.8px;padding:7px 10px;line-height:1.45}.qa.q3 .qa-i b{font-size:12.6px}
+.ck-ok.ref{width:auto;border-radius:6px;padding:0 8px;background:#ECECEA;color:#4A5057;font-size:11.5px;font-weight:800}
+
+/* v4 (2026-10-09) 추가 — 작은 AI 활용 줄 · 방법의 이유 · 방법 지도 · 판정 리포트 A4 · 계산식 */
+.ailine{display:flex;align-items:baseline;flex-wrap:wrap;gap:3px 6px;font-size:11px;line-height:1.45;color:#6B7178;margin:0 0 2px}
+.ailine b{flex:none;font-size:9.5px;font-weight:800;letter-spacing:.5px;padding:1px 6px;border-radius:3px;background:#22303A;color:#fff}
+.ailine b.p{background:var(--green2);margin-left:6px}
+.bg-ink .ailine{color:#9AA0A6}
+.bg-ink .ailine b{background:#3A444D}
+.bg-ink .ailine b.p{background:#0f8f63}
+.q-band small{display:block;font-size:15px;font-weight:700;color:#BFE3D2;margin-top:4px;letter-spacing:0}
+.sub2{font-size:15px;font-weight:700;color:var(--muted);margin-left:12px;letter-spacing:0}
+.fh small.w{color:var(--green2);font-weight:700}
+.why{display:flex;flex-direction:column;gap:5px;margin-top:6px}
+.why span{font-size:12px;line-height:1.45;color:#30353B;background:#fff;border:1px solid var(--line);border-left:4px solid var(--green2);border-radius:7px;padding:5px 9px}
+.why span b{color:var(--green);margin-right:6px}
+.ck-w{font-size:11.5px;font-weight:700;color:var(--green2);margin-top:6px;line-height:1.35}
+.chks .chk{min-height:330px}
+.chk.ref{background:#F6F5F0}
+.mm{width:100%;border-collapse:separate;border-spacing:0 4px;font-size:13px}
+.mm thead th{font-size:11.5px;font-weight:800;color:var(--muted);text-align:left;padding:0 10px 1px}
+.mm tbody th{background:#22303A;color:#fff;font-size:13px;font-weight:800;text-align:left;padding:7px 10px;border-radius:8px 0 0 8px;white-space:nowrap}
+.mm tbody td{background:#fff;padding:7px 10px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);line-height:1.4}
+.mm tbody td:nth-child(2){white-space:nowrap}
+.mm tbody td:nth-child(2) b{color:var(--green)}
+.mm tbody td:last-child{border-right:1px solid var(--line);border-radius:0 8px 8px 0;color:var(--green);font-weight:700;font-size:12.5px}
+.aiv{background:#EEEDE6;border-radius:10px;padding:8px 12px}
+.aiv-h{font-size:12.5px;font-weight:800;color:#30353B;display:flex;align-items:center;gap:7px}
+.aiv-h b{font-size:9.5px;padding:1px 6px;border-radius:3px;background:#22303A;color:#fff}
+.aiv-r{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:5px}
+.aiv-r span{font-size:11px;line-height:1.45;color:#3E444B}
+.aiv-r.c span{background:#fff;border-radius:6px;padding:4px 8px}
+.aiv-r em{font-style:normal;display:block;font-size:10px;font-weight:800;color:#A32B2B;letter-spacing:.3px}
+.qmap{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.qm-h{font-size:13.5px;font-weight:800;color:var(--muted);margin-bottom:6px}
+.qm-r{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.qx{border-radius:10px;padding:9px 12px;background:#F1F0EA;display:flex;flex-direction:column;gap:2px}
+.qx b{font-size:17px}
+.qx span{font-size:12px;color:var(--muted)}
+.qx em{font-style:normal;font-size:12.5px;font-weight:800;color:#5A6068}
+.qx.on{background:#E4EDF4}
+.qx.on em{color:var(--steel)}
+.axes .ax{min-height:150px}
+.vc3{display:grid;grid-template-columns:1.5fr 1fr .95fr;gap:14px;align-items:start}
+.a4{background:#fff;border:1px solid #C9CDD2;border-radius:6px;box-shadow:0 4px 14px rgba(0,0,0,.10);padding:14px 16px;font-size:12px}
+.a4-h{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--green);padding-bottom:6px;margin-bottom:6px}
+.a4-h span{font-size:16px;font-weight:800;color:var(--green)}
+.a4-h em{font-style:normal;font-size:11px;color:var(--muted)}
+.a4-m{font-size:11px;color:var(--muted);margin-bottom:8px;line-height:1.45}
+.a4t{width:100%;border-collapse:collapse;font-size:12px}
+.a4t th,.a4t td{border-bottom:1px solid #EEE;padding:6px 4px;text-align:center;white-space:nowrap}
+.a4t tbody th{text-align:left;font-weight:700}
+.a4t thead th{font-size:11px;color:var(--muted);font-weight:800}
+.a4t td.l{text-align:left}
+.a4t tr.hi th,.a4t tr.hi td{background:#EAF4EE}
+i.d{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:4px;vertical-align:-1px}
+i.d.pass{background:#0ca30c}
+i.d.warn{background:#fab219}
+i.d.unk{background:#B9B7AF}
+i.d.fail{background:#d03b3b}
+.a4-l{font-size:10.5px;color:var(--muted);margin:6px 0}
+.a4-l i.d{margin-left:6px}
+.a4-n{font-size:11.5px;background:#F7F7F4;border-radius:6px;padding:7px 9px;line-height:1.55}
+.eq{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:0 0 4px}
+.eq b{font-size:22px;font-weight:800;color:var(--ink)}
+.eq b.g{color:var(--green2)}
+.eq span{font-size:18px;font-weight:800;color:var(--faint)}
+.eq em{font-style:normal;font-size:11px;color:var(--muted);margin-left:-4px}
+.honest b{display:block;color:#fff;font-size:20px;margin-bottom:6px}
+.honest small{font-size:13.5px}
+</style>
+<style>
+/* 대본 문서 레이아웃 (덱 스타일 위에 덮어씀) */
+:root{--doc:#F4F3EE;--card:#fff;--ink2:#1d2126;--mut:#5A6068;--ln:#DEDCD4;--A:#0f8f63}
+html,body{background:var(--doc)!important;color:var(--ink2);overflow:auto}
+body{font-size:15px}
+.doc{max-width:1500px;margin:0 auto;padding:28px 24px 80px}
+.hdr h1{font-size:30px;margin:0 0 6px;letter-spacing:-.5px}
+.hdr .sub{color:var(--mut);font-size:14px;line-height:1.7}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 4px}
+.pills span{background:#fff;border:1px solid var(--ln);border-radius:999px;padding:4px 12px;font-size:13px;font-weight:700}
+.sec-h{font-size:20px;font-weight:800;margin:30px 0 10px;padding-top:6px;border-top:2px solid var(--ink2)}
+.tw{overflow-x:auto;background:#fff;border:1px solid var(--ln);border-radius:10px;margin:8px 0 14px}
+.tw table{border-collapse:collapse;width:100%;font-size:13.5px}
+.tw th,.tw td{padding:7px 10px;border-bottom:1px solid var(--ln);text-align:left;vertical-align:top}
+.tw thead th{background:#ECEBE4;white-space:nowrap}
+.tw td.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.st{display:inline-block;font-weight:800;font-size:12px;border-radius:6px;padding:1px 8px;color:#fff;background:var(--A)}.st.q{background:#6B7178}
+details.blk{background:#fff;border:1px solid var(--ln);border-radius:10px;padding:10px 14px;margin:10px 0}
+details.blk>summary{font-weight:800;cursor:pointer;font-size:15px}
+.ok{color:#0B6B0B;font-weight:800}.pt{color:#7A5500;font-weight:800}.no{color:#A32B2B;font-weight:800}
+.row{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:22px;background:#fff;border:1px solid var(--ln);border-radius:14px;padding:16px;margin:16px 0;break-inside:avoid;page-break-inside:avoid}
+.lab{font-weight:800;font-size:14px;margin-bottom:6px}.lab small{color:var(--mut);font-weight:600}
+.frame{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:8px;border:1px solid var(--ln);background:#FAFAF7}
+.sbox{position:absolute;left:0;top:0;width:1280px;height:720px;transform-origin:top left}
+.sbox .slide{box-shadow:none;transition:none}
+.meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:13px;color:var(--mut);margin-bottom:8px}
+.meta .t{margin-left:auto;font-weight:800;color:var(--ink2)}.meta .t small{color:var(--mut);font-weight:600}
+.script p{font-size:17px;line-height:1.85;margin:0 0 12px;color:#14171b}
+.script b{color:#0b5a3f}
+details.memo{font-size:13px;color:var(--mut);margin-top:6px}details.memo summary{cursor:pointer;font-weight:700}
+details.memo ul{margin:6px 0 0;padding-left:18px;line-height:1.7}
+.appx-note{color:var(--mut);font-size:14px}
+.qa-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px}
+.qa-c{background:#fff;border:1px solid var(--ln);border-radius:10px;padding:10px 12px;font-size:13.5px;line-height:1.6}
+.qa-c b{display:block;margin-bottom:3px}
+@media (max-width:980px){.row{grid-template-columns:1fr}}
+@media print{body{background:#fff!important}.row{border:1px solid #ccc}details.blk,details.memo{display:block}details>summary{list-style:none}}
+</style></head><body>
+<div class="doc">
+<header class="hdr">
+<h1>최종발표 대본 v2 — 민감피부 지표 판정과 패널 설계 서비스</h1>
+<div class="sub">2조 우리를놓아조 · 10.10 최종 피칭 · 2026-10-09 · 발표자 한 명(팀 결정 D6)<br>
+기준 덱 <b>최종발표_덱_v4_20261009.html</b>(화면은 그대로) · 구성 기준 <b>최종피칭10.10_안내_261007</b> · 내용 기준 <b>프로젝트_요약_안내문기준_261008</b>(10/9 팀 결정 우선) · 멘토링 기준 <b>온라인멘토링 폴더 전체</b>(녹취 · 정리 · 당시 자료 · 반영 대조표) · 팀원 메모</div>
+<div class="pills"><span>목표 19:00 · 추정 19:11</span><span>본편 21장 · 부록 6장(질의응답용)</span><span>추정 속도: 공백 제외 분당 약 276자 — 리허설 스톱워치로 확인</span></div>
+</header>
+
+<div class="sec-h">1. 시간표</div>
+<div class="tw"><table><thead><tr><th>장</th><th>안내문 단계</th><th>장 제목</th><th>목표</th><th>추정</th><th>누적</th></tr></thead><tbody><tr><td>1</td><td>표지</td><td>민감피부 지표 판정과 패널 설계 서비스</td><td class='r'>0:15</td><td class='r'>0:22</td><td class='r'>0:22</td></tr><tr><td>2</td><td>① 주제 선정 배경</td><td>민감피부는 흔한데, 가를 기준이 없습니다</td><td class='r'>1:00</td><td class='r'>1:00</td><td class='r'>1:22</td></tr><tr><td>3</td><td>② 데이터셋 선정 이유</td><td>필요한 것을 따라가니, 이 자료들이었습니다</td><td class='r'>1:15</td><td class='r'>1:10</td><td class='r'>2:32</td></tr><tr><td>4</td><td>③ 데이터 분석과 주요 결과</td><td>자료 7곳을 같은 다섯 관문에 각각 넣었습니다</td><td class='r'>0:30</td><td class='r'>0:30</td><td class='r'>3:02</td></tr><tr><td>5</td><td>③ 데이터 분석과 주요 결과</td><td>같은 얼굴인데, 한 균이 30배 넘게 달랐습니다</td><td class='r'>0:40</td><td class='r'>0:47</td><td class='r'>3:49</td></tr><tr><td>6</td><td>③ 데이터 분석과 주요 결과</td><td>807개 속에서 후보 4개를 골랐습니다</td><td class='r'>0:50</td><td class='r'>1:02</td><td class='r'>4:50</td></tr><tr><td>7</td><td>③ 데이터 분석과 주요 결과</td><td>민감군에서는 Malassezia가 절반 이하였습니다</td><td class='r'>0:50</td><td class='r'>0:46</td><td class='r'>5:36</td></tr><tr><td>8</td><td>③ 데이터 분석과 주요 결과</td><td>나이 · 피지 · 계산 방식을 점검해도 차이가 유지됐습니다</td><td class='r'>1:10</td><td class='r'>1:14</td><td class='r'>6:51</td></tr><tr><td>9</td><td>③ 데이터 분석과 주요 결과</td><td>볼 수 있는 곳에서는 종까지 봤습니다</td><td class='r'>0:50</td><td class='r'>0:59</td><td class='r'>7:50</td></tr><tr><td>10</td><td>③ 데이터 분석과 주요 결과</td><td>판정표 — 네 후보</td><td class='r'>0:50</td><td class='r'>1:02</td><td class='r'>8:52</td></tr><tr><td>11</td><td>③ 데이터 분석과 주요 결과</td><td>왜 이 방법인가 — 함정마다 방법을 골랐고, 기준은 AI 밖에 뒀습니다</td><td class='r'>0:40</td><td class='r'>0:43</td><td class='r'>9:35</td></tr><tr><td>12</td><td>④ 결과에서 큐레이션 도출</td><td>결과가 남긴 질문 넷 — 무엇을 더 재야 하나</td><td class='r'>0:50</td><td class='r'>0:50</td><td class='r'>10:25</td></tr><tr><td>13</td><td>④ 결과에서 큐레이션 도출</td><td>그래서 큐레이션 방향은 「진단」입니다</td><td class='r'>0:55</td><td class='r'>0:42</td><td class='r'>11:07</td></tr><tr><td>14</td><td>⑤ 최종 큐레이션 제안</td><td>판정하고, 판정된 균만 잽니다</td><td class='r'>1:20</td><td class='r'>1:16</td><td class='r'>12:23</td></tr><tr><td>15</td><td>⑤ 최종 큐레이션 제안</td><td>고객이 받는 화면</td><td class='r'>1:10</td><td class='r'>1:03</td><td class='r'>13:26</td></tr><tr><td>16</td><td>⑥ 실제 적용 가능성과 확장</td><td>이 결과를 어디에, 어떻게 쓰나</td><td class='r'>0:55</td><td class='r'>0:47</td><td class='r'>14:14</td></tr><tr><td>17</td><td>⑥ 실제 적용 가능성과 확장</td><td>시장은 큰데, 확인한 일곱 곳 어디에서도 균별 기준값을 찾지 못했습니다</td><td class='r'>1:05</td><td class='r'>1:03</td><td class='r'>15:16</td></tr><tr><td>18</td><td>⑥ 실제 적용 가능성과 확장</td><td>무엇으로 재느냐가 비용을 정합니다</td><td class='r'>1:00</td><td class='r'>0:58</td><td class='r'>16:14</td></tr><tr><td>19</td><td>⑥ 실제 적용 가능성과 확장</td><td>다음은 실증 — 파일럿에서 군당 74명(예비 산정) 검증으로</td><td class='r'>1:00</td><td class='r'>0:55</td><td class='r'>17:09</td></tr><tr><td>20</td><td>⑥ 실제 적용 가능성과 확장</td><td>한계와 보완 — 무엇을 더하면 무엇이 풀리나</td><td class='r'>0:55</td><td class='r'>0:59</td><td class='r'>18:08</td></tr><tr><td>21</td><td>마무리</td><td>정리하겠습니다</td><td class='r'>0:55</td><td class='r'>1:02</td><td class='r'>19:11</td></tr></tbody></table></div>
+<div class="tw"><table><thead><tr><th>안내문 단계</th><th>추정</th><th>비중</th></tr></thead><tbody><tr><td>표지</td><td class='r'>0:22</td><td class='r'>2%</td></tr><tr><td>① 주제 선정 배경</td><td class='r'>1:00</td><td class='r'>5%</td></tr><tr><td>② 데이터셋 선정 이유</td><td class='r'>1:10</td><td class='r'>6%</td></tr><tr><td>③ 데이터 분석과 주요 결과</td><td class='r'>7:03</td><td class='r'>37%</td></tr><tr><td>④ 결과에서 큐레이션 도출</td><td class='r'>1:32</td><td class='r'>8%</td></tr><tr><td>⑤ 최종 큐레이션 제안</td><td class='r'>2:19</td><td class='r'>12%</td></tr><tr><td>⑥ 실제 적용 가능성과 확장</td><td class='r'>4:42</td><td class='r'>25%</td></tr><tr><td>마무리</td><td class='r'>1:02</td><td class='r'>5%</td></tr></tbody></table></div>
+
+<div class="sec-h">2. 구성 · 반영 점검</div>
+<p class="sub" style="margin:0 0 8px">표기 — <span class="ok">✅</span> 대본 본문에서 말함 · <span class="pt">🟡</span> 메모 · 즉답 카드에만 있거나 일부만 · <span class="no">✖</span> 의도적으로 말하지 않음(이유 표기). 장 번호는 표지 = 1장. 아래 점검은 독립 검토 3건(안내문·요약·팀원 메모 / 온라인멘토링 폴더 전체 / 수치·표현 사실 확인)을 받아 고친 뒤의 대본 기준입니다.</p>
+
+<details class="blk" open><summary>2-1. 운영진 안내문(최종피칭10.10_안내_261007) 요건 → 대본 위치</summary>
+<div class="tw"><table><thead><tr><th>안내문 확인 항목</th><th>대본 위치 · 담은 말</th><th>상태</th></tr></thead><tbody>
+<tr><td>1. 어떤 데이터셋을 선정 · 활용했나</td><td>3장 — 03 민감 42명 · 외부 595명 · 수업 5편 = 자료 7곳 · 코호트 11개 · 모두 공개 자료 재분석</td><td class="ok">✅</td></tr>
+<tr><td>1. 선정 이유와 큐레이션 주제와의 연관성</td><td>3장 「관문마다 필요한 자료가 서비스의 입력 요건」 · 15장 리포트 입력 줄 · 20장 「무엇을 더 모아야 하는지까지」</td><td class="ok">✅</td></tr>
+<tr><td>1. 방법보다 활용 데이터와 주요 결과를 명확히</td><td>4장 방법 30초 · 7–10장 결과 중심(절반 이하 · 85% · 점검 · 종 · 판정표) · 11장 방법의 이유 40초</td><td class="ok">✅</td></tr>
+<tr><td>2. 진단 / 예방·관리 / 치료 중 방향 명시</td><td>13장 「큐레이션 방향은 진단」 · 예방·관리·치료가 아닌 이유 · 「직접 진단하지는 않습니다」</td><td class="ok">✅</td></tr>
+<tr><td>2. 분석 결과 → 큐레이션 연결</td><td>12장 「남은 질문 넷 = 큐레이션의 출발점」 → 13장 방향 → 14장 2단계가 절대량 · 반복 · 부위를, 본 검증이 표본을 풂</td><td class="ok">✅</td></tr>
+<tr><td>2. 과학적 · 논리적 타당성</td><td>6장 라벨 미사용 · 3–20배 · 측정 전 고정 / 7장 순위 비교 이유 / 8장 나이 · 피지 · 계산 방식 점검 / 9장 종 / 11장 함정마다 방법 · AI 밖 기준 / 20장 한계</td><td class="ok">✅</td></tr>
+<tr><td>3. 사업화 · 제품 · 서비스로의 발전 가능성</td><td>14장 두 단계 서비스 / 15장 고객이 받는 세 장 / 18장 가격 구조</td><td class="ok">✅</td></tr>
+<tr><td>3. 후속 연구 · 실증</td><td>19장 파일럿 → 군당 74명(예비 산정) → 측정 전 등록</td><td class="ok">✅</td></tr>
+<tr><td>3. 임상 · 헬스케어 · 화장품 활용</td><td>16장 화장품 R&amp;D(주 고객) · 임상 연구팀 · 소비자 검사 업체</td><td class="ok">✅</td></tr>
+<tr><td>3. 지금 시장에서 활용 가능한 형태인가</td><td>16장 「지금 바로 쓸 수 있는 것은 1단계 — 7곳 · 11개에 실제로 돌려 봄」 · 2단계는 파일럿 뒤</td><td class="ok">✅</td></tr>
+<tr><td>3. 기존 제품·서비스·기술·연구 대비 차별점</td><td>17장 「그들은 신호를 팔고, 저희는 그 신호를 믿고 쓸 수 있는지 판정」 · 원 논문 대비 / 18장 측정 기술 대비(해상도)</td><td class="ok">✅</td></tr>
+<tr><td>3. 한계와 보완 방향</td><td>20장 한계 여섯 → 보완(대상 · 표본 · 종 · 반복측정 · 음성대조 · 입력) + 패널의 한계</td><td class="ok">✅</td></tr>
+<tr><td>3. 아이디어 형태 명시</td><td>1장 배지 · 14장 「아이디어 형태는 서비스, 확장은 연구 — 받는 것이 리포트라 기술이 아니고, 패널은 설계안이라 제품도 아님」 · 사업화가 아닌 이유(가격 미정)는 14장 메모</td><td class="ok">✅</td></tr>
+<tr><td>4. 하나의 흐름 — 권장 6단계</td><td>시간표의 「안내문 단계」 열 그대로(배경 → 데이터 → 분석·결과 → 큐레이션 도출 → 최종 제안 → 적용·확장 → 마무리)</td><td class="ok">✅</td></tr>
+<tr><td>4. 20분 이내 · 이전 멘토링 반영</td><td>추정 19분 안팎(위 시간표) · 멘토링 반영은 2-3</td><td class="ok">✅ 리허설로 확인</td></tr>
+</tbody></table></div></details>
+
+<details class="blk"><summary>2-2. 프로젝트_요약_안내문기준_261008 → 대본 위치 (10/9 팀 결정으로 바뀐 것은 「갱신」)</summary>
+<div class="tw"><table><thead><tr><th>요약 절</th><th>내용</th><th>대본 위치</th><th>상태</th></tr></thead><tbody>
+<tr><td>§0</td><td>한 문장 — 새로 찾기 전에 후보부터 심사 → 분석 서비스</td><td>1장 · 2장 「새 균을 찾기 전에, 후보부터 심사」 · 6장 「심사부터 한 이유」</td><td class="ok">✅</td></tr>
+<tr><td>§1</td><td>흔하다 71% · 40% / 기준이 없다(증후군 · 설문 · 자통 · TEWL) / 질문 셋</td><td>2장</td><td class="ok">✅</td></tr>
+<tr><td>§1</td><td>주류 기전 종설에 미생물 없음 · 임상 사설</td><td>사설은 17장 본문 · 기전 종설은 2장 메모</td><td class="pt">🟡</td></tr>
+<tr><td>§1</td><td>마이크로바이옴 자료의 함정 · 「유의한데 못 쓴다」</td><td>4장 관문 · 6장 <i>Lactobacillus</i> · 11장 · 21장</td><td class="ok">✅</td></tr>
+<tr><td>§1</td><td>우리 자리 — 적격성 판정 · 원 논문과 같은 방향</td><td>8장 · 17장</td><td class="ok">✅</td></tr>
+<tr><td>§2</td><td>모두 공개 자료 · 필요 ①②③ · 합치지 않음 · 595명엔 민감 판정 없음 · 7곳/11개 · 질환 제외 · 입력 요건</td><td>3장</td><td class="ok">✅</td></tr>
+<tr><td>§2</td><td>05 장내 · 06 정량 없음</td><td>3장 메모</td><td class="pt">🟡</td></tr>
+<tr><td>§3-1</td><td>다섯 관문 + ⑥ · 라벨 미사용 규칙 · 사후 규칙 · 시드 고정</td><td>4장 · 6장 · 10장 / 시드 고정은 4장 메모(화면에 있음)</td><td class="ok">✅</td></tr>
+<tr><td>§3-2</td><td>판정표 네 후보 · 조건부 · 순위 아님 · 반복측정 일치도</td><td>10장</td><td class="ok">✅</td></tr>
+<tr><td>§3-3</td><td>① 절반 이하 · 85% ② 점검 ③ 종 ④ ρ −0.979 ⑤ 방법을 바꿔도 같음</td><td>7 · 8 · 9 · 12장</td><td class="ok">✅ 갱신 — 「착시를 지웠다」 → 「점검해도 유지」</td></tr>
+<tr><td>§4-1</td><td>진단 · 예방관리 · 치료</td><td>13장</td><td class="ok">✅</td></tr>
+<tr><td>§4-2</td><td>결과가 남긴 질문 → 서비스 설계(주 지표 · 절대량 · 반복 · 부위 · 74명 · 종 특이 · 음성대조 · 등록 · 입력 요건)</td><td>9 · 12 · 14 · 19 · 20장</td><td class="ok">✅ 갱신 — 「4개당 1개」 → 「모든 처리 단계에」</td></tr>
+<tr><td>§4-3</td><td>타당성 다섯(라벨 미사용 · 문턱 · 점검 · 같은 방향 · 재실행)</td><td>6 · 8 · 17장 / <i>Rothia</i> · 재실행은 메모</td><td class="ok">✅</td></tr>
+<tr><td>§5-1</td><td>두 단계 서비스 · 고객 · 위탁 측정 · 패널 기본안 · 설계안</td><td>14 · 15장 / 패널 표적 이름은 15장 메모(화면에 있음)</td><td class="ok">✅ 갱신 — 전체 세균량 포함(D3)</td></tr>
+<tr><td>§5-2</td><td>「바꿨다, 왜」</td><td>14장 한 문장 · 「버린 것 없음」은 메모</td><td class="ok">✅ 갱신 — 날짜 없이(팀 결정)</td></tr>
+<tr><td>§6-1</td><td>아이디어 형태 서비스(확장: 연구) · 다른 형태가 아닌 이유</td><td>14장</td><td class="ok">✅</td></tr>
+<tr><td>§6-2</td><td>비용 · 가격 구조</td><td>18장</td><td class="ok">✅ 갱신 — $87–$178 → $107–$256 · 「절반 이하」 → 「6할 안팎」 · 5–8시간 → 4–8시간</td></tr>
+<tr><td>§6-3</td><td>파일럿 · 군당 74명 근거 · 「확실히」 금지</td><td>19장</td><td class="ok">✅</td></tr>
+<tr><td>§6-4 · 6-5</td><td>세 분야 · 지금 1단계 → 2단계 → 확장 · 결론 문장</td><td>16장 · 21장</td><td class="ok">✅</td></tr>
+<tr><td>§6-6</td><td>시장 · 7곳 기준값 못 찾음 · 차별점 · 기존 연구</td><td>17장 / 면책 문구는 메모</td><td class="ok">✅ 갱신 — $119 → $149(10/8 확인)</td></tr>
+<tr><td>§6-7</td><td>한계 · 보완 · 확장 여섯 갈래</td><td>19 · 20장 / 42명 라벨은 20장 메모</td><td class="ok">✅</td></tr>
+<tr><td>§7 · §8</td><td>6단계 · 20분 / 쓰지 말 말</td><td>전체</td><td class="ok">✅ 본문에 금칙어 없음(독립 검토 확인)</td></tr>
+<tr><td>§5-2 · §9</td><td>중간발표 날짜 · 9/12 세부 · 「중간발표 때부터 같은 고객」</td><td>—</td><td class="no">✖ 10/9 팀 결정(날짜 · 중간발표 세부에 기대지 않음)</td></tr>
+</tbody></table></div></details>
+
+<details class="blk" open><summary>2-3. 온라인멘토링 폴더 반영 (녹취 1·2회차 · 정리 · 당시 발표 자료와 대본 · 반영 대조표 78건)</summary>
+<div class="tw"><table><thead><tr><th>78건 기준</th><th>✅ 본문에서 말함</th><th>🟡 메모·카드만</th><th>❌ 없음</th><th>➖ 조치 불필요</th></tr></thead><tbody>
+<tr><td>대본 v2 (독립 검토 판정 + 수정 뒤 다시 셈)</td><td class="r">51</td><td class="r">6</td><td class="r">0</td><td class="r">21</td></tr>
+</tbody></table></div>
+<div class="tw"><table><thead><tr><th>덱 화면에 덜 반영된 피드백(대조표 §3)</th><th>대본이 말로 메운 곳</th><th>상태</th></tr></thead><tbody>
+<tr><td>D21 · B27 「시간」 대신 반복측정 일치도</td><td>10 · 12 · 20장 「반복측정 일치도」 · 20장 메모 「화면의 시간 안정성은 읽지 않기」</td><td class="ok">✅</td></tr>
+<tr><td>D13 · D14 나이 보정 — 더하지 않았다 · 스케일 · RF · 재대입</td><td>8장 「각각 표준화해 함께 넣은 모형 · 값을 더한 것이 아닙니다 · 판별력이 오른 것은 <i>Malassezia</i>뿐」 · 메모 재대입 / 한 명씩 빼기 · 과적합</td><td class="ok">✅</td></tr>
+<tr><td>B18 · B13 · B6 후보 생물학</td><td>7장 <i>Malassezia</i>(지방산 · 피지) · 10장 <i>Cutibacterium</i>(모낭 피지) · <i>Staphylococcus</i>(성질이 다른 종이 섞임) · <i>Corynebacterium</i>은 메모</td><td class="pt">🟡 세균 하나는 메모</td></tr>
+<tr><td>D15 비율 표현 3종</td><td>10장 「원래 비율, 로그비, 구강균이 적은 218명 — 세 계산에서 결과가 달랐다」</td><td class="ok">✅</td></tr>
+<tr><td>B37 강점 부각</td><td>11장 「불리한 쪽으로도 고쳤습니다」 · 21장 「함정을 하나씩 점검했고, 풀지 못한 것은 한계로」</td><td class="ok">✅</td></tr>
+<tr><td>B38 · D4 프로토콜 전달 · 「주워담고 쳐낸 것」</td><td>14장 「프로토콜은 저희가 정해 넘깁니다」 · 11장 「AI에 줄 규칙을 설계 · 결론까지 반대였던 일을 잡아 원문만 근거로 쓰는 규칙」</td><td class="ok">✅</td></tr>
+<tr><td>D12 정규성은 고른 뒤</td><td>7장 「고른 뒤 점검에서도 여덟 중 일곱 기각」</td><td class="ok">✅</td></tr>
+<tr><td>D32 0 과다 모형</td><td>즉답 카드 — 해 보지 않음 · 42명 기준 · 배치 차이 · 한계</td><td class="pt">🟡 질문 대비</td></tr>
+<tr><td>D16 · B17 오염 단계 · <i>Cladosporium</i></td><td>6장 「공기 중 환경 곰팡이인 <i>Cladosporium</i>을 뺐습니다」(블랭크는 말하지 않음) · 8장 「오염은 배제하지 못해 2단계에 음성대조」 · 메모에 두 멘토 의견 차이</td><td class="ok">✅</td></tr>
+<tr><td>D23 · D8 · D22 패널의 한계 · 통제 가능/불가 · 입력</td><td>20장 「패널은 정해 둔 균만 → 새 균은 1단계 판정으로」 · 「롱리드 같은 다른 입력은 아직」 / 통제 구분은 메모</td><td class="ok">✅ D8은 🟡</td></tr>
+<tr><td>B39 규모 — 소규모 · 현실적</td><td>19장 「대규모 연구보다는 작지만 … 현실적인 1차 검증」</td><td class="ok">✅</td></tr>
+<tr><td>B29 기준 균주 · 목표치</td><td>19장 「주 지표 · 문턱 · 분석을 측정 전에 등록」 · 표준 물질은 메모 · 카드</td><td class="pt">🟡</td></tr>
+<tr><td>D10 · B21 <i>Streptococcus</i></td><td>5장 「입과 목에 흔한 균이라 세척액에 섞였을 수 있습니다. 어느 쪽이든 …」(단정 없음) · 피부 상재 보고는 메모 · 카드</td><td class="ok">✅ D10은 🟡</td></tr>
+<tr><td>D37 외부 자료를 산출물 단계에서 정당화</td><td>15장 「입력 줄에 외부 595명이 있는 것은 … 저희가 외부 자료를 쓴 이유와 같습니다」</td><td class="ok">✅</td></tr>
+<tr><td>B8 「원인이 아님」 단정</td><td>13장 「원인이라는 뜻이 아닙니다」</td><td class="ok">✅</td></tr>
+<tr><td>D29 자체 가격</td><td>18장 구조 · 「가격 숫자는 아직 정하지 않았습니다」 · 카드 「서비스 가격은 얼마?」</td><td class="pt">🟡 숫자 미정</td></tr>
+<tr><td>D5 · D6 AI를 처음부터</td><td>1장 「분석은 AI와 함께, 무엇을 볼지와 판정은 저희가」 · 4장 · 11장</td><td class="ok">✅</td></tr>
+<tr><td>D31 「실험 설계부터 서비스」는 슬라이드에 넣지 말 것</td><td>본문에서 말하지 않음 · 16장 메모 · 카드 「생각해 봤다」</td><td class="ok">✅</td></tr>
+<tr><td>B9 · B15 · B34 보류 항목</td><td>즉답 카드 세 장(적으면 건강하지 않은가 · 두 가정 분석 · <i>Epicoccum</i>)</td><td class="ok">✅ 질문 대비</td></tr>
+</tbody></table></div>
+<p class="sub">멘토가 하지 말라고 한 것 — 본문 0건: 「나이 위에 더함」 · 「시간 안정성」 · 멘토 발언 「」 직접 인용 · 「실험 설계 단계부터」 · 다른 연구 블랭크를 근거로 · 「정규성을 확인하고 골랐다」 · 「두 자료」 · 「25개를 합쳤다」. 멘토링 당시 잘못 말한 숫자(비민감 11명 · 3분의 1 · 128명)는 반복하지 않음(19명 · 3분의 2 · 218명).</p>
+<p class="sub">녹취에는 있으나 정리 문서 · 대조표에 없던 것(독립 검토가 찾음) — 2회차 21:41 멘토가 산출물을 「진단 지표 또는 기업의 실험 설계 검증 서비스」로 이해 · 21:57 「실험 설계부터」를 빼라는 이유(「데이터 분석과 아예 다른 얘기」) → 16장 메모에 반영 · 21:11 팀이 스스로 밝힌 5배 규칙의 약점 → 즉답 카드 추가 · 1회차 19:53 「점수를 매길 때 왜 그 균인지 생물학 근거」 → 10장 「등급은 순위가 아니라 다음 할 일」과 생물학 한 줄.</p>
+</details>
+
+<details class="blk"><summary>2-4. 팀원 메모(덱 v3 기준 슬라이드 번호 → 대본 장 = 번호 + 1) 반영</summary>
+<div class="tw"><table><thead><tr><th>팀원 메모</th><th>대본 · 덱 v4</th><th>상태</th></tr></thead><tbody>
+<tr><td>1 민감피부로 방향을 잡은 이유</td><td>2장 「저희가 민감피부를 고른 이유가 여기 있습니다 — 흔한데 객관적 지표가 비어 있으니 …」</td><td class="ok">✅</td></tr>
+<tr><td>2 자료 7곳인데 코호트 11개?</td><td>3장 「세균과 진균, 부위를 따로 세어 코호트는 열한 개」 · 메모 산식 · 카드</td><td class="ok">✅</td></tr>
+<tr><td>3 원자료 25개는 무엇?</td><td>덱 v4가 「입력 파일 25개 · 공개 가공 자료」로 바꿈 · 4장 메모 · 카드 · 대본은 「원자료」라는 말을 쓰지 않음</td><td class="ok">✅</td></tr>
+<tr><td>3 · 9 판정표가 뭔지 · 「성적표」와 이름 불일치</td><td>4장 「후보마다 한 줄로 모은 것이 판정표」 · 10장 「판정표 한 장에 모았습니다」 — 덱 v4도 「판정표 — 네 후보」로 통일</td><td class="ok">✅</td></tr>
+<tr><td>4 <i>Streptococcus</i> 「대표 피부 감염균」</td><td>넣지 않음 · 5장 메모 · 카드에 이유</td><td class="no">✖ 팀 결정(최종덱계획 v4 §5): 근거 문서 없음 · 속 전체를 병원성으로 묶으면 과장 · 이 장의 논점은 30.7배</td></tr>
+<tr><td>4 비민감 분포가 없음</td><td>5장 「민감·비민감을 나누기 전 전체 구성」 · 메모 「비교는 7장부터」</td><td class="ok">✅</td></tr>
+<tr><td>5 후보 4개를 가른 판정과 판정표는 다른가 · <i>Lactobacillus</i></td><td>6장 「판정 전, 후보를 고르는 단계」 · 「세 질문 모두에 걸렸습니다」 · 메모 · 카드</td><td class="ok">✅</td></tr>
+<tr><td>7 계산 방식 · RF도 보탬?</td><td>8장 「표준 통계 패키지 · 로그비 · 랜덤포레스트로 바꿔도 판별력이 오른 것은 <i>Malassezia</i>뿐」 · 메모 RF 기준선 0.51</td><td class="ok">✅</td></tr>
+<tr><td>8 BLAST 결과 이유 · 「종을 안 본 것이 아니라」 멘트</td><td>9장 「16S의 짧은 구간으로는 포도상구균 종을 가를 수 없다」 · 문제 멘트는 삭제하고 「볼 수 있는 곳에서는 종까지 봤습니다」로 시작</td><td class="ok">✅</td></tr>
+<tr><td>10 (적대적) 교차 검증 · AI를 주체적으로</td><td>11장 「AI는 적극적으로 쓰되, 기준은 저희가 AI 밖에 · 규칙 설계 · 적대적 교차 검증」</td><td class="ok">✅</td></tr>
+<tr><td>11 군당 74명은 어떻게?</td><td>19장 「AUC 0.65 · 검정력 80% → 57명 ÷ 증폭 성공률」 · 메모 산식</td><td class="ok">✅</td></tr>
+<tr><td>12 예방 · 관리 · 치료 글 줄이기</td><td>덱 v4에서 한 줄씩으로 줄임 · 대본은 안내문 2 요건이라 이유를 말함</td><td class="ok">✅</td></tr>
+<tr><td>13 「형태가 바뀐 길」 · 「고객 · 하지 않는 것」 불필요</td><td>덱 v4에서 두 상자 삭제 · 대본은 14장 한 문장(「판정표에서 시작해 … 서비스로 키웠습니다」)</td><td class="ok">✅</td></tr>
+<tr><td>13 4조 qPCR 자료</td><td>—</td><td class="no">✖ 보류(최종덱계획 v4 §5): 출처 · 사용 조건 확인과 검증 시간이 없음 · 11.7 경진대회 전에 확인</td></tr>
+<tr><td>14 A4 리포트 느낌</td><td>덱 v4 15장 A4 판정 리포트 · 대본 「저희 자료로 실제로 낸 판정 그대로」</td><td class="ok">✅</td></tr>
+<tr><td>아이디어 형태 명시 확인</td><td>1장 배지 · 14 · 16 · 21장 화면 · 14장 대본(형태 · 이유 · 다른 형태가 아닌 이유)</td><td class="ok">✅</td></tr>
+</tbody></table></div></details>
+
+<details class="blk" open><summary>2-5. 덱 v4 화면에 남은 것 — 화면은 그대로 두고, 고치면 좋은 곳(팀 판단)</summary>
+<div class="tw"><table><thead><tr><th>장</th><th>지금 화면</th><th>제안</th><th>근거</th></tr></thead><tbody>
+<tr><td>20</td><td>「다른 부위·계절 자료에서 시간 안정성 낮음」</td><td>「… 반복측정 일치도 낮음(0.10–0.38)」 · 노트 두 곳도</td><td>멘토링 D21</td></tr>
+<tr><td>8 각주</td><td>「예측 AUC」</td><td>「재대입 AUC(한 명씩 빼고 검증 +0.27)」</td><td>D14 · results/로지스틱_표준대조</td></tr>
+<tr><td>11 · 부록 C</td><td>「「나이만」 vs 「나이 + 균」」 · 「나이 + <i>Malassezia</i>」</td><td>「나이만 vs 나이·균 두 변수」</td><td>D13</td></tr>
+<tr><td>8 ②</td><td>피지 칸 「✓」</td><td>「유지」 또는 「참고」 — 「차이를 찾지 못함(신뢰구간 넓음)」이 통과로 읽히지 않게</td><td>B24</td></tr>
+<tr><td>10</td><td>「◐ 표현 의존」 칩만</td><td>각주에 「표현 3종 = 원래 비율 · 로그비 · 구강 의심 10속 합 &lt; 20%인 218명(부록 A2)」</td><td>D15</td></tr>
+<tr><td>13</td><td>「적게 관찰됐을 뿐 원인이 아님」</td><td>「원인이라는 뜻은 아님」</td><td>B8</td></tr>
+<tr><td>21</td><td>강점 선언이 노트에만 · 노트 「함정을 스스로 걸렀고」</td><td>「결과」 칸에 「함정을 다섯 관문으로 점검 — 불리한 방향으로도 고침」 · 노트는 「점검했고, 풀지 못한 것은 한계로」</td><td>B37 · 표현 수위</td></tr>
+<tr><td>부록 A</td><td>「분포가 쏠려 있어(8개 중 7개 기각) 순위로 비교했다」 · 「0 과다 … 필요한 상황이 아니다」</td><td>「목표 지표가 AUC라 순위 비교 · 고른 뒤 점검에서 8개 중 7개 기각」 · 「42명 기준 0인 사람 없음 · 배치가 달라 전용 모형은 적용하지 않음 — 한계」</td><td>D12 · D32</td></tr>
+<tr><td>6</td><td><i>Cladosporium</i> 상자가 「블랭크 1위」를 먼저</td><td>「환경 곰팡이(생물학) → 블랭크는 참고」 순서로</td><td>D16 · B17</td></tr>
+</tbody></table></div></details>
+
+<details class="blk"><summary>2-6. 발표 전에 확인할 것 (대본 밖)</summary>
+<div class="tw"><table><thead><tr><th>항목</th><th>왜</th></tr></thead><tbody>
+<tr><td>18장 $107–$256 팀원 검산</td><td>10/9 재계산 — 최종덱계획 §6-1 · 덱 노트 「팀원 검산 뒤 발표」</td></tr>
+<tr><td>17장 Superbiome $149 · HelloBiome 「종 수준 표방」 원문 재확인</td><td>10/8 접속 기준 — 최종덱계획 §6-2</td></tr>
+<tr><td>16장 임상 카드와 「실험 설계부터 서비스」(슬라이드에 넣지 말라는 조언) 겹침</td><td>팀 판단으로 남아 있음 — 최종덱계획 §8</td></tr>
+<tr><td>한 명씩 빼고 검증한 값 — 0.847(표준 패키지) · 0.854(팀 9번 코드)</td><td>둘 다 +0.27 → 질문에는 「약 0.85, +0.27」로 답하고 방식을 물으면 구분</td></tr>
+<tr><td>발표자 이름 · 리허설 장별 스톱워치</td><td>팀 결정 D6(한 명) · 추정 속도(분당 약 276자)는 리허설로 보정</td></tr>
+<tr><td>「역할 분담은?」 답할 내용</td><td>멘토링 D38 — 장별 담당은 팀이 확인</td></tr>
+</tbody></table></div></details>
+
+
+<div class="sec-h">3. 장별 슬라이드와 대본</div>
+<article class='row' id='s1'><div class='left'><div class='lab'>표지 <small>(덱 화면 번호 표지)</small> · 민감피부 지표 판정과 패널 설계 서비스</div><div class='frame'><div class='sbox'><section class="slide on bg-ink cover" data-title="표지" >
+<div class="cover-g">
+ <div>
+  <div class="cover-org">동의대학교 바이오헬스 혁신융합대학사업단 · 마이크로바이옴 데이터 큐레이션</div>
+  <h1 class="cover-t">민감피부 지표 판정과<br>패널 설계 서비스</h1>
+  <p class="cover-s">피부 미생물을 민감피부의 지표로 써도 되는지 판정하고,<br>판정된 균만 잽니다</p>
+  <div class="cover-by">2조 우리를놓아조 · 박세준 · 장수미 · 이승민</div>
+  <div class="cover-d">2026. 10. 10. 최종 피칭 · v4 2026-10-09</div>
+  <div style="margin-top:14px"><span class="idea"><b>큐레이션 방향</b>진단</span> <span class="idea"><b>아이디어 형태</b>서비스 · 확장: 연구</span></div><div class="ailine" style="margin-top:14px"><b>AI</b>분석 실행 — Claude<b class="p">사람</b>관문 · 판정 규칙 · 판정 등급 — 2조</div>
+ </div>
+ <div class="cover-road"><div class="cover-road-h">오늘의 흐름</div><ol><li><b>1</b>주제 선정 배경</li><li><b>2</b>데이터셋 선정 이유</li><li><b>3</b>데이터 분석과 주요 결과</li><li><b>4</b>결과에서 큐레이션 도출</li><li><b>5</b>최종 큐레이션 제안</li><li><b>6</b>실제 적용 가능성과 확장</li></ol></div>
+</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st'>표지</span><span class='t'>⏱ 0:22 <small>(목표 0:15)</small></span></div><div class='script'><p>안녕하세요, 2조 우리를놓아조입니다.</p><p>저희는 피부 미생물을 민감피부의 지표로 <b>써도 되는지 판정</b>하고, 판정된 균만 재는 <b>분석 서비스</b>를 제안합니다. 분석은 AI와 함께 했고, 무엇을 볼지와 판정은 저희가 했습니다.</p></div><details class='memo'><summary>발표자 메모 · 질문 대비 · 금칙</summary><ul><li>화면의 「큐레이션 방향: 진단 · 아이디어 형태: 서비스 · 확장: 연구」 배지와 「AI · 사람」 줄을 가리키며 시작.</li><li>「오늘의 흐름」 여섯 단계는 읽지 않고 가리키기만.</li></ul></details></div></article><article class='row' id='s2'><div class='left'><div class='lab'>2장 <small>(덱 화면 번호 1)</small> · 민감피부는 흔한데, 가를 기준이 없습니다</div><div class='frame'><div class='sbox'><section class="slide on " data-step="1" data-title="주제 선정 배경" >
+<div class="s-head"><div class="eye">0 · 주제 선정 배경</div><div class="steps"></div></div>
+<h2 class="title">민감피부는 흔한데, 가를 기준이 없습니다</h2>
+<div class="ailine"><b>AI</b>문헌 검색 · 원문에서 해당 문장 추출 — 메타분석(Chen 2020)은 초록 수준까지만 확인</div>
+<div class="s-body"><div class="g-bg">
+ <div class="hero-box">
+  <div class="hero-n">71<span>%</span></div><div class="hero-l">스스로 「조금이라도 민감하다」</div>
+  <div class="hero-n2">40<span>%</span></div><div class="hero-l">「보통 이상 민감하다」</div>
+  <div class="hero-src">일반인 · 18개국 51,783명 메타분석 (자기보고)</div>
+ </div>
+ <div>
+  <div class="lbl">지금 쓰는 도구로는 객관적으로 가를 수 없습니다</div>
+  <div class="tools"><div class="tool"><div class="tool-i"><svg viewBox="0 0 40 40" width="38" height="38"><rect x="8" y="6" width="24" height="30" rx="3" fill="none" stroke="#1B4D3E" stroke-width="2.5"/><rect x="14" y="3" width="12" height="6" rx="2" fill="#1B4D3E"/><path d="M13 17h14M13 23h14M13 29h9" stroke="#1B4D3E" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="tool-n">설문 (SS-10)</div><div class="tool-w">10문항에 본인이 답함</div><div class="tool-x"><span>✕</span>본인 답이 곧 정답</div></div><div class="tool"><div class="tool-i"><svg viewBox="0 0 40 40" width="38" height="38"><path d="M20 5 C 26 14 30 19 30 25 a10 10 0 0 1 -20 0 C10 19 14 14 20 5z" fill="none" stroke="#1B4D3E" stroke-width="2.5"/><path d="M15 26 a5 5 0 0 0 5 5" stroke="#1B4D3E" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg></div><div class="tool-n">유산 자통시험</div><div class="tool-w">젖산을 바르고 따가움 채점</div><div class="tool-x"><span>✕</span>결과가 일관되지 않음</div></div><div class="tool"><div class="tool-i"><svg viewBox="0 0 40 40" width="38" height="38"><rect x="5" y="27" width="30" height="7" rx="2" fill="#1B4D3E"/><path d="M12 22c-3-4 3-6 0-10M20 22c-3-4 3-6 0-10M28 22c-3-4 3-6 0-10" stroke="#1B4D3E" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg></div><div class="tool-n">TEWL</div><div class="tool-w">피부 수분 손실량</div><div class="tool-x"><span>✕</span>장벽만 봄 · 기준선 없음</div></div></div>
+  <div class="defn">민감피부 = 질환이 아닌 <b>증후군</b> — 보통은 자극이 안 되는 것에 따가움·화끈거림·가려움을 느낌 (IFSI 2017)</div>
+ </div>
+</div>
+<div class="q-band"><span>그래서 저희 질문</span><div>피부 미생물로 민감피부를 가를 수 있을까?<small>그 균을 판별 패널에 넣어도 되는가 · 무엇을 보정해야 하나 · 그러고도 남는가</small></div></div></div>
+<div class="foot">Chen W 외. J Eur Acad Dermatol Venereol 2020 — 메타분석 26개 연구 · 71% [62–81] · 40% [32–47] (초록 수준 확인 · 설문 기반이라 과대추정 가능) · Misery L 외. Acta Derm Venereol 2017 (IFSI 정의) · Ann Dermatol 종설 doi:10.5021/ad.24.157</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st'>① 주제 선정 배경</span><span class='t'>⏱ 1:00 <small>(목표 1:00)</small></span></div><div class='script'><p>민감피부는 흔합니다. 18개국 5만여 명을 모은 메타분석에서 일반인의 <b>71%</b>가 조금이라도, <b>40%</b>가 보통 이상 민감하다고 답했습니다.</p><p>그런데 정말 민감한지를 <b>객관적으로 가를 기준이 없습니다.</b> 질환이 아닌 증후군이라 진단 표준이 없고, 설문은 본인 답이 곧 정답, 자통시험은 결과가 일관되지 않고, 수분 손실 측정은 장벽만 봅니다.</p><p>저희가 민감피부를 고른 이유가 여기 있습니다. 흔한데 객관적 지표가 비어 있으니, <b>숫자로 잴 수 있는 피부 미생물</b>이 그 자리를 채울 수 있는지 — <b>새 균을 찾기 전에, 후보부터 심사</b>하기로 했습니다. 질문은 이것입니다. <b>이 균을 판별 패널에 넣어도 되는가, 무엇을 보정해야 하고, 그러고도 남는가.</b></p></div><details class='memo'><summary>발표자 메모 · 질문 대비 · 금칙</summary><ul><li>71% · 40%는 자기보고 설문 기반 메타분석(Chen 2020 · 26개 연구 · 51,783명 · 초록 수준 확인) — 「과대추정 가능」 질문이 오면 인정.</li><li>「다른 팀과 차별화하려고」는 말하지 않기.</li><li>미생물은 아직 주류 기전 설명에 들어 있지 않음 → 그래서 새 후보 찾기보다 심사가 먼저 — 질문이 오면 이렇게.</li></ul></details></div></article><article class='row' id='s3'><div class='left'><div class='lab'>3장 <small>(덱 화면 번호 2)</small> · 필요한 것을 따라가니, 이 자료들이었습니다</div><div class='frame'><div class='sbox'><section class="slide on " data-step="2" data-title="데이터셋 선정 이유" >
+<div class="s-head"><div class="eye">0 · 데이터셋 선정 이유</div><div class="steps"></div></div>
+<h2 class="title">필요한 것을 따라가니, 이 자료들이었습니다</h2>
+<div class="ailine"><b>AI</b>595명 엑셀(48만 칸)을 외부 라이브러리 없이 읽는 파서 작성 · 입력 파일 25개는 SHA-256 으로 고정</div>
+<div class="s-body"><div class="g-data">
+ <div class="needs">
+  <div class="need"><div class="nn">①</div><div class="nt"><b>민감/비민감 라벨</b><span>민감피부를 가르는지 보려면</span></div><div class="na">→</div><div class="nd r-l">03 민감 42명<small>수업 17편 중 유일 · 검색한 범위에서 라벨·대조군·논문이 있는 한국인 코호트</small></div></div>
+  <div class="need"><div class="nn">②</div><div class="nt"><b>큰 표본 · 나이 · 피지</b><span>그 균이 나이·피지에 흔들리는지</span></div><div class="na">→</div><div class="nd r-e">외부 595명<small>한국인 여성 얼굴 · 20–79세</small></div></div>
+  <div class="need"><div class="nn">③</div><div class="nt"><b>다른 자료 · 반복 측정</b><span>다른 자료에서도 판정되나, 다시 재도 같은가</span></div><div class="na">→</div><div class="nd r-t">수업 5편 더<small>01 · 02 · 07 · 15 · 16</small></div></div>
+  <div class="bigstat" style="padding:4px 0 0"><svg class="flow7 chart" viewBox="0 0 560 70" role="img" aria-label="자료 7곳에서 코호트 11개: 세균 7, 진균 4"><g font-size="11" font-weight="800" text-anchor="middle"><rect x="0" y="6" width="34" height="28" rx="6" fill="#0f8f63"/><text x="17" y="24" fill="#fff">03</text><rect x="39" y="6" width="34" height="28" rx="6" fill="#1B4D3E"/><text x="56" y="24" fill="#fff">595</text><rect x="78" y="6" width="34" height="28" rx="6" fill="#3C6E91"/><text x="95" y="24" fill="#fff">01</text><rect x="117" y="6" width="34" height="28" rx="6" fill="#3C6E91"/><text x="134" y="24" fill="#fff">02</text><rect x="156" y="6" width="34" height="28" rx="6" fill="#3C6E91"/><text x="173" y="24" fill="#fff">07</text><rect x="195" y="6" width="34" height="28" rx="6" fill="#3C6E91"/><text x="212" y="24" fill="#fff">15</text><rect x="234" y="6" width="34" height="28" rx="6" fill="#3C6E91"/><text x="251" y="24" fill="#fff">16</text></g><path d="M282 20 H316" stroke="#5A6068" stroke-width="2.5"/><path d="M316 14 L326 20 L316 26 Z" fill="#5A6068"/><g><circle cx="344" cy="20" r="8" fill="#2a78d6"/><circle cx="364" cy="20" r="8" fill="#2a78d6"/><circle cx="384" cy="20" r="8" fill="#2a78d6"/><circle cx="404" cy="20" r="8" fill="#2a78d6"/><circle cx="424" cy="20" r="8" fill="#2a78d6"/><circle cx="444" cy="20" r="8" fill="#2a78d6"/><circle cx="464" cy="20" r="8" fill="#2a78d6"/><circle cx="490" cy="20" r="8" fill="#1baf7a"/><circle cx="510" cy="20" r="8" fill="#1baf7a"/><circle cx="530" cy="20" r="8" fill="#1baf7a"/><circle cx="550" cy="20" r="8" fill="#1baf7a"/></g><text x="134" y="58" font-size="15" font-weight="800" fill="#1B4D3E" text-anchor="middle">자료 7곳 (수업 6편 + 외부 1)</text><text x="404" y="58" font-size="13" font-weight="800" fill="#2a78d6" text-anchor="middle">세균 7</text><text x="520" y="58" font-size="13" font-weight="800" fill="#1baf7a" text-anchor="middle">진균 4</text><text x="447" y="5" font-size="11" fill="#5A6068" text-anchor="middle">세균 · 진균과 부위를 나눠 코호트 11개</text></svg></div>
+ </div>
+ <div>
+  <div class="dtgrid"><div class="dt r-x"><b>01</b><span>노화</span><em>진균 나이 확인</em></div><div class="dt r-t"><b>02</b><span>건강</span><em>이식성</em></div><div class="dt r-l"><b>03</b><span>민감 42명</span><em>판별력</em></div><div class="dt r-n"><b>04</b><span>질환</span><em>—</em></div><div class="dt r-n2"><b>05</b><span>장내</span><em>—</em></div><div class="dt r-n2"><b>06</b><span>화장품·수분</span><em>정량 없음</em></div><div class="dt r-t"><b>07</b><span>화장품</span><em>이식성·반복</em></div><div class="dt r-n"><b>08</b><span>질환</span><em>—</em></div><div class="dt r-n"><b>09</b><span>질환</span><em>—</em></div><div class="dt r-n"><b>10</b><span>질환</span><em>—</em></div><div class="dt r-n"><b>11</b><span>질환</span><em>—</em></div><div class="dt r-n"><b>12</b><span>질환</span><em>—</em></div><div class="dt r-n"><b>13</b><span>질환</span><em>—</em></div><div class="dt r-n"><b>14</b><span>질환</span><em>—</em></div><div class="dt r-t"><b>15</b><span>계절</span><em>이식성·반복·음성대조</em></div><div class="dt r-t"><b>16</b><span>비듬</span><em>이식성</em></div><div class="dt r-n"><b>17</b><span>질환</span><em>—</em></div><div class="dt r-e"><b>595</b><span>외부 · 한국인 여성 얼굴</span><em>사용 조건</em></div></div>
+  <div class="dtleg"><span><i class="r-l"></i>판별력</span><span><i class="r-e"></i>사용 조건</span><span><i class="r-t"></i>이식성·반복측정</span><span><i class="r-x"></i>교차 확인</span><span><i class="r-n"></i>질환 9편 — 질환 증상과 민감피부 증상을 가를 수 없음</span></div>
+ </div>
+</div>
+<div class="band soft">모두 공개 자료 재분석 · 값은 합치지 않음 — 채취법과 읽은 DNA 구간이 달라 판정은 각 자료 안에서만 · 595명엔 민감 판정이 없어 판별력은 42명에서만</div></div>
+<div class="foot">03: Keum HL 외. Microorganisms 2020 (PMC7409107) · 595명: AAML(mSystems 2026, PMC13595949)과 같은 기준 · 저자 GitHub 공개 파일 재분석 · 원 코호트 EGA EGAS00001007334(950명, 승인제) · 같은 코호트 FCIMB 2025(여성 740명) · 공개 DB 조사(검색일·검색어 기록 없음): ENA 한국 피부 2,286 run · NCBI 「sensitive skin」 검색 · 05 장내(분변) · 06 미생물 정량 자료 없음</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st'>② 데이터셋 선정 이유</span><span class='t'>⏱ 1:10 <small>(목표 1:15)</small></span></div><div class='script'><p>판별력을 보려면 민감과 비민감이 판정된 자료가 꼭 있어야 했습니다. 수업 자료 17편 중 이 조건을 갖춘 것은 <b>03번, 한국인 여성 42명</b> 하나였습니다.</p><p>42명으로는 균이 나이와 피지에 얼마나 흔들리는지 볼 수 없어, 같은 한국인 여성 얼굴 자료 <b>595명</b>을 외부 공개 자료에서 따로 구했습니다. 다른 자료에서도 되는지, 다시 재도 같은지 보려고 <b>수업 자료 다섯 편</b>을 더 썼고, 질환 자료는 민감피부와 증상을 가를 수 없어 뺐습니다. 자료는 일곱 곳, 세균과 진균, 부위를 따로 세어 코호트는 열한 개입니다.</p><p>모두 <b>공개 자료의 재분석</b>입니다. 채취법과 읽은 DNA 구간이 달라 <b>값을 합치지 않고 각 자료 안에서만 판정</b>했고, 595명엔 민감 판정이 없어 판별력은 42명에서만 봤습니다. 이 「관문마다 필요한 자료」가 그대로 <b>서비스의 입력 요건</b>이 됐습니다.</p></div><details class='memo'><summary>발표자 메모 · 질문 대비 · 금칙</summary><ul><li>7곳 → 11개: 03 · 15 · 16은 세균 · 진균 각 1(6) + 02 이마 · 볼(2) + 595명 · 07 세균(2) + 01 진균(1).</li><li>「20개 중 1개만?」: 수업 자료는 17편 · 그중 6편을 용도별로 사용(판별력 03 · 이식성 02 · 07 · 15 · 16 · 반복측정 07 · 15 · 교차 확인 01) · 질환 9편 제외 · 05 장내 · 06 정량 자료 없음.</li><li>595명 = AAML(mSystems 2026)과 같은 기준의 20–79세 여성 · 저자 공개 파일 · EGA 원시자료는 승인제. 「유일한」 · 「공개 DB 전수 조사」 단정 금지 — 「확보하고 검색한 범위에서」.</li><li>42명과 595명을 나란히 놓은 곳은 후보 선정의 자료 간 차이 점검(5배 규칙) 한 곳뿐.</li></ul></details></div></article><article class='row' id='s4'><div class='left'><div class='lab'>4장 <small>(덱 화면 번호 3)</small> · 자료 7곳을 같은 다섯 관문에 각각 넣었습니다</div><div class='frame'><div class='sbox'><section class="slide on " data-step="3" data-title="데이터 분석과 주요 결과" >
+<div class="s-head"><div class="eye">0 · 데이터 분석과 주요 결과</div><div class="steps"></div></div>
+<h2 class="title">자료 7곳을 같은 다섯 관문에 각각 넣었습니다</h2>
+<div class="ailine"><b>AI</b>원자료 파서 · 통계 함수 · 분석 코드 작성과 실행<b class="p">사람</b>관문과 판정 규칙 결정 · 핵심 수치를 원자료에서 다시 계산해 대조</div>
+<div class="s-body"><svg viewBox="0 0 1176 330" width="1176" height="330" class="chart" role="img"><rect x="322" y="72" width="116" height="250" rx="10" fill="#EEF4F0"/><circle cx="380" cy="22" r="15" fill="#1B4D3E"/><text x="380" y="28" font-size="16" font-weight="800" fill="#fff" text-anchor="middle">1</text><text x="380" y="54" font-size="13" font-weight="800" fill="#16191D" text-anchor="middle">늘 잡히나</text><text x="380" y="70" font-size="13" font-weight="800" fill="#16191D" text-anchor="middle">(검출)</text><rect x="452" y="72" width="116" height="250" rx="10" fill="#EEF4F0"/><circle cx="510" cy="22" r="15" fill="#1B4D3E"/><text x="510" y="28" font-size="16" font-weight="800" fill="#fff" text-anchor="middle">2</text><text x="510" y="54" font-size="13" font-weight="800" fill="#16191D" text-anchor="middle">나이·계산법에</text><text x="510" y="70" font-size="13" font-weight="800" fill="#16191D" text-anchor="middle">흔들리나</text><rect x="582" y="72" width="116" height="250" rx="10" fill="#EEF4F0"/><circle cx="640" cy="22" r="15" fill="#1B4D3E"/><text x="640" y="28" font-size="16" font-weight="800" fill="#fff" text-anchor="middle">3</text><text x="640" y="54" font-size="13" font-weight="800" fill="#16191D" text-anchor="middle">이름표를</text><text x="640" y="70" font-size="13" font-weight="800" fill="#16191D" text-anchor="middle">믿을 수 있나</text><rect x="712" y="72" width="116" height="250" rx="10" fill="#EEF4F0"/><circle cx="770" cy="22" r="15" fill="#1B4D3E"/><text x="770" y="28" font-size="16" font-weight="800" fill="#fff" text-anchor="middle">4</text><text x="770" y="54" font-size="13" font-weight="800" fill="#16191D" text-anchor="middle">민감/비민감을</text><text x="770" y="70" font-size="13" font-weight="800" fill="#16191D" text-anchor="middle">가르나</text><rect x="842" y="72" width="116" height="250" rx="10" fill="#EEF4F0"/><circle cx="900" cy="22" r="15" fill="#1B4D3E"/><text x="900" y="28" font-size="16" font-weight="800" fill="#fff" text-anchor="middle">5</text><text x="900" y="54" font-size="13" font-weight="800" fill="#16191D" text-anchor="middle">종까지</text><text x="900" y="70" font-size="13" font-weight="800" fill="#16191D" text-anchor="middle">말할 수 있나</text><g font-size="11" font-weight="800" fill="#0f8f63" text-anchor="middle"><text x="380" y="314">검출률 · 심도 상관</text><text x="510" y="314">Spearman · 로그비</text><text x="640" y="314">라벨 대조</text><text x="770" y="314">Mann–Whitney AUC</text><text x="900" y="314">ASV · BLAST</text></g><text x="0" y="97" font-size="14" font-weight="800" fill="#16191D">03 민감 42명</text><text x="150" y="97" font-size="11.5" fill="#5A6068">세균·진균 · 라벨</text><path d="M262,93 L900,93 C960,93 970,192 1010,192" fill="none" stroke="#3C6E91" stroke-width="2" opacity="0.75"/><circle cx="380" cy="93" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="510" cy="93" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="640" cy="93" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="770" cy="93" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="900" cy="93" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><text x="0" y="130" font-size="14" font-weight="800" fill="#16191D">외부 595명</text><text x="150" y="130" font-size="11.5" fill="#5A6068">세균 · 나이·피지</text><path d="M262,126 L900,126 C960,126 970,192 1010,192" fill="none" stroke="#3C6E91" stroke-width="2" opacity="0.75"/><circle cx="380" cy="126" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="510" cy="126" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="640" cy="126" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="770" cy="126" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="900" cy="126" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><text x="0" y="163" font-size="14" font-weight="800" fill="#16191D">01 노화 58명</text><text x="150" y="163" font-size="11.5" fill="#5A6068">진균 · 나이</text><path d="M262,159 L900,159 C960,159 970,192 1010,192" fill="none" stroke="#3C6E91" stroke-width="2" opacity="0.75"/><circle cx="380" cy="159" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="510" cy="159" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="640" cy="159" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="770" cy="159" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="900" cy="159" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><text x="0" y="196" font-size="14" font-weight="800" fill="#16191D">02 건강</text><text x="150" y="196" font-size="11.5" fill="#5A6068">세균 · 이마·볼</text><path d="M262,192 L900,192 C960,192 970,192 1010,192" fill="none" stroke="#3C6E91" stroke-width="2" opacity="0.75"/><circle cx="380" cy="192" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="510" cy="192" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="640" cy="192" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="770" cy="192" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="900" cy="192" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><text x="0" y="229" font-size="14" font-weight="800" fill="#16191D">07 화장품</text><text x="150" y="229" font-size="11.5" fill="#5A6068">세균 · 3시점</text><path d="M262,225 L900,225 C960,225 970,192 1010,192" fill="none" stroke="#3C6E91" stroke-width="2" opacity="0.75"/><circle cx="380" cy="225" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="510" cy="225" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="640" cy="225" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="770" cy="225" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="900" cy="225" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><text x="0" y="262" font-size="14" font-weight="800" fill="#16191D">15 계절</text><text x="150" y="262" font-size="11.5" fill="#5A6068">세균·진균 · 4계절</text><path d="M262,258 L900,258 C960,258 970,192 1010,192" fill="none" stroke="#3C6E91" stroke-width="2" opacity="0.75"/><circle cx="380" cy="258" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="510" cy="258" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="640" cy="258" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="770" cy="258" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="900" cy="258" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><text x="0" y="295" font-size="14" font-weight="800" fill="#16191D">16 비듬</text><text x="150" y="295" font-size="11.5" fill="#5A6068">세균·진균 · 두피</text><path d="M262,291 L900,291 C960,291 970,192 1010,192" fill="none" stroke="#3C6E91" stroke-width="2" opacity="0.75"/><circle cx="380" cy="291" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="510" cy="291" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="640" cy="291" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="770" cy="291" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><circle cx="900" cy="291" r="6.5" fill="#fff" stroke="#1B4D3E" stroke-width="2.5"/><rect x="1010" y="151" width="166" height="82" rx="12" fill="#1B4D3E"/><text x="1093.0" y="185" font-size="22" font-weight="800" fill="#fff" text-anchor="middle">판정표</text><text x="1093.0" y="211" font-size="12.5" fill="#CFE6DA" text-anchor="middle">후보 × 관문 × 다음에 할 일</text></svg>
+<div class="facts">
+ <div><b>입력 파일 25개</b>공개 가공 자료 — 균 비율표 · 사람 정보표 · DNA 서열표</div>
+ <div><b>자료마다 따로</b>합치지 않고 같은 관문에 각각</div>
+ <div><b>다시 돌려도 같은 값</b>시드 고정 · 다른 PC에서 다시 돌려도 발표 수치 동일</div>
+</div></div>
+<div class="foot">관문 = 마이크로바이옴 자료의 함정(비율 자료 · 시퀀싱 심도 · 분류 라벨 오류 · 시약 오염 · 채취법)을 막는 점검 · ④는 민감 라벨이 있는 03에서만 판정 가능 · 코드 1–23번 · 결과 37개 · 관문별 방법과 그 이유는 「왜 이 방법인가」 장</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st'>③ 데이터 분석과 주요 결과</span><span class='t'>⏱ 0:30 <small>(목표 0:30)</small></span></div><div class='script'><p>일곱 자료를 각각 <b>같은 다섯 관문</b>에 넣었습니다 — 늘 잡히는가, 나이나 계산 방식에 흔들리는가, 이름표를 믿을 수 있는가, 민감과 비민감을 가르는가, 종까지 말할 수 있는가.</p><p>그 결과를 후보 균마다 한 줄로 모은 것이 <b>판정표</b>입니다. <b>관문과 통과 기준은 저희가 정했고</b>, 코드는 Claude가 쓰고 돌렸습니다.</p></div><details class='memo'><summary>발표자 메모 · 질문 대비 · 금칙</summary><ul><li>입력 파일 25개 = 공개 가공 자료(속 비율표 · 사람 정보표 · ASV 표 등, tsv 22 · csv 1 · xlsx 2) — FASTQ 원시자료가 아님. 「원자료」라고 부르지 않기.</li><li>판정표 = 후보(행) × 관문(열) × 다음에 할 일. 10장 「판정표 — 네 후보」가 그 실물.</li><li>시드 고정 · 다른 PC에서 다시 돌려도 발표 수치 동일(화면 오른쪽 아래) — 재현성 질문이 오면.</li></ul></details></div></article><article class='row' id='s5'><div class='left'><div class='lab'>5장 <small>(덱 화면 번호 4)</small> · 같은 얼굴인데, 한 균이 30배 넘게 달랐습니다</div><div class='frame'><div class='sbox'><section class="slide on " data-step="3" data-title="데이터 분석과 주요 결과" >
+<div class="s-head"><div class="eye">0 · 데이터 분석과 주요 결과</div><div class="steps"></div></div>
+<h2 class="title">같은 얼굴인데, 한 균이 30배 넘게 달랐습니다</h2>
+<div class="s-body"><div class="legend"><span><i class="skin"></i>피부 상재균</span><span><i class="oral"></i>구강 유래로 알려진 균</span><span><i class="env"></i>환경 유래로 알려진 균</span><span><i class="etc"></i>기타 · 미분류</span><span class="lg-n">사람별 비율의 중앙값(%)</span></div>
+<div class="ranks"><div class="rank"><div class="rank-h">외부 595명 · 세균<span>얼굴 세척액</span></div><ol><li class="oral"><em><i>Streptococcus</i></em><b style="--w:100.0%"></b><s>18.2</s></li><li class="skin"><em><i>Cutibacterium</i></em><b style="--w:51.6%"></b><s>9.4</s></li><li class="skin"><em><i>Staphylococcus</i></em><b style="--w:30.2%"></b><s>5.5</s></li><li class="oral"><em><i>Rothia</i></em><b style="--w:23.1%"></b><s>4.2</s></li><li class="skin"><em><i>Corynebacterium</i></em><b style="--w:6.0%"></b><s>1.1</s></li><li class="oral"><em><i>Actinomyces</i></em><b style="--w:6.0%"></b><s>1.1</s></li><li class="oral"><em><i>Haemophilus</i></em><b style="--w:4.4%"></b><s>0.8</s></li><li class="oral"><em><i>Neisseria</i></em><b style="--w:3.8%"></b><s>0.7</s></li></ol></div><div class="rank"><div class="rank-h">03 민감 42명 · 세균<span>볼 면봉</span></div><ol><li class="etc"><em>미분류</em><b style="--w:100.0%"></b><s>26.2</s></li><li class="skin"><em><i>Cutibacterium</i></em><b style="--w:83.2%"></b><s>21.8</s></li><li class="env"><em><i>Delftia</i></em><b style="--w:11.1%"></b><s>2.9</s></li><li class="skin"><em><i>Staphylococcus</i></em><b style="--w:9.2%"></b><s>2.4</s></li><li class="env"><em><i>Rhodanobacter</i></em><b style="--w:5.7%"></b><s>1.5</s></li><li class="env"><em><i>Pseudomonas</i></em><b style="--w:5.0%"></b><s>1.3</s></li><li class="etc"><em><i>Lactobacillus</i></em><b style="--w:3.1%"></b><s>0.8</s></li><li class="skin"><em><i>Corynebacterium</i></em><b style="--w:3.1%"></b><s>0.8</s></li></ol></div><div class="rank"><div class="rank-h">03 민감 42명 · 진균<span>볼 면봉</span></div><ol><li class="skin"><em><i>Malassezia</i></em><b style="--w:100.0%"></b><s>66.4</s></li><li class="etc"><em>미분류</em><b style="--w:5.6%"></b><s>3.7</s></li><li class="env"><em><i>Cladosporium</i></em><b style="--w:1.8%"></b><s>1.2</s></li><li class="env"><em><i>Lasiobolus</i></em><b style="--w:1.5%"></b><s>1.0</s></li><li class="env"><em><i>Rhodotorula</i></em><b style="--w:1.4%"></b><s>0.9</s></li><li class="env"><em><i>Enterocarpus</i></em><b style="--w:0.8%"></b><s>0.5</s></li><li class="env"><em><i>Mucor</i></em><b style="--w:0.5%"></b><s>0.3</s></li><li class="env"><em><i>Fusarium</i></em><b style="--w:0.3%"></b><s>0.2</s></li></ol></div></div>
+<div class="takes">
+ <div><span class="tk">1</span><span>세균 — 피부 상재균 셋이 42명 · 595명 모두 상위</span></div>
+ <div><span class="tk">2</span><span>진균 — <i>Malassezia</i> 하나가 약 3분의 2</span></div>
+ <div class="hot"><span class="tk">3</span><span><i>Streptococcus</i> — 세척액 18.2% vs 면봉 0.6% → <b>조건이 다른 자료 사이 30.7배 차이</b></span></div>
+</div></div>
+<div class="foot">민감 vs 비민감 비교는 뒤의 장들에서 · 각 칸 상위 8개 · 막대는 칸마다 1위 기준 · 595명은 외부 공개 코호트 · 역할 색은 문헌상 서식지 기준이며 저희 자료에서 오염을 확인했다는 뜻이 아님 · results/595_genus_relabund.tsv · data/03_sensitive_16S·ITS_genus_pct.tsv</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st'>③ 데이터 분석과 주요 결과</span><span class='t'>⏱ 0:47 <small>(목표 0:40)</small></span></div><div class='script'><p>같은 한국인 여성 얼굴인데, <b>한 균이 30배 넘게 달랐습니다.</b> <i>Streptococcus</i>는 세척액으로 채취한 595명에서 18.2%로 1위, 볼 면봉 42명에서는 0.6%입니다. 입과 목에 흔한 균이라 세척액에 섞였을 수 있습니다. 어느 쪽이든, 조건이 다른 자료 사이에서 이렇게 달라지는 균은 <b>지표로 옮겨 쓰기 어렵습니다.</b></p><p>민감·비민감을 나누기 전 전체 구성을 보면, 세균은 두 자료 모두 <b>피부 상재균 셋</b>이 위에 있고, 진균은 <b><i>Malassezia</i> 하나가 약 3분의 2</b>입니다.</p></div><details class='memo'><summary>발표자 메모 · 질문 대비 · 금칙</summary><ul><li>민감 vs 비민감 비교는 7장부터 — 「비민감 분포가 왜 없나?」 질문이 오면 이렇게.</li><li><i>Streptococcus</i>를 「피부 감염균」 · 「피부에 없는 균」이라고 하지 않기 — 정상 피부에서도 보고됨(Gao 2007). 이 장의 논점은 병원성이 아니라 자료 간 30.7배.</li><li>42명과 595명은 나이 구성 · 읽은 DNA 구간도 달라 원인을 채취법 하나로 단정하지 않기.</li></ul></details></div></article><article class='row' id='s6'><div class='left'><div class='lab'>6장 <small>(덱 화면 번호 5)</small> · 807개 속에서 후보 4개를 골랐습니다</div><div class='frame'><div class='sbox'><section class="slide on " data-step="3" data-title="데이터 분석과 주요 결과" >
+<div class="s-head"><div class="eye">0 · 데이터 분석과 주요 결과</div><div class="steps"></div></div>
+<h2 class="title">807개 속에서 후보 4개를 골랐습니다<span class="sub2">판정 전 단계</span></h2>
+<div class="ailine"><b>AI</b>807속에 규칙 계산 · 탈락했어도 595명에서 흔한 속까지 42명 AUC 기록(8가설 BH)</div>
+<div class="s-body"><div class="g-sel">
+ <div class="funnel">
+  <div class="fh"><div></div><div>시작</div><div>① 흔한가<small>90% 이상 검출 · 중앙값 0.5%↑</small><small class="w">왜? 지표는 거의 모든 사람에게서 재져야</small></div><div>② 자료 간 차이가 작은가<small>42명↔595명 차이 5배 미만</small><small class="w">왜? 조건이 달라도 유지돼야 「균의 양」</small></div><div>③ 오염 점검<small>얕게 읽을수록 많은 균 · 블랭크 참고</small><small class="w">왜? 시약에서 온 균 거르기</small></div></div>
+  <div class="fr"><div class="fk">세균</div><div class="fn">807</div><div class="fn">4</div><div class="fn">3<em>− <i>Streptococcus</i></em></div><div class="fn">3</div></div>
+  <div class="fr"><div class="fk">진균</div><div class="fn">234</div><div class="fn">2</div><div class="fn na">—<em>595명에 진균 없음</em></div><div class="fn">1<em>− <i>Cladosporium</i></em></div></div>
+  <div class="cands"><span class="lb">후보 4</span><span class="cd"><i>Cutibacterium</i></span><span class="cd"><i>Staphylococcus</i></span><span class="cd"><i>Corynebacterium</i></span><span class="cd hi"><i>Malassezia</i></span><span class="small">세균 셋은 모두 피부 상재균 · <i>Malassezia</i>는 피지에 기대 사는 효모</span></div>
+  <div class="nolabel">✓ 선정식에 민감/비민감 라벨은 넣지 않았습니다 — 사후 규칙이라 후속 자료에서 고정해 확인</div>
+ </div>
+ <div class="drops">
+  <div class="drop"><div class="dh"><i>Streptococcus</i><span>②에서 탈락</span></div><div class="dn">세척액 18.2% vs 면봉 0.6% = <b>30.7배</b></div><div class="db">입·목에 가장 흔한 균 — 세척액 채취에서 섞일 수 있음</div></div>
+  <div class="drop"><div class="dh"><i>Lactobacillus</i><span>①②③ 모두 걸림</span></div><div class="dn">42명에선 민감군에 많았지만 595명 검출 63% · 중앙값 0.04% · 18배 · 심도 상관 ρ −0.31</div><div class="db">유의해도 못 쓰는 균 — 유산균 제품을 바르면 늘 수 있음</div></div>
+  <div class="drop"><div class="dh"><i>Cladosporium</i><span>③에서 탈락</span></div><div class="dn">다른 연구(15계절) 블랭크 1개에서 1위 — 참고값</div><div class="db">공기·실내외 어디에나 있는 환경 곰팡이</div></div>
+ </div>
+</div>
+<svg viewBox="0 0 1176 104" width="1176" height="104" class="chart" role="img"><rect x="422.6" y="26" width="522.5" height="44" fill="#0f8f63" opacity="0.10" rx="6"/><text x="683.8" y="21" font-size="13" font-weight="800" fill="#0f8f63" text-anchor="middle">기준을 3–20배 어디에 둬도 → 같은 3속 (검출 90% 문턱 기준)</text><line x1="120" y1="52" x2="1136" y2="52" stroke="#C3C2B7" stroke-width="1.5"/><line x1="120.0" y1="48" x2="120.0" y2="56" stroke="#C3C2B7"/><text x="120.0" y="72" font-size="11.5" fill="#8A8F96" text-anchor="middle">1배</text><line x1="310.9" y1="48" x2="310.9" y2="56" stroke="#C3C2B7"/><text x="310.9" y="72" font-size="11.5" fill="#8A8F96" text-anchor="middle">2배</text><line x1="422.6" y1="48" x2="422.6" y2="56" stroke="#C3C2B7"/><text x="422.6" y="72" font-size="11.5" fill="#8A8F96" text-anchor="middle">3배</text><line x1="563.3" y1="48" x2="563.3" y2="56" stroke="#C3C2B7"/><text x="563.3" y="72" font-size="11.5" fill="#8A8F96" text-anchor="middle">5배</text><line x1="754.2" y1="48" x2="754.2" y2="56" stroke="#C3C2B7"/><text x="754.2" y="72" font-size="11.5" fill="#8A8F96" text-anchor="middle">10배</text><line x1="945.1" y1="48" x2="945.1" y2="56" stroke="#C3C2B7"/><text x="945.1" y="72" font-size="11.5" fill="#8A8F96" text-anchor="middle">20배</text><line x1="1056.8" y1="48" x2="1056.8" y2="56" stroke="#C3C2B7"/><text x="1056.8" y="72" font-size="11.5" fill="#8A8F96" text-anchor="middle">30배</text><line x1="1136.0" y1="48" x2="1136.0" y2="56" stroke="#C3C2B7"/><text x="1136.0" y="72" font-size="11.5" fill="#8A8F96" text-anchor="middle">40배</text><rect x="120.0" y="43" width="229.4" height="18" rx="4" fill="#2a78d6"><title>채택 3속 최대 2.3배</title></rect><text x="120.0" y="90" font-size="12.5" font-weight="700" fill="#16191D">채택 3속 — 최대 2.3배</text><line x1="563.3" y1="34" x2="563.3" y2="62" stroke="#16191D" stroke-width="2"/><text x="569.3" y="90" font-size="12" fill="#5A6068">지금 기준 5배</text><circle cx="1063.1" cy="52" r="8" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>Streptococcus 30.7배</title></circle><text x="1063.1" y="90" font-size="12.5" font-weight="700" fill="#16191D" text-anchor="middle">제외 중 최소 30.7배 (Streptococcus)</text><text x="0" y="57" font-size="12" font-weight="700" fill="#5A6068">42명↔595명 차이</text></svg></div>
+<div class="foot">세균: 595명 807속 + 42명 · 진균: 42명 234속(미분류 제외) · 음성대조는 같은 수업 자료 15계절의 ITS 블랭크 · 코드 5_후보선정규칙.py · results/후보선정규칙.json(흔한 탈락 속의 AUC까지 공개) · 생물학 근거: Lebeer 2022 · Gao 2007</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st'>③ 데이터 분석과 주요 결과</span><span class='t'>⏱ 1:02 <small>(목표 0:50)</small></span></div><div class='script'><p>807개 속에서 후보 넷을 골랐습니다. 판정 전, <b>후보를 고르는 단계</b>입니다. 늘 잡히는가, 42명과 595명 사이 차이가 작은가, 오염 신호는 없는가 — 남은 것은 피부 상재균 셋과 <i>Malassezia</i>이고, 진균에서는 공기 중 환경 곰팡이인 <i>Cladosporium</i>을 뺐습니다.</p><p><i>Lactobacillus</i>는 42명에서 민감군에 많았지만 595명에서 드물고 오염 신호까지 있어 세 질문 모두에 걸렸습니다. <b>유의해도 지표로 못 쓰는 균이 있다</b> — 심사부터 한 이유입니다.</p><p>선정식에 민감·비민감 라벨은 넣지 않았고, 기준을 3배에서 20배 어디에 둬도 <b>같은 셋</b>이 남습니다. 결과를 본 뒤 정리한 규칙이라, 실증에서는 측정 전에 고정합니다.</p></div><details class='memo'><summary>발표자 메모 · 질문 대비 · 금칙</summary><ul><li>후보 선정(이 장)과 판정표(10장)는 다른 단계 — 선정은 「심사할 후보 고르기」, 판정표는 그 후보를 다섯 관문으로 판정한 결과.</li><li>807은 세균 속 수. 진균(42명 234속)은 595명에 자료가 없어 ②(5배 규칙)를 거치지 않음.</li><li><i>Cladosporium</i>: 근거는 먼저 환경 곰팡이(생물학), 다른 연구 블랭크 1위는 참고값. 두 멘토 의견이 갈렸음(1회차는 이 제외를 좋게 봄, 2회차는 다른 연구 블랭크에 부정적).</li><li><i>Lactobacillus</i>: 595명 검출 63% · 중앙값 0.04% · 18배 · 심도 상관 ρ −0.31 · 유산균 제품을 바르면 늘 수 있다는 사람 연구(Lebeer 2022 등).</li><li>「미리 정했다」 · 「결과를 보고 고르지 않았다」 금지. p = 0.024였던 <i>Rothia</i>도 규칙대로 제외. 검출 90% 문턱을 80–85%로 낮추면 <i>Neisseria</i> · <i>Haemophilus</i>가 1차 통과.</li></ul></details></div></article><article class='row' id='s7'><div class='left'><div class='lab'>7장 <small>(덱 화면 번호 6)</small> · 민감군에서는 Malassezia가 절반 이하였습니다</div><div class='frame'><div class='sbox'><section class="slide on " data-step="3" data-title="데이터 분석과 주요 결과" >
+<div class="s-head"><div class="eye">0 · 데이터 분석과 주요 결과</div><div class="steps"></div></div>
+<h2 class="title">민감군에서는 <i>Malassezia</i>가 절반 이하였습니다</h2>
+<div class="ailine"><b>AI</b>AUC · 부트스트랩 · BH 보정을 외부 라이브러리 없이 직접 구현<b class="p">사람</b>멘토의 질문을 받아 정규성 점검을 더 하기로 합의 — 8개 분포 중 7개 기각</div>
+<div class="s-body"><div class="g-cmp">
+ <div><div class="lbl"><i>Malassezia</i> 비율 — 점 하나가 한 사람</div><svg viewBox="0 0 720 330" width="720" height="330" class="chart" role="img"><line x1="110.0" y1="8" x2="110.0" y2="300" stroke="#E4E2DB" stroke-width="1"/><text x="110.0" y="318" font-size="12" fill="#8A8F96" text-anchor="middle">0%</text><line x1="258.0" y1="8" x2="258.0" y2="300" stroke="#E4E2DB" stroke-width="1"/><text x="258.0" y="318" font-size="12" fill="#8A8F96" text-anchor="middle">25%</text><line x1="406.0" y1="8" x2="406.0" y2="300" stroke="#E4E2DB" stroke-width="1"/><text x="406.0" y="318" font-size="12" fill="#8A8F96" text-anchor="middle">50%</text><line x1="554.0" y1="8" x2="554.0" y2="300" stroke="#E4E2DB" stroke-width="1"/><text x="554.0" y="318" font-size="12" fill="#8A8F96" text-anchor="middle">75%</text><line x1="702.0" y1="8" x2="702.0" y2="300" stroke="#E4E2DB" stroke-width="1"/><text x="702.0" y="318" font-size="12" fill="#8A8F96" text-anchor="middle">100%</text><line x1="110" y1="300" x2="702" y2="300" stroke="#C3C2B7" stroke-width="1"/><text x="0" y="81.0" font-size="15" font-weight="800" fill="#16191D">비민감</text><text x="0" y="99.0" font-size="12" fill="#5A6068">19명</text><circle cx="224.8" cy="85.0" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>19.4%</title></circle><circle cx="336.1" cy="85.0" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>38.2%</title></circle><circle cx="500.7" cy="85.0" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>66.0%</title></circle><circle cx="505.5" cy="98.5" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>66.8%</title></circle><circle cx="548.7" cy="85.0" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>74.1%</title></circle><circle cx="555.2" cy="98.5" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>75.2%</title></circle><circle cx="560.5" cy="71.5" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>76.1%</title></circle><circle cx="600.2" cy="85.0" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>82.8%</title></circle><circle cx="604.3" cy="98.5" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>83.5%</title></circle><circle cx="608.5" cy="71.5" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>84.2%</title></circle><circle cx="619.1" cy="85.0" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>86.0%</title></circle><circle cx="644.0" cy="85.0" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>90.2%</title></circle><circle cx="665.3" cy="85.0" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>93.8%</title></circle><circle cx="665.9" cy="98.5" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>93.9%</title></circle><circle cx="674.2" cy="71.5" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>95.3%</title></circle><circle cx="677.1" cy="112.0" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>95.8%</title></circle><circle cx="684.8" cy="85.0" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>97.1%</title></circle><circle cx="697.9" cy="98.5" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>99.3%</title></circle><circle cx="700.2" cy="85.0" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>99.7%</title></circle><line x1="608.5" y1="25.4" x2="608.5" y2="144.6" stroke="#16191D" stroke-width="2.5"/><text x="608.5" y="20.4" font-size="13" font-weight="800" fill="#16191D" text-anchor="middle">중앙값 84.2%</text><text x="0" y="223.0" font-size="15" font-weight="800" fill="#16191D">민감</text><text x="0" y="241.0" font-size="12" fill="#5A6068">23명</text><circle cx="110.0" cy="227.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>0.02%</title></circle><circle cx="118.9" cy="240.5" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>1.5%</title></circle><circle cx="121.8" cy="213.5" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>2.0%</title></circle><circle cx="182.8" cy="227.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>12.3%</title></circle><circle cx="198.2" cy="227.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>14.9%</title></circle><circle cx="239.1" cy="227.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>21.8%</title></circle><circle cx="246.2" cy="240.5" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>23.0%</title></circle><circle cx="252.7" cy="227.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>24.1%</title></circle><circle cx="292.3" cy="227.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>30.8%</title></circle><circle cx="324.3" cy="227.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>36.2%</title></circle><circle cx="324.3" cy="240.5" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>36.2%</title></circle><circle cx="325.5" cy="213.5" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>36.4%</title></circle><circle cx="327.9" cy="254.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>36.8%</title></circle><circle cx="347.4" cy="227.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>40.1%</title></circle><circle cx="404.8" cy="227.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>49.8%</title></circle><circle cx="423.2" cy="227.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>52.9%</title></circle><circle cx="442.7" cy="227.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>56.2%</title></circle><circle cx="452.8" cy="240.5" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>57.9%</title></circle><circle cx="529.7" cy="227.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>70.9%</title></circle><circle cx="622.1" cy="227.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>86.5%</title></circle><circle cx="636.3" cy="227.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>88.9%</title></circle><circle cx="637.5" cy="240.5" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>89.1%</title></circle><circle cx="644.6" cy="213.5" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>90.3%</title></circle><line x1="325.5" y1="167.4" x2="325.5" y2="286.6" stroke="#16191D" stroke-width="2.5"/><text x="325.5" y="162.4" font-size="13" font-weight="800" fill="#16191D" text-anchor="middle">중앙값 36.4%</text></svg>
+  <div class="what"><b><i>Malassezia</i>는 어떤 균?</b> 피지를 먹고 사는 효모 — 지방산을 스스로 못 만들어 피지에 기대 삽니다. 얼굴 진균의 약 3분의 2.</div></div>
+ <div>
+  <div class="hero2"><div class="hn">85<span>%</span></div><div class="hl2">민감 1명 · 비민감 1명을 뽑으면<br><b>비민감 쪽에 <i>Malassezia</i>가 더 많을 확률</b></div></div>
+  <div class="lbl">후보 4개 — 같은 확률(AUC)과 95% 신뢰구간</div><svg viewBox="0 0 440 226" width="440" height="226" class="chart" role="img"><line x1="144.0" y1="6" x2="144.0" y2="192" stroke="#E4E2DB" stroke-width="1"/><text x="144.0" y="207" font-size="11.5" fill="#8A8F96" text-anchor="middle">0</text><line x1="204.5" y1="6" x2="204.5" y2="192" stroke="#E4E2DB" stroke-width="1"/><text x="204.5" y="207" font-size="11.5" fill="#8A8F96" text-anchor="middle">0.25</text><line x1="265.0" y1="6" x2="265.0" y2="192" stroke="#9AA0A6" stroke-width="1.5"/><text x="265.0" y="207" font-size="11.5" fill="#8A8F96" text-anchor="middle">0.5</text><line x1="325.5" y1="6" x2="325.5" y2="192" stroke="#E4E2DB" stroke-width="1"/><text x="325.5" y="207" font-size="11.5" fill="#8A8F96" text-anchor="middle">0.75</text><line x1="386.0" y1="6" x2="386.0" y2="192" stroke="#E4E2DB" stroke-width="1"/><text x="386.0" y="207" font-size="11.5" fill="#8A8F96" text-anchor="middle">1</text><line x1="144" y1="192" x2="386" y2="192" stroke="#C3C2B7"/><text x="259.0" y="221" font-size="11" fill="#5A6068" text-anchor="end">← 민감 쪽에 많음</text><text x="271.0" y="221" font-size="11" fill="#5A6068">비민감 쪽에 많음 →</text><text x="0" y="41.2" font-size="13.5" font-style="italic" font-weight="600" fill="#16191D">Cutibacterium</text><line x1="223.9" y1="36.2" x2="308.6" y2="36.2" stroke="#6B7178" stroke-width="2.5" stroke-linecap="round"/><circle cx="268.1" cy="36.2" r="6" fill="#6B7178" stroke="#FAFAF7" stroke-width="2"><title>0.513 [0.33–0.68]</title></circle><text x="316.6" y="40.8" font-size="12.5" font-weight="600" fill="#5A6068">0.51</text><text x="0" y="85.8" font-size="13.5" font-style="italic" font-weight="600" fill="#16191D">Staphylococcus</text><line x1="233.5" y1="80.8" x2="320.7" y2="80.8" stroke="#6B7178" stroke-width="2.5" stroke-linecap="round"/><circle cx="277.3" cy="80.8" r="6" fill="#6B7178" stroke="#FAFAF7" stroke-width="2"><title>0.551 [0.37–0.73]</title></circle><text x="328.7" y="85.2" font-size="12.5" font-weight="600" fill="#5A6068">0.55</text><text x="0" y="130.2" font-size="13.5" font-style="italic" font-weight="600" fill="#16191D">Corynebacterium</text><line x1="250.5" y1="125.2" x2="330.3" y2="125.2" stroke="#6B7178" stroke-width="2.5" stroke-linecap="round"/><circle cx="291.9" cy="125.2" r="6" fill="#6B7178" stroke="#FAFAF7" stroke-width="2"><title>0.611 [0.44–0.77]</title></circle><text x="338.3" y="129.8" font-size="12.5" font-weight="600" fill="#5A6068">0.61</text><text x="0" y="174.8" font-size="13.5" font-style="italic" font-weight="800" fill="#16191D">Malassezia</text><line x1="315.8" y1="169.8" x2="373.9" y2="169.8" stroke="#0f8f63" stroke-width="2.5" stroke-linecap="round"/><circle cx="349.0" cy="169.8" r="7" fill="#0f8f63" stroke="#FAFAF7" stroke-width="2"><title>0.847 [0.71–0.95]</title></circle><text x="381.9" y="174.2" font-size="12.5" font-weight="800" fill="#16191D">0.85</text></svg>
+  <div class="why"><span><b>왜 순위 비교(Mann–Whitney)?</b>알고 싶은 것이 「한쪽이 클 확률」 = AUC = U ÷ (23 × 19)</span><span><b>왜 다시 뽑기 4,000번?</b>42명 — 공식 대신 흔들림 폭을 직접 잼</span><span><b>판정 규칙</b>구간이 0.5(동전 던지기)에 걸치면 「근거 부족」 — 세균 셋</span></div>
+ </div>
+</div></div>
+<div class="foot">42명(민감 23 · 비민감 19) · 오른쪽 볼 면봉 ITS · data/03_sensitive_ITS_genus_pct.tsv · 확률은 Mann–Whitney U 기반 AUC를 「비민감 쪽이 클 확률」로 표시(= 1 − AUC) · 95% CI 부트스트랩 4,000회 · 다중비교 BH 보정 · Wu 2015 PLoS Genet (지방산 합성효소 유전자 부재)</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st'>③ 데이터 분석과 주요 결과</span><span class='t'>⏱ 0:46 <small>(목표 0:50)</small></span></div><div class='script'><p>민감군에서는 <b><i>Malassezia</i>가 절반 이하</b>였습니다. 지방산을 스스로 못 만들어 피지에 기대 사는 효모인데, 점 하나가 한 사람이고, 비민감군 중앙값 84%, 민감군 36%입니다.</p><p>민감 한 명과 비민감 한 명을 뽑으면 비민감 쪽에 이 균이 더 많을 확률이 <b>85%</b>이고, 신뢰구간도 동전 던지기인 0.5에서 떨어져 있습니다. 알고 싶은 것이 바로 이 확률이라 순위 비교를 썼고, 고른 뒤 점검에서도 분포 여덟 중 일곱이 정규성에서 기각됐습니다. 세균 셋은 구간이 0.5에 걸칩니다.</p></div><details class='memo'><summary>발표자 메모 · 질문 대비 · 금칙</summary><ul><li>민감 23 · 비민감 19명.</li><li>정규성 점검은 고른 뒤(10/7, 코드) — 「정규성을 확인하고 골랐다」 · 「수동으로 확인」 금지. <i>Malassezia</i> 민감군만 기각되지 않음(p = 0.12).</li><li>q = 0.0003은 진균 1차 통과 2속 범위 · 검출 진균 234속 전체로 넓혀도 q = 0.03. 원 지표는 「민감군이 클 확률」 0.153 [0.05–0.29] · 85% = 1 − 0.153.</li><li>「0이 많아서」 금지 — 후보 4속은 0인 사람이 없음.</li></ul></details></div></article><article class='row' id='s8'><div class='left'><div class='lab'>8장 <small>(덱 화면 번호 7)</small> · 나이 · 피지 · 계산 방식을 점검해도 차이가 유지됐습니다</div><div class='frame'><div class='sbox'><section class="slide on " data-step="3" data-title="데이터 분석과 주요 결과" >
+<div class="s-head"><div class="eye">0 · 데이터 분석과 주요 결과</div><div class="steps"></div></div>
+<h2 class="title">나이 · 피지 · 계산 방식을 점검해도 차이가 유지됐습니다</h2>
+<div class="ailine"><b>AI</b>피지 점검을 요청 범위 밖에서 먼저 계산 · 방어 분석 4종은 별도 에이전트가 독립 검수(지적 3건 수정)<b class="p">사람</b>피지는 멈추고 경위를 따진 뒤 팀 검토 → 「추가 점검」으로만 채택 · 판정 등급은 그대로</div>
+<div class="s-body"><div class="chks">
+ <div class="chk"><div class="ck-h"><span class="ck-n">①</span>나이<span class="ck-ok">✓</span></div><div class="ck-w">왜? 민감군이 11살 젊어 나이만으로도 갈림</div><div class="ck-v"><div class="mb"><div class="mbr"><span>나이만</span><b style="--w:65.3%;--c:#9AA3AD"></b><s>0.653</s></div><div class="mbr"><span>나이 · <i>Malassezia</i> 두 변수</span><b style="--w:88.3%;--c:#0f8f63"></b><s>0.883</s></div></div></div><div class="ck-t">두 변수 모형 비교 · <b>+0.23</b> [0.07–0.41]<div class="pills"><span>표준 패키지 p=1.7×10⁻⁵</span><span>로그비 +0.22</span><span>RF도 <i>Malassezia</i>만</span></div></div></div>
+ <div class="chk"><div class="ck-h"><span class="ck-n">②</span>피지<span class="ck-ok">✓</span></div><div class="ck-w">왜? 피지를 먹는 균 — 피지가 적어서일 수도</div><div class="ck-v"><div class="tnum"><b>0.49</b><span>두 군 피지 차이<br>(0.5 = 가르지 못함)</span></div><div class="tnum"><b>+0.33</b><span>피지를 넣어도<br><i>Malassezia</i>가 보탬</span></div></div><div class="ck-t">두 군 피지에서 차이를 찾지 못함</div></div>
+ <div class="chk"><div class="ck-h"><span class="ck-n">③</span>계산 방식<span class="ck-ok">✓</span></div><div class="ck-w">왜? 합이 100% — 한 균이 줄면 나머지가 늘어 보임</div><div class="ck-v"><div class="mb"><div class="mbr"><span>원래 비율</span><b style="--w:85.0%;--c:#0f8f63"></b><s>85%</s></div><div class="mbr"><span>로그비 · 미분류 제거</span><b style="--w:82.0%;--c:#5FB892"></b><s>82%</s></div></div><div class="mcap">비민감 쪽에 많을 확률</div></div><div class="ck-t">표현을 바꿔도 유지</div></div>
+ <div class="chk ref"><div class="ck-h"><span class="ck-n">④</span>오염<span class="ck-ok ref">참고</span></div><div class="ck-w">왜? 시약에서 온 균일 수 있음</div><div class="ck-v"><div class="mb"><div class="mbr"><span>그 연구 시료</span><b style="--w:100.0%;--c:#9AA3AD"></b><s>1.00배</s></div><div class="mbr"><span>블랭크 1개</span><b style="--w:36.0%;--c:#B9B7AF"></b><s>0.36배</s></div></div></div><div class="ck-t">다른 연구의 블랭크라 배제 못 함 → <b>2단계 음성대조</b></div></div>
+ <div class="chk ref"><div class="ck-h"><span class="ck-n">⑤</span>다른 자료<span class="ck-ok ref">참고</span></div><div class="ck-w">왜? 이 자료에만 있는 균일 수 있음</div><div class="ck-v"><div class="mb"><div class="mbr"><span>볼(42명)</span><b style="--w:100.0%;--c:#0f8f63"></b><s>100%</s></div><div class="mbr"><span>볼·이마(58명)</span><b style="--w:100.0%;--c:#0f8f63"></b><s>100%</s></div><div class="mbr"><span>이마(계절)</span><b style="--w:100.0%;--c:#0f8f63"></b><s>100%</s></div><div class="mbr"><span>두피(비듬)</span><b style="--w:100.0%;--c:#0f8f63"></b><s>100%</s></div></div></div><div class="ck-t">4곳 모두 검출 — 판별력 확인은 아님 → <b>본 검증</b></div></div>
+</div>
+<div class="band">셋은 유지 · 둘은 2단계와 본 검증으로 — 원 논문(Keum 2020)이 보고한 감소와 같은 방향</div></div>
+<div class="foot">① 로지스틱 회귀(나이 · 균 두 변수 z-표준화) · 예측 AUC · 표준 패키지(statsmodels 최대우도) 우도비 검정 · 랜덤포레스트 층화 5겹 × 50회 · ② 오른쪽 볼 기기 피지 1회 · 민감군이 클 확률 0.493 [0.315–0.675] · 피지 모형에 보탠 몫 +0.331 [0.118–0.471] · ③ 로그비 AUC 0.181 · ④ 15계절 ITS 블랭크 1개 22.5% vs 그 연구 전체 시료 중앙값 63% · ⑤ 진균 자료 4곳 596시료 · results/나이보정_판별력 · 로지스틱_표준대조_261007 · 랜덤포레스트_비교_261007 · 오염점검 · 진균_판별력 · 피지_점검.json</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st'>③ 데이터 분석과 주요 결과</span><span class='t'>⏱ 1:14 <small>(목표 1:10)</small></span></div><div class='script'><p>이 차이가 나이 · 피지 · 계산 방식 때문은 아닌지 점검했고, <b>셋 모두에서 차이가 유지됐습니다.</b></p><p>나이 — 민감군이 11살 젊어, 나이 차이가 결과를 흉내 낼 수 있습니다. 그래서 나이만 쓴 모형과, 나이와 <i>Malassezia</i>를 <b>각각 표준화해 함께 넣은 모형</b>을 비교했더니 0.65에서 0.88로 올랐습니다. 값을 더한 것이 아닙니다. 표준 통계 패키지 · 로그비 · 랜덤포레스트로 바꿔도 <b>판별력이 오른 것은 <i>Malassezia</i>뿐</b>이었습니다.</p><p>피지 — 두 군 피지에서 차이를 찾지 못했고, 피지를 넣어도 <i>Malassezia</i>의 몫은 남았습니다. 계산 방식 — 비율의 합이 100%인 함정을 점검하려 로그비로 바꿔도 82%로 유지됐습니다.</p><p>이 감소는 <b>원 논문이 보고한 것과 같은 방향</b>입니다. 오염은 저희 자료에 음성대조가 없어 배제하지 못했고, 그래서 2단계에 음성대조를 넣었습니다.</p></div><details class='memo'><summary>발표자 메모 · 질문 대비 · 금칙</summary><ul><li>11살 = 나이 중앙값 차이(29 vs 40세). 나이만 쓴 AUC는 구간이 0.5에 걸쳐 「나이로 갈린다」고 단정하지 않기.</li><li>0.653 → 0.883은 모형을 맞춘 같은 42명으로 잰 값(재대입) — 한 명씩 빼고 검증하면 약 0.85(+0.27): 표준 패키지 0.581 → 0.847 · 팀 9번 코드 방식 0.854. 화면 각주의 「예측 AUC」를 물으면 이렇게.</li><li>랜덤포레스트 +0.30은 「나이만」 기준선이 0.51로 낮아 커 보이는 것 — 교차검증 기준 나이만 모형 RF 0.51 · 로지스틱 0.62. 42명이라 과적합 위험이 있어 여러 방법으로 같은 결론인지 본 것.</li><li>다른 진균 자료 네 곳(596시료)에서 모두 검출 — 판별력 확인은 아님(참고 점검).</li><li>「나이 위에 더함」 · 「착시를 지웠다」 · 「오염이 아니었다」 · 「두 군 피지가 같다」 · 「재현」 금지. 피지는 「차이를 찾지 못했다(신뢰구간 0.315–0.675)」.</li></ul></details></div></article><article class='row' id='s9'><div class='left'><div class='lab'>9장 <small>(덱 화면 번호 8)</small> · 볼 수 있는 곳에서는 종까지 봤습니다</div><div class='frame'><div class='sbox'><section class="slide on " data-step="3" data-title="데이터 분석과 주요 결과" >
+<div class="s-head"><div class="eye">0 · 데이터 분석과 주요 결과</div><div class="steps"></div></div>
+<h2 class="title">볼 수 있는 곳에서는 종까지 봤습니다</h2>
+<div class="ailine"><b>AI</b>같은 자료에 ASV 표가 따로 있음을 알려 줌 · NCBI BLAST 제출<b class="p">사람</b>원자료 대조를 지시 → 진균 ⑤를 「불가」에서 「부분 가능」으로 고침</div>
+<div class="s-body"><div class="g2 sp">
+ <div class="spc">
+  <div class="sph"><span>세균 · <i>Staphylococcus</i></span><span class="chip fail">✕ 종을 못 가름</span></div>
+  <div class="spbig"><b>1.7<small>%</small></b><span>read 중 종 이름이 붙은 비율 (42명)<br>외부 595명은 0.8%</span></div>
+  <div class="blast"><div class="bl-in">가장 많은 서열 1개<small>42명 <i>Staphylococcus</i> read의 89%</small></div><div class="bl-ar">BLAST →</div><div class="bl-out"><div class="blr"><span class="bn"><i>S. aureus</i></span><span class="bb"><b></b></span><span class="bv">100%</span></div><div class="blr"><span class="bn"><i>S. epidermidis</i></span><span class="bb"><b></b></span><span class="bv">100%</span></div><div class="blr"><span class="bn"><i>S. hominis</i></span><span class="bb"><b></b></span><span class="bv">100%</span></div><div class="blr"><span class="bn"><i>S. haemolyticus</i></span><span class="bb"><b></b></span><span class="bv">100%</span></div><div class="blr"><span class="bn"><i>S. warneri</i></span><span class="bb"><b></b></span><span class="bv">100%</span></div><div class="blr"><span class="bn"><i>S. borealis</i></span><span class="bb"><b></b></span><span class="bv">100%</span></div></div></div>
+  <div class="spt">포도상구균 <b>6종 이상에 똑같이 100% 일치</b> → 16S로는 가를 수 없음 → 패널에 <b>종 특이 표적</b></div>
+ </div>
+ <div class="spc">
+  <div class="sph"><span>진균 · <i>Malassezia</i></span><span class="chip pass">✓ 종까지 봄</span></div>
+  <div class="spbig"><b>91<small>%</small></b><span>read 중 종 이름이 붙은 비율 (42명)</span></div>
+  <div class="lbl"><i>M. restricta</i> 비율 — 점 하나가 한 사람</div><svg viewBox="0 0 540 232" width="540" height="232" class="chart" role="img"><line x1="84.0" y1="8" x2="84.0" y2="202" stroke="#E4E2DB" stroke-width="1"/><text x="84.0" y="220" font-size="12" fill="#8A8F96" text-anchor="middle">0%</text><line x1="193.5" y1="8" x2="193.5" y2="202" stroke="#E4E2DB" stroke-width="1"/><text x="193.5" y="220" font-size="12" fill="#8A8F96" text-anchor="middle">25%</text><line x1="303.0" y1="8" x2="303.0" y2="202" stroke="#E4E2DB" stroke-width="1"/><text x="303.0" y="220" font-size="12" fill="#8A8F96" text-anchor="middle">50%</text><line x1="412.5" y1="8" x2="412.5" y2="202" stroke="#E4E2DB" stroke-width="1"/><text x="412.5" y="220" font-size="12" fill="#8A8F96" text-anchor="middle">75%</text><line x1="522.0" y1="8" x2="522.0" y2="202" stroke="#E4E2DB" stroke-width="1"/><text x="522.0" y="220" font-size="12" fill="#8A8F96" text-anchor="middle">100%</text><line x1="84" y1="202" x2="522" y2="202" stroke="#C3C2B7" stroke-width="1"/><text x="0" y="56.5" font-size="15" font-weight="800" fill="#16191D">비민감</text><text x="0" y="74.5" font-size="12" fill="#5A6068">19명</text><circle cx="117.3" cy="60.5" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>7.6%</title></circle><circle cx="201.4" cy="60.5" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>26.8%</title></circle><circle cx="257.9" cy="60.5" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>39.7%</title></circle><circle cx="308.7" cy="60.5" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>51.3%</title></circle><circle cx="309.6" cy="74.0" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>51.5%</title></circle><circle cx="340.7" cy="60.5" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>58.6%</title></circle><circle cx="352.9" cy="74.0" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>61.4%</title></circle><circle cx="360.4" cy="60.5" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>63.1%</title></circle><circle cx="375.3" cy="60.5" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>66.5%</title></circle><circle cx="377.0" cy="74.0" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>66.9%</title></circle><circle cx="409.0" cy="60.5" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>74.2%</title></circle><circle cx="416.4" cy="74.0" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>75.9%</title></circle><circle cx="439.2" cy="60.5" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>81.1%</title></circle><circle cx="464.2" cy="60.5" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>86.8%</title></circle><circle cx="476.9" cy="74.0" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>89.7%</title></circle><circle cx="479.5" cy="60.5" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>90.3%</title></circle><circle cx="498.3" cy="60.5" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>94.6%</title></circle><circle cx="502.3" cy="74.0" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>95.5%</title></circle><circle cx="517.2" cy="60.5" r="6" fill="#2a78d6" stroke="#FAFAF7" stroke-width="2"><title>98.9%</title></circle><line x1="377.0" y1="21.4" x2="377.0" y2="99.6" stroke="#16191D" stroke-width="2.5"/><text x="377.0" y="16.4" font-size="13" font-weight="800" fill="#16191D" text-anchor="middle">중앙값 66.9%</text><text x="0" y="149.5" font-size="15" font-weight="800" fill="#16191D">민감</text><text x="0" y="167.5" font-size="12" fill="#5A6068">23명</text><circle cx="84.0" cy="153.5" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>0.0%</title></circle><circle cx="88.4" cy="167.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>1.0%</title></circle><circle cx="90.1" cy="140.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>1.4%</title></circle><circle cx="123.4" cy="153.5" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>9.0%</title></circle><circle cx="133.5" cy="167.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>11.3%</title></circle><circle cx="155.4" cy="153.5" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>16.3%</title></circle><circle cx="169.0" cy="153.5" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>19.4%</title></circle><circle cx="179.5" cy="167.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>21.8%</title></circle><circle cx="186.9" cy="153.5" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>23.5%</title></circle><circle cx="189.1" cy="140.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>24.0%</title></circle><circle cx="211.5" cy="153.5" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>29.1%</title></circle><circle cx="216.3" cy="167.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>30.2%</title></circle><circle cx="220.7" cy="140.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>31.2%</title></circle><circle cx="246.9" cy="153.5" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>37.2%</title></circle><circle cx="250.0" cy="167.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>37.9%</title></circle><circle cx="257.4" cy="140.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>39.6%</title></circle><circle cx="268.4" cy="153.5" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>42.1%</title></circle><circle cx="271.9" cy="167.0" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>42.9%</title></circle><circle cx="293.8" cy="153.5" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>47.9%</title></circle><circle cx="355.1" cy="153.5" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>61.9%</title></circle><circle cx="402.9" cy="153.5" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>72.8%</title></circle><circle cx="451.0" cy="153.5" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>83.8%</title></circle><circle cx="465.1" cy="153.5" r="6" fill="#eb6834" stroke="#FAFAF7" stroke-width="2"><title>87.0%</title></circle><line x1="216.3" y1="114.4" x2="216.3" y2="192.6" stroke="#16191D" stroke-width="2.5"/><text x="216.3" y="109.4" font-size="13" font-weight="800" fill="#16191D" text-anchor="middle">중앙값 30.2%</text></svg>
+  <div class="spt"><i>Malassezia</i>와 우점종 <b><i>M. restricta</i></b>의 상대풍부도가 함께 낮음 · 속 안 종 구성 차이는 찾지 못함</div>
+ </div>
+</div>
+<div class="band soft">16S의 짧은 구간은 포도상구균 종끼리 거의 같음 → 패널에 <b>종 특이 표적</b> · 진균은 종까지 → 주 지표 <b><i>M. restricta</i></b></div></div>
+<div class="foot">세균 BLAST: NCBI core_nt · 42명 ASV0006(그 밖에 Listeria 등 2개 hit도 동률) · 16S는 가까운 Staphylococcus 종 구분력이 약함(Heikens 2005) · 진균: 42명 ITS ASV 116개 중 종 이름 74개(restricta 46) · M. restricta AUC 0.165 [0.05–0.31] · q=0.0024 · ITS 종 이름도 서열 기반 추정 · 속 안 restricta 비율의 두 군 차이는 찾지 못함 · results/진균_종수준.json</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st'>③ 데이터 분석과 주요 결과</span><span class='t'>⏱ 0:59 <small>(목표 0:50)</small></span></div><div class='script'><p><b>볼 수 있는 곳에서는 종까지 봤습니다.</b> 포도상구균에는 성질이 다른 종이 섞여 있으니 종을 보라는 멘토링 조언 때문입니다.</p><p>포도상구균 read는 종 이름이 1.7%뿐이었고, 가장 많은 서열을 BLAST로 찾으니 <i>aureus</i>, <i>epidermidis</i>를 포함한 <b>여섯 종 이상에 똑같이 100% 일치</b>했습니다. 저희가 읽은 <b>16S의 짧은 구간으로는 포도상구균 종을 가를 수 없다</b>는 뜻이고, 그래서 패널에는 종을 가르는 표적을 넣습니다.</p><p><i>Malassezia</i>는 read의 91%에 종 이름이 붙어, 우점종 <b><i>M. restricta</i></b>도 함께 낮다는 것까지 확인했습니다. 그래서 주 지표는 <i>M. restricta</i>입니다.</p></div><details class='memo'><summary>발표자 메모 · 질문 대비 · 금칙</summary><ul><li>1.7% = 42명 <i>Staphylococcus</i> read 중 종 이름이 붙은 비율(16S 전체는 25.7%) · 91% = <i>Malassezia</i> read 중(ITS 전체는 72.1%). 「세균 전체」 · 「진균 전체」로 말하지 않기.</li><li>BLAST: 42명 <i>Staphylococcus</i> read의 89%인 서열 1개 · NCBI core_nt · 6종 동률(그 밖에 Listeria 등도 동률). 문헌은 「16S의 가까운 포도상구균 종 구분력이 약하다」(Heikens 2005)까지 — 「종끼리 거의 같다」는 저희 BLAST 결과로 말하기.</li><li>원 논문은 종 수치 없이 감소만 보고 — 「종 수준까지 재현」이 아니라 「같은 방향」. restricta가 속보다 나은 지표라는 뜻이 아님 · 속 안 종 구성 차이는 「찾지 못함」.</li><li>「해로운 종 / 지켜주는 종」 대신 「성질이 다른 종」. 날짜는 말하지 않기.</li></ul></details></div></article><article class='row' id='s10'><div class='left'><div class='lab'>10장 <small>(덱 화면 번호 9)</small> · 판정표 — 네 후보</div><div class='frame'><div class='sbox'><section class="slide on " data-step="3" data-title="데이터 분석과 주요 결과" >
+<div class="s-head"><div class="eye">0 · 데이터 분석과 주요 결과</div><div class="steps"></div></div>
+<h2 class="title">판정표 — 네 후보</h2>
+<div class="ailine"><b>AI</b>판정 코드(1–13번) 작성과 실행<b class="p">사람</b>판정 등급과 「다음에 할 일」 결정</div>
+<div class="s-body"><table class="mtx">
+<thead><tr><th>후보</th><th>① 늘 잡히나</th><th>② 흔들리나</th><th>③ 이름표</th><th>④ 가르나</th><th>⑤ 종 수준</th><th>⑥ 반복측정<br>일치도 (참고)</th><th>다음에 할 일</th></tr></thead>
+<tbody><tr class=""><th><i>Cutibacterium</i></th><td><span class="chip pass">● 통과</span></td><td><span class="chip warn">◐ 취약</span></td><td><span class="chip warn">◐ 주의</span></td><td><span class="chip unk">○ 근거 부족</span></td><td><span class="chip fail">✕ 불가</span></td><td class="icc">0.31</td><td><b>조건부</b><small>나이·피지 보정 필수</small></td></tr><tr class=""><th><i>Staphylococcus</i></th><td><span class="chip pass">● 통과</span></td><td><span class="chip warn">◐ 표현 의존</span></td><td><span class="chip pass">● 통과</span></td><td><span class="chip unk">○ 근거 부족</span></td><td><span class="chip fail">✕ 불가</span></td><td class="icc">0.10</td><td><b>조건부</b><small>종 특이 표적으로 다시</small></td></tr><tr class=""><th><i>Corynebacterium</i></th><td><span class="chip warn">◐ 주의</span></td><td><span class="chip warn">◐ 표현 의존</span></td><td><span class="chip pass">● 통과</span></td><td><span class="chip unk">○ 근거 부족</span></td><td><span class="chip fail">✕ 불가</span></td><td class="icc">0.38</td><td><b>조건부</b><small>최소 read 조건</small></td></tr><tr class="hi"><th><i>Malassezia</i></th><td><span class="chip pass">● 통과</span></td><td><span class="chip pass">● 통과</span></td><td><span class="chip warn">◐ 주의</span></td><td><span class="chip pass">● 근거 있음</span></td><td><span class="chip warn">◐ 부분 가능</span></td><td class="icc">0.20</td><td><b>후속 검증 우선</b><small>주 지표 <i>M. restricta</i></small></td></tr></tbody></table>
+<div class="mleg"><span class="chip pass">● 통과</span><span class="chip warn">◐ 조건이 붙음</span><span class="chip unk">○ 근거 부족</span><span class="chip fail">✕ 이 자료로는 불가</span></div>
+<div class="band soft">등급은 순위가 아닙니다 — 다음에 할 일이 다릅니다: 세균 셋은 <b>표본 · 종 특이 측정</b>, <i>Malassezia</i>는 <b>사용 조건 · 반복 측정</b></div></div>
+<div class="foot">⑥ 반복측정 일치도(ICC) = 같은 사람을 다시 쟀을 때 같은 값이 나오는 정도(0–1) · 15계절 이마 24명 × 4계절에서 잰 참고값(07 화장품은 Cutibacterium 0.42 — 두 코호트 모두 &lt; 0.5) — 판정에는 반영하지 않음 · 수치 전체는 부록 C · results/gate_results.json · 시간안정성.json</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st'>③ 데이터 분석과 주요 결과</span><span class='t'>⏱ 1:02 <small>(목표 0:50)</small></span></div><div class='script'><p>네 후보를 <b>판정표</b> 한 장에 모았습니다. 판별력 신호가 있는 것은 <i>Malassezia</i> 하나입니다.</p><p>세균 셋은 효과가 없는 것이 아니라, 42명으로는 아직 판단할 수 없는 <b>조건부</b>입니다. <i>Cutibacterium</i>은 모낭의 피지에 기대 사는 균으로 나이에 흔들려 나이·피지 보정이 필요하고, <i>Staphylococcus</i>는 성질이 다른 종이 한 속에 섞여 신호가 서로 가려질 수 있습니다. 「표현 의존」은 원래 비율, 로그비, 구강균이 적은 218명 — <b>세 계산에서 결과가 달랐다</b>는 뜻입니다.</p><p>등급은 순위가 아니라 다음 할 일입니다 — 세균은 표본과 종 특이 측정, <i>Malassezia</i>는 사용 조건과 반복 측정. <b>반복측정 일치도</b>는 넷 모두 낮았습니다.</p></div><details class='memo'><summary>발표자 메모 · 질문 대비 · 금칙</summary><ul><li>「진균이 제일 낫다」 금지.</li><li>표현 3종 = 원래 비율 · 로그비 · 595명 중 구강 의심 10속 합 &lt; 20%인 218명(부록 A2). <i>Staphylococcus</i>는 표현에 따라 나이와의 관계 부호가 뒤집혀 ② 보류.</li><li>ICC = 15계절 이마 24명 × 4계절의 참고값(0.10–0.38) · 판정에 넣지 않음. 「시간 안정성」 대신 「반복측정 일치도」.</li><li><i>Cutibacterium</i>: 595명에서 나이 ρ −0.38 · 피지 ρ +0.37. <i>Corynebacterium</i> 생물학을 물으면: 습한 부위에 많고 지질이 필요한 종이 많음(총정리 §6-5).</li></ul></details></div></article><article class='row' id='s11'><div class='left'><div class='lab'>11장 <small>(덱 화면 번호 10)</small> · 왜 이 방법인가 — 함정마다 방법을 골랐고, 기준은 AI 밖에 뒀습니다</div><div class='frame'><div class='sbox'><section class="slide on " data-step="3" data-title="데이터 분석과 주요 결과" >
+<div class="s-head"><div class="eye">0 · 데이터 분석과 주요 결과</div><div class="steps"></div></div>
+<h2 class="title">왜 이 방법인가 — 함정마다 방법을 골랐고, 기준은 AI 밖에 뒀습니다</h2>
+<div class="s-body">
+<table class="mm">
+<thead><tr><th>함정 · 질문</th><th>쓴 방법</th><th>왜 이 방법</th><th>확인</th></tr></thead>
+<tbody>
+<tr><th>두 군을 가르나</th><td><b>Mann–Whitney AUC</b></td><td>알고 싶은 것이 「한쪽이 클 확률」 = U ÷ (두 군 인원의 곱) · 순위라 쏠린 분포에 강함</td><td>고른 뒤 점검: 8개 분포 중 7개 정규성 기각</td></tr>
+<tr><th>42명 — 작은 표본</th><td><b>사람 단위 부트스트랩</b> 4,000회</td><td>공식 대신 다시 뽑아 흔들림 폭을 직접 잼</td><td>구간이 0.5를 포함하면 「근거 부족」</td></tr>
+<tr><th>여러 균을 한꺼번에</th><td><b>BH 보정 q</b></td><td>우연히 걸리는 몫을 고침</td><td><i>Malassezia</i> q = 0.0003</td></tr>
+<tr><th>나이 (민감군 11살 젊음)</th><td><b>「나이만」 vs 「나이 + 균」</b></td><td>나이만으로도 갈림 → 균이 보태는 몫을 따로 잼(로지스틱)</td><td>표준 패키지 · 로그비 · 랜덤포레스트도 같은 결론</td></tr>
+<tr><th>합이 100% (조성)</th><td><b>로그비</b> · 미분류 제거로 다시</td><td>한 균이 줄면 나머지가 늘어 보임</td><td><i>Malassezia</i> 82–85% 유지</td></tr>
+<tr><th>시약 오염</th><td><b>심도와의 Spearman ρ</b> + 블랭크</td><td>시약 균은 DNA가 적은 시료일수록 비율이 높음 (Salter 2014)</td><td>의심 신호 검사 — 확정은 2단계 음성대조</td></tr>
+<tr><th>한 번 재서 믿나</th><td><b>반복측정 일치도(ICC)</b></td><td>같은 사람 안의 변동을 따로 잼</td><td>네 후보 0.10–0.38 (참고)</td></tr>
+<tr><th>몇 명이 필요한가</th><td><b>AUC 검정력</b> (Hanley–McNeil)</td><td>42명 효과는 부풀려졌을 수 있어 가정값 AUC 0.65</td><td>모의실험 2,000회 검수 · 군당 74명(예비 산정)</td></tr>
+</tbody></table>
+<div class="aiv">
+ <div class="aiv-h"><b>AI</b>코드는 Claude가 쓰고 돌렸습니다 — 그래서 맞는지는 AI 밖에서 정했습니다</div>
+ <div class="aiv-r"><span>① 팀원마다 Claude · GPT로 따로 <b>적대적 교차 검증</b> — 여러 차례</span><span>② 원자료 재계산 · 논문 원문 문장 · 표준 도구(scipy · statsmodels)와 대조</span><span>③ 틀린 것을 잡으면 AI에게 주는 <b>규칙</b>으로 남김</span></div>
+ <div class="aiv-r c"><span><em>원문이 AI를 잡음</em>검색 요약만 보고 쓴 <i>S. aureus</i> 수치 70%/39% → 원문 62%/34%, 결론 반대 → 사람이 「원문만 근거」 규칙으로</span><span><em>AI가 AI를 잡음</em>서브에이전트가 옮긴 「선크림」 → 원문 「facial cream」 · 인용 81개 문자열 대조로 3건 더 수정</span><span><em>원문이 우리를 잡음</em>노트의 <i>M. restricta</i> 주장 → 원문 주어는 속 전체 → 「같은 방향」으로 낮춤</span></div>
+</div>
+</div>
+<div class="foot">Spearman p는 직접 구현 후 scipy와 대조(상대오차 1e-13) · 방어 분석 4종(20–23번)은 별도 에이전트가 읽기 전용으로 독립 검수 · 다른 PC에서 다시 실행해도 발표 수치 동일 · 규칙 파일 그록 프롬프트.txt · 사례 원장 20건 장별_재료/AI활용검증_재료_20261002.md · 방법 근거 판정표_상세.md · 프로젝트_총정리_261008.md §4 · §12</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st'>③ 데이터 분석과 주요 결과</span><span class='t'>⏱ 0:43 <small>(목표 0:40)</small></span></div><div class='script'><p>방법은 먼저 고르지 않고, <b>마이크로바이옴 자료의 함정마다 맞는 방법</b>을 골랐습니다.</p><p>AI는 적극적으로 쓰되, <b>기준은 저희가 AI 밖에 뒀습니다.</b> AI에 줄 규칙을 설계했고, 팀원마다 Claude와 GPT로 따로 <b>적대적 교차 검증</b>을 했습니다. 핵심 수치는 공개 자료에서 직접 다시 계산했고, 검색 요약만 보고 쓴 수치가 원문과 달라 결론까지 반대였던 일을 잡아 <b>원문만 근거로 쓰는 규칙</b>을 만들었습니다. 저희에게 불리한 쪽으로도 고쳤습니다.</p></div><details class='memo'><summary>발표자 메모 · 질문 대비 · 금칙</summary><ul><li>사례(화면 아래 띠): 검색 요약만 보고 쓴 <i>S. aureus</i> 70%/39% → 원문 62%/34%, 결론 반대 · 「선크림」 → 원문 「facial cream」 · <i>M. restricta</i> 주장 → 원문 주어는 속 전체.</li><li>「모든 오류를 사람이 찾았다」 · 「모든 수치를 재계산했다」 금지 — 「핵심 수치는」. 검증 횟수는 「여러 차례」.</li><li>규칙 파일 그록 프롬프트.txt는 작업 규칙(역할 · 검증 절차). 오류에서 생긴 규칙(「원문만 근거」 등)은 따로 기록(장별_재료 AI활용검증 재료 · 총정리 §12-4) — 질문이 오면 구분해 답하기.</li></ul></details></div></article><article class='row' id='s12'><div class='left'><div class='lab'>12장 <small>(덱 화면 번호 11)</small> · 결과가 남긴 질문 넷 — 무엇을 더 재야 하나</div><div class='frame'><div class='sbox'><section class="slide on " data-step="4" data-title="결과에서 큐레이션 도출" >
+<div class="s-head"><div class="eye">0 · 결과에서 큐레이션 도출</div><div class="steps"></div></div>
+<h2 class="title">결과가 남긴 질문 넷 — 무엇을 더 재야 하나</h2>
+<div class="ailine"><b>AI</b>문서에만 있던 ρ = −0.979 를 원자료에서 다시 계산하는 스크립트 작성(13번) — 해석 규칙은 계산 전에 고정</div>
+<div class="s-body"><div class="qs"><div class="qrow"><div class="qq">실제로 줄었나,<br>비율만 줄었나?</div><div class="qe"><div class="qv"><svg viewBox="0 0 230 128" width="230" height="128" class="chart" role="img"><line x1="30" y1="102" x2="222" y2="102" stroke="#C3C2B7"/><line x1="30" y1="10" x2="30" y2="102" stroke="#C3C2B7"/><circle cx="190.3" cy="75.9" r="4.2" fill="#2a78d6" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 83.5% · 다양성 0.85</title></circle><circle cx="176.1" cy="69.2" r="4.2" fill="#2a78d6" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 76.1% · 다양성 1.07</title></circle><circle cx="158.3" cy="58.5" r="4.2" fill="#2a78d6" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 66.8% · 다양성 1.42</title></circle><circle cx="53.6" cy="20.7" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 12.3% · 다양성 2.65</title></circle><circle cx="103.3" cy="25.9" r="4.2" fill="#2a78d6" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 38.2% · 다양성 2.48</title></circle><circle cx="201.1" cy="83.0" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 89.1% · 다양성 0.62</title></circle><circle cx="141.2" cy="45.6" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 57.9% · 다양성 1.84</title></circle><circle cx="71.9" cy="20.4" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 21.8% · 다양성 2.66</title></circle><circle cx="99.5" cy="29.0" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 36.2% · 다양성 2.38</title></circle><circle cx="58.6" cy="20.7" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 14.9% · 다양성 2.65</title></circle><circle cx="32.9" cy="15.8" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 1.5% · 다양성 2.81</title></circle><circle cx="221.4" cy="101.1" r="4.2" fill="#2a78d6" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 99.7% · 다양성 0.03</title></circle><circle cx="213.0" cy="92.2" r="4.2" fill="#2a78d6" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 95.3% · 다양성 0.32</title></circle><circle cx="210.1" cy="90.3" r="4.2" fill="#2a78d6" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 93.8% · 다양성 0.38</title></circle><circle cx="220.7" cy="100.5" r="4.2" fill="#2a78d6" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 99.3% · 다양성 0.05</title></circle><circle cx="156.7" cy="59.7" r="4.2" fill="#2a78d6" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 66.0% · 다양성 1.38</title></circle><circle cx="166.1" cy="71.3" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 70.9% · 다양성 1.0</title></circle><circle cx="137.9" cy="51.1" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 56.2% · 다양성 1.66</title></circle><circle cx="203.2" cy="83.0" r="4.2" fill="#2a78d6" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 90.2% · 다양성 0.62</title></circle><circle cx="107.0" cy="25.0" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 40.1% · 다양성 2.51</title></circle><circle cx="33.8" cy="18.9" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 2.0% · 다양성 2.71</title></circle><circle cx="74.2" cy="17.4" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 23.0% · 다양성 2.76</title></circle><circle cx="125.6" cy="38.2" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 49.8% · 다양성 2.08</title></circle><circle cx="99.9" cy="30.5" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 36.4% · 다양성 2.33</title></circle><circle cx="76.3" cy="28.4" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 24.1% · 다양성 2.4</title></circle><circle cx="191.7" cy="78.1" r="4.2" fill="#2a78d6" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 84.2% · 다양성 0.78</title></circle><circle cx="195.1" cy="77.5" r="4.2" fill="#2a78d6" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 86.0% · 다양성 0.8</title></circle><circle cx="189.0" cy="74.1" r="4.2" fill="#2a78d6" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 82.8% · 다양성 0.91</title></circle><circle cx="174.4" cy="66.1" r="4.2" fill="#2a78d6" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 75.2% · 다양성 1.17</title></circle><circle cx="213.9" cy="93.1" r="4.2" fill="#2a78d6" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 95.8% · 다양성 0.29</title></circle><circle cx="30.0" cy="19.2" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 0.02% · 다양성 2.7</title></circle><circle cx="203.4" cy="83.9" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 90.3% · 다양성 0.59</title></circle><circle cx="131.6" cy="42.2" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 52.9% · 다양성 1.95</title></circle><circle cx="200.7" cy="83.9" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 88.9% · 다양성 0.59</title></circle><circle cx="196.1" cy="78.4" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 86.5% · 다양성 0.77</title></circle><circle cx="100.7" cy="29.0" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 36.8% · 다양성 2.38</title></circle><circle cx="99.5" cy="22.0" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 36.2% · 다양성 2.61</title></circle><circle cx="89.1" cy="42.8" r="4.2" fill="#eb6834" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 30.8% · 다양성 1.93</title></circle><circle cx="67.2" cy="20.1" r="4.2" fill="#2a78d6" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 19.4% · 다양성 2.67</title></circle><circle cx="216.4" cy="95.9" r="4.2" fill="#2a78d6" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 97.1% · 다양성 0.2</title></circle><circle cx="210.3" cy="90.3" r="4.2" fill="#2a78d6" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 93.9% · 다양성 0.38</title></circle><circle cx="172.3" cy="58.5" r="4.2" fill="#2a78d6" stroke="#FAFAF7" stroke-width="1.5"><title>Malassezia 74.1% · 다양성 1.42</title></circle><text x="126" y="120" font-size="10.5" fill="#5A6068" text-anchor="middle">Malassezia 비율 0→100%</text><text x="12" y="56" font-size="10.5" fill="#5A6068" text-anchor="middle" transform="rotate(-90 12 56)">진균 다양성</text><text x="222" y="22" font-size="13" font-weight="800" fill="#16191D" text-anchor="end">ρ = −0.979</text></svg></div><div class="qt"><i>Malassezia</i>가 줄면 다른 진균이 늘어난 것처럼 보임 — 비율로는 둘을 못 가름</div></div><div class="qar">→</div><div class="qm">절대량을 함께 잰다</div></div><div class="qrow"><div class="qq">한 번 재서<br>믿을 수 있나?</div><div class="qe"><div class="qv qn"><b>0.20</b><span>반복측정 일치도</span><b>1.9배</b><span>같은 사람 안 변동 중앙값<br>(최대 1,276배는 1명)</span></div><div class="qt">다른 부위·계절 자료(15계절 이마)에서 같은 사람의 값이 달라짐</div></div><div class="qar">→</div><div class="qm">같은 사람을 반복 측정</div></div><div class="qrow"><div class="qq">어디서<br>재야 하나?</div><div class="qe"><div class="mb "><div class="mbr"><span>두피 (16 비듬)</span><b style="--w:33.9%;--c:#eb6834"></b><s>33.9%</s></div><div class="mbr"><span>이마 (15 계절)</span><b style="--w:78.4%;--c:#2a78d6"></b><s>78.4%</s></div></div><div class="qt">서로 다른 자료 · 부위마다 비율이 크게 다름</div></div><div class="qar">→</div><div class="qm">채취 부위 고정 (오른쪽 볼)</div></div><div class="qrow"><div class="qq">42명으로<br>충분한가?</div><div class="qe"><div class="qv qn"><b>3 / 4</b><span>후보가 판단 불가</span></div><div class="qt">세균 셋은 신뢰구간이 0.5에 걸침 · 74명 근거는 실증 장</div></div><div class="qar">→</div><div class="qm">군당 74명(예비 산정)</div></div></div><div class="band soft">「이 균을 지표로 써도 되는가」에 답하려면 무엇을, 어디서, 몇 명을, 어떻게 재야 하는지가 정해졌습니다</div></div>
+<div class="foot">① 42명 · 속 수준 진균 다양성(Shannon)과 Spearman ρ=−0.979 · results/다양성_분리.json · ② 15계절 이마 24명 × 4계절 · 시간안정성.json · ③ 16비듬 두피 · 15계절 이마(서로 다른 자료) · 판정표_이식성.json · ④ code/18_검정력_표본크기_261007.py</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st'>④ 결과에서 큐레이션 도출</span><span class='t'>⏱ 0:50 <small>(목표 0:50)</small></span></div><div class='script'><p>결과는 <i>M. restricta</i>를 가리키지만, 지표로 쓰기 전에 <b>풀 질문 넷</b>이 남았습니다.</p><p>첫째, 정말 줄었나, 비율만 줄었나 — 비율로는 <i>Malassezia</i> 감소와 다른 진균 증가를 가를 수 없어 <b>절대량</b>을 함께 잽니다. 둘째, 한 번 재서 믿을 수 있나 — 다른 자료에서 잰 반복측정 일치도가 0.20이라 <b>같은 사람을 반복</b>해 잽니다. 셋째, 어디서 재나 — 피부는 부위마다 균 구성이 달라 <b>채취 부위를 고정</b>합니다. 넷째, 42명으로 충분한가 — 세균 셋이 판단 불가라 <b>표본을 늘립니다.</b></p><p>이 넷이 저희 큐레이션의 출발점입니다.</p></div><details class='memo'><summary>발표자 메모 · 질문 대비 · 금칙</summary><ul><li>ρ = −0.979(42명 · 속 수준 진균 다양성). 우점균이 줄면 다양성이 오르는 수학적 관계가 커서 비율로는 둘을 못 가름.</li><li>두피 · 이마 막대는 서로 다른 자료라 직접 비교가 아님 — 「부위를 고정해야 한다」까지만.</li></ul></details></div></article><article class='row' id='s13'><div class='left'><div class='lab'>13장 <small>(덱 화면 번호 12)</small> · 그래서 큐레이션 방향은 「진단」입니다</div><div class='frame'><div class='sbox'><section class="slide on " data-step="4" data-title="결과에서 큐레이션 도출" >
+<div class="s-head"><div class="eye">0 · 결과에서 큐레이션 도출</div><div class="steps"></div></div>
+<h2 class="title">그래서 큐레이션 방향은 「진단」입니다</h2>
+<div class="s-body"><div class="axes">
+ <div class="ax on"><div class="ax-k">진단</div><div class="ax-v">✓ 우리 방향</div><div class="ax-t">진단 표준이 없음 → <b>객관적 지표가 먼저</b></div></div>
+ <div class="ax"><div class="ax-k">예방 · 관리</div><div class="ax-v">지금은 아님</div><div class="ax-t">적게 관찰됐을 뿐 <b>원인이 아님</b></div></div>
+ <div class="ax"><div class="ax-k">치료</div><div class="ax-v">해당 없음</div><div class="ax-t"><b>질환이 아님</b> (IFSI 2017)</div></div>
+</div>
+<div class="chain">
+ <div class="ch"><span>결과</span><i>Malassezia</i>(우점종 <i>M. restricta</i>)<br>상대풍부도 신호 + 남은 질문 넷</div><div class="cha">→</div>
+ <div class="ch hi"><span>큐레이션</span>진단에 쓸 지표를 <b>판정</b>하고<br>그 지표의 <b>측정을 설계</b></div><div class="cha">→</div>
+ <div class="ch"><span>제안</span>판정 + 패널 감시<br>분석 서비스</div>
+</div>
+<div class="band soft">방향은 진단, 역할은 지표 판정과 측정 설계 — 저희가 진단하지는 않습니다</div></div>
+<div class="foot">예방·관리·치료 판단 근거: IFSI 2017 — 질환 병변으로 설명되지 않는 증후군(질환과 동반될 수는 있음) · 「적을 때의 의미」는 문헌에서 엇갈림(민감 두피에서는 오히려 많았다는 보고 — Wang 2023) · 2회차 멘토링(요지) — 담당 교수님이 간접적으로 기여하는 기준표도 괜찮다고 했다고 팀이 설명했고, 멘토는 진단 지표는 넘어가도 된다고 함</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st'>④ 결과에서 큐레이션 도출</span><span class='t'>⏱ 0:42 <small>(목표 0:55)</small></span></div><div class='script'><p>그래서 큐레이션 방향은 <b>진단</b>입니다. 민감피부는 진단 표준이 없는 증후군이라, 객관적 지표가 먼저 필요하기 때문입니다.</p><p>예방이나 관리를 말하려면 이 균을 늘리거나 줄이라고 해야 하는데, 저희 결과는 민감군에서 <b>적게 관찰됐다</b>는 것이지 원인이라는 뜻이 아닙니다. 치료는 민감피부가 질환이 아니어서 해당하지 않습니다.</p><p>다만 저희가 직접 진단하지는 않습니다. <b>방향은 진단, 역할은 진단에 쓸 지표를 판정하고 그 측정을 설계하는 것</b>입니다.</p></div><details class='memo'><summary>발표자 메모 · 질문 대비 · 금칙</summary><ul><li>「이 균이 민감피부를 일으킨다」 · 「조절하면 나아진다」 금지.</li><li>멘토링 맥락(「」 인용 금지 · 요지로): 2회차는 팀이 담당 교수 의견을 전하자 멘토가 진단 지표 부분은 넘어가도 된다고 함 — 멘토의 승인으로 말하지 않기. 1회차 멘토는 진단·치료·예방보다 측정 프로토콜을 넘기는 역할을 신선하다고 봄 → 「방향은 진단, 역할은 판정 · 설계」로 답.</li><li>「적으면 건강하지 않다는 뜻?」: 문헌이 엇갈림(민감 두피에서는 오히려 많았다는 보고 — Wang 2023) · 원인 해석을 붙이지 않음.</li></ul></details></div></article><article class='row' id='s14'><div class='left'><div class='lab'>14장 <small>(덱 화면 번호 13)</small> · 판정하고, 판정된 균만 잽니다</div><div class='frame'><div class='sbox'><section class="slide on " data-step="5" data-title="최종 큐레이션 제안" >
+<div class="s-head"><div class="eye">0 · 최종 큐레이션 제안</div><div class="steps"></div></div>
+<h2 class="title">판정하고, 판정된 균만 잽니다 <span class="idea" style="vertical-align:middle;margin-left:10px"><b>아이디어 형태</b>서비스 · 확장: 연구</span></h2>
+<div class="s-body"><div class="svc">
+ <div class="stg"><div class="stg-h"><b>1단계</b> 판정 — 측정비 0</div>
+  <div class="sflow"><div class="sbx c">고객 R&amp;D<small>16S·ITS 시퀀싱 자료 + 나이·라벨</small></div><div class="sar">→</div><div class="sbx w">우리<small>입력 점검 → 다섯 관문</small></div><div class="sar">→</div><div class="sbx o">받는 것<small>판정 리포트 · 패널 구성안(넣을 균 · 뺄 균 · 이유)</small></div></div></div>
+ <div class="stg s2"><div class="stg-h"><b>2단계</b> 패널 감시</div>
+  <div class="sflow"><div class="sbx c">고객 시료<small>채취 부위·방법은 우리가 지정</small></div><div class="sar">→</div><div class="sbx w">위탁 측정 기관<small>세균 종 특이 패널 + qPCR 3종(<i>M. restricta</i> · 전체 진균 · 전체 세균) + 음성대조</small></div><div class="sar">→</div><div class="sbx o">감시 리포트<small>실제 감소인가, 비율 착시인가</small></div></div></div>
+</div>
+<div class="qmap">
+ <div class="qm-h">결과가 남긴 질문 넷 → 무엇이 푸나</div>
+ <div class="qm-r">
+  <div class="qx on"><b>절대량</b><span>실제로 줄었나, 비율만 줄었나</span><em>2단계 · qPCR 3종</em></div>
+  <div class="qx on"><b>반복</b><span>한 번 재서 믿을 수 있나</span><em>2단계 · 같은 사람 2회 이상</em></div>
+  <div class="qx on"><b>부위</b><span>어디서 재야 하나</span><em>2단계 · 채취 부위 지정</em></div>
+  <div class="qx"><b>표본</b><span>42명으로 충분한가</span><em>본 검증 · 군당 74명(예비 산정)</em></div>
+ </div>
+</div>
+<div class="small ctr">왜 「서비스」인가 — 고객이 받는 것은 알고리즘이 아니라 판정 리포트 · 패널 구성안 · 감시 리포트입니다</div></div>
+<div class="foot">2회차 멘토링(요지) — 시퀀싱만으로는 상품성에 상당한 어려움이 있어 패널 시퀀싱이나 qPCR로 비용을 고려하라는 조언 · 음성대조는 채취 · 추출 · 증폭 모든 처리 단계에 · <i>M. restricta</i> 종 특이 qPCR 세부는 파일럿에서 확정 · 위탁처는 특정하지 않음 · 근거 최종형태_분석서비스_장 · 서비스_흐름_리포트_패널규칙</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st'>⑤ 최종 큐레이션 제안</span><span class='t'>⏱ 1:16 <small>(목표 1:20)</small></span></div><div class='script'><p>그래서 <b>두 단계 서비스</b>를 제안합니다. 판정하고, 판정된 균만 잽니다.</p><p><b>1단계는 판정</b>입니다. 고객인 기업 R&amp;D가 이미 가진 시퀀싱 자료를 다섯 관문에 넣어, 판정 리포트와 패널 구성안 — 넣을 균, 뺄 균, 그 이유를 드립니다. 측정비가 들지 않습니다.</p><p><b>2단계는 패널 감시</b>입니다. 측정은 위탁 기관이 하고, 채취 부위와 반복 측정, 음성대조의 <b>프로토콜은 저희가 정해 넘깁니다.</b> 주 지표 <i>M. restricta</i>는 종 특이 qPCR로 직접 정량하고 전체 진균·세균량을 함께 재서, 남은 질문 중 절대량 · 반복 · 부위를 풀고, 표본은 본 검증이 풉니다.</p><p>아이디어 형태는 <b>서비스</b>, 확장은 <b>연구</b>입니다. 고객이 받는 것이 알고리즘이 아닌 리포트라 기술이 아니고, 패널은 아직 설계안이라 제품도 아닙니다. 판정표에서 시작해, 시퀀싱만으로는 상품성이 어렵다는 멘토링 조언을 받아 <b>측정까지 잇는 서비스</b>로 키웠습니다.</p></div><details class='memo'><summary>발표자 메모 · 질문 대비 · 금칙</summary><ul><li>위탁처를 특정하지 않기 · 「처음부터 서비스를 목표로 했다」 금지 · 날짜는 말하지 않기.</li><li>음성대조는 「모든 처리 단계에」 — 「4개당 1개」는 출판본 대조 전이라 말하지 않기.</li><li>「사업화」가 아닌 이유: 가격 · 사업 모델 숫자가 아직 미정. 「연구」 확장 = 파일럿 → 군당 74명 실증(19장).</li><li>판정표는 1단계 엔진으로, 멘토링 때의 검증 설계는 2단계 설계로 들어감 — 버린 것이 없다는 질문 대비.</li></ul></details></div></article><article class='row' id='s15'><div class='left'><div class='lab'>15장 <small>(덱 화면 번호 14)</small> · 고객이 받는 화면</div><div class='frame'><div class='sbox'><section class="slide on " data-step="5" data-title="최종 큐레이션 제안" >
+<div class="s-head"><div class="eye">0 · 최종 큐레이션 제안</div><div class="steps"></div></div>
+<h2 class="title">고객이 받는 화면</h2>
+<div class="s-body"><div class="vc3">
+ <div><div class="vcap">① 1단계 판정 리포트 — 저희 자료로 낸 실제 판정</div>
+  <div class="a4">
+   <div class="a4-h"><span>판정 리포트</span><em>1단계 · 예시</em></div>
+   <div class="a4-m">입력 — 03 민감 42명(16S V4–V5 · ITS1 · 민감/비민감 라벨 · ASV 표) + 595명(16S V3–V4 · 나이 · 피지) → 판정 가능 관문 ①–⑤</div>
+   <table class="a4t"><thead><tr><th>후보</th><th>①</th><th>②</th><th>③</th><th>④ AUC [95% CI]</th><th>⑤</th><th>다음에 할 일</th></tr></thead><tbody>
+    <tr><th><i>Cutibacterium</i></th><td><i class="d pass"></i></td><td><i class="d warn"></i></td><td><i class="d warn"></i></td><td class="l"><i class="d unk"></i>0.49 [0.32–0.67]</td><td><i class="d fail"></i></td><td>조건부</td></tr>
+    <tr><th><i>Staphylococcus</i></th><td><i class="d pass"></i></td><td><i class="d warn"></i></td><td><i class="d pass"></i></td><td class="l"><i class="d unk"></i>0.45 [0.27–0.63]</td><td><i class="d fail"></i></td><td>조건부</td></tr>
+    <tr><th><i>Corynebacterium</i></th><td><i class="d warn"></i></td><td><i class="d warn"></i></td><td><i class="d pass"></i></td><td class="l"><i class="d unk"></i>0.39 [0.23–0.56]</td><td><i class="d fail"></i></td><td>조건부</td></tr>
+    <tr class="hi"><th><i>Malassezia</i></th><td><i class="d pass"></i></td><td><i class="d pass"></i></td><td><i class="d warn"></i></td><td class="l"><i class="d pass"></i><b>0.15 [0.05–0.29]</b> q=0.0003</td><td><i class="d warn"></i></td><td><b>후속 검증 우선</b></td></tr>
+   </tbody></table>
+   <div class="a4-l"><i class="d pass"></i>통과<i class="d warn"></i>조건이 붙음<i class="d unk"></i>근거 부족<i class="d fail"></i>이 자료로는 불가 · AUC = 민감군이 클 확률(0.5 = 가르지 못함)</div>
+   <div class="a4-n">⚠ <i>Malassezia</i> — 진균 다양성과 분리되지 않음(ρ = −0.979) → 절대량 필요 · 반복측정 일치도 0.20(참고)<br>▶ 패널 권고 — 주 지표 <i>M. restricta</i>(AUC 0.165 · q=0.0024) + 전체 진균 · 세균량 · 세균은 종 특이 표적</div>
+  </div></div>
+ <div><div class="vcap">② 패널 구성안 — 고객 한 곳당 한 장</div>
+  <div class="vcard"><div class="vh">패널 구성안<span class="nx">기본안</span></div><table>
+   <tr><td>✅ 넣는 것</td><td><i>M. restricta</i>(주 지표 · 종 특이 qPCR) · <i>S. aureus</i> · <i>S. epidermidis</i> · <i>C. acnes</i>(선택) · 전체 진균량 · 전체 세균량 · 음성대조</td></tr>
+   <tr><td>❌ 빼는 것</td><td>구강균 — 조건이 다른 자료 간 차이가 큼<br><i>Lactobacillus</i> — 세 번 탈락</td></tr>
+   <tr><td>⏸ 보류</td><td><i>Corynebacterium</i> — 측정법 미정<br><i>Rhodotorula</i> — 오염 의심</td></tr>
+  </table><div class="vf">설계안 — 표적마다 피부 선례 확인(부록 D) · 파일럿부터</div></div></div>
+ <div><div class="vcap">③ 감시 리포트 — 측정 회차마다</div>
+  <div class="vcard"><div class="vh">감시 리포트<span class="nx">형식 예시 · 값 없음</span></div><table>
+   <tr><td>품질</td><td>시료 <span class="blank">&nbsp;</span> · 음성대조 <span class="blank">&nbsp;</span></td></tr>
+   <tr><td>주 지표</td><td><i>M. restricta</i> 절대량 <span class="blank">&nbsp;</span><br>전체 진균량 <span class="blank">&nbsp;</span></td></tr></table>
+   <table class="rule"><tr><th><i>M. restricta</i></th><th>전체 진균</th><th>해석</th></tr>
+   <tr><td>↓</td><td>그대로</td><td><b>실제 감소</b></td></tr>
+   <tr><td>그대로</td><td>↑</td><td><b>비율 착시</b></td></tr>
+   <tr><td>↓</td><td>↓</td><td>채취·회수 → 품질 먼저</td></tr></table>
+   <div class="vf">진단이 아닙니다 — 지표 후보 검증용 R&amp;D 리포트</div></div></div>
+</div></div>
+<div class="foot">판정 리포트 값 = 판정표(부록 C) 그대로 · 세균 ①②③⑤는 595명, ④는 42명(민감 23 · 비민감 19) · 감시 리포트는 2단계 측정 전이라 값을 넣지 않은 형식 예시 · 패널 표적의 피부 선례는 부록 D(Wang 2023 · Ahle 2022 · Hamann 2025 · Valido 2025 등)</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st'>⑤ 최종 큐레이션 제안</span><span class='t'>⏱ 1:03 <small>(목표 1:10)</small></span></div><div class='script'><p>고객이 받는 것은 세 장입니다. 왼쪽 <b>1단계 판정 리포트</b>는 저희 자료로 실제로 낸 판정 그대로입니다. 입력 줄에 외부 595명이 있는 것은, 나이·피지 점검에는 큰 표본이 필요하기 때문입니다 — 저희가 외부 자료를 쓴 이유와 같습니다. 신호가 없는 균도 같은 형식으로, 무엇이 왜 안 되는지 알려 드립니다.</p><p>가운데 <b>패널 구성안</b>은 넣을 균, 뺄 균, 보류할 균과 그 이유입니다. 표적마다 피부 선례를 확인해 짠 설계안이라 파일럿부터 시작합니다.</p><p>오른쪽 <b>감시 리포트</b>의 핵심은 해석 규칙입니다. <i>M. restricta</i> 절대량이 줄고 전체 진균량이 그대로면 실제 감소, 절대량은 그대로인데 전체 진균량이 늘면 비율 착시입니다. 아직 측정 전이라 값은 비워 둔 형식 예시입니다.</p></div><details class='memo'><summary>발표자 메모 · 질문 대비 · 금칙</summary><ul><li>감시 리포트에 숫자를 지어 넣지 않기 · 「검증된 패널」이 아니라 「선례가 있는 표적으로 짠 설계안」.</li><li>패널 기본안: <i>M. restricta</i>(주 지표) · <i>S. aureus</i> · <i>S. epidermidis</i> · <i>C. acnes</i>(선택) · 전체 진균 · 세균량 · 음성대조 / 빼는 것: 구강균 · <i>Lactobacillus</i> / 보류: <i>Corynebacterium</i> · <i>Rhodotorula</i>.</li><li><i>Corynebacterium</i> 보류: 효과가 없어서가 아니라 42명으로 판단 불가 + 피부 군집 시료의 종 표적(rpoB) 선례를 찾지 못해 측정법 미정.</li></ul></details></div></article><article class='row' id='s16'><div class='left'><div class='lab'>16장 <small>(덱 화면 번호 15)</small> · 이 결과를 어디에, 어떻게 쓰나</div><div class='frame'><div class='sbox'><section class="slide on " data-step="6" data-title="실제 적용 가능성과 확장" >
+<div class="s-head"><div class="eye">0 · 실제 적용 가능성과 확장</div><div class="steps"></div></div>
+<h2 class="title">이 결과를 어디에, 어떻게 쓰나 <span class="idea" style="vertical-align:middle;margin-left:10px"><b>아이디어 형태</b>서비스 · 확장: 연구</span></h2>
+<div class="s-body"><div class="secs">
+ <div class="sec"><div class="sec-k">화장품 R&amp;D<span>주 고객</span></div><div class="sec-r"><b>누가 · 언제</b>민감피부 제품·지표를 개발하는 기업 연구소 — 패널 설계 전</div><div class="sec-r g"><b>얻는 것</b>판별력이 없거나 채취 조건에 흔들리는 균에 <strong>파일럿 예산을 쓰지 않음</strong></div></div>
+ <div class="sec"><div class="sec-k">피부 임상 · 실증 연구<span>제안 단계</span></div><div class="sec-r"><b>누가 · 언제</b>피부 미생물 임상을 설계하는 연구팀 — 시험 설계 단계</div><div class="sec-r g"><b>얻는 것</b>부위 · 음성대조 · 반복측정 · 표본 수 · 절대량이 <strong>정해진 측정 설계</strong></div></div>
+ <div class="sec"><div class="sec-k">피부 미생물 검사 · 헬스케어<span>제안 단계</span></div><div class="sec-r"><b>누가 · 언제</b>소비자 검사 업체 — 리포트에 넣을 균을 정할 때</div><div class="sec-r g"><b>얻는 것</b>그 균을 지표로 써도 되는지 <strong>판정</strong> — 속 수준 요약으로는 못 보는 항목 확인</div></div>
+</div>
+<div class="ready">
+ <div class="rd now"><span>지금 쓸 수 있음</span><b>1단계 판정</b>자료 7곳 · 코호트 11개에서 실제로 돌려 봄</div><div class="rda">→</div>
+ <div class="rd"><span>파일럿 뒤</span><b>2단계 패널 감시</b>채취법 · 증폭 성공률 확인 후</div><div class="rda">→</div>
+ <div class="rd"><span>확장</span><b>입력 · 대상 확장</b>롱리드 · 범용 입력 처리 · 남성 · 다른 부위</div>
+</div></div>
+<div class="foot">임상 · 검사 업체 활용은 제안 단계 · 1단계를 돌려 본 입력: 16S V3 · V4 · V3–V4 · V4–V5 · ITS1 · 범용 입력 처리는 아직 없음</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st'>⑥ 실제 적용 가능성과 확장</span><span class='t'>⏱ 0:47 <small>(목표 0:55)</small></span></div><div class='script'><p>이 판정이 가장 먼저 필요한 곳은 민감피부 <b>화장품</b>과 지표를 개발하는 기업 연구소입니다. 패널 설계나 효능 시험에 들어가기 전에 판정을 받으면, 판별력이 없거나 채취 조건에 흔들리는 균에 <b>파일럿 예산을 쓰지 않을 수 있습니다.</b></p><p>아직 제안 단계지만, 피부 임상 연구팀에는 측정 설계를, 소비자 검사 업체에는 리포트에 넣을 균의 판정을 드릴 수 있습니다.</p><p>지금 바로 쓸 수 있는 것은 1단계입니다. 자료 일곱 곳, 코호트 열한 개에 <b>실제로 돌려 봤고</b>, 2단계는 파일럿 뒤, 입력과 대상 확장은 그다음입니다.</p></div><details class='memo'><summary>발표자 메모 · 질문 대비 · 금칙</summary><ul><li>「어떤 자료든 판정한다」 · 「자동으로 리포트가 나온다」 금지 — 돌려 본 입력은 16S V3 · V4 · V3–V4 · V4–V5 · ITS1, 범용 입력 처리는 아직 없음.</li><li>「실험 설계 단계부터 하는 서비스」는 멘토가 데이터 분석과 다른 이야기라며 슬라이드에 넣지 말라고 한 아이디어 — 질문이 오면 「생각해 봤다 — 2단계 측정 설계가 그 첫걸음」 정도로만. 임상 카드와 겹쳐 보이는지는 팀 판단(최종덱계획 §8).</li></ul></details></div></article><article class='row' id='s17'><div class='left'><div class='lab'>17장 <small>(덱 화면 번호 16)</small> · 시장은 큰데, 확인한 일곱 곳 어디에서도 균별 기준값을 찾지 못했습니다</div><div class='frame'><div class='sbox'><section class="slide on " data-step="6" data-title="실제 적용 가능성과 확장" >
+<div class="s-head"><div class="eye">0 · 실제 적용 가능성과 확장</div><div class="steps"></div></div>
+<h2 class="title">시장은 큰데, 확인한 일곱 곳 어디에서도 균별 기준값을 찾지 못했습니다</h2>
+<div class="ailine"><b>AI</b>경쟁사 공개 페이지 · 가격 수집과 문구 대조 — 「찾지 못함」은 확인한 공개 페이지 범위</div>
+<div class="s-body"><div class="g-mkt">
+ <div>
+  <div class="mk-h">민감성 스킨케어 세계 시장</div>
+  <div class="mk"><div><b>$46.2B</b><span>2025</span></div><div class="mk-a">→</div><div><b>$92.6B</b><span>2035 전망</span></div></div>
+  <div class="small">Market.us · 아시아·태평양 44.8% · 기관마다 다름(MRFR 2025 $44.05B)</div>
+  <div class="quote">“Microbiome assessments do not yet offer <b>validated diagnostic thresholds</b>”<span>— Ann Med Surg 2026 (사설)</span></div>
+  <div class="small" style="margin-top:10px"><b>기존 연구와도 다른 자리</b> — <i>Malassezia</i> 감소는 원 논문(Keum 2020)이 먼저 보고 · 저희는 그 신호가 패널에 들어갈 수 있는지를 판정</div>
+ </div>
+ <div>
+  <table class="tbl sm comp"><thead><tr><th>회사</th><th>무엇으로 재나</th><th>파는 것</th><th class="c">가격</th><th class="c">균별 기준값 공개</th></tr></thead><tbody><tr><th>코스맥스 FACE-LINK</th><td>설문 + 미생물 알고리즘</td><td>피부 유형 12개</td><td class="c">—</td><td class="c x">✕</td></tr><tr><th>한국콜마 카이옴</th><td>유익균·유해균 분석 키트(원리 비공개)</td><td>유익/유해 점수</td><td class="c">—</td><td class="c x">✕</td></tr><tr><th>Sequential Skin · LaFlore</th><td>qPCR 표적 패널(LaFlore 키트 20종 · B2B 패널 종 수 비공개)</td><td>점수</td><td class="c">$150</td><td class="c x">✕</td></tr><tr><th>Superbiome</th><td>「60+ biomarkers」 DNA</td><td>우점 균 · 다양성 점수</td><td class="c">$149</td><td class="c x">✕</td></tr><tr><th>RUDDI</th><td>NGS(종 수준 표방)</td><td>민감도 점수</td><td class="c">$220<br><small>정가 $320</small></td><td class="c x">✕</td></tr><tr><th>Parallel Health</th><td>WGS</td><td>Skin Microbiome Type™</td><td class="c">$495</td><td class="c x">✕</td></tr><tr><th>HelloBiome (B2B)</th><td>NGS(방법 비공개)</td><td>종 수준 표방 리포트</td><td class="c">비공개</td><td class="c x">✕</td></tr></tbody></table>
+ </div>
+</div>
+<div class="band">그들은 「신호가 있다」를 팔고, 저희는 <b>「그 신호를 믿고 쓸 수 있는가」</b>를 판정합니다</div></div>
+<div class="foot">각 회사 페이지 원문(2026-09-20 · 09-30 · 10-02 접속, 가격 · 측정법 10-08 재확인) · 「—」는 확인 못 함 · 「찾지 못함」은 확인한 공개 페이지 범위 · Superbiome = 구 Milieu · 면책 문구: 「not a medical device」(Superbiome) · 「not intended to diagnose」(RUDDI) · Ann Med Surg 2026 PMC13236127 · references/경쟁자_보고지침_확인기록</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st'>⑥ 실제 적용 가능성과 확장</span><span class='t'>⏱ 1:03 <small>(목표 1:05)</small></span></div><div class='script'><p>시장은 큽니다. Market.us 전망으로 민감성 스킨케어 시장은 2025년 <b>462억 달러</b>에서 2035년 <b>926억 달러</b>로 커지고, 소비자 피부 미생물 검사도 이미 <b>149달러에서 495달러</b>에 팔립니다.</p><p>그런데 저희가 확인한 일곱 곳의 공개 페이지에서는 어떤 균이 몇 퍼센트면 무엇인지, <b>균별 기준값을 찾지 못했습니다.</b> 한 의학 학술지 사설도 마이크로바이옴 검사에는 아직 검증된 진단 기준값이 없다고 썼습니다.</p><p>여기가 저희 자리입니다. 그들은 신호가 있다는 것을 팔고, <b>저희는 그 신호를 믿고 쓸 수 있는지를 판정합니다.</b> 연구와도 다릅니다 — <i>Malassezia</i> 감소는 원 논문이 먼저 보고했고, 저희는 그 신호를 패널에 넣어도 되는지 판정했습니다.</p></div><details class='memo'><summary>발표자 메모 · 질문 대비 · 금칙</summary><ul><li>시장 규모는 기관마다 다름(MRFR 2025 $44.05B) — 기관명과 함께.</li><li>「경쟁사가 틀렸다」 · 「다 패널이라 싸다」 금지(HelloBiome은 NGS). 「아무도 공개 안 함」이 아니라 「확인한 일곱 곳에서 찾지 못했다」.</li><li>민감도 점수를 파는 곳도 「진단 목적이 아니다」라고 적음(RUDDI 「not intended to diagnose」).</li><li>Superbiome $149 · HelloBiome 「종 수준 표방」은 10/8 접속 기준 — 발표 직전 원문 재확인.</li></ul></details></div></article><article class='row' id='s18'><div class='left'><div class='lab'>18장 <small>(덱 화면 번호 17)</small> · 무엇으로 재느냐가 비용을 정합니다</div><div class='frame'><div class='sbox'><section class="slide on " data-step="6" data-title="실제 적용 가능성과 확장" >
+<div class="s-head"><div class="eye">0 · 실제 적용 가능성과 확장</div><div class="steps"></div></div>
+<h2 class="title">무엇으로 재느냐가 비용을 정합니다</h2>
+<div class="ailine"><b>AI</b>공개 요금표 9곳 수집 · 조건이 맞는 미국 5곳으로 시료당 비용 계산 — 업체 견적 아님</div>
+<div class="s-body"><div class="g-cost">
+ <div><div class="lbl">시료당 측정비 어림 — 1인 1회 · 학술 시설 공개 요금표 (USD)</div><svg viewBox="0 0 700 250" width="700" height="250" class="chart" role="img" aria-label="측정 방식별 시료당 측정비 어림"><line x1="160.0" y1="4" x2="160.0" y2="224" stroke="#E4E2DB"/><text x="160.0" y="240" font-size="11.5" fill="#8A8F96" text-anchor="middle">$0</text><line x1="271.0" y1="4" x2="271.0" y2="224" stroke="#E4E2DB"/><text x="271.0" y="240" font-size="11.5" fill="#8A8F96" text-anchor="middle">$100</text><line x1="382.0" y1="4" x2="382.0" y2="224" stroke="#E4E2DB"/><text x="382.0" y="240" font-size="11.5" fill="#8A8F96" text-anchor="middle">$200</text><line x1="493.0" y1="4" x2="493.0" y2="224" stroke="#E4E2DB"/><text x="493.0" y="240" font-size="11.5" fill="#8A8F96" text-anchor="middle">$300</text><line x1="604.0" y1="4" x2="604.0" y2="224" stroke="#E4E2DB"/><text x="604.0" y="240" font-size="11.5" fill="#8A8F96" text-anchor="middle">$400</text><text x="0" y="33.0" font-size="14" font-weight="700" fill="#16191D">전체 시퀀싱</text><text x="0" y="49.0" font-size="11.5" fill="#5A6068">모든 균을 읽음</text><rect x="364.2" y="25.0" width="215.3" height="20" rx="4" fill="#9AA3AD"><title>$184–$378</title></rect><text x="587.6" y="40.0" font-size="14" font-weight="800" fill="#16191D">$184–$378</text><text x="0" y="87.0" font-size="14" font-weight="700" fill="#16191D">16S + ITS 앰플리콘</text><text x="0" y="103.0" font-size="11.5" fill="#5A6068">세균·진균 표지 유전자</text><rect x="229.9" y="79.0" width="238.6" height="20" rx="4" fill="#9AA3AD"><title>$63–$278</title></rect><text x="476.6" y="94.0" font-size="14" font-weight="800" fill="#16191D">$63–$278</text><text x="0" y="141.0" font-size="14" font-weight="800" fill="#0f8f63">★ 서비스 2단계</text><text x="0" y="157.0" font-size="11.5" fill="#5A6068">종 특이 패널 3 + qPCR 3종</text><rect x="278.8" y="133.0" width="165.4" height="20" rx="4" fill="#0f8f63"><title>$107–$256</title></rect><text x="452.2" y="148.0" font-size="15" font-weight="800" fill="#0f8f63">$107–$256</text><text x="0" y="195.0" font-size="14" font-weight="700" fill="#16191D">qPCR만 3종</text><text x="0" y="211.0" font-size="11.5" fill="#5A6068">참고 — 가장 좁게</text><rect x="233.3" y="187.0" width="101.0" height="20" rx="4" fill="#9AA3AD"><title>$66–$157</title></rect><text x="342.3" y="202.0" font-size="14" font-weight="800" fill="#16191D">$66–$157</text></svg>
+  <div class="hl-note">판정된 균만 재면 → 전체 시퀀싱의 약 <b>58–68%</b> · 종을 가르고 절대량까지 · 앰플리콘과는 범위가 겹침</div></div>
+ <div>
+  <div class="pc"><div class="pc-h">1단계 · 판정</div><div class="pc-b">측정비 <b>0</b> — 고객이 가진 자료를 씀<br>+ 분석 (판정 1건 약 4–8시간 · 추정)</div></div>
+  <div class="pc s2"><div class="pc-h">2단계 · 패널 감시</div><div class="pc-b">측정 실비 (위탁 · 왼쪽 어림 <b>$107–$256</b>)<br>+ 분석 · 리포트</div></div>
+  <div class="pc ref"><div class="pc-h">참고 · 시장 판매가</div><div class="pc-b">소비자 검사 <b>$149–$495</b><br><small>리포트 포함 판매가라 직접 비교 아님</small></div></div>
+  <div class="small">저희 서비스 가격 숫자는 아직 정하지 않았습니다</div>
+ </div>
+</div></div>
+<div class="foot">학술 코어 시설 공개 요금표 9곳 확인 · 계산은 미국 5곳 · 업체 견적 아님 · 서비스 2단계 낮음 = 추출 $21 + PCR $10 × 3 + 인덱싱 $10 + 시퀀싱 $1 + qPCR $15 × 3 · 높음 = 한 라이브러리 $139 + qPCR $39 × 3 · qPCR 단가는 표적과 무관한 시료당 공개 요금으로 가정(<i>M. restricta</i> 종 특이 · 범진균 qPCR 실제 단가는 확인 못 함) · 인건비 · 채취 · 분석 · IRB 제외 · 시카고대 DFI 8/11부터 신규 의뢰 중단 · 근거 간이견적_20261003 §3-4 · 가격구조_장_20261003</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st'>⑥ 실제 적용 가능성과 확장</span><span class='t'>⏱ 0:58 <small>(목표 1:00)</small></span></div><div class='script'><p>비용은 무엇으로 재느냐가 정합니다. 학술 시설 공개 요금표로 어림하면, 모든 균을 읽는 전체 시퀀싱은 시료당 <b>184에서 378달러</b>입니다. 판정된 균만 재는 저희 2단계는 세균 종 특이 패널과 qPCR 세 가지로 <b>107에서 256달러</b>, 전체 시퀀싱의 6할 안팎입니다.</p><p>패널의 진짜 장점은 해상도입니다. 앰플리콘과는 비용이 겹치지만, 16S로 못 가르던 종을 가르고, 필요한 균만 재며 <b>절대량도</b> 잽니다.</p><p>가격 구조는 단순합니다. 1단계는 측정비 없이 분석만, 2단계는 위탁 측정 실비에 분석과 리포트를 더합니다. 판정 한 건의 분석은 4에서 8시간으로 추정하고, 가격 숫자는 아직 정하지 않았습니다.</p></div><details class='memo'><summary>발표자 메모 · 질문 대비 · 금칙</summary><ul><li>「견적」이 아니라 「공개 요금표 기반 어림」 · 「절반 이하」 금지(약 58–68%) · 원화 환산 안 함 · 소비자 판매가와 직접 비교하지 않기.</li><li>세균 종 패널은 비율 자료 — 절대량은 qPCR 3종(<i>M. restricta</i> · 전체 진균 · 전체 세균)이 잼.</li><li>qPCR 단가는 표적과 무관한 공개 요금으로 가정 — <i>M. restricta</i> 종 특이 · 범진균 qPCR 실제 단가는 확인 못 함.</li><li>⚠️ $107–$256은 10/9 재계산 — 팀원 검산을 마친 뒤 발표(최종덱계획 §6-1).</li></ul></details></div></article><article class='row' id='s19'><div class='left'><div class='lab'>19장 <small>(덱 화면 번호 18)</small> · 다음은 실증 — 파일럿에서 군당 74명(예비 산정) 검증으로</div><div class='frame'><div class='sbox'><section class="slide on " data-step="6" data-title="실제 적용 가능성과 확장" >
+<div class="s-head"><div class="eye">0 · 실제 적용 가능성과 확장</div><div class="steps"></div></div>
+<h2 class="title">다음은 실증 — 파일럿에서 군당 74명(예비 산정) 검증으로</h2>
+<div class="ailine"><b>AI</b>검정력 계산 코드 작성 · 모의실험 2,000회로 독립 검수<b class="p">사람</b>기대 효과(AUC 0.65–0.80)를 가정값으로 합의 — 42명 값은 부풀려졌을 수 있어 쓰지 않음</div>
+<div class="s-body"><div class="road">
+ <div class="rs"><div class="rs-k">파일럿</div><ul><li>면봉 vs 긁기 — 어느 채취가 DNA를 얻나</li><li>전체 진균량 측정이 <i>Malassezia</i>를 잡나</li><li>피부에서 증폭 성공률</li></ul></div><div class="rsa">→</div>
+ <div class="rs hi"><div class="rs-k">본 검증 · 군당 74명</div><ul><li>오른쪽 볼 고정 · 같은 사람 2회 이상</li><li>패널 + 절대량 · 모든 처리 단계에 음성대조</li><li>주 지표·문턱·분석을 <b>측정 전에 등록</b></li></ul></div><div class="rsa">→</div>
+ <div class="rs"><div class="rs-k">판정</div><ul><li><i>M. restricta</i> 지표 적격성</li><li>세균 종 특이 표적의 판별력</li></ul></div>
+</div>
+<div class="g2 rd2">
+ <div><div class="lbl">기대 효과 크기별 군당 필요 인원 (검정력 80% · 증폭 실패 반영 · 예비 산정)</div><div class="eq"><b>57명</b><span>÷</span><b>0.775</b><em>피부 증폭 성공 93/120</em><span>=</span><b class="g">74명</b><em>AUC 0.65 · 군당</em></div><svg viewBox="0 0 380 200" width="380" height="200" class="chart" role="img"><line x1="30" y1="125.5" x2="372" y2="125.5" stroke="#E4E2DB"/><text x="24" y="129.5" font-size="11" fill="#8A8F96" text-anchor="end">20</text><line x1="30" y1="91.0" x2="372" y2="91.0" stroke="#E4E2DB"/><text x="24" y="95.0" font-size="11" fill="#8A8F96" text-anchor="end">40</text><line x1="30" y1="56.5" x2="372" y2="56.5" stroke="#E4E2DB"/><text x="24" y="60.5" font-size="11" fill="#8A8F96" text-anchor="end">60</text><line x1="30" y1="22.0" x2="372" y2="22.0" stroke="#E4E2DB"/><text x="24" y="26.0" font-size="11" fill="#8A8F96" text-anchor="end">80</text><line x1="30" y1="160" x2="372" y2="160" stroke="#C3C2B7"/><path d="M55.8,160 L55.8,36.3 Q55.8,32.3 59.8,32.3 L85.8,32.3 Q89.8,32.3 89.8,36.3 L89.8,160 Z" fill="#0f8f63"><title>74명</title></path><text x="72.8" y="25.3" font-size="14" font-weight="800" fill="#16191D" text-anchor="middle">74명</text><text x="72.8" y="177" font-size="12" font-weight="800" fill="#16191D" text-anchor="middle">AUC 0.65</text><path d="M141.2,160 L141.2,91.5 Q141.2,87.5 145.2,87.5 L171.2,87.5 Q175.2,87.5 175.2,91.5 L175.2,160 Z" fill="#9AA3AD"><title>42명</title></path><text x="158.2" y="80.5" font-size="14" font-weight="800" fill="#16191D" text-anchor="middle">42명</text><text x="158.2" y="177" font-size="12" font-weight="600" fill="#16191D" text-anchor="middle">0.70</text><path d="M226.8,160 L226.8,119.2 Q226.8,115.2 230.8,115.2 L256.8,115.2 Q260.8,115.2 260.8,119.2 L260.8,160 Z" fill="#9AA3AD"><title>26명</title></path><text x="243.8" y="108.2" font-size="14" font-weight="800" fill="#16191D" text-anchor="middle">26명</text><text x="243.8" y="177" font-size="12" font-weight="600" fill="#16191D" text-anchor="middle">0.75</text><path d="M312.2,160 L312.2,131.2 Q312.2,127.2 316.2,127.2 L342.2,127.2 Q346.2,127.2 346.2,131.2 L346.2,160 Z" fill="#9AA3AD"><title>19명</title></path><text x="329.2" y="120.2" font-size="14" font-weight="800" fill="#16191D" text-anchor="middle">19명</text><text x="329.2" y="177" font-size="12" font-weight="600" fill="#16191D" text-anchor="middle">0.80</text></svg></div>
+ <div><div class="lbl">비교한 세 연구의 규모 (총 인원)</div><svg viewBox="0 0 470 196" width="470" height="196" class="chart" role="img"><line x1="158" y1="2" x2="158" y2="194" stroke="#C3C2B7"/><text x="0" y="24.8" font-size="13" font-weight="700" fill="#16191D">민감 안면 파일럿</text><text x="0" y="39.8" font-size="11" fill="#5A6068">Van Thanh Le 2025</text><path d="M158,16.8 L169.1,16.8 Q173.1,16.8 173.1,20.8 L173.1,32.8 Q173.1,36.8 169.1,36.8 L158,36.8 Z" fill="#9AA3AD"><title>10명</title></path><text x="180.1" y="31.8" font-size="13.5" font-weight="800" fill="#16191D">10명</text><text x="0" y="72.2" font-size="13" font-weight="700" fill="#16191D">민감 안면 (우리 03)</text><text x="0" y="87.2" font-size="11" fill="#5A6068">Keum 2020</text><path d="M158,64.2 L217.5,64.2 Q221.5,64.2 221.5,68.2 L221.5,80.2 Q221.5,84.2 217.5,84.2 L158,84.2 Z" fill="#9AA3AD"><title>42명</title></path><text x="228.5" y="79.2" font-size="13.5" font-weight="800" fill="#16191D">42명</text><text x="0" y="119.8" font-size="13" font-weight="700" fill="#16191D">민감 두피</text><text x="0" y="134.8" font-size="11" fill="#5A6068">Wang 2023</text><path d="M158,111.8 L244.8,111.8 Q248.8,111.8 248.8,115.8 L248.8,127.8 Q248.8,131.8 244.8,131.8 L158,131.8 Z" fill="#9AA3AD"><title>60명</title></path><text x="255.8" y="126.8" font-size="13.5" font-weight="800" fill="#16191D">60명</text><text x="0" y="167.2" font-size="13" font-weight="800" fill="#16191D">우리 본 검증 계획</text><text x="0" y="182.2" font-size="11" fill="#5A6068">군당 74명</text><path d="M158,159.2 L377.9,159.2 Q381.9,159.2 381.9,163.2 L381.9,175.2 Q381.9,179.2 377.9,179.2 L158,179.2 Z" fill="#0f8f63"><title>148명</title></path><text x="388.9" y="174.2" font-size="13.5" font-weight="800" fill="#16191D">148명</text></svg></div>
+</div></div>
+<div class="foot">양측 α=0.05 · 군 1:1 · Hanley–McNeil · 증폭 실패 = 성공 비율 93/120(Ahle 2022)로 나눔 · 군당 65명이면 AUC 0.641 이상을 80%로 검출 · 채취법: Van Thanh Le 2025(10명 파일럿) · code/18_검정력_표본크기_261007.py · 검증설계_수정_20261002</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st'>⑥ 실제 적용 가능성과 확장</span><span class='t'>⏱ 0:55 <small>(목표 1:00)</small></span></div><div class='script'><p>다음은 실증입니다. 파일럿에서 먼저 면봉과 긁기 중 어느 채취가 DNA를 잘 얻는지, 전체 진균량 측정이 <i>Malassezia</i>를 제대로 잡는지, 피부에서 증폭이 얼마나 성공하는지 확인합니다.</p><p>본 검증은 예비 산정으로 <b>군당 74명</b>입니다. 기대 효과를 AUC 0.65로 잡고 검정력 80%로 계산한 57명을, 피부 시료의 증폭 성공률로 나눈 값입니다. 42명의 큰 효과는 부풀려졌을 수 있어 쓰지 않았습니다. 대규모 연구보다는 작지만, 비교한 세 연구보다는 큰 <b>현실적인 1차 검증</b>입니다. 주 지표와 문턱, 분석 방법은 <b>측정 전에 등록</b>해 지금의 사후 규칙이라는 약점을 막습니다.</p></div><details class='memo'><summary>발표자 메모 · 질문 대비 · 금칙</summary><ul><li>57 ÷ 0.775(증폭 성공 93/120, Ahle 2022) = 74 · 65명 = AUC 신뢰구간 ±0.10 기준(0.641 이상을 80%로 검출).</li><li>효과가 크면 줄어듦 — AUC 0.70 → 42명 · 0.75 → 26명 · 0.80 → 19명. 모의실험 검수에서 0.65 칸 검정력 0.783 → 1–2명 여유 권장.</li><li>74명은 AUC 0.65 기준 — 세균(비민감 쪽 확률 0.51–0.61)의 판단을 보장하지 않음. 「74명이면 확실히 검증된다」 금지 · 93/120은 시료 단위 증폭 성공 수(사람 단위 탈락률 아님).</li><li>qPCR 기준 균주 · 표준 물질 질문: 「감시 표적」이라는 뜻이면 주 지표 <i>M. restricta</i>로 답하고, 「정량 표준」이라는 뜻이면 표준 DNA(검량선)가 필요하며 무엇을 쓸지는 파일럿에서 정함(아직 정하지 않음).</li></ul></details></div></article><article class='row' id='s20'><div class='left'><div class='lab'>20장 <small>(덱 화면 번호 19)</small> · 한계와 보완 — 무엇을 더하면 무엇이 풀리나</div><div class='frame'><div class='sbox'><section class="slide on " data-step="6" data-title="실제 적용 가능성과 확장" >
+<div class="s-head"><div class="eye">0 · 실제 적용 가능성과 확장</div><div class="steps"></div></div>
+<h2 class="title">한계와 보완 — 무엇을 더하면 무엇이 풀리나</h2>
+<div class="s-body"><div class="g-lim">
+ <div><div class="lbl">한계 → 보완</div><div class="lms"><div class="lm"><div class="lk">대상</div><div class="ll">판별력은 한국인 여성 42명에서만</div><div class="la">→</div><div class="lr">남성 · 연령 · 다른 부위로</div></div><div class="lm"><div class="lk">표본</div><div class="ll">세균 셋은 판단 불가</div><div class="la">→</div><div class="lr">군당 74명(예비 산정) 본 검증</div></div><div class="lm"><div class="lk">종</div><div class="ll">16S로는 가까운 종(<i>aureus</i> · <i>epidermidis</i> 등)을 못 가름</div><div class="la">→</div><div class="lr">종 특이 표적 패널 · ASV 표</div></div><div class="lm"><div class="lk">반복</div><div class="ll">다른 부위·계절 자료에서 시간 안정성 낮음</div><div class="la">→</div><div class="lr">같은 사람 반복 측정</div></div><div class="lm"><div class="lk">대조</div><div class="ll">우리 자료에 음성대조 없음 · 다른 연구 블랭크는 참고값</div><div class="la">→</div><div class="lr">모든 처리 단계에 음성대조</div></div><div class="lm"><div class="lk">정량</div><div class="ll">주 지표 절대량 측정법은 설계 단계</div><div class="la">→</div><div class="lr">파일럿에서 확정 (종 특이 qPCR)</div></div><div class="lm"><div class="lk">입력</div><div class="ll">롱리드 · 전체 시퀀싱은 돌려 보지 않음 · 범용 입력 처리 없음</div><div class="la">→</div><div class="lr">입력 확장</div></div></div></div>
+ <div><div class="lbl">지금 돌려 본 범위 — 영역 5종류 · 코호트 11개</div><div class="rgs"><div class="rg"><b>16S V3–V4</b><span>595명 · 02 건강 · 07 화장품</span></div><div class="rg"><b>16S V4–V5</b><span>03 민감 42명</span></div><div class="rg"><b>16S V4</b><span>15 계절</span></div><div class="rg"><b>16S V3</b><span>16 비듬</span></div><div class="rg"><b>ITS1</b><span>42명 · 01 노화 · 15 · 16</span></div></div>
+  <div class="callout green"><div class="callout-h">입력이 판정 범위를 정합니다</div><div class="callout-b">라벨이 없으면 ④, ASV 표가 없으면 ③⑤가 「판정 불가」로 나옴 → 고객에게 <b>무엇을 더 모아야 하는지</b>까지 알려 드립니다</div></div>
+ </div>
+</div></div>
+<div class="foot">돌려 본 결과: ①과 ②(심도)는 11/11 · ②(나이)는 나이가 기재된 세균 자료 5/7 · ④는 라벨이 있는 03뿐 · ③⑤는 속 요약표 기준 0/11(ASV를 쓰면 진균 ⑤ 부분 가능) · results/판정표_이식성.json · 서비스카드_적용범위_장 A6</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st'>⑥ 실제 적용 가능성과 확장</span><span class='t'>⏱ 0:59 <small>(목표 0:55)</small></span></div><div class='script'><p>한계는 보완과 함께 말씀드립니다. 판별력은 한국인 여성 42명의 볼에서만 봤습니다 — 남성, 연령, 다른 부위로 넓힙니다. 세균 셋은 판단할 수 없었습니다 — 본 검증으로 봅니다. 16S로는 가까운 종을 못 갈랐습니다 — 종 특이 표적으로 잽니다. 다른 자료에서 <b>반복측정 일치도</b>가 낮았습니다 — 같은 사람을 반복해 잽니다. 저희 자료엔 음성대조가 없었습니다 — 모든 처리 단계에 넣습니다. 롱리드 같은 다른 입력은 아직 돌려 보지 않았습니다 — 입력을 넓힙니다.</p><p>패널은 정해 둔 균만 보기 때문에, 새 균은 1단계 시퀀싱 판정으로 찾습니다. 입력이 판정 범위를 정하니, 고객에게는 <b>무엇을 더 모아야 하는지까지</b> 알려 드립니다.</p></div><details class='memo'><summary>발표자 메모 · 질문 대비 · 금칙</summary><ul><li>화면 「시간 안정성 낮음」은 소리 내 읽지 않기 — 「반복측정 일치도가 낮았다」로.</li><li>42명 민감 라벨은 원 논문 기준이라 저희가 다시 판정할 수 없음 — 질문이 오면 한계로 인정.</li><li>롱리드 자료를 가져오면 「된다」가 아니라 「아직 돌려 보지 않았고 확장 계획에 있다」.</li><li>통제한 것(심도 · 검출 · 계산 방식)과 자료가 정한 것(음성대조 · 채취법)을 구분해 답하기.</li><li>마커 밖을 주기적으로 넓게 다시 잴지는 팀 미결정 — 「언제나」라고 말하지 않기.</li></ul></details></div></article><article class='row' id='s21'><div class='left'><div class='lab'>21장 <small>(덱 화면 번호 20)</small> · 정리하겠습니다</div><div class='frame'><div class='sbox'><section class="slide on bg-ink close" data-step="6" data-title="마무리" >
+<div class="s-head"><div class="eye">마무리</div><div class="steps"></div></div>
+<h2 class="title">정리하겠습니다</h2>
+<div class="s-body">
+ <div class="three">
+  <div class="th"><div class="th-k">문제</div><div class="th-t">민감피부는 진단 표준이 없고, 피부 미생물 검사는 <b>$149–$495</b>에 팔리지만 확인한 일곱 곳에서 균별 기준값을 찾지 못했습니다</div></div>
+  <div class="th"><div class="th-k">결과</div><div class="th-t"><b>807속 → 4속 → 다섯 관문.</b> 나이·피지·계산 방식을 점검해도 상대풍부도 차이가 남은 것은 <i>Malassezia</i>(우점종 <b><i>M. restricta</i></b>). 세균 셋은 42명으로는 판단 불가</div></div>
+  <div class="th"><div class="th-k">제안</div><div class="th-t">진단에 쓸 지표를 <b>판정</b>하고, 판정된 균만 <b>패널 + 절대량</b>으로 잽니다. 다음은 파일럿과 <b>군당 74명</b>(예비 산정) 검증<div style="margin-top:8px"><span class="idea"><b>아이디어 형태</b>서비스 · 확장: 연구</span></div></div></div>
+ </div>
+ <div class="honest"><b>「쓸 수 있다」가 아니라 — 무엇을, 몇 명으로, 어떻게 더 재야 쓸 수 있는지 압니다</b><small>진단하지 않습니다 · 판별력은 한국인 여성 42명에서 본 것 · 분석 실행은 AI, 판정은 사람</small></div>
+ <div class="team"><b>2조 우리를놓아조</b> 박세준 · 장수미 · 이승민</div>
+</div>
+<div class="foot">예상 질문 · 용어 · 판정표 수치 · 패널 근거 · 출처는 부록 A–E</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st'>마무리</span><span class='t'>⏱ 1:02 <small>(목표 0:55)</small></span></div><div class='script'><p>정리하겠습니다. 민감피부는 흔한데 가를 기준이 없고, 피부 미생물 검사는 팔리지만 확인한 일곱 곳에서 균별 기준값을 찾지 못했습니다.</p><p>저희는 후보 넷을 골라, 채취 · 오염 · 이름표 · 비율 · 나이의 <b>함정을 다섯 관문으로 하나씩 점검했고, 풀지 못한 것은 한계로 남겼습니다.</b> 그러고도 상대풍부도 차이가 남은 것이 <i>Malassezia</i>, 우점종 <i>M. restricta</i>입니다.</p><p>그래서 지표를 판정하고, 판정된 균만 패널과 절대량으로 재는 서비스를 제안합니다. 저희 결론은 「쓸 수 있다」가 아니라, <b>무엇을, 몇 명으로, 어떻게 더 재야 쓸 수 있는지 안다</b>는 것입니다. 다른 곳이 신호를 팔 때, 저희는 그 신호를 믿을 수 있는지 판정하겠습니다. 감사합니다.</p></div><details class='memo'><summary>발표자 메모 · 질문 대비 · 금칙</summary><ul><li>「함정을 스스로 걸렀다」(덱 노트)보다 「점검했고, 풀지 못한 것은 한계로」 — 근거에 맞는 표현.</li><li>질문은 부록 A · A2 예상 질문으로.</li></ul></details></div></article><article class='row' id='s22'><div class='left'><div class='lab'>22장 <small>(덱 화면 번호 21)</small> · 예상 질문과 짧은 답</div><div class='frame'><div class='sbox'><section class="slide on bg-paper2 appx" data-title="부록 A" >
+<div class="s-head"><div class="eye">부록 A</div><div class="part">부록</div></div>
+<h2 class="title">예상 질문과 짧은 답</h2>
+<div class="s-body"><div class="qa q3"><div class="qa-i"><b>Q. 결국 진단 서비스 아닌가?</b><span>아니다. 「이 균을 지표로 써도 되는가」의 판정과 「어떻게 잴 것인가」의 설계다.</span></div><div class="qa-i"><b>Q. 제공 데이터를 거의 안 쓴 것 아닌가?</b><span>17편 중 6편을 용도별로 썼다(판별력 03 · 이식성 02·07·15·16 · 반복측정 07·15 · 음성대조 15 · 교차 확인 01). 질환 9편은 질환 증상과 민감피부 증상을 가를 수 없어 대상에서 뺐다.</span></div><div class="qa-i"><b>Q. 42명과 595명을 합쳐도 되나?</b><span>합치지 않았다. 판정은 각 자료 안에서만 했다. 42명과 595명을 나란히 놓은 곳은 자료 간 차이가 큰 균을 거르는 후보 선정 규칙 한 곳이다.</span></div><div class="qa-i"><b>Q. 595명은 어디서?</b><span>AAML(mSystems 2026)과 같은 기준의 20–79세 여성 595명. 저자 공개 자료로 재분석했고, EGA 원시자료는 승인제다.</span></div><div class="qa-i"><b>Q. 왜 Mann–Whitney인가?</b><span>목표 지표가 AUC = U ÷ (두 군 인원의 곱)이고, 분포가 쏠려 있어(8개 중 7개 정규성 기각) 순위로 비교했다.</span></div><div class="qa-i"><b>Q. 비율과 나이를 한 모형에 넣어도 되나?</b><span>두 변수를 표준화해 각각 계수를 추정한 로지스틱 회귀다 — 값을 더한 것이 아니다. 랜덤포레스트로도 해 봤고 <i>Malassezia</i>만 보탰다. 나이만 모형이 RF 0.51 · 로지스틱 0.62라 이 표본에서는 로지스틱이 낫다.</span></div><div class="qa-i"><b>Q. 0 과다 모형은?</b><span>후보 4속은 0인 사람이 없어 필요한 상황이 아니다. 로그비 재계산과 0 처리값을 100배 범위로 바꾸는 점검도 했다.</span></div><div class="qa-i"><b>Q. 블랭크에도 <i>Malassezia</i>가 있는데 오염 아닌가?</b><span>다른 연구의 블랭크라 참고값이다. 우리 자료엔 음성대조가 없어 오염을 배제하지 못했다 → 2단계는 모든 처리 단계에 음성대조(채취 대조 비율은 출판본 대조 후 확정).</span></div><div class="qa-i"><b>Q. <i>M. restricta</i> 절대량은 어떻게 재나?</b><span>종 특이 qPCR로 직접 정량한다(파일럿에서 확정). 패널 비율 × 전체 진균량만으로는 자동으로 나오지 않는다.</span></div><div class="qa-i"><b>Q. 군당 65 · 74명의 근거는?</b><span>65명 = AUC 신뢰구간 ±0.10 기준. 74명 = AUC 0.65를 검정력 80%로 보는 57명에 증폭 성공률을 반영한 예비 산정.</span></div><div class="qa-i"><b>Q. 피지 때문 아닌가?</b><span>두 군 피지에서 차이를 찾지 못했고(신뢰구간이 넓음), 피지를 넣어도 Malassezia가 판별에 보탰다.</span></div><div class="qa-i"><b>Q. 패널을 실제로 만들어 봤나?</b><span>아니다. 피부 선례가 있는 표적으로 짠 설계안이고, 2단계는 파일럿부터다.</span></div><div class="qa-i"><b>Q. AI가 하라는 대로 한 것 아닌가?</b><span>판정 등급 · 분석 범위는 사람이 정했다. AI가 범위 밖 분석을 했을 때 멈추고 검토한 뒤 추가 점검으로만 채택했다.</span></div></div></div>
+<div class="foot"></div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st q'>부록</span><span>질의응답용 — 발표하지 않음</span></div><p class='appx-note'>질문이 오면 이 장을 띄워 답합니다. 짧은 답은 아래 「질의응답 즉답 카드」에 있습니다.</p></div></article><article class='row' id='s23'><div class='left'><div class='lab'>23장 <small>(덱 화면 번호 22)</small> · 예상 질문 — 데이터 · 방법 · 패널</div><div class='frame'><div class='sbox'><section class="slide on bg-paper2 appx" data-title="부록 A2" >
+<div class="s-head"><div class="eye">부록 A2</div><div class="part">부록</div></div>
+<h2 class="title">예상 질문 — 데이터 · 방법 · 패널</h2>
+<div class="s-body"><div class="qa q3"><div class="qa-i"><b>Q. 자료 7곳인데 왜 코호트 11개인가?</b><span>세균 · 진균과 부위를 나눠 셌다. 03 · 15 · 16 은 세균 · 진균 각 1(6) + 02 이마 · 볼(2) + 595명 · 07 세균(2) + 01 진균(1) = 11.</span></div><div class="qa-i"><b>Q. 비율 표현을 바꾸면 결과가 바뀌나?</b><span>같은 질문을 세 표현으로 다시 물었다 — 원래 비율 · 로그비 · 595명 중 구강 의심 10속 합이 20% 미만인 218명. <i>Staphylococcus</i>는 표현에 따라 부호가 뒤집혀 ② 판정을 보류했다.</span></div><div class="qa-i"><b>Q. 비율의 합이 100%인 문제는?</b><span>조성 전용 모형 대신 세 표현과 0 처리값 범위(100배)에서 결론이 유지되는지 봤다. 근본 해결은 2단계에서 절대량을 함께 재는 것이다.</span></div><div class="qa-i"><b>Q. <i>Corynebacterium</i>은 왜 보류인가?</b><span>42명으로 판별력을 판단할 수 없고, ② 나이와의 관계가 계산 방식에 따라 달라지며(표현 의존), 피부 군집 시료의 종 표적(rpoB) 선례를 찾지 못해 측정법이 정해지지 않았다. 효과가 없다는 뜻이 아니다.</span></div><div class="qa-i"><b>Q. 랜덤포레스트를 주 모형으로 쓰지 않은 이유는?</b><span>해 봤다 — RF로도 <i>Malassezia</i>만 보탰다(+0.30, 반복 50회 모두). 이 표본에서는 나이만 모형이 교차검증 기준 RF 0.51 · 로지스틱 0.62라 로지스틱이 낫다.</span></div><div class="qa-i"><b>Q. 판정 1건에 얼마나 걸리나?</b><span>작업 단계 합으로 약 4–8시간(추정). 지금은 입력 정리를 사람이 한다 — 범용 입력 처리는 확장 계획이다.</span></div></div></div>
+<div class="foot">근거 판정표_상세.md · 프로젝트_총정리_261008.md §3-1 · §4 · §5 · 추가분석2_결과_20261007.md · results/판정표_이식성.json</div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st q'>부록</span><span>질의응답용 — 발표하지 않음</span></div><p class='appx-note'>질문이 오면 이 장을 띄워 답합니다. 짧은 답은 아래 「질의응답 즉답 카드」에 있습니다.</p></div></article><article class='row' id='s24'><div class='left'><div class='lab'>24장 <small>(덱 화면 번호 23)</small> · 용어 풀이</div><div class='frame'><div class='sbox'><section class="slide on bg-paper2 appx" data-title="부록 B" >
+<div class="s-head"><div class="eye">부록 B</div><div class="part">부록</div></div>
+<h2 class="title">용어 풀이</h2>
+<div class="s-body"><div class="gl"><div class="gl-i"><b>속 · 종</b><span>균의 성과 이름. 포도상구균속 안에 가까운 종(aureus · epidermidis 등)이 함께 있다 — 각 종의 민감피부 관련성은 따로 검증</span></div><div class="gl-i"><b>16S · ITS</b><span>세균(16S)과 진균(ITS)을 알아보는 표지 유전자. V3–V4 등은 그중 읽은 구간</span></div><div class="gl-i"><b>ASV</b><span>균의 실제 DNA 서열 단위 — 종 이름을 확인할 때 씀</span></div><div class="gl-i"><b>비율(상대풍부도)</b><span>한 사람의 균 중 그 균이 차지하는 % — 합이 100%라 한 균이 늘면 나머지가 줄어 보임</span></div><div class="gl-i"><b>AUC</b><span>민감 1명·비민감 1명을 뽑았을 때 한쪽이 더 많을 확률. 0.5 = 동전 던지기</span></div><div class="gl-i"><b>신뢰구간 · 부트스트랩</b><span>42명에서 다시 뽑기를 4,000번 해서 본 흔들림 폭. 0.5에 걸치면 판단 불가</span></div><div class="gl-i"><b>q값</b><span>여러 균을 한꺼번에 검사할 때 우연히 걸리는 몫을 고친 p값(BH 보정)</span></div><div class="gl-i"><b>심도</b><span>시료에서 읽은 DNA 조각 수 — 적게 읽으면 있는 균도 0으로 나온다</span></div><div class="gl-i"><b>음성대조</b><span>피부를 대지 않고 시약만 돌린 시료 — 여기서 나온 균은 오염 의심</span></div><div class="gl-i"><b>반복측정 일치도(ICC)</b><span>같은 사람을 다시 쟀을 때 같은 값이 나오는 정도(0–1)</span></div><div class="gl-i"><b>패널 · qPCR</b><span>정해 둔 균만 재는 방식 — 미지의 균은 못 보지만 종을 가를 수 있다</span></div><div class="gl-i"><b>절대량</b><span>「몇 %」가 아니라 「몇 개」 — 실제 감소와 비율 착시를 가른다</span></div></div></div>
+<div class="foot"></div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st q'>부록</span><span>질의응답용 — 발표하지 않음</span></div><p class='appx-note'>질문이 오면 이 장을 띄워 답합니다. 짧은 답은 아래 「질의응답 즉답 카드」에 있습니다.</p></div></article><article class='row' id='s25'><div class='left'><div class='lab'>25장 <small>(덱 화면 번호 24)</small> · 판정표 — 수치</div><div class='frame'><div class='sbox'><section class="slide on bg-paper2 appx" data-title="부록 C" >
+<div class="s-head"><div class="eye">부록 C</div><div class="part">부록</div></div>
+<h2 class="title">판정표 — 수치</h2>
+<div class="s-body"><table class="tbl sm"><thead><tr><th>후보</th><th>① 검출</th><th>② 교란</th><th>③ 분류</th><th>④ 판별력 (민감군이 클 확률)</th><th>⑤ 종 수준</th><th>⑥ ICC(참고)</th><th>다음에 할 일</th></tr></thead><tbody>
+<tr><th><i>Cutibacterium</i></th><td>통과 99.2%</td><td>취약 (나이)</td><td>주의</td><td>근거 부족 0.487 [0.32–0.67]</td><td>불가 98.6% 미분류</td><td>0.312</td><td>조건부 — 나이·피지 보정</td></tr>
+<tr><th><i>Staphylococcus</i></th><td>통과 99.3%</td><td>표현 의존</td><td>통과</td><td>근거 부족 0.449 [0.27–0.63]</td><td>불가 99.2% 미분류</td><td>0.102</td><td>조건부 — ② 판정 보류 · 종 특이 표적으로 다시</td></tr>
+<tr><th><i>Corynebacterium</i></th><td>주의 90.4%</td><td>표현 의존</td><td>통과</td><td>근거 부족 0.389 [0.23–0.56]</td><td>불가 64.1% 미분류</td><td>0.381</td><td>조건부 — 최소 read 조건</td></tr>
+<tr class="hi"><th><i>Malassezia</i></th><td>통과 100%</td><td>통과</td><td>주의</td><td>근거 있음 0.153 [0.05–0.29] · q=0.0003</td><td>부분 가능 — <i>M. restricta</i> 0.165 · q=0.0024</td><td>0.195</td><td>후속 패널 검증 우선</td></tr>
+</tbody></table>
+<div class="small">④ 본편의 「비민감 쪽에 많을 확률」 = 1 − 이 값 · 42명(민감 23 · 비민감 19) · ①⑤의 %는 595명(세균) 기준 · 나이 보정: 나이만 0.653 → 나이 + <i>Malassezia</i> 0.883 (+0.23 [0.07–0.41] · 한 명씩 빼고 검증 +0.27 — 기준선이 낮게 치우치는 방식, 짝 빼기 교차검증으로는 0.653→0.874) · 출처 판정표_상세.md «결과 요약» · results/gate_results.json · 진균_판별력.json · 나이보정_판별력.json</div></div>
+<div class="foot"></div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st q'>부록</span><span>질의응답용 — 발표하지 않음</span></div><p class='appx-note'>질문이 오면 이 장을 띄워 답합니다. 짧은 답은 아래 「질의응답 즉답 카드」에 있습니다.</p></div></article><article class='row' id='s26'><div class='left'><div class='lab'>26장 <small>(덱 화면 번호 25)</small> · 패널 — 표적마다 피부 선례</div><div class='frame'><div class='sbox'><section class="slide on bg-paper2 appx" data-title="부록 D" >
+<div class="s-head"><div class="eye">부록 D</div><div class="part">부록</div></div>
+<h2 class="title">패널 — 표적마다 피부 선례</h2>
+<div class="s-body"><table class="tbl sm"><thead><tr><th>표적</th><th>무엇을 가르나</th><th>피부 선례</th><th>패널</th></tr></thead><tbody>
+<tr><th><i>M. restricta</i></th><td>우점종 (주 지표 — 측정 설계상 선택)</td><td>종 특이 TaqMan qPCR — 민감 두피 30 대 30 (Wang 2023)</td><td>✅ 주 지표</td></tr>
+<tr><th><i>S. aureus</i> · <i>S. epidermidis</i></th><td>16S BLAST에서 동률인 가까운 종</td><td>tuf2 앰플리콘 종 구분(Ahle 2022 — 피부에서 두 종 모두 · <i>S. aureus</i> 볼 2.5%) · Wang 2023은 <i>S. epidermidis</i> 실측(두피), <i>S. aureus</i>는 프라이머만</td><td>✅ 보조</td></tr>
+<tr><th><i>C. acnes</i></th><td>계통형</td><td>SLST 앰플리콘 — 얼굴 29명 (Hamann 2025) · ddPCR 정량 (Feidenhansl 2026)</td><td>보조 · 선택</td></tr>
+<tr><th><i>Corynebacterium</i></th><td>종</td><td>rpoB — 분리주 선례뿐 (Khamis 2004 · 2005), 피부 군집 시료 선례 못 찾음</td><td>⏸ 보류 — 측정법 미정</td></tr>
+<tr><th>전체 세균량</th><td>실제 감소 vs 비율 착시</td><td>스파이크인 — 피부 포함 검증 (Valido 2025) · 정상 피부 면봉 (Bertolo 2026)</td><td>✅</td></tr>
+<tr><th>전체 진균량</th><td>같은 문제 (<i>Malassezia</i> 축)</td><td>범진균 qPCR (FungiQuant, Liu 2012) · dPCR — <i>Malassezia</i> 증폭 미확인</td><td>✅ 조건부</td></tr>
+</tbody></table>
+<div class="callout red" style="margin-top:10px"><div class="callout-h">정직하게 말할 것</div><div class="callout-b">표적별 선례만 확인 — 묶음 패널 검증 연구는 따로 검색하지 않음 → 2단계는 파일럿부터 · 피부 tuf2 앰플리콘은 120개 중 93개만 증폭(Ahle 2022) · 표적 앰플리콘도 비율 자료다 → 절대량을 반드시 함께</div></div></div>
+<div class="foot"></div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st q'>부록</span><span>질의응답용 — 발표하지 않음</span></div><p class='appx-note'>질문이 오면 이 장을 띄워 답합니다. 짧은 답은 아래 「질의응답 즉답 카드」에 있습니다.</p></div></article><article class='row' id='s27'><div class='left'><div class='lab'>27장 <small>(덱 화면 번호 26)</small> · 주요 출처</div><div class='frame'><div class='sbox'><section class="slide on bg-paper2 appx" data-title="부록 E" >
+<div class="s-head"><div class="eye">부록 E</div><div class="part">부록</div></div>
+<h2 class="title">주요 출처</h2>
+<div class="s-body"><div class="small" style="margin-top:-6px">원문을 열어 확인한 것 위주 — 단서: Chen 2020은 초록, Hanley &amp; McNeil은 서지만 확인 · Fierer 2025의 음성대조 비율 문장은 출판본 대조 필요</div><div class="src2">
+<div><b>자료</b>Keum 2020 Microorganisms (03 민감 42명) · PMC7409107 / 595명 — AAML mSystems 2026 · PMC13595949(같은 기준 · 저자 GitHub 공개 파일) · 같은 코호트 Front Cell Infect Microbiol 2025 · PMC12277360 · EGA EGAS00001007334(승인제) / 수업 자료 17편</div>
+<div><b>배경</b>Chen 2020 J Eur Acad Dermatol Venereol (메타분석) · Misery 2017 Acta Derm Venereol (IFSI 정의) · Ann Dermatol 종설 doi:10.5021/ad.24.157</div>
+<div><b>생물학 · 판정</b>Park 2021 J Microbiol Biotechnol · PMC9705927 · Wu 2015 PLoS Genet · Findley 2013 Nature · Grice &amp; Segre 2011 · Gao 2007 · Lebeer 2022 · Heikens 2005 · Salter 2014 BMC Biol · Lu 2024 Int J Cosmet Sci</div>
+<div><b>통계</b>Hanley &amp; McNeil 1982 (AUC 분산식) · 검정력 계산 code/18_검정력_표본크기_261007.py (모의실험 검수)</div>
+<div><b>패널 · 측정</b>Wang 2023 Clin Cosmet Investig Dermatol · PMC10520257 · Ahle 2022 Commun Biol · Hamann 2025 · Feidenhansl 2026 · Valido 2025 · Bertolo 2026 · Khamis 2004 · 2005 · Liu 2012 · Fierer 2025 Nat Microbiol · Van Thanh Le 2025 Sci Rep</div>
+<div><b>시장 · 가격</b>Market.us · MarketResearchFuture · Ann Med Surg 2026 사설 · PMC13236127 · 각 회사 페이지 · 학술 코어 시설 공개 요금표 9곳</div>
+</div></div>
+<div class="foot"></div>
+</section></div></div></div><div class='right'><div class='meta'><span class='st q'>부록</span><span>질의응답용 — 발표하지 않음</span></div><p class='appx-note'>질문이 오면 이 장을 띄워 답합니다. 짧은 답은 아래 「질의응답 즉답 카드」에 있습니다.</p></div></article>
+
+<div class="sec-h">4. 질의응답 즉답 카드 (발표 시간 밖)</div>
+<div class="qa-g"><div class='qa-c'><b>Q. 왜 민감피부인가?</b><span>흔한데(71% · 40%) 객관적으로 가를 기준이 없는 자리 — 숫자로 잴 수 있는 미생물이 지표 후보가 될 수 있는지 심사할 가치. 라벨이 있는 수업 자료(03)가 있었던 것도 이유.</span></div><div class='qa-c'><b>Q. 자료 7곳인데 왜 코호트 11개?</b><span>세균 · 진균과 부위를 나눠 셈 — 03 · 15 · 16 세균 · 진균 각 1(6) + 02 이마 · 볼(2) + 595명 · 07 세균(2) + 01 진균(1).</span></div><div class='qa-c'><b>Q. 입력 파일 25개는 원자료(FASTQ)인가?</b><span>아니다. 공개된 가공 자료 — 속 비율표 · 사람 정보표 · ASV 표(03만) 등 tsv 22 · csv 1 · xlsx 2. 해시는 data/SHA256SUMS.</span></div><div class='qa-c'><b>Q. 판정표와 후보 선정은 같은 것?</b><span>다르다. 후보 선정은 807속에서 심사할 넷을 고르는 단계(검출 · 자료 간 차이 · 오염), 판정표는 그 넷을 다섯 관문으로 판정한 결과(10장).</span></div><div class='qa-c'><b>Q. <i>Streptococcus</i>는 피부 감염균 아닌가?</b><span>일부 종은 그렇지만 속 전체를 병원성으로 묶을 수 없고 정상 피부에서도 보고됨(Gao 2007). 저희가 뺀 이유는 병원성이 아니라 자료 간 30.7배 차이.</span></div><div class='qa-c'><b>Q. 5배 규칙이 부위 차이를 채취법 차이로 오인하지 않나?</b><span>그럴 수 있다 — 42명과 595명은 채취법 · 나이 구성 · DNA 구간이 함께 달라 원인을 하나로 가르지 못함. 그래서 실증에서는 부위를 고정하고 규칙을 측정 전에 등록.</span></div><div class='qa-c'><b>Q. <i>Cladosporium</i>은 무엇으로 뺐나?</b><span>공기 중 어디에나 있는 환경 곰팡이라는 생물학이 먼저, 다른 연구 블랭크 1위는 참고값. 우리 자료엔 음성대조가 없어 확정은 2단계 음성대조로.</span></div><div class='qa-c'><b>Q. 왜 Mann–Whitney인가?</b><span>목표 지표가 AUC = U ÷ (두 군 인원의 곱). 고른 뒤 점검에서 8개 중 7개 정규성 기각. <i>Malassezia</i> 민감군만 기각 안 됨(p = 0.12).</span></div><div class='qa-c'><b>Q. 비율과 나이를 더했나?</b><span>아니다. 두 변수를 표준화해 각각 계수를 추정한 로지스틱 회귀. 표준 패키지 우도비 p = 1.7×10⁻⁵ · 로그비 +0.22 · 랜덤포레스트도 <i>Malassezia</i>만. 0.653→0.883은 재대입, 한 명씩 빼면 약 0.85(+0.27 · 표준 패키지 0.581→0.847).</span></div><div class='qa-c'><b>Q. 랜덤포레스트 +0.30이 더 큰 효과?</b><span>아니다. RF의 「나이만」 기준선(0.51)이 낮아 커 보임 — 이 표본에서는 로지스틱(0.62)이 낫다. 「방법을 바꿔도 <i>Malassezia</i>만」까지만.</span></div><div class='qa-c'><b>Q. 비율 표현 3가지는?</b><span>원래 비율 · 로그비 · 595명 중 구강 의심 10속 합이 20% 미만인 218명. <i>Staphylococcus</i>는 표현에 따라 부호가 뒤집혀 ② 보류.</span></div><div class='qa-c'><b>Q. 0 과다 모형은?</b><span>해 보지 않았다. 42명의 후보 4속은 0인 사람이 없고(595명 <i>Corynebacterium</i>은 9.6%가 0), 42명과 595명은 배치가 달라 전용 모형 대신 로그비 · 0 처리값 점검으로 대신 — 한계로 인정.</span></div><div class='qa-c'><b>Q. ICC는 어디서?</b><span>15계절 이마 24명 × 4계절(07 화장품도 &lt; 0.5) — 우리 대상이 아니라 참고 열, 판정에 넣지 않음.</span></div><div class='qa-c'><b>Q. BLAST가 왜 여러 종에 똑같이 맞나?</b><span>저희가 읽은 16S 짧은 구간에서 가장 많은 서열이 6종 이상과 100% 동률 — 16S의 포도상구균 종 구분력 한계(Heikens 2005)와 같은 결과 → 종 특이 표적이 필요.</span></div><div class='qa-c'><b>Q. 포도상구균 「유익/유해 두 가정」 분석은?</b><span>하지 않았다. 대신 BLAST로 종을 가를 수 없음을 확인하고, 종 특이 표적으로 다음 측정을 설계.</span></div><div class='qa-c'><b>Q. <i>Lactobacillus</i>는 왜 뺐나?</b><span>595명 검출 63% · 중앙값 0.04% · 심도 상관 오염 의심 신호. 유산균 제품을 바르면 늘 수 있다는 사람 연구.</span></div><div class='qa-c'><b>Q. <i>Corynebacterium</i>은 왜 보류?</b><span>효과가 없어서가 아니라 42명으로 판단 불가 + 피부 군집 시료의 종 표적 선례를 찾지 못해 측정법 미정.</span></div><div class='qa-c'><b>Q. 블랭크에도 <i>Malassezia</i>가 있는데?</b><span>다른 연구의 블랭크 1개라 참고값. 우리 자료엔 음성대조가 없어 오염을 배제하지 못함 → 2단계는 모든 처리 단계에 음성대조.</span></div><div class='qa-c'><b>Q. <i>M. restricta</i> 절대량은?</b><span>종 특이 qPCR로 직접 정량(파일럿에서 확정). 패널 비율 × 전체 진균량만으로는 자동으로 나오지 않음.</span></div><div class='qa-c'><b>Q. 65명 · 74명 근거는?</b><span>65명 = AUC 신뢰구간 ±0.10. 74명 = AUC 0.65를 검정력 80%로 보는 57명 ÷ 증폭 성공률 93/120 — 예비 산정.</span></div><div class='qa-c'><b>Q. 군당 74명으로 세균도 판단되나?</b><span>보장하지 않음 — 세균은 비민감 쪽에 많을 확률이 0.51–0.61이라 74명으로도 판단이 안 날 수 있음. 74명은 AUC 0.65 기준의 예비 산정.</span></div><div class='qa-c'><b>Q. 서비스 가격은 얼마?</b><span>숫자는 아직 정하지 않았다. 1단계는 측정비 0 + 분석(판정 1건 약 4–8시간 추정), 2단계는 측정 실비(어림 $107–$256) + 분석 · 리포트. 지어낸 숫자로 답하지 않기.</span></div><div class='qa-c'><b>Q. <i>Malassezia</i>가 적으면 건강하지 않다는 뜻?</b><span>문헌이 엇갈리고(Wang 2023), 42명 피지에서도 차이를 찾지 못함 — 원인 해석은 붙이지 않음.</span></div><div class='qa-c'><b>Q. <i>Epicoccum</i>(알레르기원)은?</b><span>후보 규칙에서는 탈락 — 검증할 가설로 남겨 둠.</span></div><div class='qa-c'><b>Q. 실험 설계부터 서비스로 하면?</b><span>생각해 봤다 — 2단계에서 채취 · 반복 측정 프로토콜을 저희가 정하는 것이 그 첫걸음.</span></div><div class='qa-c'><b>Q. qPCR 기준 균주 · 표준 물질은?</b><span>감시 표적이라는 뜻이면 주 지표 <i>M. restricta</i>. 정량 표준이라는 뜻이면 표준 DNA(검량선)가 필요 — 무엇을 쓸지는 파일럿에서 정함(아직 미정).</span></div><div class='qa-c'><b>Q. 역할 분담은?</b><span>발표는 한 명, 분석 · 검증 · 자료 정리는 팀원이 나눠 맡음 — 장별 담당은 팀이 확인해 답하기.</span></div><div class='qa-c'><b>Q. 42명 라벨은 믿을 수 있나?</b><span>원 논문(Keum 2020) 기준이라 저희가 다시 판정할 수 없음 — 한계로 명시.</span></div><div class='qa-c'><b>Q. 595명은 어디서?</b><span>AAML(mSystems 2026)과 같은 기준의 20–79세 여성. 저자 공개 자료로 재분석, EGA 원시자료는 승인제.</span></div><div class='qa-c'><b>Q. 경쟁사도 종 수준을 한다는데?</b><span>종 수준을 <b>표방</b>하는 곳도 확인한 공개 페이지에서 균별 기준값은 찾지 못함. 차별점은 측정 해상도가 아니라 지표 적격성 판정.</span></div><div class='qa-c'><b>Q. 패널이 앰플리콘보다 싼가?</b><span>아니다 — 범위가 겹친다. 패널의 장점은 종을 가르고 절대량까지 재는 해상도.</span></div><div class='qa-c'><b>Q. AI가 하라는 대로 한 것 아닌가?</b><span>판정 등급 · 분석 범위는 사람이 정했다. AI가 범위 밖 분석(피지)을 했을 때 멈추고 검토한 뒤 추가 점검으로만 채택.</span></div></div>
+</div>
+<script>
+// 덱 v4 스크립트와 같은 방식: 6단계 진행 표시 · 장 머리 번호 · 본문 맞춤
+const STEPS=['주제 배경','데이터 선정','분석·결과','큐레이션 도출','최종 제안','적용·확장'];
+const slides=[...document.querySelectorAll('.sbox .slide')];
+slides.forEach((s,n)=>{
+  const st=+s.dataset.step, box=s.querySelector('.steps');
+  if(box&&st) box.innerHTML=STEPS.map((t,k)=>'<span class="'+(k+1===st?'cur':(k+1<st?'done':''))+'">'+(k+1)+' '+t+'</span>').join('');
+  const e=s.querySelector('.eye'); if(e && /^\d+ · /.test(e.textContent)) e.innerHTML=e.innerHTML.replace(/^\d+ · /, n+' · ');
+});
+function fitBody(el){
+  const b=el.querySelector('.s-body'); if(!b) return;
+  b.style.transform='none'; b.style.width=''; b.style.paddingTop='';
+  const avail=b.clientHeight, need=b.scrollHeight; if(avail<=0) return;
+  if(need>avail+1){ const k=Math.max(0.6,avail/need); b.style.transform='scale('+k+')'; b.style.width=(100/k)+'%'; }
+  else{ const last=b.lastElementChild; if(last){ const used=(last.offsetTop+last.offsetHeight)-b.offsetTop, room=avail-used;
+    if(used>0 && room>24) b.style.paddingTop=Math.round(room*0.35)+'px'; } }
+}
+function fitFrames(){ document.querySelectorAll('.frame').forEach(f=>{ f.firstElementChild.style.transform='scale('+(f.clientWidth/1280)+')'; }); }
+function fitAll(){ slides.forEach(fitBody); fitFrames(); }
+window.addEventListener('resize',fitFrames);
+window.addEventListener('beforeprint',fitAll);
+fitAll(); setTimeout(fitAll,120);
+if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fitAll);
+</script>
+</body></html>
