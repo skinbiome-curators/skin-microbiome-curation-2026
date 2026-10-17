@@ -1,0 +1,6067 @@
+{
+  "question": "화장품 시험의 균 변화를 근거로 말할 수 있나 — 효능 판정 규칙 v2 시범",
+  "rules": "경진대회/효능판정기준_초안_261017.md v2 (결정 1–8 · 3장 결정표 · 5-2)",
+  "note": "E1 · E2 · E0-③ 은 참고. 07 의 등급은 E0 로 정해진다(결정 5 · 7).",
+  "params": {
+    "EPS": 1e-05,
+    "thresholds_pct": [
+      1.0,
+      0.1,
+      0.0
+    ],
+    "primary_threshold_pct": 1.0,
+    "confined_rule": "한 시점 ≥ 80% · 다른 모든 시점 ≤ 20%",
+    "run_overlap_rule": "crossed(모든 런에 두 시점이 함께) 일 때만 통과 — partial · disjoint 는 겹침",
+    "CR": "1.96·√2·S_w",
+    "alpha": 0.05,
+    "claim_direction": {
+      "Cutibacterium": "greater",
+      "Staphylococcus": "greater",
+      "Corynebacterium": "two-sided"
+    },
+    "E2_gate": "None — 같은 시험 잡음의 숫자 기준은 아직 정하지 않음(문서 빈칸)"
+  },
+  "inputs": {
+    "07_skincare_16S_sample_info.tsv": {
+      "sha256": "e0fb90301641ec0ed7d97e9e4e540d27bf3aee2b89e278a6b6cd541e4d7de923",
+      "matches_SHA256SUMS": true
+    },
+    "07_skincare_16S_genus_pct.tsv": {
+      "sha256": "06a63aa5e370eee16031cfa910ec659d09ea743404fc9d2f9b8313a98406b988",
+      "matches_SHA256SUMS": true
+    },
+    "15_season_16S_sample_info.tsv": {
+      "sha256": "a1afb07e044e8f9315f8f26d76f07fa7031ca652ff9df7f1471ec13f0acd8b31",
+      "matches_SHA256SUMS": true
+    },
+    "15_season_16S_genus_pct.tsv": {
+      "sha256": "8763d6e57b4ba360e75bc8033d4b96d5dd3d5e6e02a4dccc232197e3800a294b",
+      "matches_SHA256SUMS": true
+    }
+  },
+  "selftest": {
+    "decision_table_cases": 11,
+    "signrank_crit_n25": 89,
+    "exact_p_matches_scipy": true,
+    "run_overlap_partial_and_crossed": true,
+    "opposite_direction_reaches_row8": true,
+    "passed": true
+  },
+  "noise_15season": {
+    "note": "홍콩 중국인 11가구 24명 · 이마 · V4 · 2014-01·04·08·11 · 로그비 원자료",
+    "genera": {
+      "Cutibacterium": {
+        "n_subject": 24,
+        "n_repeat": 4,
+        "S_w_oneway": 1.1858,
+        "S_w_twoway": 0.9924,
+        "CR_oneway": 3.2868,
+        "CR_twoway": 2.7509
+      },
+      "Staphylococcus": {
+        "n_subject": 24,
+        "n_repeat": 4,
+        "S_w_oneway": 1.1304,
+        "S_w_twoway": 0.9797,
+        "CR_oneway": 3.1332,
+        "CR_twoway": 2.7156
+      },
+      "Corynebacterium": {
+        "n_subject": 24,
+        "n_repeat": 4,
+        "S_w_oneway": 0.8677,
+        "S_w_twoway": 0.8,
+        "CR_oneway": 2.4053,
+        "CR_twoway": 2.2174
+      }
+    }
+  },
+  "E0": {
+    "07": {
+      "timepoints": [
+        "0W",
+        "2W",
+        "4W"
+      ],
+      "n_samples": 75,
+      "negative_controls_by_timepoint": {},
+      "run_crosstab": {
+        "M04177:242:000000000-CW4R9": {
+          "0W": 25,
+          "2W": 0,
+          "4W": 0
+        },
+        "M04177:241:000000000-CW4RL": {
+          "0W": 0,
+          "2W": 22,
+          "4W": 0
+        },
+        "M04177:244:000000000-J276W": {
+          "0W": 0,
+          "2W": 3,
+          "4W": 0
+        },
+        "M04177:243:000000000-J2766": {
+          "0W": 0,
+          "2W": 0,
+          "4W": 25
+        }
+      },
+      "confined_grid": {
+        "1%": {
+          "n_genera": 6,
+          "genera": [
+            {
+              "genus": "Acetobacter",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.0,
+                "4W": 0.0
+              }
+            },
+            {
+              "genus": "Akkermansia",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.0,
+                "4W": 0.0
+              }
+            },
+            {
+              "genus": "Bacteroides",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.0,
+                "4W": 0.0
+              }
+            },
+            {
+              "genus": "Lachnospiraceae NK4A136 group",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.0,
+                "4W": 0.0
+              }
+            },
+            {
+              "genus": "Sphingomonas",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.12,
+                "4W": 0.08
+              }
+            },
+            {
+              "genus": "Wolbachia",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.12,
+                "4W": 0.12
+              }
+            }
+          ],
+          "sum_median_pct_by_timepoint": {
+            "0W": 58.091,
+            "2W": 0.628,
+            "4W": 0.591
+          }
+        },
+        "0.1%": {
+          "n_genera": 13,
+          "genera": [
+            {
+              "genus": "Acetobacter",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.04,
+                "4W": 0.04
+              }
+            },
+            {
+              "genus": "Akkermansia",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.12,
+                "4W": 0.12
+              }
+            },
+            {
+              "genus": "Bacteroides",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.2,
+                "4W": 0.08
+              }
+            },
+            {
+              "genus": "Colidextribacter",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.0,
+                "4W": 0.04
+              }
+            },
+            {
+              "genus": "Fructilactobacillus",
+              "timepoint": "0W",
+              "share": {
+                "0W": 0.84,
+                "2W": 0.0,
+                "4W": 0.0
+              }
+            },
+            {
+              "genus": "Intestinimonas",
+              "timepoint": "0W",
+              "share": {
+                "0W": 0.96,
+                "2W": 0.0,
+                "4W": 0.04
+              }
+            },
+            {
+              "genus": "Lachnospiraceae NK4A136 group",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.04,
+                "4W": 0.2
+              }
+            },
+            {
+              "genus": "Lactiplantibacillus",
+              "timepoint": "0W",
+              "share": {
+                "0W": 0.96,
+                "2W": 0.04,
+                "4W": 0.0
+              }
+            },
+            {
+              "genus": "Ligilactobacillus",
+              "timepoint": "0W",
+              "share": {
+                "0W": 0.96,
+                "2W": 0.0,
+                "4W": 0.0
+              }
+            },
+            {
+              "genus": "Mucispirillum",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.0,
+                "4W": 0.04
+              }
+            },
+            {
+              "genus": "Oscillibacter",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.0,
+                "4W": 0.04
+              }
+            },
+            {
+              "genus": "Roseburia",
+              "timepoint": "0W",
+              "share": {
+                "0W": 0.92,
+                "2W": 0.0,
+                "4W": 0.0
+              }
+            },
+            {
+              "genus": "Ruminococcus",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.04,
+                "4W": 0.0
+              }
+            }
+          ],
+          "sum_median_pct_by_timepoint": {
+            "0W": 16.503,
+            "2W": 0.06,
+            "4W": 0.068
+          }
+        },
+        "0%": {
+          "n_genera": 27,
+          "genera": [
+            {
+              "genus": "[Eubacterium] siraeum group",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.0,
+                "4W": 0.12
+              }
+            },
+            {
+              "genus": "[Eubacterium] xylanophilum group",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.04,
+                "4W": 0.04
+              }
+            },
+            {
+              "genus": "Acutalibacter",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.0,
+                "4W": 0.0
+              }
+            },
+            {
+              "genus": "Agathobaculum",
+              "timepoint": "0W",
+              "share": {
+                "0W": 0.88,
+                "2W": 0.0,
+                "4W": 0.04
+              }
+            },
+            {
+              "genus": "Anaerotruncus",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.0,
+                "4W": 0.0
+              }
+            },
+            {
+              "genus": "Arachidicoccus",
+              "timepoint": "0W",
+              "share": {
+                "0W": 0.8,
+                "2W": 0.0,
+                "4W": 0.12
+              }
+            },
+            {
+              "genus": "Butyribacter",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.0,
+                "4W": 0.04
+              }
+            },
+            {
+              "genus": "Candidatus Udaeobacter",
+              "timepoint": "0W",
+              "share": {
+                "0W": 0.84,
+                "2W": 0.0,
+                "4W": 0.0
+              }
+            },
+            {
+              "genus": "Emticicia",
+              "timepoint": "0W",
+              "share": {
+                "0W": 0.96,
+                "2W": 0.0,
+                "4W": 0.0
+              }
+            },
+            {
+              "genus": "Fructilactobacillus",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.0,
+                "4W": 0.08
+              }
+            },
+            {
+              "genus": "Intestinimonas",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.0,
+                "4W": 0.2
+              }
+            },
+            {
+              "genus": "Klebsiella",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.04,
+                "4W": 0.04
+              }
+            },
+            {
+              "genus": "Lactiplantibacillus",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.12,
+                "4W": 0.08
+              }
+            },
+            {
+              "genus": "Levilactobacillus",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.0,
+                "4W": 0.0
+              }
+            },
+            {
+              "genus": "Ligilactobacillus",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.04,
+                "4W": 0.0
+              }
+            },
+            {
+              "genus": "Luteolibacter",
+              "timepoint": "0W",
+              "share": {
+                "0W": 0.88,
+                "2W": 0.0,
+                "4W": 0.0
+              }
+            },
+            {
+              "genus": "Monoglobus",
+              "timepoint": "0W",
+              "share": {
+                "0W": 0.96,
+                "2W": 0.0,
+                "4W": 0.16
+              }
+            },
+            {
+              "genus": "Mucispirillum",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.16,
+                "4W": 0.12
+              }
+            },
+            {
+              "genus": "NK4A214 group",
+              "timepoint": "0W",
+              "share": {
+                "0W": 0.92,
+                "2W": 0.0,
+                "4W": 0.0
+              }
+            },
+            {
+              "genus": "Oscillibacter",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.08,
+                "4W": 0.2
+              }
+            },
+            {
+              "genus": "Peptococcus",
+              "timepoint": "0W",
+              "share": {
+                "0W": 0.88,
+                "2W": 0.08,
+                "4W": 0.08
+              }
+            },
+            {
+              "genus": "Pirellula",
+              "timepoint": "0W",
+              "share": {
+                "0W": 0.8,
+                "2W": 0.04,
+                "4W": 0.04
+              }
+            },
+            {
+              "genus": "Roseburia",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.04,
+                "4W": 0.04
+              }
+            },
+            {
+              "genus": "Ruminococcus",
+              "timepoint": "0W",
+              "share": {
+                "0W": 1.0,
+                "2W": 0.16,
+                "4W": 0.2
+              }
+            },
+            {
+              "genus": "Ruthenibacterium",
+              "timepoint": "0W",
+              "share": {
+                "0W": 0.8,
+                "2W": 0.0,
+                "4W": 0.0
+              }
+            },
+            {
+              "genus": "Thomasclavelia",
+              "timepoint": "0W",
+              "share": {
+                "0W": 0.88,
+                "2W": 0.0,
+                "4W": 0.0
+              }
+            },
+            {
+              "genus": "UCG-005",
+              "timepoint": "0W",
+              "share": {
+                "0W": 0.84,
+                "2W": 0.04,
+                "4W": 0.16
+              }
+            }
+          ],
+          "sum_median_pct_by_timepoint": {
+            "0W": 3.109,
+            "2W": 0.014,
+            "4W": 0.034
+          }
+        }
+      },
+      "confined_nesting": {
+        "nested": false,
+        "intersection_1_and_0.1": [
+          "Acetobacter",
+          "Akkermansia",
+          "Bacteroides",
+          "Lachnospiraceae NK4A136 group"
+        ],
+        "intersection_1_and_0": [],
+        "union_n": 34
+      },
+      "E4_baseline_repeat": false,
+      "E4_note": "바르기 전(기준 시점) 반복측정이 설계에 없다"
+    },
+    "15": {
+      "timepoints": [
+        "2014-01",
+        "2014-04",
+        "2014-08",
+        "2014-11"
+      ],
+      "n_samples": 96,
+      "negative_controls_by_timepoint": {
+        "2014-01": 4
+      },
+      "run_crosstab": {
+        "(정보 없음)": {
+          "2014-01": 24,
+          "2014-04": 24,
+          "2014-08": 24,
+          "2014-11": 24
+        }
+      },
+      "confined_grid": {
+        "1%": {
+          "n_genera": 0,
+          "genera": [],
+          "sum_median_pct_by_timepoint": {
+            "2014-01": 0.0,
+            "2014-04": 0.0,
+            "2014-08": 0.0,
+            "2014-11": 0.0
+          }
+        },
+        "0.1%": {
+          "n_genera": 0,
+          "genera": [],
+          "sum_median_pct_by_timepoint": {
+            "2014-01": 0.0,
+            "2014-04": 0.0,
+            "2014-08": 0.0,
+            "2014-11": 0.0
+          }
+        },
+        "0%": {
+          "n_genera": 1,
+          "genera": [
+            {
+              "genus": "OLB13",
+              "timepoint": "2014-01",
+              "share": {
+                "2014-01": 0.833,
+                "2014-04": 0.125,
+                "2014-08": 0.0,
+                "2014-11": 0.0
+              }
+            }
+          ],
+          "sum_median_pct_by_timepoint": {
+            "2014-01": 0.016,
+            "2014-04": 0.0,
+            "2014-08": 0.0,
+            "2014-11": 0.0
+          }
+        }
+      },
+      "confined_nesting": {
+        "nested": true,
+        "intersection_1_and_0.1": [],
+        "intersection_1_and_0": [],
+        "union_n": 1
+      },
+      "E4_baseline_repeat": false,
+      "E4_note": "관찰 연구 — 기준 시점 반복측정 개념이 없다"
+    }
+  },
+  "cohort07": {
+    "design": "볼 · 25명 × 0W · 2W · 4W · 대조 없음 · 음성대조 없음",
+    "primary_comparison": "0W→4W (부분 사후 — 시점별 중앙값을 본 뒤 정함)",
+    "excl_union_genera": [
+      "Acetobacter",
+      "Acutalibacter",
+      "Agathobaculum",
+      "Akkermansia",
+      "Anaerotruncus",
+      "Arachidicoccus",
+      "Bacteroides",
+      "Butyribacter",
+      "Candidatus Udaeobacter",
+      "Colidextribacter",
+      "Emticicia",
+      "Fructilactobacillus",
+      "Intestinimonas",
+      "Klebsiella",
+      "Lachnospiraceae NK4A136 group",
+      "Lactiplantibacillus",
+      "Levilactobacillus",
+      "Ligilactobacillus",
+      "Luteolibacter",
+      "Monoglobus",
+      "Mucispirillum",
+      "NK4A214 group",
+      "Oscillibacter",
+      "Peptococcus",
+      "Pirellula",
+      "Roseburia",
+      "Ruminococcus",
+      "Ruthenibacterium",
+      "Sphingomonas",
+      "Thomasclavelia",
+      "UCG-005",
+      "Wolbachia",
+      "[Eubacterium] siraeum group",
+      "[Eubacterium] xylanophilum group"
+    ],
+    "CR_internal_2W4W": {
+      "raw": {
+        "Cutibacterium": {
+          "oneway": 1.2264,
+          "twoway": 1.0352
+        },
+        "Staphylococcus": {
+          "oneway": 1.9789,
+          "twoway": 1.8179
+        },
+        "Corynebacterium": {
+          "oneway": 1.3783,
+          "twoway": 1.3242
+        }
+      },
+      "excl_1pct": {
+        "Cutibacterium": {
+          "oneway": 1.2487,
+          "twoway": 1.0591
+        },
+        "Staphylococcus": {
+          "oneway": 1.9783,
+          "twoway": 1.8197
+        },
+        "Corynebacterium": {
+          "oneway": 1.3701,
+          "twoway": 1.3134
+        }
+      },
+      "excl_0.1pct": {
+        "Cutibacterium": {
+          "oneway": 1.2319,
+          "twoway": 1.0407
+        },
+        "Staphylococcus": {
+          "oneway": 1.9782,
+          "twoway": 1.8181
+        },
+        "Corynebacterium": {
+          "oneway": 1.3801,
+          "twoway": 1.3254
+        }
+      },
+      "excl_0pct": {
+        "Cutibacterium": {
+          "oneway": 1.2289,
+          "twoway": 1.0369
+        },
+        "Staphylococcus": {
+          "oneway": 1.9775,
+          "twoway": 1.8174
+        },
+        "Corynebacterium": {
+          "oneway": 1.3789,
+          "twoway": 1.3241
+        }
+      },
+      "excl_union": {
+        "Cutibacterium": {
+          "oneway": 1.2523,
+          "twoway": 1.0617
+        },
+        "Staphylococcus": {
+          "oneway": 1.9771,
+          "twoway": 1.8197
+        },
+        "Corynebacterium": {
+          "oneway": 1.372,
+          "twoway": 1.3144
+        }
+      }
+    },
+    "comparisons": {
+      "0W→2W": {
+        "run_overlap": {
+          "status": "disjoint",
+          "frac_samples_in_shared_runs": 0.0
+        },
+        "E0_state": "혼동 의심",
+        "E0_reasons": [
+          "두 시점의 시퀀싱 런이 하나도 겹치지 않음",
+          "한 시점에만 몰린 속 6개(1 % 문턱)"
+        ],
+        "versions": {
+          "raw": {
+            "Cutibacterium": {
+              "n": 25,
+              "median_delta": 1.073,
+              "hl": 1.073,
+              "hl_ci95": [
+                0.8098,
+                1.3495
+              ],
+              "p": 2.980232238769531e-07,
+              "alternative": "greater",
+              "p_two_sided": 5.960464477539062e-07,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.2868,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7509,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.2264,
+                "n": 25,
+                "k_up": 9,
+                "k_up_ci95": [
+                  0.18,
+                  0.575
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 9,
+                "k_claim_ci95": [
+                  0.18,
+                  0.575
+                ],
+                "binom_null": 0.025,
+                "binom_p": 5.4184462526729325e-09
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.0352,
+                "n": 25,
+                "k_up": 13,
+                "k_up_ci95": [
+                  0.313,
+                  0.722
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 13,
+                "k_claim_ci95": [
+                  0.313,
+                  0.722
+                ],
+                "binom_null": 0.025,
+                "binom_p": 5.846876084570985e-15
+              },
+              "p_holm": 2.980232238769531e-07,
+              "p_two_sided_holm": 5.960464477539062e-07,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Staphylococcus": {
+              "n": 25,
+              "median_delta": 1.7697,
+              "hl": 1.661,
+              "hl_ci95": [
+                1.2869,
+                1.9645
+              ],
+              "p": 1.4901161193847656e-07,
+              "alternative": "greater",
+              "p_two_sided": 2.980232238769531e-07,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.1332,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7156,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.9789,
+                "n": 25,
+                "k_up": 8,
+                "k_up_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 8,
+                "k_claim_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.1273214813178967e-07
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.8179,
+                "n": 25,
+                "k_up": 12,
+                "k_up_ci95": [
+                  0.278,
+                  0.687
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 12,
+                "k_claim_ci95": [
+                  0.278,
+                  0.687
+                ],
+                "binom_null": 0.025,
+                "binom_p": 2.28879557898841e-13
+              },
+              "p_holm": 2.980232238769531e-07,
+              "p_two_sided_holm": 5.960464477539062e-07,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Corynebacterium": {
+              "n": 25,
+              "median_delta": 1.7772,
+              "hl": 1.8824,
+              "hl_ci95": [
+                1.4892,
+                2.3188
+              ],
+              "p": 5.960464477539063e-08,
+              "alternative": "two-sided",
+              "p_two_sided": 5.960464477539063e-08,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 2.4053,
+                "n": 25,
+                "k_up": 7,
+                "k_up_ci95": [
+                  0.121,
+                  0.494
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 7,
+                "k_claim_ci95": [
+                  0.121,
+                  0.494
+                ],
+                "binom_null": 0.05,
+                "binom_p": 0.0001687531500815852
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.2174,
+                "n": 25,
+                "k_up": 8,
+                "k_up_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 8,
+                "k_claim_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.9580554079346307e-05
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.3783,
+                "n": 25,
+                "k_up": 18,
+                "k_up_ci95": [
+                  0.506,
+                  0.879
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 18,
+                "k_claim_ci95": [
+                  0.506,
+                  0.879
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.3057863415700103e-18
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.3242,
+                "n": 25,
+                "k_up": 19,
+                "k_up_ci95": [
+                  0.549,
+                  0.906
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 19,
+                "k_claim_ci95": [
+                  0.549,
+                  0.906
+                ],
+                "binom_null": 0.05,
+                "binom_p": 2.5227800339746524e-20
+              },
+              "p_holm": 1.7881393432617188e-07,
+              "p_two_sided_holm": 1.7881393432617188e-07,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            }
+          },
+          "excl_1pct": {
+            "Cutibacterium": {
+              "n": 25,
+              "median_delta": -0.2448,
+              "hl": -0.2167,
+              "hl_ci95": [
+                -0.4111,
+                0.0035
+              ],
+              "p": 0.9686867892742157,
+              "alternative": "greater",
+              "p_two_sided": 0.06670159101486206,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.2868,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7509,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.2487,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 1,
+                "k_down_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.0591,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 2,
+                "k_down_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "p_holm": 0.9686867892742157,
+              "p_two_sided_holm": 0.11750304698944092,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Staphylococcus": {
+              "n": 25,
+              "median_delta": 0.3831,
+              "hl": 0.3534,
+              "hl_ci95": [
+                -0.0096,
+                0.6927
+              ],
+              "p": 0.02937576174736023,
+              "alternative": "greater",
+              "p_two_sided": 0.05875152349472046,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.1332,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7156,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.9783,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 1,
+                "k_down_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.8197,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 1,
+                "k_down_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "p_holm": 0.05875152349472046,
+              "p_two_sided_holm": 0.11750304698944092,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Corynebacterium": {
+              "n": 25,
+              "median_delta": 0.5482,
+              "hl": 0.5614,
+              "hl_ci95": [
+                0.1522,
+                1.0225
+              ],
+              "p": 0.007370948791503906,
+              "alternative": "two-sided",
+              "p_two_sided": 0.007370948791503906,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 2.4053,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.05,
+                "binom_p": 0.7226104268781659
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.2174,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.05,
+                "binom_p": 0.7226104268781659
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.3701,
+                "n": 25,
+                "k_up": 7,
+                "k_up_ci95": [
+                  0.121,
+                  0.494
+                ],
+                "k_down": 1,
+                "k_down_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_claim": 8,
+                "k_claim_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.9580554079346307e-05
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.3134,
+                "n": 25,
+                "k_up": 7,
+                "k_up_ci95": [
+                  0.121,
+                  0.494
+                ],
+                "k_down": 1,
+                "k_down_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_claim": 8,
+                "k_claim_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.9580554079346307e-05
+              },
+              "p_holm": 0.02211284637451172,
+              "p_two_sided_holm": 0.02211284637451172,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            }
+          },
+          "excl_0.1pct": {
+            "Cutibacterium": {
+              "n": 25,
+              "median_delta": 0.84,
+              "hl": 0.8418,
+              "hl_ci95": [
+                0.5871,
+                1.1217
+              ],
+              "p": 9.834766387939453e-07,
+              "alternative": "greater",
+              "p_two_sided": 1.9669532775878906e-06,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.2868,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7509,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.2319,
+                "n": 25,
+                "k_up": 6,
+                "k_up_ci95": [
+                  0.094,
+                  0.451
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 6,
+                "k_claim_ci95": [
+                  0.094,
+                  0.451
+                ],
+                "binom_null": 0.025,
+                "binom_p": 2.869959617150913e-05
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.0407,
+                "n": 25,
+                "k_up": 8,
+                "k_up_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 8,
+                "k_claim_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.1273214813178967e-07
+              },
+              "p_holm": 1.9669532775878906e-06,
+              "p_two_sided_holm": 3.933906555175781e-06,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Staphylococcus": {
+              "n": 25,
+              "median_delta": 1.5223,
+              "hl": 1.4298,
+              "hl_ci95": [
+                1.0533,
+                1.7402
+              ],
+              "p": 9.834766387939453e-07,
+              "alternative": "greater",
+              "p_two_sided": 1.9669532775878906e-06,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.1332,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7156,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.9782,
+                "n": 25,
+                "k_up": 6,
+                "k_up_ci95": [
+                  0.094,
+                  0.451
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 6,
+                "k_claim_ci95": [
+                  0.094,
+                  0.451
+                ],
+                "binom_null": 0.025,
+                "binom_p": 2.869959617150913e-05
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.8181,
+                "n": 25,
+                "k_up": 8,
+                "k_up_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 8,
+                "k_claim_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.1273214813178967e-07
+              },
+              "p_holm": 1.9669532775878906e-06,
+              "p_two_sided_holm": 3.933906555175781e-06,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Corynebacterium": {
+              "n": 25,
+              "median_delta": 1.5172,
+              "hl": 1.6336,
+              "hl_ci95": [
+                1.2832,
+                2.0823
+              ],
+              "p": 1.7881393432617188e-07,
+              "alternative": "two-sided",
+              "p_two_sided": 1.7881393432617188e-07,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 2.4053,
+                "n": 25,
+                "k_up": 6,
+                "k_up_ci95": [
+                  0.094,
+                  0.451
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 6,
+                "k_claim_ci95": [
+                  0.094,
+                  0.451
+                ],
+                "binom_null": 0.05,
+                "binom_p": 0.0012129613220972573
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.2174,
+                "n": 25,
+                "k_up": 7,
+                "k_up_ci95": [
+                  0.121,
+                  0.494
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 7,
+                "k_claim_ci95": [
+                  0.121,
+                  0.494
+                ],
+                "binom_null": 0.05,
+                "binom_p": 0.0001687531500815852
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.3801,
+                "n": 25,
+                "k_up": 17,
+                "k_up_ci95": [
+                  0.465,
+                  0.851
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 17,
+                "k_claim_ci95": [
+                  0.465,
+                  0.851
+                ],
+                "binom_null": 0.05,
+                "binom_p": 5.604966397916378e-17
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.3254,
+                "n": 25,
+                "k_up": 17,
+                "k_up_ci95": [
+                  0.465,
+                  0.851
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 17,
+                "k_claim_ci95": [
+                  0.465,
+                  0.851
+                ],
+                "binom_null": 0.05,
+                "binom_p": 5.604966397916378e-17
+              },
+              "p_holm": 5.364418029785156e-07,
+              "p_two_sided_holm": 5.364418029785156e-07,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            }
+          },
+          "excl_0pct": {
+            "Cutibacterium": {
+              "n": 25,
+              "median_delta": 1.0394,
+              "hl": 1.0336,
+              "hl_ci95": [
+                0.7666,
+                1.3076
+              ],
+              "p": 2.980232238769531e-07,
+              "alternative": "greater",
+              "p_two_sided": 5.960464477539062e-07,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.2868,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7509,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.2289,
+                "n": 25,
+                "k_up": 9,
+                "k_up_ci95": [
+                  0.18,
+                  0.575
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 9,
+                "k_claim_ci95": [
+                  0.18,
+                  0.575
+                ],
+                "binom_null": 0.025,
+                "binom_p": 5.4184462526729325e-09
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.0369,
+                "n": 25,
+                "k_up": 13,
+                "k_up_ci95": [
+                  0.313,
+                  0.722
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 13,
+                "k_claim_ci95": [
+                  0.313,
+                  0.722
+                ],
+                "binom_null": 0.025,
+                "binom_p": 5.846876084570985e-15
+              },
+              "p_holm": 2.980232238769531e-07,
+              "p_two_sided_holm": 5.960464477539062e-07,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Staphylococcus": {
+              "n": 25,
+              "median_delta": 1.7229,
+              "hl": 1.6228,
+              "hl_ci95": [
+                1.2406,
+                1.9251
+              ],
+              "p": 1.4901161193847656e-07,
+              "alternative": "greater",
+              "p_two_sided": 2.980232238769531e-07,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.1332,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7156,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.9775,
+                "n": 25,
+                "k_up": 8,
+                "k_up_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 8,
+                "k_claim_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.1273214813178967e-07
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.8174,
+                "n": 25,
+                "k_up": 11,
+                "k_up_ci95": [
+                  0.244,
+                  0.651
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 11,
+                "k_claim_ci95": [
+                  0.244,
+                  0.651
+                ],
+                "binom_null": 0.025,
+                "binom_p": 7.68454349283301e-12
+              },
+              "p_holm": 2.980232238769531e-07,
+              "p_two_sided_holm": 5.960464477539062e-07,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Corynebacterium": {
+              "n": 25,
+              "median_delta": 1.7303,
+              "hl": 1.8378,
+              "hl_ci95": [
+                1.4507,
+                2.2749
+              ],
+              "p": 5.960464477539063e-08,
+              "alternative": "two-sided",
+              "p_two_sided": 5.960464477539063e-08,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 2.4053,
+                "n": 25,
+                "k_up": 6,
+                "k_up_ci95": [
+                  0.094,
+                  0.451
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 6,
+                "k_claim_ci95": [
+                  0.094,
+                  0.451
+                ],
+                "binom_null": 0.05,
+                "binom_p": 0.0012129613220972573
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.2174,
+                "n": 25,
+                "k_up": 8,
+                "k_up_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 8,
+                "k_claim_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.9580554079346307e-05
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.3789,
+                "n": 25,
+                "k_up": 18,
+                "k_up_ci95": [
+                  0.506,
+                  0.879
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 18,
+                "k_claim_ci95": [
+                  0.506,
+                  0.879
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.3057863415700103e-18
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.3241,
+                "n": 25,
+                "k_up": 19,
+                "k_up_ci95": [
+                  0.549,
+                  0.906
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 19,
+                "k_claim_ci95": [
+                  0.549,
+                  0.906
+                ],
+                "binom_null": 0.05,
+                "binom_p": 2.5227800339746524e-20
+              },
+              "p_holm": 1.7881393432617188e-07,
+              "p_two_sided_holm": 1.7881393432617188e-07,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            }
+          },
+          "excl_union": {
+            "Cutibacterium": {
+              "n": 25,
+              "median_delta": -0.412,
+              "hl": -0.3968,
+              "hl_ci95": [
+                -0.6194,
+                -0.1984
+              ],
+              "p": 0.9996425211429596,
+              "alternative": "greater",
+              "p_two_sided": 0.0008081197738647461,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.2868,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7509,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.2523,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 2,
+                "k_down_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.0617,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 2,
+                "k_down_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "p_holm": 0.9996425211429596,
+              "p_two_sided_holm": 0.0024243593215942383,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Staphylococcus": {
+              "n": 25,
+              "median_delta": 0.0898,
+              "hl": 0.1263,
+              "hl_ci95": [
+                -0.2587,
+                0.4815
+              ],
+              "p": 0.2370823323726654,
+              "alternative": "greater",
+              "p_two_sided": 0.4741646647453308,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.1332,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7156,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.9771,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 1,
+                "k_down_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.8197,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 1,
+                "k_down_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "p_holm": 0.4741646647453308,
+              "p_two_sided_holm": 0.4741646647453308,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Corynebacterium": {
+              "n": 25,
+              "median_delta": 0.2786,
+              "hl": 0.3384,
+              "hl_ci95": [
+                -0.0533,
+                0.7902
+              ],
+              "p": 0.08513903617858887,
+              "alternative": "two-sided",
+              "p_two_sided": 0.08513903617858887,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 2.4053,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.05,
+                "binom_p": 0.7226104268781659
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.2174,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.05,
+                "binom_p": 0.7226104268781659
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.372,
+                "n": 25,
+                "k_up": 5,
+                "k_up_ci95": [
+                  0.068,
+                  0.407
+                ],
+                "k_down": 1,
+                "k_down_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_claim": 6,
+                "k_claim_ci95": [
+                  0.094,
+                  0.451
+                ],
+                "binom_null": 0.05,
+                "binom_p": 0.0012129613220972573
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.3144,
+                "n": 25,
+                "k_up": 5,
+                "k_up_ci95": [
+                  0.068,
+                  0.407
+                ],
+                "k_down": 2,
+                "k_down_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "k_claim": 7,
+                "k_claim_ci95": [
+                  0.121,
+                  0.494
+                ],
+                "binom_null": 0.05,
+                "binom_p": 0.0001687531500815852
+              },
+              "p_holm": 0.2554171085357666,
+              "p_two_sided_holm": 0.17027807235717773,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            }
+          }
+        },
+        "candidate_pair_logratio": {
+          "Cutibacterium/Staphylococcus": {
+            "n": 25,
+            "median_delta": -0.6103,
+            "hl": -0.5499,
+            "hl_ci95": [
+              -0.8876,
+              -0.1233
+            ],
+            "p": 0.00806879997253418,
+            "alternative": "two-sided",
+            "p_two_sided": 0.00806879997253418,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "p_holm": 0.01613759994506836
+          },
+          "Cutibacterium/Corynebacterium": {
+            "n": 25,
+            "median_delta": -0.9361,
+            "hl": -0.7478,
+            "hl_ci95": [
+              -1.1824,
+              -0.323
+            ],
+            "p": 0.0012963414192199707,
+            "alternative": "two-sided",
+            "p_two_sided": 0.0012963414192199707,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "p_holm": 0.003889024257659912
+          },
+          "Staphylococcus/Corynebacterium": {
+            "n": 25,
+            "median_delta": -0.4485,
+            "hl": -0.2282,
+            "hl_ci95": [
+              -0.7144,
+              0.1869
+            ],
+            "p": 0.17295855283737183,
+            "alternative": "two-sided",
+            "p_two_sided": 0.17295855283737183,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "p_holm": 0.17295855283737183
+          }
+        }
+      },
+      "0W→4W": {
+        "run_overlap": {
+          "status": "disjoint",
+          "frac_samples_in_shared_runs": 0.0
+        },
+        "E0_state": "혼동 의심",
+        "E0_reasons": [
+          "두 시점의 시퀀싱 런이 하나도 겹치지 않음",
+          "한 시점에만 몰린 속 6개(1 % 문턱)"
+        ],
+        "versions": {
+          "raw": {
+            "Cutibacterium": {
+              "n": 25,
+              "median_delta": 1.467,
+              "hl": 1.4574,
+              "hl_ci95": [
+                1.1201,
+                1.7903
+              ],
+              "p": 8.940696716308594e-08,
+              "alternative": "greater",
+              "p_two_sided": 1.7881393432617188e-07,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.2868,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7509,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.2264,
+                "n": 25,
+                "k_up": 16,
+                "k_up_ci95": [
+                  0.425,
+                  0.82
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 16,
+                "k_claim_ci95": [
+                  0.425,
+                  0.82
+                ],
+                "binom_null": 0.025,
+                "binom_p": 3.839435596046184e-20
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.0352,
+                "n": 25,
+                "k_up": 17,
+                "k_up_ci95": [
+                  0.465,
+                  0.851
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 17,
+                "k_claim_ci95": [
+                  0.465,
+                  0.851
+                ],
+                "binom_null": 0.025,
+                "binom_p": 5.200457267794636e-22
+              },
+              "p_holm": 1.7881393432617188e-07,
+              "p_two_sided_holm": 3.5762786865234375e-07,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Staphylococcus": {
+              "n": 25,
+              "median_delta": 1.2263,
+              "hl": 1.1257,
+              "hl_ci95": [
+                0.7435,
+                1.5509
+              ],
+              "p": 3.2782554626464844e-06,
+              "alternative": "greater",
+              "p_two_sided": 6.556510925292969e-06,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.1332,
+                "n": 25,
+                "k_up": 2,
+                "k_up_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 2,
+                "k_claim_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.1285735064914026
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7156,
+                "n": 25,
+                "k_up": 2,
+                "k_up_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 2,
+                "k_claim_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.1285735064914026
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.9789,
+                "n": 25,
+                "k_up": 5,
+                "k_up_ci95": [
+                  0.068,
+                  0.407
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 5,
+                "k_claim_ci95": [
+                  0.068,
+                  0.407
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.00034140268650393907
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.8179,
+                "n": 25,
+                "k_up": 5,
+                "k_up_ci95": [
+                  0.068,
+                  0.407
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 5,
+                "k_claim_ci95": [
+                  0.068,
+                  0.407
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.00034140268650393907
+              },
+              "p_holm": 3.2782554626464844e-06,
+              "p_two_sided_holm": 6.556510925292969e-06,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Corynebacterium": {
+              "n": 25,
+              "median_delta": 2.0206,
+              "hl": 2.1098,
+              "hl_ci95": [
+                1.7185,
+                2.5315
+              ],
+              "p": 5.960464477539063e-08,
+              "alternative": "two-sided",
+              "p_two_sided": 5.960464477539063e-08,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 2.4053,
+                "n": 25,
+                "k_up": 8,
+                "k_up_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 8,
+                "k_claim_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.9580554079346307e-05
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.2174,
+                "n": 25,
+                "k_up": 10,
+                "k_up_ci95": [
+                  0.211,
+                  0.613
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 10,
+                "k_claim_ci95": [
+                  0.211,
+                  0.613
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.5919116492738966e-07
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.3783,
+                "n": 25,
+                "k_up": 18,
+                "k_up_ci95": [
+                  0.506,
+                  0.879
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 18,
+                "k_claim_ci95": [
+                  0.506,
+                  0.879
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.3057863415700103e-18
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.3242,
+                "n": 25,
+                "k_up": 22,
+                "k_up_ci95": [
+                  0.688,
+                  0.975
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 22,
+                "k_claim_ci95": [
+                  0.688,
+                  0.975
+                ],
+                "binom_null": 0.05,
+                "binom_p": 4.7339427471160995e-26
+              },
+              "p_holm": 1.7881393432617188e-07,
+              "p_two_sided_holm": 1.7881393432617188e-07,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            }
+          },
+          "excl_1pct": {
+            "Cutibacterium": {
+              "n": 25,
+              "median_delta": 0.0934,
+              "hl": 0.1541,
+              "hl_ci95": [
+                -0.0853,
+                0.4022
+              ],
+              "p": 0.09086492657661438,
+              "alternative": "greater",
+              "p_two_sided": 0.18172985315322876,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.2868,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7509,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.2487,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 2,
+                "k_down_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.0591,
+                "n": 25,
+                "k_up": 2,
+                "k_up_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "k_down": 2,
+                "k_down_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "k_claim": 2,
+                "k_claim_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.1285735064914026
+              },
+              "p_holm": 0.18172985315322876,
+              "p_two_sided_holm": 0.3634597063064575,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Staphylococcus": {
+              "n": 25,
+              "median_delta": -0.2407,
+              "hl": -0.1522,
+              "hl_ci95": [
+                -0.564,
+                0.2211
+              ],
+              "p": 0.746148020029068,
+              "alternative": "greater",
+              "p_two_sided": 0.5249125957489014,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.1332,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7156,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.9783,
+                "n": 25,
+                "k_up": 2,
+                "k_up_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "k_down": 1,
+                "k_down_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_claim": 2,
+                "k_claim_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.1285735064914026
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.8197,
+                "n": 25,
+                "k_up": 2,
+                "k_up_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "k_down": 1,
+                "k_down_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_claim": 2,
+                "k_claim_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.1285735064914026
+              },
+              "p_holm": 0.746148020029068,
+              "p_two_sided_holm": 0.5249125957489014,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Corynebacterium": {
+              "n": 25,
+              "median_delta": 0.8239,
+              "hl": 0.8253,
+              "hl_ci95": [
+                0.4058,
+                1.2103
+              ],
+              "p": 0.0002498030662536621,
+              "alternative": "two-sided",
+              "p_two_sided": 0.0002498030662536621,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 2.4053,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.05,
+                "binom_p": 0.7226104268781659
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.2174,
+                "n": 25,
+                "k_up": 2,
+                "k_up_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 2,
+                "k_claim_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "binom_null": 0.05,
+                "binom_p": 0.3576241464547001
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.3701,
+                "n": 25,
+                "k_up": 7,
+                "k_up_ci95": [
+                  0.121,
+                  0.494
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 7,
+                "k_claim_ci95": [
+                  0.121,
+                  0.494
+                ],
+                "binom_null": 0.05,
+                "binom_p": 0.0001687531500815852
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.3134,
+                "n": 25,
+                "k_up": 7,
+                "k_up_ci95": [
+                  0.121,
+                  0.494
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 7,
+                "k_claim_ci95": [
+                  0.121,
+                  0.494
+                ],
+                "binom_null": 0.05,
+                "binom_p": 0.0001687531500815852
+              },
+              "p_holm": 0.0007494091987609863,
+              "p_two_sided_holm": 0.0007494091987609863,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            }
+          },
+          "excl_0.1pct": {
+            "Cutibacterium": {
+              "n": 25,
+              "median_delta": 1.2191,
+              "hl": 1.2216,
+              "hl_ci95": [
+                0.9017,
+                1.5475
+              ],
+              "p": 2.980232238769531e-07,
+              "alternative": "greater",
+              "p_two_sided": 5.960464477539062e-07,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.2868,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7509,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.2319,
+                "n": 25,
+                "k_up": 12,
+                "k_up_ci95": [
+                  0.278,
+                  0.687
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 12,
+                "k_claim_ci95": [
+                  0.278,
+                  0.687
+                ],
+                "binom_null": 0.025,
+                "binom_p": 2.28879557898841e-13
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.0407,
+                "n": 25,
+                "k_up": 16,
+                "k_up_ci95": [
+                  0.425,
+                  0.82
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 16,
+                "k_claim_ci95": [
+                  0.425,
+                  0.82
+                ],
+                "binom_null": 0.025,
+                "binom_p": 3.839435596046184e-20
+              },
+              "p_holm": 5.960464477539062e-07,
+              "p_two_sided_holm": 1.1920928955078125e-06,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Staphylococcus": {
+              "n": 25,
+              "median_delta": 0.9637,
+              "hl": 0.8788,
+              "hl_ci95": [
+                0.4972,
+                1.3299
+              ],
+              "p": 9.393692016601562e-05,
+              "alternative": "greater",
+              "p_two_sided": 0.00018787384033203125,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.1332,
+                "n": 25,
+                "k_up": 2,
+                "k_up_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 2,
+                "k_claim_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.1285735064914026
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7156,
+                "n": 25,
+                "k_up": 2,
+                "k_up_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 2,
+                "k_claim_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.1285735064914026
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.9782,
+                "n": 25,
+                "k_up": 3,
+                "k_up_ci95": [
+                  0.025,
+                  0.312
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 3,
+                "k_claim_ci95": [
+                  0.025,
+                  0.312
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.023834745252388444
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.8181,
+                "n": 25,
+                "k_up": 5,
+                "k_up_ci95": [
+                  0.068,
+                  0.407
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 5,
+                "k_claim_ci95": [
+                  0.068,
+                  0.407
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.00034140268650393907
+              },
+              "p_holm": 9.393692016601562e-05,
+              "p_two_sided_holm": 0.00018787384033203125,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Corynebacterium": {
+              "n": 25,
+              "median_delta": 1.8607,
+              "hl": 1.8681,
+              "hl_ci95": [
+                1.496,
+                2.281
+              ],
+              "p": 5.960464477539063e-08,
+              "alternative": "two-sided",
+              "p_two_sided": 5.960464477539063e-08,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 2.4053,
+                "n": 25,
+                "k_up": 8,
+                "k_up_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 8,
+                "k_claim_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.9580554079346307e-05
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.2174,
+                "n": 25,
+                "k_up": 8,
+                "k_up_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 8,
+                "k_claim_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.9580554079346307e-05
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.3801,
+                "n": 25,
+                "k_up": 17,
+                "k_up_ci95": [
+                  0.465,
+                  0.851
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 17,
+                "k_claim_ci95": [
+                  0.465,
+                  0.851
+                ],
+                "binom_null": 0.05,
+                "binom_p": 5.604966397916378e-17
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.3254,
+                "n": 25,
+                "k_up": 17,
+                "k_up_ci95": [
+                  0.465,
+                  0.851
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 17,
+                "k_claim_ci95": [
+                  0.465,
+                  0.851
+                ],
+                "binom_null": 0.05,
+                "binom_p": 5.604966397916378e-17
+              },
+              "p_holm": 1.7881393432617188e-07,
+              "p_two_sided_holm": 1.7881393432617188e-07,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            }
+          },
+          "excl_0pct": {
+            "Cutibacterium": {
+              "n": 25,
+              "median_delta": 1.4276,
+              "hl": 1.4173,
+              "hl_ci95": [
+                1.0804,
+                1.7495
+              ],
+              "p": 1.4901161193847656e-07,
+              "alternative": "greater",
+              "p_two_sided": 2.980232238769531e-07,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.2868,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7509,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.2289,
+                "n": 25,
+                "k_up": 16,
+                "k_up_ci95": [
+                  0.425,
+                  0.82
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 16,
+                "k_claim_ci95": [
+                  0.425,
+                  0.82
+                ],
+                "binom_null": 0.025,
+                "binom_p": 3.839435596046184e-20
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.0369,
+                "n": 25,
+                "k_up": 17,
+                "k_up_ci95": [
+                  0.465,
+                  0.851
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 17,
+                "k_claim_ci95": [
+                  0.465,
+                  0.851
+                ],
+                "binom_null": 0.025,
+                "binom_p": 5.200457267794636e-22
+              },
+              "p_holm": 2.980232238769531e-07,
+              "p_two_sided_holm": 5.960464477539062e-07,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Staphylococcus": {
+              "n": 25,
+              "median_delta": 1.1941,
+              "hl": 1.0797,
+              "hl_ci95": [
+                0.7004,
+                1.5124
+              ],
+              "p": 6.16908073425293e-06,
+              "alternative": "greater",
+              "p_two_sided": 1.233816146850586e-05,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.1332,
+                "n": 25,
+                "k_up": 2,
+                "k_up_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 2,
+                "k_claim_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.1285735064914026
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7156,
+                "n": 25,
+                "k_up": 2,
+                "k_up_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 2,
+                "k_claim_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.1285735064914026
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.9775,
+                "n": 25,
+                "k_up": 5,
+                "k_up_ci95": [
+                  0.068,
+                  0.407
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 5,
+                "k_claim_ci95": [
+                  0.068,
+                  0.407
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.00034140268650393907
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.8174,
+                "n": 25,
+                "k_up": 5,
+                "k_up_ci95": [
+                  0.068,
+                  0.407
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 5,
+                "k_claim_ci95": [
+                  0.068,
+                  0.407
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.00034140268650393907
+              },
+              "p_holm": 6.16908073425293e-06,
+              "p_two_sided_holm": 1.233816146850586e-05,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Corynebacterium": {
+              "n": 25,
+              "median_delta": 1.9938,
+              "hl": 2.0713,
+              "hl_ci95": [
+                1.6883,
+                2.4934
+              ],
+              "p": 5.960464477539063e-08,
+              "alternative": "two-sided",
+              "p_two_sided": 5.960464477539063e-08,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 2.4053,
+                "n": 25,
+                "k_up": 8,
+                "k_up_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 8,
+                "k_claim_ci95": [
+                  0.149,
+                  0.535
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.9580554079346307e-05
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.2174,
+                "n": 25,
+                "k_up": 10,
+                "k_up_ci95": [
+                  0.211,
+                  0.613
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 10,
+                "k_claim_ci95": [
+                  0.211,
+                  0.613
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.5919116492738966e-07
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.3789,
+                "n": 25,
+                "k_up": 18,
+                "k_up_ci95": [
+                  0.506,
+                  0.879
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 18,
+                "k_claim_ci95": [
+                  0.506,
+                  0.879
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.3057863415700103e-18
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.3241,
+                "n": 25,
+                "k_up": 20,
+                "k_up_ci95": [
+                  0.593,
+                  0.932
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 20,
+                "k_claim_ci95": [
+                  0.593,
+                  0.932
+                ],
+                "binom_null": 0.05,
+                "binom_p": 3.9702530204057777e-22
+              },
+              "p_holm": 1.7881393432617188e-07,
+              "p_two_sided_holm": 1.7881393432617188e-07,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            }
+          },
+          "excl_union": {
+            "Cutibacterium": {
+              "n": 25,
+              "median_delta": -0.0064,
+              "hl": -0.0722,
+              "hl_ci95": [
+                -0.251,
+                0.1858
+              ],
+              "p": 0.6245035231113434,
+              "alternative": "greater",
+              "p_two_sided": 0.7711594104766846,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.2868,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7509,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.2523,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 2,
+                "k_down_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.0617,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 2,
+                "k_down_ci95": [
+                  0.01,
+                  0.26
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "p_holm": 1.0,
+              "p_two_sided_holm": 0.7711594104766846,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Staphylococcus": {
+              "n": 25,
+              "median_delta": -0.4766,
+              "hl": -0.3511,
+              "hl_ci95": [
+                -0.7838,
+                0.0099
+              ],
+              "p": 0.9706242382526398,
+              "alternative": "greater",
+              "p_two_sided": 0.0626264214515686,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.1332,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7156,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.9771,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 3,
+                "k_down_ci95": [
+                  0.025,
+                  0.312
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.8197,
+                "n": 25,
+                "k_up": 1,
+                "k_up_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "k_down": 3,
+                "k_down_ci95": [
+                  0.025,
+                  0.312
+                ],
+                "k_claim": 1,
+                "k_claim_ci95": [
+                  0.001,
+                  0.204
+                ],
+                "binom_null": 0.025,
+                "binom_p": 0.46897448051819846
+              },
+              "p_holm": 1.0,
+              "p_two_sided_holm": 0.1252528429031372,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Corynebacterium": {
+              "n": 25,
+              "median_delta": 0.6077,
+              "hl": 0.6181,
+              "hl_ci95": [
+                0.2144,
+                1.0031
+              ],
+              "p": 0.003419220447540283,
+              "alternative": "two-sided",
+              "p_two_sided": 0.003419220447540283,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 2.4053,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.2174,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.0
+              },
+              "E2_internal_2W4W_oneway": {
+                "CR": 1.372,
+                "n": 25,
+                "k_up": 6,
+                "k_up_ci95": [
+                  0.094,
+                  0.451
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 6,
+                "k_claim_ci95": [
+                  0.094,
+                  0.451
+                ],
+                "binom_null": 0.05,
+                "binom_p": 0.0012129613220972573
+              },
+              "E2_internal_2W4W_twoway": {
+                "CR": 1.3144,
+                "n": 25,
+                "k_up": 6,
+                "k_up_ci95": [
+                  0.094,
+                  0.451
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 6,
+                "k_claim_ci95": [
+                  0.094,
+                  0.451
+                ],
+                "binom_null": 0.05,
+                "binom_p": 0.0012129613220972573
+              },
+              "p_holm": 0.01025766134262085,
+              "p_two_sided_holm": 0.01025766134262085,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            }
+          }
+        },
+        "candidate_pair_logratio": {
+          "Cutibacterium/Staphylococcus": {
+            "n": 25,
+            "median_delta": 0.3697,
+            "hl": 0.3585,
+            "hl_ci95": [
+              -0.1559,
+              0.8373
+            ],
+            "p": 0.21998637914657593,
+            "alternative": "two-sided",
+            "p_two_sided": 0.21998637914657593,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "p_holm": 0.21998637914657593
+          },
+          "Cutibacterium/Corynebacterium": {
+            "n": 25,
+            "median_delta": -0.5733,
+            "hl": -0.5798,
+            "hl_ci95": [
+              -1.0652,
+              -0.1839
+            ],
+            "p": 0.003419220447540283,
+            "alternative": "two-sided",
+            "p_two_sided": 0.003419220447540283,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "p_holm": 0.00926363468170166
+          },
+          "Staphylococcus/Corynebacterium": {
+            "n": 25,
+            "median_delta": -0.9972,
+            "hl": -1.0024,
+            "hl_ci95": [
+              -1.4758,
+              -0.4817
+            ],
+            "p": 0.0030878782272338867,
+            "alternative": "two-sided",
+            "p_two_sided": 0.0030878782272338867,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "p_holm": 0.00926363468170166
+          }
+        }
+      },
+      "2W→4W": {
+        "run_overlap": {
+          "status": "disjoint",
+          "frac_samples_in_shared_runs": 0.0
+        },
+        "E0_state": "혼동 의심",
+        "E0_reasons": [
+          "두 시점의 시퀀싱 런이 하나도 겹치지 않음"
+        ],
+        "versions": {
+          "raw": {
+            "Cutibacterium": {
+              "n": 25,
+              "median_delta": 0.3941,
+              "hl": 0.3555,
+              "hl_ci95": [
+                0.2202,
+                0.5706
+              ],
+              "p": 0.00031566619873046875,
+              "alternative": "greater",
+              "p_two_sided": 0.0006313323974609375,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.2868,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7509,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "p_holm": 0.0009469985961914062,
+              "p_two_sided_holm": 0.0018939971923828125,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Staphylococcus": {
+              "n": 25,
+              "median_delta": -0.3477,
+              "hl": -0.4239,
+              "hl_ci95": [
+                -0.8058,
+                -0.0389
+              ],
+              "p": 0.9862602949142456,
+              "alternative": "greater",
+              "p_two_sided": 0.029578447341918945,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.1332,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7156,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "p_holm": 0.9862602949142456,
+              "p_two_sided_holm": 0.05915689468383789,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Corynebacterium": {
+              "n": 25,
+              "median_delta": 0.2058,
+              "hl": 0.2247,
+              "hl_ci95": [
+                -0.0516,
+                0.5483
+              ],
+              "p": 0.08513903617858887,
+              "alternative": "two-sided",
+              "p_two_sided": 0.08513903617858887,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 2.4053,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.2174,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.0
+              },
+              "p_holm": 0.17027807235717773,
+              "p_two_sided_holm": 0.08513903617858887,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            }
+          },
+          "excl_1pct": {
+            "Cutibacterium": {
+              "n": 25,
+              "median_delta": 0.3822,
+              "hl": 0.3439,
+              "hl_ci95": [
+                0.2177,
+                0.5845
+              ],
+              "p": 0.0004559457302093506,
+              "alternative": "greater",
+              "p_two_sided": 0.0009118914604187012,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.2868,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7509,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "p_holm": 0.0013678371906280518,
+              "p_two_sided_holm": 0.0027356743812561035,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Staphylococcus": {
+              "n": 25,
+              "median_delta": -0.3374,
+              "hl": -0.4209,
+              "hl_ci95": [
+                -0.8126,
+                -0.0382
+              ],
+              "p": 0.9852107763290405,
+              "alternative": "greater",
+              "p_two_sided": 0.03180783987045288,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.1332,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7156,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "p_holm": 0.9852107763290405,
+              "p_two_sided_holm": 0.06361567974090576,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Corynebacterium": {
+              "n": 25,
+              "median_delta": 0.2161,
+              "hl": 0.2362,
+              "hl_ci95": [
+                -0.038,
+                0.5422
+              ],
+              "p": 0.0801958441734314,
+              "alternative": "two-sided",
+              "p_two_sided": 0.0801958441734314,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 2.4053,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.2174,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.0
+              },
+              "p_holm": 0.1603916883468628,
+              "p_two_sided_holm": 0.0801958441734314,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            }
+          },
+          "excl_0.1pct": {
+            "Cutibacterium": {
+              "n": 25,
+              "median_delta": 0.3921,
+              "hl": 0.3528,
+              "hl_ci95": [
+                0.2155,
+                0.5731
+              ],
+              "p": 0.00031566619873046875,
+              "alternative": "greater",
+              "p_two_sided": 0.0006313323974609375,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.2868,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7509,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "p_holm": 0.0009469985961914062,
+              "p_two_sided_holm": 0.0018939971923828125,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Staphylococcus": {
+              "n": 25,
+              "median_delta": -0.345,
+              "hl": -0.4227,
+              "hl_ci95": [
+                -0.8047,
+                -0.0342
+              ],
+              "p": 0.9862602949142456,
+              "alternative": "greater",
+              "p_two_sided": 0.029578447341918945,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.1332,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7156,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "p_holm": 0.9862602949142456,
+              "p_two_sided_holm": 0.05915689468383789,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Corynebacterium": {
+              "n": 25,
+              "median_delta": 0.2086,
+              "hl": 0.2238,
+              "hl_ci95": [
+                -0.0582,
+                0.547
+              ],
+              "p": 0.08513903617858887,
+              "alternative": "two-sided",
+              "p_two_sided": 0.08513903617858887,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 2.4053,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.2174,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.0
+              },
+              "p_holm": 0.17027807235717773,
+              "p_two_sided_holm": 0.08513903617858887,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            }
+          },
+          "excl_0pct": {
+            "Cutibacterium": {
+              "n": 25,
+              "median_delta": 0.3938,
+              "hl": 0.3545,
+              "hl_ci95": [
+                0.2206,
+                0.5743
+              ],
+              "p": 0.00031566619873046875,
+              "alternative": "greater",
+              "p_two_sided": 0.0006313323974609375,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.2868,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7509,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "p_holm": 0.0009469985961914062,
+              "p_two_sided_holm": 0.0018939971923828125,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Staphylococcus": {
+              "n": 25,
+              "median_delta": -0.3478,
+              "hl": -0.4228,
+              "hl_ci95": [
+                -0.8044,
+                -0.0355
+              ],
+              "p": 0.9862602949142456,
+              "alternative": "greater",
+              "p_two_sided": 0.029578447341918945,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.1332,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7156,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "p_holm": 0.9862602949142456,
+              "p_two_sided_holm": 0.05915689468383789,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Corynebacterium": {
+              "n": 25,
+              "median_delta": 0.2058,
+              "hl": 0.2271,
+              "hl_ci95": [
+                -0.0501,
+                0.5494
+              ],
+              "p": 0.08513903617858887,
+              "alternative": "two-sided",
+              "p_two_sided": 0.08513903617858887,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 2.4053,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.2174,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.0
+              },
+              "p_holm": 0.17027807235717773,
+              "p_two_sided_holm": 0.08513903617858887,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            }
+          },
+          "excl_union": {
+            "Cutibacterium": {
+              "n": 25,
+              "median_delta": 0.3819,
+              "hl": 0.3449,
+              "hl_ci95": [
+                0.2193,
+                0.5839
+              ],
+              "p": 0.0004559457302093506,
+              "alternative": "greater",
+              "p_two_sided": 0.0009118914604187012,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.2868,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7509,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "p_holm": 0.0013678371906280518,
+              "p_two_sided_holm": 0.0027356743812561035,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Staphylococcus": {
+              "n": 25,
+              "median_delta": -0.3373,
+              "hl": -0.4206,
+              "hl_ci95": [
+                -0.8097,
+                -0.0359
+              ],
+              "p": 0.9852107763290405,
+              "alternative": "greater",
+              "p_two_sided": 0.03180783987045288,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 3.1332,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.7156,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.025,
+                "binom_p": 1.0
+              },
+              "p_holm": 0.9852107763290405,
+              "p_two_sided_holm": 0.06361567974090576,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            },
+            "Corynebacterium": {
+              "n": 25,
+              "median_delta": 0.2163,
+              "hl": 0.2372,
+              "hl_ci95": [
+                -0.0376,
+                0.5433
+              ],
+              "p": 0.0801958441734314,
+              "alternative": "two-sided",
+              "p_two_sided": 0.0801958441734314,
+              "p_method": "exact",
+              "n_zero": 0,
+              "ties": false,
+              "ci_assumes_no_zero_no_ties": true,
+              "E2_borrowed_oneway": {
+                "CR": 2.4053,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.0
+              },
+              "E2_borrowed_twoway": {
+                "CR": 2.2174,
+                "n": 25,
+                "k_up": 0,
+                "k_up_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_down": 0,
+                "k_down_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "k_claim": 0,
+                "k_claim_ci95": [
+                  0.0,
+                  0.137
+                ],
+                "binom_null": 0.05,
+                "binom_p": 1.0
+              },
+              "p_holm": 0.1603916883468628,
+              "p_two_sided_holm": 0.0801958441734314,
+              "grade": {
+                "grade": "아직 안 됨",
+                "row": 1,
+                "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+              }
+            }
+          }
+        },
+        "candidate_pair_logratio": {
+          "Cutibacterium/Staphylococcus": {
+            "n": 25,
+            "median_delta": 0.6989,
+            "hl": 0.7551,
+            "hl_ci95": [
+              0.4003,
+              1.1703
+            ],
+            "p": 5.3882598876953125e-05,
+            "alternative": "two-sided",
+            "p_two_sided": 5.3882598876953125e-05,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "p_holm": 0.00016164779663085938
+          },
+          "Cutibacterium/Corynebacterium": {
+            "n": 25,
+            "median_delta": 0.0111,
+            "hl": 0.1337,
+            "hl_ci95": [
+              -0.2825,
+              0.4721
+            ],
+            "p": 0.5964998602867126,
+            "alternative": "two-sided",
+            "p_two_sided": 0.5964998602867126,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "p_holm": 0.5964998602867126
+          },
+          "Staphylococcus/Corynebacterium": {
+            "n": 25,
+            "median_delta": -0.793,
+            "hl": -0.7286,
+            "hl_ci95": [
+              -1.0214,
+              -0.3823
+            ],
+            "p": 0.000429689884185791,
+            "alternative": "two-sided",
+            "p_two_sided": 0.000429689884185791,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "p_holm": 0.000859379768371582
+          }
+        }
+      }
+    },
+    "grade_primary": {
+      "Cutibacterium": {
+        "grade": "아직 안 됨",
+        "row": 1,
+        "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+      },
+      "Staphylococcus": {
+        "grade": "아직 안 됨",
+        "row": 1,
+        "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+      },
+      "Corynebacterium": {
+        "grade": "아직 안 됨",
+        "row": 1,
+        "reason": "시점과 배치가 겹쳐 제품 효과와 처리 차이를 가를 수 없음"
+      }
+    }
+  },
+  "rule_test_15season": {
+    "pairs": {
+      "2014-01→2014-04": {
+        "run_overlap": {
+          "status": "unknown",
+          "frac_samples_in_shared_runs": null
+        },
+        "E0_state": "정보 없음",
+        "E0_reasons": [
+          "시퀀싱 런 정보 없음",
+          "음성대조 없음(2014-04)"
+        ],
+        "genera": {
+          "Cutibacterium": {
+            "n": 24,
+            "median_delta": -1.3741,
+            "hl": -1.1759,
+            "hl_ci95": [
+              -1.6399,
+              -0.687
+            ],
+            "p": 5.328655242919922e-05,
+            "alternative": "two-sided",
+            "p_two_sided": 5.328655242919922e-05,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "E2_in_sample_oneway": {
+              "CR": 3.2868,
+              "n": 24,
+              "k_up": 0,
+              "k_up_ci95": [
+                0.0,
+                0.142
+              ],
+              "k_down": 1,
+              "k_down_ci95": [
+                0.001,
+                0.211
+              ],
+              "k_claim": 1,
+              "k_claim_ci95": [
+                0.001,
+                0.211
+              ],
+              "binom_null": 0.05,
+              "binom_p": 0.7080109756612272
+            },
+            "p_holm": 0.00015985965728759766,
+            "p_two_sided_holm": 0.00015985965728759766,
+            "grade": {
+              "grade": "조건부",
+              "row": 7,
+              "reason": "전후 변화는 관찰됐지만 원인을 가를 대조가 없음"
+            }
+          },
+          "Staphylococcus": {
+            "n": 24,
+            "median_delta": -0.3533,
+            "hl": -0.3911,
+            "hl_ci95": [
+              -1.0185,
+              0.1275
+            ],
+            "p": 0.10738253593444824,
+            "alternative": "two-sided",
+            "p_two_sided": 0.10738253593444824,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "E2_in_sample_oneway": {
+              "CR": 3.1332,
+              "n": 24,
+              "k_up": 1,
+              "k_up_ci95": [
+                0.001,
+                0.211
+              ],
+              "k_down": 0,
+              "k_down_ci95": [
+                0.0,
+                0.142
+              ],
+              "k_claim": 1,
+              "k_claim_ci95": [
+                0.001,
+                0.211
+              ],
+              "binom_null": 0.05,
+              "binom_p": 0.7080109756612272
+            },
+            "p_holm": 0.10738253593444824,
+            "p_two_sided_holm": 0.10738253593444824,
+            "grade": {
+              "grade": "아직 안 됨",
+              "row": 8,
+              "reason": "전후 변화가 유의하지 않음"
+            }
+          },
+          "Corynebacterium": {
+            "n": 24,
+            "median_delta": -0.7579,
+            "hl": -0.4814,
+            "hl_ci95": [
+              -0.9477,
+              -0.056
+            ],
+            "p": 0.03148162364959717,
+            "alternative": "two-sided",
+            "p_two_sided": 0.03148162364959717,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "E2_in_sample_oneway": {
+              "CR": 2.4053,
+              "n": 24,
+              "k_up": 0,
+              "k_up_ci95": [
+                0.0,
+                0.142
+              ],
+              "k_down": 0,
+              "k_down_ci95": [
+                0.0,
+                0.142
+              ],
+              "k_claim": 0,
+              "k_claim_ci95": [
+                0.0,
+                0.142
+              ],
+              "binom_null": 0.05,
+              "binom_p": 1.0
+            },
+            "p_holm": 0.06296324729919434,
+            "p_two_sided_holm": 0.06296324729919434,
+            "grade": {
+              "grade": "아직 안 됨",
+              "row": 8,
+              "reason": "전후 변화가 유의하지 않음"
+            }
+          }
+        }
+      },
+      "2014-01→2014-08": {
+        "run_overlap": {
+          "status": "unknown",
+          "frac_samples_in_shared_runs": null
+        },
+        "E0_state": "정보 없음",
+        "E0_reasons": [
+          "시퀀싱 런 정보 없음",
+          "음성대조 없음(2014-08)"
+        ],
+        "genera": {
+          "Cutibacterium": {
+            "n": 24,
+            "median_delta": -1.2845,
+            "hl": -1.2945,
+            "hl_ci95": [
+              -1.7686,
+              -0.8618
+            ],
+            "p": 8.344650268554688e-06,
+            "alternative": "two-sided",
+            "p_two_sided": 8.344650268554688e-06,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "E2_in_sample_oneway": {
+              "CR": 3.2868,
+              "n": 24,
+              "k_up": 0,
+              "k_up_ci95": [
+                0.0,
+                0.142
+              ],
+              "k_down": 3,
+              "k_down_ci95": [
+                0.027,
+                0.324
+              ],
+              "k_claim": 3,
+              "k_claim_ci95": [
+                0.027,
+                0.324
+              ],
+              "binom_null": 0.05,
+              "binom_p": 0.11594458835933916
+            },
+            "p_holm": 2.5033950805664062e-05,
+            "p_two_sided_holm": 2.5033950805664062e-05,
+            "grade": {
+              "grade": "조건부",
+              "row": 7,
+              "reason": "전후 변화는 관찰됐지만 원인을 가를 대조가 없음"
+            }
+          },
+          "Staphylococcus": {
+            "n": 24,
+            "median_delta": -0.7453,
+            "hl": -0.9224,
+            "hl_ci95": [
+              -1.4759,
+              -0.1688
+            ],
+            "p": 0.008714795112609863,
+            "alternative": "two-sided",
+            "p_two_sided": 0.008714795112609863,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "E2_in_sample_oneway": {
+              "CR": 3.1332,
+              "n": 24,
+              "k_up": 0,
+              "k_up_ci95": [
+                0.0,
+                0.142
+              ],
+              "k_down": 1,
+              "k_down_ci95": [
+                0.001,
+                0.211
+              ],
+              "k_claim": 1,
+              "k_claim_ci95": [
+                0.001,
+                0.211
+              ],
+              "binom_null": 0.05,
+              "binom_p": 0.7080109756612272
+            },
+            "p_holm": 0.008714795112609863,
+            "p_two_sided_holm": 0.008714795112609863,
+            "grade": {
+              "grade": "조건부",
+              "row": 7,
+              "reason": "전후 변화는 관찰됐지만 원인을 가를 대조가 없음"
+            }
+          },
+          "Corynebacterium": {
+            "n": 24,
+            "median_delta": -0.6569,
+            "hl": -0.7921,
+            "hl_ci95": [
+              -1.2595,
+              -0.3716
+            ],
+            "p": 0.0013997554779052734,
+            "alternative": "two-sided",
+            "p_two_sided": 0.0013997554779052734,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "E2_in_sample_oneway": {
+              "CR": 2.4053,
+              "n": 24,
+              "k_up": 0,
+              "k_up_ci95": [
+                0.0,
+                0.142
+              ],
+              "k_down": 1,
+              "k_down_ci95": [
+                0.001,
+                0.211
+              ],
+              "k_claim": 1,
+              "k_claim_ci95": [
+                0.001,
+                0.211
+              ],
+              "binom_null": 0.05,
+              "binom_p": 0.7080109756612272
+            },
+            "p_holm": 0.002799510955810547,
+            "p_two_sided_holm": 0.002799510955810547,
+            "grade": {
+              "grade": "조건부",
+              "row": 7,
+              "reason": "전후 변화는 관찰됐지만 원인을 가를 대조가 없음"
+            }
+          }
+        }
+      },
+      "2014-01→2014-11": {
+        "run_overlap": {
+          "status": "unknown",
+          "frac_samples_in_shared_runs": null
+        },
+        "E0_state": "정보 없음",
+        "E0_reasons": [
+          "시퀀싱 런 정보 없음",
+          "음성대조 없음(2014-11)"
+        ],
+        "genera": {
+          "Cutibacterium": {
+            "n": 24,
+            "median_delta": -1.2389,
+            "hl": -1.4787,
+            "hl_ci95": [
+              -2.1658,
+              -0.601
+            ],
+            "p": 0.0007423162460327148,
+            "alternative": "two-sided",
+            "p_two_sided": 0.0007423162460327148,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "E2_in_sample_oneway": {
+              "CR": 3.2868,
+              "n": 24,
+              "k_up": 0,
+              "k_up_ci95": [
+                0.0,
+                0.142
+              ],
+              "k_down": 4,
+              "k_down_ci95": [
+                0.047,
+                0.374
+              ],
+              "k_claim": 4,
+              "k_claim_ci95": [
+                0.047,
+                0.374
+              ],
+              "binom_null": 0.05,
+              "binom_p": 0.029782496908446036
+            },
+            "p_holm": 0.0012996196746826172,
+            "p_two_sided_holm": 0.0012996196746826172,
+            "grade": {
+              "grade": "조건부",
+              "row": 7,
+              "reason": "전후 변화는 관찰됐지만 원인을 가를 대조가 없음"
+            }
+          },
+          "Staphylococcus": {
+            "n": 24,
+            "median_delta": -1.7262,
+            "hl": -1.3977,
+            "hl_ci95": [
+              -2.0137,
+              -0.7625
+            ],
+            "p": 0.00014960765838623047,
+            "alternative": "two-sided",
+            "p_two_sided": 0.00014960765838623047,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "E2_in_sample_oneway": {
+              "CR": 3.1332,
+              "n": 24,
+              "k_up": 0,
+              "k_up_ci95": [
+                0.0,
+                0.142
+              ],
+              "k_down": 2,
+              "k_down_ci95": [
+                0.01,
+                0.27
+              ],
+              "k_claim": 2,
+              "k_claim_ci95": [
+                0.01,
+                0.27
+              ],
+              "binom_null": 0.05,
+              "binom_p": 0.33918273439119856
+            },
+            "p_holm": 0.0004488229751586914,
+            "p_two_sided_holm": 0.0004488229751586914,
+            "grade": {
+              "grade": "조건부",
+              "row": 7,
+              "reason": "전후 변화는 관찰됐지만 원인을 가를 대조가 없음"
+            }
+          },
+          "Corynebacterium": {
+            "n": 24,
+            "median_delta": -0.6455,
+            "hl": -0.7002,
+            "hl_ci95": [
+              -1.1658,
+              -0.4151
+            ],
+            "p": 0.0006498098373413086,
+            "alternative": "two-sided",
+            "p_two_sided": 0.0006498098373413086,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "E2_in_sample_oneway": {
+              "CR": 2.4053,
+              "n": 24,
+              "k_up": 0,
+              "k_up_ci95": [
+                0.0,
+                0.142
+              ],
+              "k_down": 2,
+              "k_down_ci95": [
+                0.01,
+                0.27
+              ],
+              "k_claim": 2,
+              "k_claim_ci95": [
+                0.01,
+                0.27
+              ],
+              "binom_null": 0.05,
+              "binom_p": 0.33918273439119856
+            },
+            "p_holm": 0.0012996196746826172,
+            "p_two_sided_holm": 0.0012996196746826172,
+            "grade": {
+              "grade": "조건부",
+              "row": 7,
+              "reason": "전후 변화는 관찰됐지만 원인을 가를 대조가 없음"
+            }
+          }
+        }
+      },
+      "2014-04→2014-08": {
+        "run_overlap": {
+          "status": "unknown",
+          "frac_samples_in_shared_runs": null
+        },
+        "E0_state": "정보 없음",
+        "E0_reasons": [
+          "시퀀싱 런 정보 없음",
+          "음성대조 없음(2014-04 · 2014-08)"
+        ],
+        "genera": {
+          "Cutibacterium": {
+            "n": 24,
+            "median_delta": -0.4051,
+            "hl": -0.2392,
+            "hl_ci95": [
+              -0.7507,
+              0.2621
+            ],
+            "p": 0.344876766204834,
+            "alternative": "two-sided",
+            "p_two_sided": 0.344876766204834,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "E2_in_sample_oneway": {
+              "CR": 3.2868,
+              "n": 24,
+              "k_up": 0,
+              "k_up_ci95": [
+                0.0,
+                0.142
+              ],
+              "k_down": 0,
+              "k_down_ci95": [
+                0.0,
+                0.142
+              ],
+              "k_claim": 0,
+              "k_claim_ci95": [
+                0.0,
+                0.142
+              ],
+              "binom_null": 0.05,
+              "binom_p": 1.0
+            },
+            "p_holm": 0.3559603691101074,
+            "p_two_sided_holm": 0.3559603691101074,
+            "grade": {
+              "grade": "아직 안 됨",
+              "row": 8,
+              "reason": "전후 변화가 유의하지 않음"
+            }
+          },
+          "Staphylococcus": {
+            "n": 24,
+            "median_delta": -0.2508,
+            "hl": -0.4877,
+            "hl_ci95": [
+              -1.0671,
+              0.102
+            ],
+            "p": 0.10109639167785645,
+            "alternative": "two-sided",
+            "p_two_sided": 0.10109639167785645,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "E2_in_sample_oneway": {
+              "CR": 3.1332,
+              "n": 24,
+              "k_up": 0,
+              "k_up_ci95": [
+                0.0,
+                0.142
+              ],
+              "k_down": 1,
+              "k_down_ci95": [
+                0.001,
+                0.211
+              ],
+              "k_claim": 1,
+              "k_claim_ci95": [
+                0.001,
+                0.211
+              ],
+              "binom_null": 0.05,
+              "binom_p": 0.7080109756612272
+            },
+            "p_holm": 0.30328917503356934,
+            "p_two_sided_holm": 0.30328917503356934,
+            "grade": {
+              "grade": "아직 안 됨",
+              "row": 8,
+              "reason": "전후 변화가 유의하지 않음"
+            }
+          },
+          "Corynebacterium": {
+            "n": 24,
+            "median_delta": -0.5206,
+            "hl": -0.4354,
+            "hl_ci95": [
+              -0.785,
+              0.1156
+            ],
+            "p": 0.1779801845550537,
+            "alternative": "two-sided",
+            "p_two_sided": 0.1779801845550537,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "E2_in_sample_oneway": {
+              "CR": 2.4053,
+              "n": 24,
+              "k_up": 0,
+              "k_up_ci95": [
+                0.0,
+                0.142
+              ],
+              "k_down": 0,
+              "k_down_ci95": [
+                0.0,
+                0.142
+              ],
+              "k_claim": 0,
+              "k_claim_ci95": [
+                0.0,
+                0.142
+              ],
+              "binom_null": 0.05,
+              "binom_p": 1.0
+            },
+            "p_holm": 0.3559603691101074,
+            "p_two_sided_holm": 0.3559603691101074,
+            "grade": {
+              "grade": "아직 안 됨",
+              "row": 8,
+              "reason": "전후 변화가 유의하지 않음"
+            }
+          }
+        }
+      },
+      "2014-04→2014-11": {
+        "run_overlap": {
+          "status": "unknown",
+          "frac_samples_in_shared_runs": null
+        },
+        "E0_state": "정보 없음",
+        "E0_reasons": [
+          "시퀀싱 런 정보 없음",
+          "음성대조 없음(2014-04 · 2014-11)"
+        ],
+        "genera": {
+          "Cutibacterium": {
+            "n": 24,
+            "median_delta": 0.1276,
+            "hl": -0.1866,
+            "hl_ci95": [
+              -0.8684,
+              0.4084
+            ],
+            "p": 0.5456695556640625,
+            "alternative": "two-sided",
+            "p_two_sided": 0.5456695556640625,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "E2_in_sample_oneway": {
+              "CR": 3.2868,
+              "n": 24,
+              "k_up": 0,
+              "k_up_ci95": [
+                0.0,
+                0.142
+              ],
+              "k_down": 0,
+              "k_down_ci95": [
+                0.0,
+                0.142
+              ],
+              "k_claim": 0,
+              "k_claim_ci95": [
+                0.0,
+                0.142
+              ],
+              "binom_null": 0.05,
+              "binom_p": 1.0
+            },
+            "p_holm": 0.7804932594299316,
+            "p_two_sided_holm": 0.7804932594299316,
+            "grade": {
+              "grade": "아직 안 됨",
+              "row": 8,
+              "reason": "전후 변화가 유의하지 않음"
+            }
+          },
+          "Staphylococcus": {
+            "n": 24,
+            "median_delta": -0.6719,
+            "hl": -0.945,
+            "hl_ci95": [
+              -1.5634,
+              -0.3902
+            ],
+            "p": 0.0005675554275512695,
+            "alternative": "two-sided",
+            "p_two_sided": 0.0005675554275512695,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "E2_in_sample_oneway": {
+              "CR": 3.1332,
+              "n": 24,
+              "k_up": 0,
+              "k_up_ci95": [
+                0.0,
+                0.142
+              ],
+              "k_down": 1,
+              "k_down_ci95": [
+                0.001,
+                0.211
+              ],
+              "k_claim": 1,
+              "k_claim_ci95": [
+                0.001,
+                0.211
+              ],
+              "binom_null": 0.05,
+              "binom_p": 0.7080109756612272
+            },
+            "p_holm": 0.0017026662826538086,
+            "p_two_sided_holm": 0.0017026662826538086,
+            "grade": {
+              "grade": "조건부",
+              "row": 7,
+              "reason": "전후 변화는 관찰됐지만 원인을 가를 대조가 없음"
+            }
+          },
+          "Corynebacterium": {
+            "n": 24,
+            "median_delta": -0.2602,
+            "hl": -0.2749,
+            "hl_ci95": [
+              -0.9373,
+              0.3175
+            ],
+            "p": 0.3902466297149658,
+            "alternative": "two-sided",
+            "p_two_sided": 0.3902466297149658,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "E2_in_sample_oneway": {
+              "CR": 2.4053,
+              "n": 24,
+              "k_up": 1,
+              "k_up_ci95": [
+                0.001,
+                0.211
+              ],
+              "k_down": 2,
+              "k_down_ci95": [
+                0.01,
+                0.27
+              ],
+              "k_claim": 3,
+              "k_claim_ci95": [
+                0.027,
+                0.324
+              ],
+              "binom_null": 0.05,
+              "binom_p": 0.11594458835933916
+            },
+            "p_holm": 0.7804932594299316,
+            "p_two_sided_holm": 0.7804932594299316,
+            "grade": {
+              "grade": "아직 안 됨",
+              "row": 8,
+              "reason": "전후 변화가 유의하지 않음"
+            }
+          }
+        }
+      },
+      "2014-08→2014-11": {
+        "run_overlap": {
+          "status": "unknown",
+          "frac_samples_in_shared_runs": null
+        },
+        "E0_state": "정보 없음",
+        "E0_reasons": [
+          "시퀀싱 런 정보 없음",
+          "음성대조 없음(2014-08 · 2014-11)"
+        ],
+        "genera": {
+          "Cutibacterium": {
+            "n": 24,
+            "median_delta": -0.2369,
+            "hl": -0.1243,
+            "hl_ci95": [
+              -0.8034,
+              0.5501
+            ],
+            "p": 0.8333734273910522,
+            "alternative": "two-sided",
+            "p_two_sided": 0.8333734273910522,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "E2_in_sample_oneway": {
+              "CR": 3.2868,
+              "n": 24,
+              "k_up": 1,
+              "k_up_ci95": [
+                0.001,
+                0.211
+              ],
+              "k_down": 0,
+              "k_down_ci95": [
+                0.0,
+                0.142
+              ],
+              "k_claim": 1,
+              "k_claim_ci95": [
+                0.001,
+                0.211
+              ],
+              "binom_null": 0.05,
+              "binom_p": 0.7080109756612272
+            },
+            "p_holm": 1.0,
+            "p_two_sided_holm": 1.0,
+            "grade": {
+              "grade": "아직 안 됨",
+              "row": 8,
+              "reason": "전후 변화가 유의하지 않음"
+            }
+          },
+          "Staphylococcus": {
+            "n": 24,
+            "median_delta": -0.5196,
+            "hl": -0.4619,
+            "hl_ci95": [
+              -0.944,
+              -0.0545
+            ],
+            "p": 0.026927709579467773,
+            "alternative": "two-sided",
+            "p_two_sided": 0.026927709579467773,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "E2_in_sample_oneway": {
+              "CR": 3.1332,
+              "n": 24,
+              "k_up": 0,
+              "k_up_ci95": [
+                0.0,
+                0.142
+              ],
+              "k_down": 1,
+              "k_down_ci95": [
+                0.001,
+                0.211
+              ],
+              "k_claim": 1,
+              "k_claim_ci95": [
+                0.001,
+                0.211
+              ],
+              "binom_null": 0.05,
+              "binom_p": 0.7080109756612272
+            },
+            "p_holm": 0.08078312873840332,
+            "p_two_sided_holm": 0.08078312873840332,
+            "grade": {
+              "grade": "아직 안 됨",
+              "row": 8,
+              "reason": "전후 변화가 유의하지 않음"
+            }
+          },
+          "Corynebacterium": {
+            "n": 24,
+            "median_delta": 0.1415,
+            "hl": 0.0133,
+            "hl_ci95": [
+              -0.5182,
+              0.5997
+            ],
+            "p": 0.9664472341537476,
+            "alternative": "two-sided",
+            "p_two_sided": 0.9664472341537476,
+            "p_method": "exact",
+            "n_zero": 0,
+            "ties": false,
+            "ci_assumes_no_zero_no_ties": true,
+            "E2_in_sample_oneway": {
+              "CR": 2.4053,
+              "n": 24,
+              "k_up": 1,
+              "k_up_ci95": [
+                0.001,
+                0.211
+              ],
+              "k_down": 1,
+              "k_down_ci95": [
+                0.001,
+                0.211
+              ],
+              "k_claim": 2,
+              "k_claim_ci95": [
+                0.01,
+                0.27
+              ],
+              "binom_null": 0.05,
+              "binom_p": 0.33918273439119856
+            },
+            "p_holm": 1.0,
+            "p_two_sided_holm": 1.0,
+            "grade": {
+              "grade": "아직 안 됨",
+              "row": 8,
+              "reason": "전후 변화가 유의하지 않음"
+            }
+          }
+        }
+      }
+    },
+    "grade_counts": {
+      "조건부": 8,
+      "아직 안 됨": 10
+    },
+    "structurally_guaranteed": "대조가 없으므로 결정표 1 · 7 · 8번만 나올 수 있다 — '근거로 쓸 수 있음' 0건은 데이터와 무관하게 보장된다",
+    "conditional_rate": "8 / 18",
+    "reading": "무처리 자료에서 나온 '조건부'는 '변화가 관찰됨 · 원인은 모름'이다(효능의 약한 근거가 아님)."
+  },
+  "mem_time": "메모리(Python 할당 기준) 현재 0.0437 GB · peak 0.0473 GB · 소요 시간 0.030714 Hour"
+}
