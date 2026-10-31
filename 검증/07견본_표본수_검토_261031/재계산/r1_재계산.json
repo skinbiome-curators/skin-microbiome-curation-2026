@@ -1,0 +1,769 @@
+{
+ "constants": {
+  "2(z+z)^2 m1": 15.697759468698177,
+  "m3": 20.93822809456731,
+  "one-sided m1": 12.365114464039532,
+  "one-sided m3": 17.637837859451334,
+  "TOST": 17.127694701335948,
+  "ln1.5": 0.4054651081081644,
+  "ln2": 0.6931471805599453,
+  "ln3": 1.0986122886681098,
+  "check d0.5/0.8/1.0": [
+   63,
+   25,
+   16
+  ]
+ },
+ "S_w_from_json": {
+  "Cutibacterium": {
+   "15_1": 1.1858,
+   "15_2": 0.9924,
+   "07_1": 0.4424468145138683,
+   "07_2": 0.37346782647158877
+  },
+  "Staphylococcus": {
+   "15_1": 1.1304,
+   "15_2": 0.9797,
+   "07_1": 0.713925310862275,
+   "07_2": 0.6558415395505228
+  },
+  "Corynebacterium": {
+   "15_1": 0.8677,
+   "15_2": 0.8,
+   "07_1": 0.4972475900558258,
+   "07_2": 0.4777299998200134
+  }
+ },
+ "table5": {
+  "15_2|Cutibacterium": {
+   "x1.5": {
+    "exact_delta": 189,
+    "rounded_delta": 185
+   },
+   "x2": {
+    "exact_delta": 65,
+    "rounded_delta": 65
+   },
+   "x3": {
+    "exact_delta": 26,
+    "rounded_delta": 26
+   }
+  },
+  "15_2|Staphylococcus": {
+   "x1.5": {
+    "exact_delta": 184,
+    "rounded_delta": 180
+   },
+   "x2": {
+    "exact_delta": 63,
+    "rounded_delta": 64
+   },
+   "x3": {
+    "exact_delta": 25,
+    "rounded_delta": 25
+   }
+  },
+  "15_2|Corynebacterium": {
+   "x1.5": {
+    "exact_delta": 123,
+    "rounded_delta": 120
+   },
+   "x2": {
+    "exact_delta": 42,
+    "rounded_delta": 43
+   },
+   "x3": {
+    "exact_delta": 17,
+    "rounded_delta": 17
+   }
+  },
+  "07_2|Cutibacterium": {
+   "x1.5": {
+    "exact_delta": 27,
+    "rounded_delta": 27
+   },
+   "x2": {
+    "exact_delta": 10,
+    "rounded_delta": 10
+   },
+   "x3": {
+    "exact_delta": 4,
+    "rounded_delta": 4
+   }
+  },
+  "07_2|Staphylococcus": {
+   "x1.5": {
+    "exact_delta": 83,
+    "rounded_delta": 81
+   },
+   "x2": {
+    "exact_delta": 29,
+    "rounded_delta": 29
+   },
+   "x3": {
+    "exact_delta": 12,
+    "rounded_delta": 12
+   }
+  },
+  "07_2|Corynebacterium": {
+   "x1.5": {
+    "exact_delta": 44,
+    "rounded_delta": 43
+   },
+   "x2": {
+    "exact_delta": 15,
+    "rounded_delta": 16
+   },
+   "x3": {
+    "exact_delta": 6,
+    "rounded_delta": 6
+   }
+  }
+ },
+ "table5_compare": [
+  {
+   "row": "15_2|Cutibacterium",
+   "doc": [
+    189,
+    65,
+    26
+   ],
+   "mine_exact_delta": [
+    189,
+    65,
+    26
+   ],
+   "mine_rounded_delta": [
+    185,
+    65,
+    26
+   ],
+   "match_exact": true,
+   "match_rounded": false
+  },
+  {
+   "row": "15_2|Staphylococcus",
+   "doc": [
+    184,
+    63,
+    25
+   ],
+   "mine_exact_delta": [
+    184,
+    63,
+    25
+   ],
+   "mine_rounded_delta": [
+    180,
+    64,
+    25
+   ],
+   "match_exact": true,
+   "match_rounded": false
+  },
+  {
+   "row": "15_2|Corynebacterium",
+   "doc": [
+    123,
+    42,
+    17
+   ],
+   "mine_exact_delta": [
+    123,
+    42,
+    17
+   ],
+   "mine_rounded_delta": [
+    120,
+    43,
+    17
+   ],
+   "match_exact": true,
+   "match_rounded": false
+  },
+  {
+   "row": "07_2|Cutibacterium",
+   "doc": [
+    27,
+    10,
+    4
+   ],
+   "mine_exact_delta": [
+    27,
+    10,
+    4
+   ],
+   "mine_rounded_delta": [
+    27,
+    10,
+    4
+   ],
+   "match_exact": true,
+   "match_rounded": true
+  },
+  {
+   "row": "07_2|Staphylococcus",
+   "doc": [
+    83,
+    29,
+    12
+   ],
+   "mine_exact_delta": [
+    83,
+    29,
+    12
+   ],
+   "mine_rounded_delta": [
+    81,
+    29,
+    12
+   ],
+   "match_exact": true,
+   "match_rounded": false
+  },
+  {
+   "row": "07_2|Corynebacterium",
+   "doc": [
+    44,
+    15,
+    6
+   ],
+   "mine_exact_delta": [
+    44,
+    15,
+    6
+   ],
+   "mine_rounded_delta": [
+    43,
+    16,
+    6
+   ],
+   "match_exact": true,
+   "match_rounded": false
+  }
+ ],
+ "section6": {
+  "07_2": {
+   "m3_s95": {
+    "n0": 9.118,
+    "n1": 11,
+    "recruit_per_arm": 15,
+    "total": 30,
+    "samples": 90
+   },
+   "m3_s90": {
+    "n0": 9.118,
+    "n1": 11,
+    "recruit_per_arm": 17,
+    "total": 34,
+    "samples": 102
+   },
+   "m1_s95": {
+    "n0": 6.836,
+    "n1": 8,
+    "recruit_per_arm": 11,
+    "total": 22,
+    "samples": 66
+   },
+   "m3_s775": {
+    "n0": 9.118,
+    "n1": 11,
+    "recruit_per_arm": 27,
+    "total": 54,
+    "samples": 162
+   },
+   "m3_s95_rounded_delta": {
+    "n0": 9.201,
+    "n1": 11,
+    "recruit_per_arm": 15,
+    "total": 30,
+    "samples": 90
+   }
+  },
+  "15_2": {
+   "m3_s95": {
+    "n0": 64.38,
+    "n1": 75,
+    "recruit_per_arm": 98,
+    "total": 196,
+    "samples": 588
+   },
+   "m3_s90": {
+    "n0": 64.38,
+    "n1": 75,
+    "recruit_per_arm": 115,
+    "total": 230,
+    "samples": 690
+   },
+   "m1_s95": {
+    "n0": 48.267,
+    "n1": 56,
+    "recruit_per_arm": 73,
+    "total": 146,
+    "samples": 438
+   },
+   "m3_s775": {
+    "n0": 64.38,
+    "n1": 75,
+    "recruit_per_arm": 180,
+    "total": 360,
+    "samples": 1080
+   },
+   "m3_s95_rounded_delta": {
+    "n0": 64.969,
+    "n1": 76,
+    "recruit_per_arm": 99,
+    "total": 198,
+    "samples": 594
+   }
+  },
+  "07_2_all3_max": {
+   "Cutibacterium": {
+    "n0": 9.118,
+    "n1": 11,
+    "recruit_per_arm": 15,
+    "total": 30,
+    "samples": 90
+   },
+   "Staphylococcus": {
+    "n0": 28.118,
+    "n1": 33,
+    "recruit_per_arm": 43,
+    "total": 86,
+    "samples": 258
+   },
+   "Corynebacterium": {
+    "n0": 14.919,
+    "n1": 18,
+    "recruit_per_arm": 24,
+    "total": 48,
+    "samples": 144
+   }
+  },
+  "15_2_all3_max": {
+   "Cutibacterium": {
+    "n0": 64.38,
+    "n1": 75,
+    "recruit_per_arm": 98,
+    "total": 196,
+    "samples": 588
+   },
+   "Staphylococcus": {
+    "n0": 62.743,
+    "n1": 73,
+    "recruit_per_arm": 95,
+    "total": 190,
+    "samples": 570
+   },
+   "Corynebacterium": {
+    "n0": 41.837,
+    "n1": 49,
+    "recruit_per_arm": 64,
+    "total": 128,
+    "samples": 384
+   }
+  }
+ },
+ "t_based_n": {
+  "07_2|Cutibacterium": {
+   "d": 1.515,
+   "normal_n0": 9.12,
+   "t_n": 10.66
+  },
+  "07_2|Staphylococcus": {
+   "d": 0.863,
+   "normal_n0": 28.12,
+   "t_n": 29.59
+  },
+  "07_2|Corynebacterium": {
+   "d": 1.185,
+   "normal_n0": 14.92,
+   "t_n": 16.42
+  },
+  "15_2|Cutibacterium": {
+   "d": 0.57,
+   "normal_n0": 64.38,
+   "t_n": 65.83
+  },
+  "15_2|Staphylococcus": {
+   "d": 0.578,
+   "normal_n0": 62.74,
+   "t_n": 64.19
+  },
+  "15_2|Corynebacterium": {
+   "d": 0.707,
+   "normal_n0": 41.84,
+   "t_n": 43.3
+  }
+ },
+ "ratios": {
+  "Sw_ratio_15over07_2way": {
+   "Cutibacterium": 2.6572570102648343,
+   "Staphylococcus": 1.4938059590910202,
+   "Corynebacterium": 1.6745860638883954
+  },
+  "n_ratio": {
+   "Cutibacterium": 7.061014818601605,
+   "Staphylococcus": 2.2314562434158427,
+   "Corynebacterium": 2.804238485369229
+  },
+  "x1.5_vs_x3_n_ratio": 7.341451437961029,
+  "samples_ratio_15_vs_07": [
+   6.533333333333333,
+   6.764705882352941
+  ],
+  "waste_usd": [
+   4725,
+   20850
+  ]
+ },
+ "own_from_raw": {
+  "Cutibacterium": {
+   "07_n": 25,
+   "07_sw1": 0.44245169118479183,
+   "07_sw2": 0.3734793054293611,
+   "15_n": 24,
+   "15_k": 4,
+   "15_sw1": 1.1857909991772586,
+   "15_sw2": 0.9924305952554778,
+   "ICC_15_2way": 0.46634380798842806,
+   "ICC_07_2W4W_2way": 0.8700712176567783,
+   "sigma_b2_15": 0.8606864201729622,
+   "sw2_sq_15": 0.9849184863991421,
+   "Sw07_2_CI95": [
+    0.2916232373694585,
+    0.5195665452670196
+   ],
+   "Sw15_2_CI95": [
+    0.8509275385647334,
+    1.190823573300018
+   ],
+   "Sw07_2_UCL80": 0.43051828032747
+  },
+  "Staphylococcus": {
+   "07_n": 25,
+   "07_sw1": 0.7139214817206483,
+   "07_sw2": 0.6558449846716203,
+   "15_n": 24,
+   "15_k": 4,
+   "15_sw1": 1.1303516719389246,
+   "15_sw2": 0.9797100972487275,
+   "ICC_15_2way": 0.24768745825640015,
+   "ICC_07_2W4W_2way": 0.6998026765894324,
+   "sigma_b2_15": 0.3160100412985464,
+   "sw2_sq_15": 0.9598318746511111,
+   "Sw07_2_CI95": [
+    0.5121023704983707,
+    0.9123801719744409
+   ],
+   "Sw15_2_CI95": [
+    0.8400207586750875,
+    1.1755601695285385
+   ],
+   "Sw07_2_UCL80": 0.7560077649754158
+  },
+  "Corynebacterium": {
+   "07_n": 25,
+   "07_sw1": 0.49724471191438735,
+   "07_sw2": 0.47771972081868147,
+   "15_n": 24,
+   "15_k": 4,
+   "15_sw1": 0.867747935410182,
+   "15_sw2": 0.7999788206721316,
+   "ICC_15_2way": 0.226134098668323,
+   "ICC_07_2W4W_2way": 0.5890204553775488,
+   "sigma_b2_15": 0.1870067669488745,
+   "sw2_sq_15": 0.6399661135239744,
+   "Sw07_2_CI95": [
+    0.37301711102900004,
+    0.6645808250776901
+   ],
+   "Sw15_2_CI95": [
+    0.6859159844857653,
+    0.9598995056696019
+   ],
+   "Sw07_2_UCL80": 0.550678631173253
+  }
+ },
+ "distribution": {
+  "Cutibacterium": {
+   "07_d_2W4W_kurtosis_excess": 2.6698223009155804,
+   "07_d_skew": -0.798281064129709,
+   "07_d_shapiro_p": 0.018687847972562347,
+   "15_resid_kurtosis_excess": -0.1006090749517079,
+   "15_resid_shapiro_p": 0.007345653934699867,
+   "07_zero_samples_(pct==0)": 0,
+   "15_zero_samples_(pct==0)": 0,
+   "07_min_logratio": -6.587924814859937,
+   "15_min_logratio": -5.665124576373156
+  },
+  "Staphylococcus": {
+   "07_d_2W4W_kurtosis_excess": -0.1752769684172515,
+   "07_d_skew": -0.281083156019001,
+   "07_d_shapiro_p": 0.9456920104743356,
+   "15_resid_kurtosis_excess": 0.5096408925087443,
+   "15_resid_shapiro_p": 0.19142906455713238,
+   "07_zero_samples_(pct==0)": 0,
+   "15_zero_samples_(pct==0)": 0,
+   "07_min_logratio": -4.609193521485637,
+   "15_min_logratio": -5.384856898688502
+  },
+  "Corynebacterium": {
+   "07_d_2W4W_kurtosis_excess": -0.7944720125505187,
+   "07_d_skew": -0.17642683641444942,
+   "07_d_shapiro_p": 0.35382330487133384,
+   "15_resid_kurtosis_excess": 0.27946694008933726,
+   "15_resid_shapiro_p": 0.4525213678758259,
+   "07_zero_samples_(pct==0)": 0,
+   "15_zero_samples_(pct==0)": 0,
+   "07_min_logratio": -7.7835300026815855,
+   "15_min_logratio": -6.696742383656828
+  }
+ },
+ "ancova_vs_change_15season": {
+  "Cutibacterium|r1": {
+   "ICC": 0.46634380798842806,
+   "var_change": 1.9698369727982843,
+   "var_post_only": 1.8456049065721043,
+   "var_ancova": 1.444229123904717,
+   "ancova_over_change": 0.7331719039942141
+  },
+  "Cutibacterium|r2": {
+   "ICC": 0.46634380798842806,
+   "var_change": 1.4773777295987132,
+   "var_post_only": 1.8456049065721043,
+   "var_ancova": 1.2981537829259984,
+   "ancova_over_change": 0.8786877972491194
+  },
+  "Staphylococcus|r1": {
+   "ICC": 0.24768745825640015,
+   "var_change": 1.9196637493022222,
+   "var_post_only": 1.2758419159496575,
+   "var_ancova": 1.1975701920369204,
+   "ancova_over_change": 0.6238437291282001
+  },
+  "Staphylococcus|r2": {
+   "ICC": 0.24768745825640015,
+   "var_change": 1.4397478119766667,
+   "var_post_only": 1.2758419159496575,
+   "var_ancova": 1.1503750397784103,
+   "ancova_over_change": 0.7990114867401888
+  },
+  "Corynebacterium|r1": {
+   "ICC": 0.226134098668323,
+   "var_change": 1.2799322270479487,
+   "var_post_only": 0.8269728804728489,
+   "var_ancova": 0.784684273783988,
+   "ancova_over_change": 0.6130670493341615
+  },
+  "Corynebacterium|r2": {
+   "ICC": 0.226134098668323,
+   "var_change": 0.9599491702859615,
+   "var_post_only": 0.8269728804728489,
+   "var_ancova": 0.7579941174896,
+   "ancova_over_change": 0.7896190141648848
+  }
+ },
+ "six_genera_shares": {
+  "Acetobacter": {
+   "0W": 1.0,
+   "2W": 0.0,
+   "4W": 0.0
+  },
+  "Akkermansia": {
+   "0W": 1.0,
+   "2W": 0.0,
+   "4W": 0.0
+  },
+  "Bacteroides": {
+   "0W": 1.0,
+   "2W": 0.0,
+   "4W": 0.0
+  },
+  "Lachnospiraceae NK4A136 group": {
+   "0W": 1.0,
+   "2W": 0.0,
+   "4W": 0.0
+  },
+  "Sphingomonas": {
+   "0W": 1.0,
+   "2W": 0.12,
+   "4W": 0.08
+  },
+  "Wolbachia": {
+   "0W": 1.0,
+   "2W": 0.12,
+   "4W": 0.12
+  }
+ },
+ "six_sum_0W": {
+  "n": 25,
+  "median": 58.091452888514155,
+  "min": 36.47250698974836,
+  "max": 82.69613259668512,
+  "n_over_50": 20,
+  "median_2W": 0.627549419516787,
+  "median_4W": 0.5911398567355166
+ },
+ "median_observed_otus_paper": {
+  "0W": 835.0,
+  "2W": 777.0,
+  "4W": 749.0
+ },
+ "median_Observed": {
+  "0W": 455.0,
+  "2W": 270.0,
+  "4W": 223.0
+ },
+ "A5_reference_json": {
+  "raw": {
+   "Cutibacterium": {
+    "hl": 1.4574,
+    "ci": [
+     1.1201,
+     1.7903
+    ],
+    "p_holm": 1.7881393432617188e-07,
+    "p_two_holm": 3.5762786865234375e-07
+   },
+   "Staphylococcus": {
+    "hl": 1.1257,
+    "ci": [
+     0.7435,
+     1.5509
+    ],
+    "p_holm": 3.2782554626464844e-06,
+    "p_two_holm": 6.556510925292969e-06
+   },
+   "Corynebacterium": {
+    "hl": 2.1098,
+    "ci": [
+     1.7185,
+     2.5315
+    ],
+    "p_holm": 1.7881393432617188e-07,
+    "p_two_holm": 1.7881393432617188e-07
+   }
+  },
+  "excl_1pct": {
+   "Cutibacterium": {
+    "hl": 0.1541,
+    "ci": [
+     -0.0853,
+     0.4022
+    ],
+    "p_holm": 0.18172985315322876,
+    "p_two_holm": 0.3634597063064575
+   },
+   "Staphylococcus": {
+    "hl": -0.1522,
+    "ci": [
+     -0.564,
+     0.2211
+    ],
+    "p_holm": 0.746148020029068,
+    "p_two_holm": 0.5249125957489014
+   },
+   "Corynebacterium": {
+    "hl": 0.8253,
+    "ci": [
+     0.4058,
+     1.2103
+    ],
+    "p_holm": 0.0007494091987609863,
+    "p_two_holm": 0.0007494091987609863
+   }
+  },
+  "excl_0.1pct": {
+   "Cutibacterium": {
+    "hl": 1.2216,
+    "ci": [
+     0.9017,
+     1.5475
+    ],
+    "p_holm": 5.960464477539062e-07,
+    "p_two_holm": 1.1920928955078125e-06
+   },
+   "Staphylococcus": {
+    "hl": 0.8788,
+    "ci": [
+     0.4972,
+     1.3299
+    ],
+    "p_holm": 9.393692016601562e-05,
+    "p_two_holm": 0.00018787384033203125
+   },
+   "Corynebacterium": {
+    "hl": 1.8681,
+    "ci": [
+     1.496,
+     2.281
+    ],
+    "p_holm": 1.7881393432617188e-07,
+    "p_two_holm": 1.7881393432617188e-07
+   }
+  },
+  "excl_0pct": {
+   "Cutibacterium": {
+    "hl": 1.4173,
+    "ci": [
+     1.0804,
+     1.7495
+    ],
+    "p_holm": 2.980232238769531e-07,
+    "p_two_holm": 5.960464477539062e-07
+   },
+   "Staphylococcus": {
+    "hl": 1.0797,
+    "ci": [
+     0.7004,
+     1.5124
+    ],
+    "p_holm": 6.16908073425293e-06,
+    "p_two_holm": 1.233816146850586e-05
+   },
+   "Corynebacterium": {
+    "hl": 2.0713,
+    "ci": [
+     1.6883,
+     2.4934
+    ],
+    "p_holm": 1.7881393432617188e-07,
+    "p_two_holm": 1.7881393432617188e-07
+   }
+  },
+  "excl_union": {
+   "Cutibacterium": {
+    "hl": -0.0722,
+    "ci": [
+     -0.251,
+     0.1858
+    ],
+    "p_holm": 1.0,
+    "p_two_holm": 0.7711594104766846
+   },
+   "Staphylococcus": {
+    "hl": -0.3511,
+    "ci": [
+     -0.7838,
+     0.0099
+    ],
+    "p_holm": 1.0,
+    "p_two_holm": 0.1252528429031372
+   },
+   "Corynebacterium": {
+    "hl": 0.6181,
+    "ci": [
+     0.2144,
+     1.0031
+    ],
+    "p_holm": 0.01025766134262085,
+    "p_two_holm": 0.01025766134262085
+   }
+  }
+ },
+ "mem_time": {
+  "sec": 0.2573093000000881,
+  "peak_MB": 11.416394
+ }
+}
