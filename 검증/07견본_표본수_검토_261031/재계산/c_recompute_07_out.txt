@@ -1,0 +1,48 @@
+n sample_info rows 75
+columns: ['run', 'project', 'sample_id', 'subject', 'body_site', 'assay', 'region', 'group', 'group_type', 'age', 'age_group', 'sex', 'read_count', 'Observed', 'Shannon', 'Simpson', 'InvSimpson', 'read_depth_final', 'dominant_genus', 'dominant_pct', 'n_genus_detected', 'panel', 'timepoint', 'reads_paper', 'observed_otus_paper', 'shannon_paper', 'g_Cutibacterium', 'g_Unassigned', 'g_Staphylococcus', 'g_Wolbachia']
+body_site {'Cheek': 75}
+group {'0W': 25, '2W': 25, '4W': 25}
+sex {'female': 75}
+age {'': 75}
+age_group {'': 75}
+region {'V3-V4': 75}
+timepoint {'0W': 25, '2W': 25, '4W': 25}
+project {'PRJEB44885': 75}
+panel {'P1': 75}
+n subjects 25
+Observed 0W n 25 median 455.0
+Observed 2W n 25 median 270.0
+Observed 4W n 25 median 223.0
+observed_otus_paper 0W n 25 median 835.0
+observed_otus_paper 2W n 25 median 777.0
+observed_otus_paper 4W n 25 median 749.0
+read_count 0W n 25 median 148418.0
+read_count 2W n 25 median 131874.0
+read_count 4W n 25 median 214290.0
+reads_paper 0W n 25 median 103923.0
+reads_paper 2W n 25 median 84040.0
+reads_paper 4W n 25 median 158544.0
+n_genus_detected 0W n 25 median 126.0
+n_genus_detected 2W n 25 median 97.0
+n_genus_detected 4W n 25 median 89.0
+genus rows 75 n genera 696
+row sums range 99.99999999999987 100.00000000000013
+confined 1%: [('Acetobacter', '0W', {'0W': 1.0, '2W': 0.0, '4W': 0.0}), ('Akkermansia', '0W', {'0W': 1.0, '2W': 0.0, '4W': 0.0}), ('Bacteroides', '0W', {'0W': 1.0, '2W': 0.0, '4W': 0.0}), ('Lachnospiraceae NK4A136 group', '0W', {'0W': 1.0, '2W': 0.0, '4W': 0.0}), ('Sphingomonas', '0W', {'0W': 1.0, '2W': 0.12, '4W': 0.08}), ('Wolbachia', '0W', {'0W': 1.0, '2W': 0.12, '4W': 0.12})]
+6-genus sum 0W median 58.091 min 36.47 max 82.70 >50%: 20 / 25
+6-genus sum 2W median 0.628 min 0.00 max 2.51 >50%: 0 / 25
+6-genus sum 4W median 0.591 min 0.05 max 6.21 >50%: 0 / 25
+    Acetobacter 0W median 4.41 max 6.91
+    Akkermansia 0W median 4.71 max 6.38
+    Bacteroides 0W median 2.20 max 3.08
+    Lachnospiraceae NK4A136 group 0W median 3.08 max 5.23
+    Sphingomonas 0W median 16.62 max 25.79
+    Wolbachia 0W median 27.15 max 36.62
+raw 0W→4W Cutibacterium: n 25 median +1.4670 HL +1.4574 CI [+1.1201, +1.7903] p(greater) 0.0000 Holm 0.0000 | p2 0.0000 Holm2 0.0000
+raw 0W→4W Staphylococcus: n 25 median +1.2263 HL +1.1257 CI [+0.7435, +1.5509] p(greater) 0.0000 Holm 0.0000 | p2 0.0000 Holm2 0.0000
+raw 0W→4W Corynebacterium: n 25 median +2.0206 HL +2.1098 CI [+1.7185, +2.5315] p(two-sided) 0.0000 Holm 0.0000 | p2 0.0000 Holm2 0.0000
+excl_6 0W→4W Cutibacterium: n 25 median +0.0934 HL +0.1541 CI [-0.0853, +0.4022] p(greater) 0.0909 Holm 0.1817 | p2 0.1817 Holm2 0.3635
+excl_6 0W→4W Staphylococcus: n 25 median -0.2407 HL -0.1522 CI [-0.5640, +0.2211] p(greater) 0.7461 Holm 0.7461 | p2 0.5249 Holm2 0.5249
+excl_6 0W→4W Corynebacterium: n 25 median +0.8239 HL +0.8253 CI [+0.4058, +1.2103] p(two-sided) 0.0002 Holm 0.0007 | p2 0.0002 Holm2 0.0007
+pct median 0W Cuti 8.92 Staph 4.27
+pct median 2W Cuti 17.31 Staph 15.63
+pct median 4W Cuti 23.60 Staph 7.53
