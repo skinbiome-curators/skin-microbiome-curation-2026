@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>피부 기준 DB 사업안</title>
+<!-- 2026-11-02 · Claude 정리 · 근거: 녹음본(10/10 심사 피드백) · 덱 v7 · 서비스구성 v2 · 사업성 독립검토(11/1) · 11/2 대화 · 팀 결정 전 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap">
+<style>
+/* 레이아웃: 한 기둥(최대 920px) 설명 페이지 · 그림 → 대화 → 게이지 → 단계 → 숙제 순서, 글은 최소 */
+:root{
+  --bg:#F3F6F1; --surface:#FFFFFF; --surface2:#E9EEE7; --ink:#16201B; --muted:#5A675F; --faint:#8A948E; --line:#D7DFD5;
+  --new:#13795A; --new-ink:#0C5A42; --new-bg:#DAF0E4;
+  --old:#7D8580; --old-bg:#E8EAE7;
+  --warn:#B23F2E; --warn-bg:#FBE3DD;
+  --judge:#2F55A6; --judge-bg:#E4EBFA;
+  --mid:#875A00; --mid-bg:#FAEFD2;
+  --font-display:"Do Hyeon",Pretendard,"Malgun Gothic",sans-serif;
+  --font-body:Pretendard,"Pretendard Variable","Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#101512; --surface:#18201B; --surface2:#202A24; --ink:#E7EEE9; --muted:#A2AFA7; --faint:#76827B; --line:#2D3A33;
+    --new:#5ACB9F; --new-ink:#8FE0C0; --new-bg:#16372A;
+    --old:#9AA29D; --old-bg:#252B28;
+    --warn:#F29D8D; --warn-bg:#3B201B;
+    --judge:#9BB8F5; --judge-bg:#1A2640;
+    --mid:#EFC167; --mid-bg:#352A14;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101512; --surface:#18201B; --surface2:#202A24; --ink:#E7EEE9; --muted:#A2AFA7; --faint:#76827B; --line:#2D3A33;
+  --new:#5ACB9F; --new-ink:#8FE0C0; --new-bg:#16372A;
+  --old:#9AA29D; --old-bg:#252B28;
+  --warn:#F29D8D; --warn-bg:#3B201B;
+  --judge:#9BB8F5; --judge-bg:#1A2640;
+  --mid:#EFC167; --mid-bg:#352A14;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--font-body); font-size:16px; line-height:1.65;
+  word-break:keep-all; overflow-wrap:anywhere;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+  padding-block:0 64px;
+}
+.wrap{max-width:920px; margin:0 auto}
+p{margin:0}
+b,strong{font-weight:800}
+h1,h2{font-family:var(--font-display); font-weight:400; text-wrap:balance; margin:0}
+a{color:var(--new-ink)}
+
+/* 머리 */
+.head{padding-block:48px 8px}
+.eyebrow{font-size:13px; font-weight:700; color:var(--muted); letter-spacing:.3px}
+.head h1{font-size:clamp(32px, 6vw, 52px); line-height:1.2; margin-top:12px}
+.head h1 .from{color:var(--old)}
+.head h1 .arrow{color:var(--faint)}
+.head h1 .to{color:var(--new)}
+.head .sub{color:var(--muted); font-size:17px; margin-top:12px}
+.pills{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px}
+.pill{font-size:12.5px; font-weight:700; padding:2px 10px; border-radius:999px; background:var(--surface2); color:var(--muted)}
+.pill.warn{background:var(--warn-bg); color:var(--warn)}
+
+/* 절 */
+section{padding-top:56px}
+section h2{font-size:clamp(24px, 3.6vw, 30px); line-height:1.3}
+.sec-sub{color:var(--muted); margin-top:6px; margin-bottom:22px}
+
+/* 1. 비교 그림 */
+.compare{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px}
+.panel{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:18px 18px 16px; min-width:0}
+.panel.new{border:2px solid var(--new)}
+.panel-tag{display:inline-block; font-size:13px; font-weight:800; padding:2px 10px; border-radius:8px}
+.panel.old .panel-tag{background:var(--old-bg); color:var(--old)}
+.panel.new .panel-tag{background:var(--new-bg); color:var(--new-ink)}
+.panel figure{margin:12px 0 0}
+.panel svg{display:block; width:100%; max-width:360px; height:auto; margin:0 auto}
+.panel figcaption{margin-top:10px; font-size:15.5px; font-weight:700; text-align:center}
+
+/* SVG 칠 */
+.s-box{fill:var(--surface); stroke:var(--line); stroke-width:1.5}
+.s-box-old{fill:var(--old-bg); stroke:var(--old); stroke-width:1.5; stroke-dasharray:5 4}
+.s-box-new{fill:var(--new-bg); stroke:var(--new); stroke-width:2}
+.s-warn{fill:var(--warn-bg); stroke:var(--warn); stroke-width:1.5}
+.s-chip{fill:var(--surface); stroke:var(--new); stroke-width:1.2}
+.s-t{fill:var(--ink); font-size:15px; font-weight:800}
+.s-s{fill:var(--muted); font-size:12.5px; font-weight:500}
+.s-t-new{fill:var(--new-ink); font-size:15px; font-weight:800}
+.s-t-warn{fill:var(--warn); font-size:13.5px; font-weight:800}
+.s-chip-t{fill:var(--new-ink); font-size:12.5px; font-weight:800}
+.s-lab{fill:var(--muted); font-size:12px; font-weight:600}
+.s-lab-new{fill:var(--new-ink); font-size:12px; font-weight:800}
+.s-lab-warn{fill:var(--warn); font-size:12px; font-weight:800}
+.s-line{stroke:var(--faint); stroke-width:1.6; fill:none}
+.s-line-new{stroke:var(--new); stroke-width:2; fill:none}
+.s-line-warn{stroke:var(--warn); stroke-width:1.6; fill:none; stroke-dasharray:5 4}
+.ah{fill:var(--faint)}
+.ah-new{fill:var(--new)}
+.ah-warn{fill:var(--warn)}
+
+/* 비교 표 */
+.diff{margin-top:16px; background:var(--surface); border:1px solid var(--line); border-radius:16px; overflow:hidden}
+.diff-row{display:grid; grid-template-columns:140px minmax(0,1fr) minmax(0,1fr); border-top:1px solid var(--line)}
+.diff-row:first-child{border-top:0}
+.diff-row > div{padding:12px 16px; min-width:0; font-size:15px}
+.diff-row .k{font-weight:800; color:var(--muted); font-size:14px; background:var(--surface2)}
+.diff-row .o{color:var(--old)}
+.diff-row .n{color:var(--ink); font-weight:700}
+.diff-row.head-row > div{font-size:13px; font-weight:800; padding-block:8px}
+.diff-row.head-row .o{color:var(--old)}
+.diff-row.head-row .n{color:var(--new-ink)}
+
+/* 2. 대화 */
+.chat{display:grid; gap:26px}
+.turn{display:grid; gap:8px}
+.q{display:flex; gap:10px; align-items:flex-start; max-width:620px}
+.avatar{flex:none; width:40px; height:40px; border-radius:50%; display:grid; place-items:center; background:var(--judge-bg); color:var(--judge); font-weight:800; font-size:14px}
+.who{font-size:12.5px; font-weight:700; color:var(--muted); margin-bottom:3px}
+.bubble{padding:10px 14px; border-radius:4px 16px 16px 16px; font-size:15.5px; line-height:1.55}
+.q .bubble{background:var(--judge-bg)}
+.a{justify-self:end; max-width:560px; text-align:left}
+.a .who{text-align:right}
+.a .bubble{border-radius:16px 4px 16px 16px}
+.a.old .bubble{background:var(--old-bg); color:var(--old); text-decoration:line-through; text-decoration-color:var(--faint); text-decoration-thickness:1px}
+.a.new .bubble{background:var(--new); color:var(--surface); font-weight:700}
+.a.old .who{color:var(--old)}
+.a.new .who{color:var(--new-ink)}
+.chat-note{font-size:13px; color:var(--faint); margin-top:18px}
+
+/* 3. 게이지 */
+.gauges{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:22px 20px; display:grid; gap:30px}
+.g-title{font-weight:800; font-size:15.5px; margin-bottom:10px}
+.g-title span{font-weight:500; color:var(--muted); font-size:13.5px; margin-left:6px}
+.g-bar{position:relative; display:flex; height:34px; border-radius:10px; overflow:visible}
+.g-seg{display:grid; place-items:center; font-size:13px; font-weight:800; color:var(--muted); background:var(--surface2); border-right:2px solid var(--surface)}
+.g-seg:first-child{border-radius:10px 0 0 10px}
+.g-seg:last-child{border-radius:0 10px 10px 0; border-right:0}
+.g-seg.ok{background:var(--new-bg); color:var(--new-ink)}
+.g-mark{position:absolute; top:-8px; bottom:-8px; width:3px; background:var(--ink); border-radius:2px; transform:translateX(-50%)}
+.g-mark span{position:absolute; top:100%; left:50%; transform:translateX(-50%); margin-top:4px; white-space:nowrap; font-size:12.5px; font-weight:800; background:var(--ink); color:var(--surface); padding:1px 8px; border-radius:6px}
+.g-row{padding-bottom:26px}
+.g-note{font-size:13px; color:var(--faint)}
+
+/* 4. 단계 */
+.steps{display:grid; grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr) 28px minmax(0,1fr); align-items:stretch}
+.step{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:18px; min-width:0}
+.step .no{font-family:var(--font-display); font-size:30px; color:var(--new); line-height:1}
+.step .t{font-weight:800; font-size:17px; margin-top:8px}
+.step .d{color:var(--muted); font-size:14.5px; margin-top:4px}
+.step .money{display:inline-block; margin-top:10px; font-size:12.5px; font-weight:800; padding:2px 9px; border-radius:7px; background:var(--new-bg); color:var(--new-ink)}
+.step-arrow{display:grid; place-items:center; color:var(--faint); font-size:20px}
+
+/* 5. 싸지는 이유 */
+.cheap-lead{font-family:var(--font-display); font-size:clamp(19px, 2.8vw, 23px); color:var(--new-ink); margin-bottom:16px}
+.cheap{display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:12px}
+.tile{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:14px; min-width:0}
+.tile .t{font-weight:800; font-size:15px}
+.tile .d{color:var(--muted); font-size:13.5px; margin-top:4px; line-height:1.5}
+
+/* 6. 숙제 · 일정 */
+.todo-grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:16px}
+.box{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:18px; min-width:0}
+.box h3{margin:0 0 12px; font-size:16px; font-weight:800}
+.chips{display:flex; flex-wrap:wrap; gap:8px}
+.chip{font-size:14px; font-weight:700; padding:6px 12px; border-radius:10px; background:var(--warn-bg); color:var(--warn)}
+.chip small{font-weight:500; opacity:.85}
+.timeline{list-style:none; margin:0; padding:0; display:grid; gap:0}
+.timeline li{display:grid; grid-template-columns:92px 18px minmax(0,1fr); gap:10px; align-items:start; position:relative; padding-bottom:16px}
+.timeline li:last-child{padding-bottom:0}
+.timeline .date{font-weight:800; font-variant-numeric:tabular-nums; font-size:14.5px; text-align:right}
+.timeline .dot{width:14px; height:14px; border-radius:50%; background:var(--surface); border:3px solid var(--new); margin-top:4px; position:relative; z-index:1}
+.timeline li:not(:last-child)::after{content:""; position:absolute; left:calc(92px + 10px + 6px); top:20px; bottom:-2px; width:2px; background:var(--line)}
+.timeline .what{font-size:14.5px}
+.timeline li.due .dot{background:var(--warn); border-color:var(--warn)}
+.timeline li.due .date{color:var(--warn)}
+
+/* 왜 될까 · 네 질문 */
+.ask{display:flex; gap:10px; align-items:flex-start; max-width:640px; margin-bottom:22px}
+.ask .avatar{background:var(--mid-bg); color:var(--mid)}
+.ask .bubble{background:var(--mid-bg)}
+.ask ol{margin:6px 0 0; padding-left:20px}
+.score{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; margin-bottom:16px}
+.score a{display:block; text-decoration:none; color:inherit; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:14px; min-width:0}
+.score a:hover{border-color:var(--new)}
+.score a:focus-visible{outline:2px solid var(--new); outline-offset:2px}
+.score .n{font-family:var(--font-display); font-size:22px; color:var(--muted); line-height:1}
+.score .q{font-weight:800; font-size:15px; margin-top:6px; line-height:1.4}
+.vd{display:inline-block; margin-top:8px; font-size:12.5px; font-weight:800; padding:2px 10px; border-radius:999px}
+.vd.good{background:var(--new-bg); color:var(--new-ink)}
+.vd.mid{background:var(--mid-bg); color:var(--mid)}
+.gates{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px}
+.gate{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:18px; min-width:0; scroll-margin-top:16px}
+.gate-head{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.gate-head .n{font-family:var(--font-display); font-size:26px; color:var(--new); line-height:1}
+.gate-head .q{font-weight:800; font-size:16px}
+.gate-head .vd{margin-top:0}
+.gate .ans{margin-top:10px; font-weight:800; font-size:15.5px; line-height:1.5}
+.ev{list-style:none; margin:12px 0 0; padding:0; display:grid; gap:9px}
+.ev li{font-size:14px; line-height:1.55; display:grid; grid-template-columns:64px minmax(0,1fr); gap:8px; align-items:baseline}
+.src{font-size:11.5px; font-weight:800; padding:1px 0; border-radius:6px; background:var(--surface2); color:var(--muted); text-align:center; white-space:nowrap}
+.src.ours{background:var(--new-bg); color:var(--new-ink)}
+.cite{color:var(--faint); font-size:12.5px}
+.caution{margin-top:12px; padding-top:10px; border-top:1px dashed var(--line); font-size:13.5px; color:var(--warn); line-height:1.55}
+.mx-title{font-weight:800; font-size:16px; margin:26px 0 4px}
+.mx-sub{font-size:13.5px; color:var(--muted); margin-bottom:10px}
+.mx{overflow-x:auto; background:var(--surface); border:1px solid var(--line); border-radius:16px}
+.mx table{border-collapse:collapse; width:100%; min-width:640px; font-size:14px}
+.mx th,.mx td{padding:10px 12px; border-bottom:1px solid var(--line); text-align:center; vertical-align:middle}
+.mx th:first-child,.mx td:first-child{text-align:left}
+.mx tbody tr:last-child td{border-bottom:0}
+.mx thead th{font-size:12.5px; color:var(--muted); background:var(--surface2); font-weight:800}
+.mx td .sub{display:block; font-size:12px; color:var(--muted); font-weight:500}
+.mx td:first-child{font-weight:800}
+.mx tr.us td{background:var(--new-bg)}
+.mk{font-size:17px; line-height:1}
+.mk.y{color:var(--new)}
+.mk.p{color:var(--mid)}
+.mk.n{color:var(--faint)}
+.mk.q{color:var(--faint); font-weight:800; font-size:15px}
+.legend{display:flex; flex-wrap:wrap; gap:14px; font-size:12.5px; color:var(--muted); margin-top:8px}
+.legend > span{white-space:nowrap}
+.saynot{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; margin-top:26px}
+.saynot > div{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:18px; min-width:0}
+.saynot h3{margin:0 0 10px; font-size:16px; font-weight:800}
+.saynot .yes h3{color:var(--new-ink)}
+.saynot .no h3{color:var(--warn)}
+.saynot ul{margin:0; padding-left:18px; display:grid; gap:6px; font-size:14.5px}
+.saynot .no li span{color:var(--muted); font-size:13px}
+
+footer{margin-top:48px; padding-top:16px; border-top:1px solid var(--line); font-size:13px; color:var(--faint); line-height:1.7}
+
+@media (max-width:760px){
+  .compare{grid-template-columns:minmax(0,1fr)}
+  .diff-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .diff-row .k{grid-column:1 / -1; padding-block:6px}
+  .diff-row.head-row .k{display:none}
+  .steps{grid-template-columns:minmax(0,1fr)}
+  .step-arrow{transform:rotate(90deg); height:28px}
+  .todo-grid{grid-template-columns:minmax(0,1fr)}
+  .score{grid-template-columns:repeat(2, minmax(0,1fr))}
+  .gates{grid-template-columns:minmax(0,1fr)}
+  .saynot{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:880px){
+  .cheap{grid-template-columns:minmax(0,1fr)}
+  .tile{display:grid; grid-template-columns:130px minmax(0,1fr); gap:10px; align-items:baseline}
+  .tile .d{margin-top:0}
+}
+@media (max-width:420px){
+  .tile{grid-template-columns:minmax(0,1fr); gap:2px}
+  .timeline li{grid-template-columns:72px 18px minmax(0,1fr)}
+  .timeline li:not(:last-child)::after{left:calc(72px + 10px + 6px)}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="head">
+  <div class="eyebrow">경진대회 11/7 발표 · 사업 방향 바꾸기</div>
+  <h1><span class="from">판정만 하던 팀</span> <span class="arrow">→</span><br><span class="to">피부 기준을 만드는 팀</span></h1>
+  <p class="sub">기존 안(덱 v7)은 어땠고, 무엇으로 바꾸는지 한 장으로 봅니다.</p>
+  <div class="pills">
+    <span class="pill">Claude 정리</span>
+    <span class="pill warn">팀 결정 전</span>
+    <span class="pill">숫자는 어림</span>
+  </div>
+</header>
+
+<!-- 1. 비교 -->
+<section id="compare">
+  <h2>기존 vs 바꿀 안</h2>
+  <p class="sec-sub">달라지는 건 하나입니다. <b>데이터를 누가 만드느냐.</b></p>
+
+  <div class="compare">
+    <div class="panel old">
+      <span class="panel-tag">기존 · 덱 v7</span>
+      <figure>
+        <svg viewBox="0 0 340 330" role="img" aria-label="기존 안: 중소 화장품사가 CRO에 시험을 맡기고, 우리는 그 데이터를 판정만 한다. 판정은 조건부 이하만 나와서 실패 보험으로 다시 의뢰받는 고리다.">
+          <defs>
+            <marker id="ahOld" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker>
+            <marker id="ahWarn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah-warn" d="M0,0 L10,5 L0,10 z"/></marker>
+          </defs>
+          <!-- 고객 -->
+          <rect class="s-box" x="110" y="10" width="210" height="54" rx="12"/>
+          <text class="s-t" x="215" y="33" text-anchor="middle">중소 화장품사</text>
+          <text class="s-s" x="215" y="52" text-anchor="middle">시험 계획만 있음</text>
+          <line class="s-line" x1="215" y1="64" x2="215" y2="94" marker-end="url(#ahOld)"/>
+          <text class="s-lab" x="225" y="84">시험 의뢰</text>
+          <!-- CRO -->
+          <rect class="s-box" x="110" y="96" width="210" height="54" rx="12"/>
+          <text class="s-t" x="215" y="119" text-anchor="middle">CRO (시험 기관)</text>
+          <text class="s-s" x="215" y="138" text-anchor="middle">시험하고 균 목록을 만듦</text>
+          <line class="s-line" x1="215" y1="150" x2="215" y2="180" marker-end="url(#ahOld)"/>
+          <text class="s-lab" x="225" y="170">데이터</text>
+          <!-- 우리 -->
+          <rect class="s-box-old" x="110" y="182" width="210" height="58" rx="12"/>
+          <text class="s-t" x="215" y="206" text-anchor="middle">우리 = 판정만</text>
+          <text class="s-s" x="215" y="226" text-anchor="middle">"이 문장 써도 되나?"</text>
+          <line class="s-line" x1="215" y1="240" x2="215" y2="268" marker-end="url(#ahOld)"/>
+          <!-- 결과 -->
+          <rect class="s-warn" x="120" y="270" width="190" height="44" rx="22"/>
+          <text class="s-t-warn" x="215" y="297" text-anchor="middle">'조건부' 이하만 나옴</text>
+          <!-- 다시 의뢰 고리 -->
+          <path class="s-line-warn" d="M120,292 H40 V37 H106" marker-end="url(#ahWarn)"/>
+          <text class="s-lab-warn" x="48" y="150">다시</text>
+          <text class="s-lab-warn" x="48" y="166">의뢰</text>
+          <text class="s-lab" x="48" y="184">실패</text>
+          <text class="s-lab" x="48" y="200">보험</text>
+        </svg>
+        <figcaption>남이 만든 데이터에 <span style="color:var(--warn)">점수만</span> 매긴다</figcaption>
+      </figure>
+    </div>
+
+    <div class="panel new">
+      <span class="panel-tag">바꿀 안</span>
+      <figure>
+        <svg viewBox="0 0 340 338" role="img" aria-label="바꿀 안: 같은 방법으로 나라마다 피부 기준 데이터를 쌓고, 우리 실험실이 그 기준으로 qPCR과 분석을 해서 화장품사에 결과지를 준다. 고객 시료 데이터는 동의를 받아 다시 기준 DB에 쌓인다.">
+          <defs>
+            <marker id="ahNew" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah-new" d="M0,0 L10,5 L0,10 z"/></marker>
+            <marker id="ahNew2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker>
+          </defs>
+          <!-- 같은 방법 -->
+          <rect class="s-box" x="110" y="10" width="210" height="54" rx="12"/>
+          <text class="s-t" x="215" y="33" text-anchor="middle">같은 방법</text>
+          <text class="s-s" x="215" y="52" text-anchor="middle">표준 키트 · 절차</text>
+          <line class="s-line" x1="215" y1="64" x2="215" y2="88" marker-end="url(#ahNew2)"/>
+          <text class="s-lab" x="225" y="81">나라마다 쌓기</text>
+          <!-- DB -->
+          <rect class="s-box-new" x="110" y="90" width="210" height="78" rx="12"/>
+          <text class="s-t-new" x="215" y="114" text-anchor="middle">나라별 피부 기준 DB</text>
+          <rect class="s-chip" x="124" y="128" width="56" height="26" rx="13"/>
+          <text class="s-chip-t" x="152" y="146" text-anchor="middle">한국</text>
+          <rect class="s-chip" x="187" y="128" width="56" height="26" rx="13"/>
+          <text class="s-chip-t" x="215" y="146" text-anchor="middle">EU</text>
+          <rect class="s-chip" x="250" y="128" width="56" height="26" rx="13"/>
+          <text class="s-chip-t" x="278" y="146" text-anchor="middle">영국</text>
+          <line class="s-line" x1="215" y1="168" x2="215" y2="192" marker-end="url(#ahNew2)"/>
+          <text class="s-lab" x="225" y="185">기준과 비교</text>
+          <!-- 실험실 -->
+          <rect class="s-box-new" x="110" y="194" width="210" height="54" rx="12"/>
+          <text class="s-t-new" x="215" y="217" text-anchor="middle">우리 실험실</text>
+          <text class="s-s" x="215" y="236" text-anchor="middle">qPCR · 분석을 직접</text>
+          <line class="s-line" x1="215" y1="248" x2="215" y2="272" marker-end="url(#ahNew2)"/>
+          <text class="s-lab" x="225" y="265">결과지</text>
+          <!-- 고객 -->
+          <rect class="s-box" x="110" y="274" width="210" height="54" rx="12"/>
+          <text class="s-t" x="215" y="297" text-anchor="middle">중소 화장품사</text>
+          <text class="s-s" x="215" y="316" text-anchor="middle">BMI처럼 한눈에 받음</text>
+          <!-- 데이터가 다시 쌓이는 고리 -->
+          <path class="s-line-new" d="M110,301 H40 V129 H106" marker-end="url(#ahNew)"/>
+          <text class="s-lab-new" x="48" y="204">데이터</text>
+          <text class="s-lab-new" x="48" y="220">다시</text>
+          <text class="s-lab-new" x="48" y="236">쌓임</text>
+          <text class="s-lab" x="48" y="254">(동의)</text>
+        </svg>
+        <figcaption>데이터를 <span style="color:var(--new-ink)">직접 쌓고</span>, 그 기준으로 분석해 준다</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="diff" role="table" aria-label="기존 안과 바꿀 안 비교">
+    <div class="diff-row head-row" role="row"><div class="k" role="columnheader"></div><div class="o" role="columnheader">기존</div><div class="n" role="columnheader">바꿀 안</div></div>
+    <div class="diff-row" role="row"><div class="k" role="rowheader">우리가 하는 일</div><div class="o" role="cell">남의 데이터 판정</div><div class="n" role="cell">기준 DB + 실험 + 분석</div></div>
+    <div class="diff-row" role="row"><div class="k" role="rowheader">고객이 받는 것</div><div class="o" role="cell">'조건부 · 근거 불충분'</div><div class="n" role="cell">기준 범위 속 내 위치</div></div>
+    <div class="diff-row" role="row"><div class="k" role="rowheader">다시 오는 이유</div><div class="o" role="cell">실패 보험</div><div class="n" role="cell">qPCR 반복 측정 · 기준이 계속 좋아짐</div></div>
+    <div class="diff-row" role="row"><div class="k" role="rowheader">시장</div><div class="o" role="cell">민감 피부 시장</div><div class="n" role="cell">피부 분석 전체 (민감 피부는 첫 사례)</div></div>
+  </div>
+</section>
+
+<!-- 2. 대화 -->
+<section id="chat">
+  <h2>심사위원 말에 이렇게 답한다</h2>
+  <p class="sec-sub">10/10 녹음본에서 들은 말과, 기존 답 → 바꾼 답</p>
+
+  <div class="chat">
+    <div class="turn">
+      <div class="q">
+        <div class="avatar" aria-hidden="true">대표</div>
+        <div><div class="who">대표님</div><div class="bubble">이래서 안 되고 저래서 안 되고… 결국 리포트밖에 없다는 발표 같아요. 평가하는 입장으로 보여요.</div></div>
+      </div>
+      <div class="a old"><div class="who">기존 답</div><div class="bubble">저희는 판정만 합니다. 진단 · 시험 · 보증은 안 합니다.</div></div>
+      <div class="a new"><div class="who">바꾼 답</div><div class="bubble">피부 기준 데이터를 직접 만들고, 분석도 직접 합니다.</div></div>
+    </div>
+
+    <div class="turn">
+      <div class="q">
+        <div class="avatar" aria-hidden="true">위원</div>
+        <div><div class="who">심사위원 (참석자 5)</div><div class="bubble">고객은 raw FASTQ만 줄 거예요. 능력은 다 있는데 한 발짝 물러서 있어요.</div></div>
+      </div>
+      <div class="a old"><div class="who">기존 답</div><div class="bubble">데이터를 가진 고객이 보내 주면 판정합니다.</div></div>
+      <div class="a new"><div class="who">바꾼 답</div><div class="bubble">시료부터 받아서 실험 · FASTQ 처리 · 분석까지 우리가 합니다.</div></div>
+    </div>
+
+    <div class="turn">
+      <div class="q">
+        <div class="avatar" aria-hidden="true">교수</div>
+        <div><div class="who">교수님</div><div class="bubble">BMI처럼 "이렇게 나왔다"를 딱 줘야 돈을 내고 맡기죠.</div></div>
+      </div>
+      <div class="a old"><div class="who">기존 답</div><div class="bubble">사용 가능 / 조건부 / 근거 불충분 (지금 기준으론 '조건부'가 최고)</div></div>
+      <div class="a new"><div class="who">바꾼 답</div><div class="bubble">나라별 기준 범위 안에서 어디쯤인지 보여 줍니다. ↓ 아래 그림</div></div>
+    </div>
+
+    <div class="turn">
+      <div class="q">
+        <div class="avatar" aria-hidden="true">위원</div>
+        <div><div class="who">심사위원 (참석자 8)</div><div class="bubble">분석 서비스라면서 민감 피부 시장 얘기는 왜 해요? 다시 맡길 이유도 안 보여요.</div></div>
+      </div>
+      <div class="a old"><div class="who">기존 답</div><div class="bubble">민감 피부 시장이 큽니다. 재구매는 실패 보험으로.</div></div>
+      <div class="a new"><div class="who">바꾼 답</div><div class="bubble">시장은 피부 분석 전체입니다. 데이터가 쌓일수록 기준이 좋아져서 다시 옵니다.</div></div>
+    </div>
+
+    <div class="turn">
+      <div class="q">
+        <div class="avatar" aria-hidden="true">사회</div>
+        <div><div class="who">사회자</div><div class="bubble">데이터가 작은 게 문제가 아니라 기술력이 중요해요. 타깃을 정하고 차별점을 보여 주세요.</div></div>
+      </div>
+      <div class="a new"><div class="who">바꾼 답</div><div class="bubble">타깃은 분석 인력이 없는 중소 · 신생 화장품사. 차별점은 여러 나라를 같은 방법으로 잰 기준입니다.</div></div>
+    </div>
+  </div>
+  <p class="chat-note">심사위원 말은 녹음 전사를 요지로 옮겼습니다.</p>
+</section>
+
+<!-- 2-1. 왜 될까 -->
+<section id="why">
+  <h2>왜 될까? 네 가지 질문에 근거로 답하기</h2>
+  <p class="sec-sub">팀이 정한 네 관문(10/26)에 논문 · 규정 · 시장 근거를 붙였습니다. 반대 근거도 같이 적었습니다.</p>
+
+  <div class="ask">
+    <div class="avatar" aria-hidden="true">수미</div>
+    <div>
+      <div class="who">장수미 님</div>
+      <div class="bubble">될 거라는 배경 설명이 필요해요. 여기서 먹힐 거다, 이 사람들은 이걸 왜 필요로 할 거다. 정리하면 이거요.
+        <ol>
+          <li>우리가 만든 분석 결과물을 활용하는가</li>
+          <li>우리 서비스가 수요가 있을까</li>
+          <li>굳이 우리 서비스를 살 이유가 있나</li>
+          <li>우리 서비스를 재사용할 이유가 있나</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="score">
+    <a href="#g1"><div class="n">1</div><div class="q">우리 분석을 쓰나</div><span class="vd good">강함</span></a>
+    <a href="#g2"><div class="n">2</div><div class="q">필요한가</div><span class="vd good">문제는 확실</span></a>
+    <a href="#g3"><div class="n">3</div><div class="q">굳이 우리 걸 살까</div><span class="vd mid">차별점을 좁혀야</span></a>
+    <a href="#g4"><div class="n">4</div><div class="q">다시 쓸까</div><span class="vd mid">계기만 있음</span></a>
+  </div>
+
+  <div class="gates">
+    <article class="gate" id="g1">
+      <div class="gate-head"><span class="n">1</span><span class="q">우리 분석 결과물을 쓰나</span><span class="vd good">강함</span></div>
+      <p class="ans">우리가 분석에서 찾은 문제가 사업의 출발점이고, 분석 방법이 그대로 상품이 된다.</p>
+      <ul class="ev">
+        <li><span class="src ours">우리 분석</span><span>같은 한국인 여성 얼굴인데 <i>Streptococcus</i>가 자료 사이 30.7배 차이. 재는 방법이 다르면 값이 안 이어진다</span></li>
+        <li><span class="src ours">우리 분석</span><span>다섯 관문 = 기준 DB에 넣을 균을 고르는 필터</span></li>
+        <li><span class="src ours">우리 분석</span><span>말라세지아 레스트릭타 종특이 qPCR · 포도상구균 종 구분 = 패널 설계</span></li>
+        <li><span class="src ours">우리 분석</span><span>07 시험은 시점마다 시퀀싱 회차가 달라 결론을 못 냄 = 같은 회차에 넣는 설계</span></li>
+      </ul>
+      <p class="caution"><b>주의</b> 같은 사람을 다시 재면 값이 잘 안 맞습니다(반복 측정 일치도 ICC 0.10–0.38). 사용 전 2회 측정 · 부위 고정 · 절대량으로 설계해야 BMI처럼 쓸 수 있습니다.</p>
+    </article>
+
+    <article class="gate" id="g2">
+      <div class="gate-head"><span class="n">2</span><span class="q">필요한가 (수요)</span><span class="vd good">문제는 확실</span></div>
+      <p class="ans">피부 균은 재는 방법과 사는 곳에 따라 달라지는데, 같은 방법으로 잰 기준은 없다.</p>
+      <ul class="ev">
+        <li><span class="src">논문</span><span>DNA 구간(V4)에 따라 <i>S. epidermidis</i> · <i>C. acnes</i>가 크게 적게 잡힘. 추출 키트에 따라 성공률 39–100% <span class="cite">Meisel 2016 · Bjerre 2019</span></span></li>
+        <li><span class="src">논문</span><span>도시 · 농촌을 피부 균만으로 구분. 핀란드와 이웃 러시아 카렐리아가 "뚜렷이 다름". 중국인 피부에만 있는 종 <span class="cite">Ying 2015 · Ruokolainen 2017 · Li 2021</span></span></li>
+        <li><span class="src">논문</span><span>'건강한 피부 균'의 정의가 없고 기준 물질을 만들자고 제안. 피부 마이크로바이옴 ISO · 업계 기준은 못 찾음 <span class="cite">van Belkum 2023</span></span></li>
+        <li><span class="src">규정</span><span>영국 CAP: 시험은 제품을 쓸 인구 집단을 반영해야 함. 수출은 영국 +179%, 네덜란드 +293% <span class="cite">식약처 2026년 1–9월</span></span></li>
+        <li><span class="src">식약처</span><span>마이크로바이옴 계열 기능성 보고 회사 137곳(하한) · 해마다 새로 18–20곳 · 화장품 회사 88%가 10명 미만</span></li>
+      </ul>
+      <p class="caution"><b>주의</b> 민족보다 신체 부위 차이가 더 크다는 연구도 있습니다(Perez Perez 2016). "나라마다 다르다"보다 "생활환경 · 부위가 다르니 같은 방법 · 같은 부위로 재야 한다"로 말합니다. 돈을 낼지는 아직 한 곳도 확인하지 않았습니다.</p>
+    </article>
+
+    <article class="gate" id="g3">
+      <div class="gate-head"><span class="n">3</span><span class="q">굳이 우리 걸 살까</span><span class="vd mid">차별점을 좁혀야</span></div>
+      <p class="ans">'한국 DB'는 이미 있다. 우리 자리는 <span style="color:var(--new-ink)">여러 나라 · 같은 방법 · 절대량 · 어느 중소기업이든</span>이다.</p>
+      <ul class="ev">
+        <li><span class="src">기사</span><span>코스맥스: 한국인 1,000명 DB에 이어 인도네시아 410명 DB를 쌓는 중. 사내 연구용으로 소개됨</span></li>
+        <li><span class="src">웹 조사</span><span>여러 나라를 같은 방법으로 재서 제품을 비교해 주는 서비스는 공개 웹에서 못 찾음</span></li>
+        <li><span class="src">공시 · 웹</span><span>CRO 결과물은 균 분류 목록. 분석 기관 표준 보고서는 균 표 · 다양성까지이고 해석 · 기준은 없음 <span class="cite">Psomagen</span></span></li>
+        <li><span class="src">논문</span><span>핵심 균은 qPCR로 따로 잴 수 있음: 말라세지아 레스트릭타 · <i>S. aureus</i> · <i>S. epidermidis</i> <span class="cite">Akaza 2010 · Wood 2021 · Rendboe 2020</span></span></li>
+      </ul>
+      <p class="caution"><b>주의</b> 코스맥스는 중소 브랜드가 실제로 제조를 맡기는 곳이라 가장 큰 경쟁자이자 협력 후보입니다. 국내 분석 단가가 비공개라 "더 싸다"는 숫자는 아직 없습니다. 두 포도상구균 종을 한 번에 가르는 얼굴 피부 qPCR은 직접 검증해야 합니다.</p>
+    </article>
+
+    <article class="gate" id="g4">
+      <div class="gate-head"><span class="n">4</span><span class="q">다시 쓸까</span><span class="vd mid">계기만 있음</span></div>
+      <p class="ans">제품 · 시장 · 리뉴얼마다 다시 재야 하고, qPCR 반복 측정은 싸다.</p>
+      <ul class="ev">
+        <li><span class="src">규정</span><span>EU는 제품마다 정보 파일(PIF)에 효능 근거를 넣고 출하 후 10년 보관 <span class="cite">1223/2009 제11조</span></span></li>
+        <li><span class="src">규정</span><span>영국은 책임자(RP)를 따로 둠. 시장을 늘리면 다시</span></li>
+        <li><span class="src">식약처</span><span>해를 넘겨 다시 보고한 회사 2024년 6곳 · 2025년 3곳 · 2026년 10곳 <span class="cite">팀 집계</span></span></li>
+        <li><span class="src">구조</span><span>데이터가 쌓일수록 기준이 정밀해져 다음 결과지의 가치가 커짐 (가설)</span></li>
+      </ul>
+      <p class="caution"><b>주의</b> 137곳 중 81곳은 제품이 하나뿐입니다(조사 단계). 실제로 다시 산 고객 데이터는 없습니다.</p>
+    </article>
+  </div>
+
+  <div class="mx-title">3번을 한눈에: 누가 무엇을 갖고 있나</div>
+  <p class="mx-sub">공개 웹 기준입니다. 공개 자료에 없다고 해서 하지 않는다는 뜻은 아닙니다.</p>
+  <div class="mx">
+    <table>
+      <thead><tr><th>곳</th><th>여러 나라 · 같은 방법</th><th>기준 범위 제공</th><th>절대량 (qPCR)</th><th>어느 중소기업이든</th></tr></thead>
+      <tbody>
+        <tr><td>코스맥스 (ODM)<span class="sub">한국 1,000명 · 인도네시아 410명</span></td><td><span class="mk p" aria-label="일부">◐</span></td><td><span class="mk q" aria-label="모름">?</span></td><td><span class="mk q" aria-label="모름">?</span></td><td><span class="mk q" aria-label="모름">?</span></td></tr>
+        <tr><td>Sequential (영국)<span class="sub">시료 5만 건+ · 실험실 3개국</span></td><td><span class="mk p" aria-label="일부">◐</span></td><td><span class="mk n" aria-label="없음">○</span></td><td><span class="mk y" aria-label="있음">●</span></td><td><span class="mk y" aria-label="있음">●</span></td></tr>
+        <tr><td>CRO · 인증 기관<span class="sub">대한피부과학연구소 · Dermatest 등, 사용 전후 비교</span></td><td><span class="mk n" aria-label="없음">○</span></td><td><span class="mk n" aria-label="없음">○</span></td><td><span class="mk q" aria-label="모름">?</span></td><td><span class="mk y" aria-label="있음">●</span></td></tr>
+        <tr><td>분석 기관<span class="sub">마크로젠 · Psomagen · Eurofins, 균 표 · 다양성</span></td><td><span class="mk n" aria-label="없음">○</span></td><td><span class="mk n" aria-label="없음">○</span></td><td><span class="mk p" aria-label="일부">◐</span></td><td><span class="mk y" aria-label="있음">●</span></td></tr>
+        <tr><td>국책 과제<span class="sub">중앙대병원 컨소시엄, 한국인 표준 피부 마이크로바이옴 (2023–2027)</span></td><td><span class="mk n" aria-label="없음">○</span></td><td><span class="mk q" aria-label="모름">?</span></td><td><span class="mk q" aria-label="모름">?</span></td><td><span class="mk q" aria-label="모름">?</span></td></tr>
+        <tr class="us"><td>우리 (계획)<span class="sub">한국 → EU · 영국, 같은 키트 · 절차</span></td><td><span class="mk y" aria-label="있음">●</span></td><td><span class="mk y" aria-label="있음">●</span></td><td><span class="mk y" aria-label="있음">●</span></td><td><span class="mk y" aria-label="있음">●</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="legend"><span><span class="mk y">●</span> 있음</span><span><span class="mk p">◐</span> 일부</span><span><span class="mk n">○</span> 공개 자료에 없음</span><span><span class="mk q">?</span> 모름</span></div>
+
+  <div class="saynot">
+    <div class="yes">
+      <h3>발표에서 말해도 되는 것</h3>
+      <ul>
+        <li>피부 균 결과는 재는 방법과 부위에 따라 크게 달라진다</li>
+        <li>사는 곳(생활환경)에 따라서도 다르다는 연구가 여럿 있다</li>
+        <li>검증된 '건강한 피부 균' 기준은 아직 없다</li>
+        <li>여러 나라를 같은 방법으로 잰 기준을 파는 곳은 공개적으로 못 찾았다</li>
+        <li>핵심 균은 qPCR로 따로 잴 수 있다</li>
+      </ul>
+    </div>
+    <div class="no">
+      <h3>아직 말하면 안 되는 것</h3>
+      <ul>
+        <li>"한국 기준 DB는 우리가 처음" <span>코스맥스 1,000명</span></li>
+        <li>"나라마다 피부 균이 다르다" 단정 <span>부위 차이가 더 큰 연구도 있음</span></li>
+        <li>"고객이 산다" <span>지불 의사 확인 0건</span></li>
+        <li>"더 싸다" <span>국내 공개 단가 없음</span></li>
+        <li>"한 번 재면 BMI처럼 나온다" <span>반복 측정 일치도가 낮음</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 3. 게이지 -->
+<section id="gauge">
+  <h2>결과는 BMI처럼 보여 준다</h2>
+  <p class="sec-sub">BMI가 되는 건 사람들 기준 데이터가 있어서입니다. 피부 기준 DB가 있으면 피부 균도 이렇게 말할 수 있습니다.</p>
+
+  <div class="gauges">
+    <div class="g-row">
+      <div class="g-title">BMI <span>사람들 기준이 있으니 바로 읽힘</span></div>
+      <div class="g-bar">
+        <div class="g-seg" style="flex:2">저체중</div>
+        <div class="g-seg ok" style="flex:3">정상</div>
+        <div class="g-seg" style="flex:2">과체중</div>
+        <div class="g-seg" style="flex:2">비만</div>
+        <div class="g-mark" style="left:49%"><span>나</span></div>
+      </div>
+    </div>
+    <div class="g-row">
+      <div class="g-title">피부 핵심 균 양 <span>같은 나이대 · 피부 타입 한국인 기준</span></div>
+      <div class="g-bar">
+        <div class="g-seg" style="flex:2">낮음</div>
+        <div class="g-seg ok" style="flex:4">기준 범위</div>
+        <div class="g-seg" style="flex:2">높음</div>
+        <div class="g-mark" style="left:64%"><span>제품 4주 사용 후</span></div>
+      </div>
+    </div>
+    <p class="g-note">모양을 보여 주는 예시입니다. 실제 데이터가 아닙니다. 피부 균은 한 번 재면 값이 흔들려서, 사용 전 2회 측정 · 부위 고정 · 절대량으로 재야 이렇게 말할 수 있습니다.</p>
+  </div>
+</section>
+
+<!-- 4. 단계 -->
+<section id="steps">
+  <h2>이렇게 커진다</h2>
+  <p class="sec-sub">한국에서 시작해 나라를 늘리고, 쌓인 기준으로 상품을 늘립니다.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="no">1</div>
+      <div class="t">한국 기준 DB</div>
+      <div class="d">같은 방법으로 한국인 피부 데이터를 쌓는다 (나이 · 성별 · 피부 타입 · 계절)</div>
+      <span class="money">투자 + 국내 분석으로 첫 매출</span>
+    </div>
+    <div class="step-arrow" aria-hidden="true">→</div>
+    <div class="step">
+      <div class="no">2</div>
+      <div class="t">수출국으로</div>
+      <div class="d">EU · 영국부터 같은 방법으로. 수출 브랜드가 "현지 피부에서도 괜찮나"를 확인</div>
+      <span class="money">수출 브랜드 효능 시험</span>
+    </div>
+    <div class="step-arrow" aria-hidden="true">→</div>
+    <div class="step">
+      <div class="no">3</div>
+      <div class="t">아래로 넓히기</div>
+      <div class="d">핵심 균 qPCR 패널 · 결과지 · 원료 스크리닝 · 데이터 라이선스</div>
+      <span class="money">반복 매출</span>
+    </div>
+  </div>
+</section>
+
+<!-- 5. 가격 -->
+<section id="cheap">
+  <h2>왜 더 싸지나</h2>
+  <p class="sec-sub">실험실이 있다고 가정합니다.</p>
+  <p class="cheap-lead">같은 실험을 깎는 게 아니라, 결론까지 드는 돈을 줄인다</p>
+  <div class="cheap">
+    <div class="tile"><div class="t">피부 전용 공정</div><div class="d">실패 · 오염이 줄어 다시 하는 일이 준다</div></div>
+    <div class="tile"><div class="t">qPCR</div><div class="d">핵심 균만 싸게 반복해서 잰다</div></div>
+    <div class="tile"><div class="t">종까지 구분</div><div class="d">대형 분석 기관 상품과 겹치지 않는다</div></div>
+    <div class="tile"><div class="t">시료 모아 처리</div><div class="d">여러 회사 시료를 한 번에 돌려 단가를 낮춘다</div></div>
+    <div class="tile"><div class="t">원스톱</div><div class="d">설계부터 해석까지 한 곳이라 중간 비용이 없다</div></div>
+  </div>
+</section>
+
+<!-- 6. 숙제 · 일정 -->
+<section id="next">
+  <h2>남은 숙제와 일정</h2>
+  <p class="sec-sub">덱에는 "이미 있다"가 아니라 "이렇게 세운다"로 씁니다.</p>
+  <div class="todo-grid">
+    <div class="box">
+      <h3>채워야 할 빈칸</h3>
+      <div class="chips">
+        <span class="chip">투자 규모 <small>한국 1,000명 × 2회 · 분석 · 사례비 · 장비 약 5.7–6.0억 원 (인건비 제외 · 어림)</small></span>
+        <span class="chip">FASTQ 처리 구축</span>
+        <span class="chip">규제 <small>IRB · GDPR · 생명윤리법</small></span>
+        <span class="chip">경쟁사 조사</span>
+        <span class="chip">DB가 커지기 전 매출</span>
+      </div>
+    </div>
+    <div class="box">
+      <h3>다음 순서</h3>
+      <ol class="timeline">
+        <li><div class="date">11/2–3</div><div class="dot"></div><div class="what"><b>팀 동의</b> (10/31에 정한 서비스 v2를 바꾸는 일)</div></li>
+        <li><div class="date">11/3</div><div class="dot"></div><div class="what">서비스 구성 v3 · 숫자 조사 · 덱 서비스 장 수정</div></li>
+        <li class="due"><div class="date">11/4 (수)</div><div class="dot"></div><div class="what"><b>16:00 제출</b></div></li>
+        <li><div class="date">11/7 (토)</div><div class="dot"></div><div class="what">발표</div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<footer>
+  근거: <a href="../녹음본/민감%20피부%20지표%20위한%20피부%20미생물%20큐레이션%20서비스%20제안.txt">녹음본 전사</a> · <a href="덱/경진대회_덱_v7_261102_0630승민.html">덱 v7</a> · <a href="서비스구성_261027.md">서비스 구성 v2</a> · <a href="사업성_독립검토_클로드비교_261101.md">사업성 독립 검토(11/1)</a> · <a href="README.md">README</a>(제출 일정).
+  <br>투자 규모는 자체 실험실 기준 시료당 소모품 약 15만 원(16S · ITS · qPCR 3종) × 2,000시료 + 사례비(2회 5만–8만 원) + 공용IRB 심의비 + 장비(나라장터 · 제조사 가격 약 2.25억 원)를 더한 어림입니다. 인건비 · 공간 · 냉동고 · 안전작업대는 뺐습니다. 계산 근거는 <code>덱/경진대회_사업파트_초안_261102.html</code> 원가 장에 있습니다.
+  <br><b>논문</b> Meisel 2016 <a href="https://doi.org/10.1016/j.jid.2016.01.016">J Invest Dermatol</a> · Bjerre 2019 <a href="https://doi.org/10.1038/s41598-019-53599-z">Sci Rep</a> · Ying 2015 <a href="https://doi.org/10.1371/journal.pone.0141842">PLoS One</a> · Ruokolainen 2017 <a href="https://doi.org/10.1111/cea.12895">Clin Exp Allergy</a> · Li 2021 <a href="https://doi.org/10.1186/s40168-020-00995-7">Microbiome</a> · Perez Perez 2016 <a href="https://doi.org/10.1371/journal.pone.0151990">PLoS One</a>(검색 요약만) · van Belkum 2023 <a href="https://doi.org/10.3389/frmbi.2022.1077151">Front Microbiomes</a> · Akaza 2010 <a href="https://doi.org/10.1111/j.1346-8138.2010.00913.x">J Dermatol</a> · Wood 2021 <a href="https://doi.org/10.1186/s12866-021-02247-6">BMC Microbiol</a> · Rendboe 2020 <a href="https://doi.org/10.1186/s12866-020-02041-w">BMC Microbiol</a>. 조사 에이전트가 원문이나 초록을 열어 확인했고, 표시한 하나만 검색 요약입니다.
+  <br><b>경쟁 · 단가</b> 코스맥스 <a href="https://www.etoday.co.kr/news/view/2488365">한국인 1,000명</a> · <a href="https://www.koreaherald.com/article/10690789">인도네시아 410명</a> · <a href="https://www.sequential.bio/">Sequential</a> · <a href="https://www.psomagen.com/16s-its-amplicon-sequencing">Psomagen 16S 보고서</a> · <a href="https://eurofinsgenomics.eu/en/next-generation-sequencing/skin-microbiome/">Eurofins</a> · <a href="https://medigatenews.com/news/341050338">중앙대병원 컨소시엄</a> · <a href="https://microbiome.forsyth.org/pricing.php">Forsyth 단가</a>.
+  <br><b>저장소 원문 확인 기록</b> 영국 CAP · 수출 수치 <code>references/수요동인 · 수출근거</code> · 기능성 보고 회사 수 <code>references/수요추정</code> · ICC · 30.7배 <code>판정표_상세.md</code> · 재보고 회사 수 <code>경진대회/반복매출_시나리오</code>.
+</footer>
+
+</div>
+</body>
+</html>
