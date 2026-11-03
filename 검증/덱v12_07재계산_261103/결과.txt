@@ -1,0 +1,4 @@
+없는 속: []
+Cutibacterium    n=25 W+=213 p(greater)=0.0909 p_two=0.1817 · Holm 주장방향 0.1817 · Holm 양측 0.3635
+Staphylococcus   n=25 W+=138 p(greater)=0.7461 p_two=0.5249 · Holm 주장방향 0.7461 · Holm 양측 0.5249
+Corynebacterium  n=25 W+=290 p(two-sided)=0.0002 p_two=0.0002 · Holm 주장방향 0.0007 · Holm 양측 0.0007
