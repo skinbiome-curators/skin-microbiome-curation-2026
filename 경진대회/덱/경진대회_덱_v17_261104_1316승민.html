@@ -1051,6 +1051,15 @@ body.shot #stage{padding:0}
 .bz-ladder td.bz-stg{white-space:nowrap;font-weight:800;color:var(--green);font-size:12px}
 .bz-ladder tr.core td{background:#EAF4EE}
 .bz-box{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 15px}
+.bz-rev{flex:1;display:flex;flex-direction:column;gap:7px;padding:12px 18px}
+.bz-rev .rv-h{font-size:13px;font-weight:800;color:var(--steel);margin-top:2px}
+.bz-rev .ltv{gap:7px}
+.bz-rev .ltv-r .tr{height:22px}
+.bz-rev .ltv-r{grid-template-columns:112px 1fr 118px}
+.bz-rev .ltv-r .k small{color:#4A5058}
+.bz-rev .ltv-r s{font-size:16.5px;white-space:nowrap}
+.bz-rev .rv-n{font-size:12.5px;color:#4A5058;line-height:1.5}
+.bz-rev ul{margin:2px 0 0;border-top:1px dashed #D8D5CC;padding-top:8px}
 .bz-box ul{margin:4px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:5px;font-size:13px;line-height:1.5}
 
 .bz-val{display:grid;grid-template-columns:.82fr 1.18fr;gap:14px}
@@ -1615,7 +1624,7 @@ body.shot #stage{padding:0}
 <div class="foot"><sup>1</sup> 「화장품법」 제14조 &nbsp;<sup>2</sup> 식약처(2025) 표시·광고 관리 지침 별표 1 &nbsp;<sup>3</sup> 영국판 1223/2009 Art. 4(RP) · 11(SI 2019/696 개정) &nbsp;<sup>4</sup> CAP(영국 광고 규약 위원회 · 심의는 ASA). (2021). <i>Skin in the game</i> 「… reflect the population for which the product is intended」 &nbsp;<sup>5</sup> Regulation (EC) No 1223/2009, Art. 4(RP) · 11 &nbsp;<sup>6</sup> Regulation (EU) No 655/2013 &nbsp;<sup>7</sup> 미국 — 서류 의무는 안전성 중심 · 분쟁은 ‘probiotic’ 성분 표현(소송 2021) &nbsp;<sup>8</sup> 중국 — 중국 검사기관 시험 · 외국 기관 시료 채취 · 반출 불가(A9) &nbsp;<sup>9</sup> 일본 — 화장품 효능 표현 56개 · 마이크로바이옴 없음 &nbsp;<sup>10</sup> ASA 판정 A19-1031915(2021) — 그 뒤 판정은 찾지 못함 &nbsp;<sup>11</sup> 식약처(2026. 10. 2.) — 화장품 전체 · 잠정치 &nbsp;<sup>12</sup> UK SI 2022/1213(영국 → 한국) · 전체 출처 A4-3 · 법률 자문 아님</div>
 </section>
 
-<section class="slide" data-step="6" data-title="상품 · 가격과 반복 매출" data-notes="상품은 무료 설계 점검으로 시작합니다. 핵심은 원자료 검수와 분석이고, 분석까지 맡긴 시험이 근거 불충분이면 다음 설계는 무료, 리뉴얼 때는 측정 기관이 핵심 균만 qPCR로 다시 재고 저희가 비교합니다. 측정비는 측정 기관 몫이고, 저희 몫은 설계서 83만 원과 시험 한 건 분석료 약 140만에서 255만 원입니다. 첫 고객층의 10%가 3년에 한 건에서 3.8건을 맡기면 저희 몫은 약 2,000만에서 1.9억 원입니다. 다시 사는 계기는 아직 가설입니다. 권고 설계대로면 측정비만 수천만 원이라 설계 점검부터 하고 측정 항목을 고르게 합니다.">
+<section class="slide" data-step="6" data-title="상품 · 가격과 반복 매출" data-notes="상품은 무료 설계 점검으로 시작합니다. 핵심은 원자료 검수와 분석이고, 분석까지 맡긴 시험이 근거 불충분이면 다음 설계는 무료, 리뉴얼 때는 측정 기관이 핵심 균만 qPCR로 다시 재고 저희가 비교합니다. 측정비는 측정 기관 몫이고, 저희 몫은 설계서 83만 원과 시험 한 건 분석료 약 140만에서 255만 원입니다. 첫 고객층의 10%가 3년에 한 건에서 3.8건을 맡기면 저희 몫은 약 2,000만에서 1.9억 원입니다. 재구매 계기는 아직 가설입니다. 권고 설계대로면 측정비만 수천만 원이라 설계 점검부터 하고 측정 항목을 고르게 합니다.">
 <div class="s-head"><div class="eye">CHAPTER 06 · 실제 적용 가능성 및 향후 확장 방향</div><div class="steps"></div></div>
 <h2 class="title">상품 · 가격과 반복 매출</h2>
 <div class="lead">수익은 설계 · 분석료(측정비는 측정 기관 몫) — 무료 점검으로 유입, 실패 보험 · 처방 변경 · 수출 시 재구매(가설)</div>
@@ -1633,25 +1642,25 @@ body.shot #stage{padding:0}
    </tbody>
   </table>
   <div class="bz-col">
-   <div class="bz-box"><div class="bz-k">다시 사는 계기 <span class="hyp">가설</span></div>
-    <ul>
-     <li>영국 · EU: 근거는 제품 · 주장마다 · 서류 10년 보관(재측정 의무는 아님)<sup>1</sup> · 영국은 EU와 별도로 책임자(RP) · 서류 필요<sup>2</sup></li>
-     <li>국내: 해를 넘겨 다시 보고한 회사 2024년 6곳 · 2025년 3곳 · <b>2026년 10곳</b><sup>3</sup></li>
-    </ul>
-   </div>
-   <div class="bz-box"><div class="bz-k">가격 구조 · 3년 매출 <span class="hyp">가정</span></div>
-    <ul>
-     <li>측정비 = 측정 기관 몫 — 시료당 약 43만 원 어림(미국 코어 단가 · 국내 견적 전 · 부록 A6)</li>
-     <li>우리 몫 = 설계서 <b>83만 원</b>/건 + 분석료 <b>약 140만–255만 원</b>/건(78–96시료 · 가정)<sup>4</sup></li>
-     <li>3년 우리 몫 — 고객 145곳 × 도달 10% × 고객당 1–3.8건 ≈ 14.5–55건 × 140만–338만 원 = <b>약 2,000만–1.9억 원</b><sup>6</sup> · 측정비는 넣지 않음</li>
-     <li>자체 실험실(시료당 원가 약 15만 원)은 물량 · 경제성 확인 뒤 선택지</li>
-    </ul>
+   <div class="bz-box bz-rev"><div class="bz-k">가격 구조 · 3년 매출 <span class="hyp">가정</span></div>
+    <div class="rv-h">한 건 우리 몫 — 측정비(측정 기관 몫)는 넣지 않음</div>
+    <div class="ltv">
+     <div class="ltv-r"><div class="k">분석료만<small>78–96시료</small></div><div class="tr"><i style="--w:75.4%;--c:#A9D9C2"></i><i style="--w:41.4%;--c:#0f8f63"></i></div><s style="color:var(--green2)">140만–255만</s></div>
+     <div class="ltv-r"><div class="k">설계서 + 분석료<small>83만 + 140만–255만</small></div><div class="tr"><i style="--w:100%;--c:#A9D9C2"></i><i style="--w:66%;--c:#0f8f63"></i></div><s style="color:var(--green2)">223만–338만</s></div>
+    </div>
+    <div class="rv-n">진한 색 = 하한 · 옅은 색 = 상한 · 가격 = 원가(사람 시간) ÷ 0.6<sup>1</sup></div>
+    <div class="rv-h">3년 우리 몫 — 고객 145곳 × 도달 10% × 고객당 1–3.8건</div>
+    <div class="ltv">
+     <div class="ltv-r"><div class="k">하한<small>14.5건 × 140만</small></div><div class="tr"><i style="--w:10.9%;--c:#0f8f63"></i></div><s style="color:var(--green2)">약 2,000만 원</s></div>
+     <div class="ltv-r"><div class="k">상한<small>55건 × 338만</small></div><div class="tr"><i style="--w:100%;--c:#3C6E91"></i></div><s style="color:var(--steel)">약 1.9억 원</s></div>
+    </div>
+    <div class="rv-n">1건 = 첫 시험만 · 3.8건 = 재구매 계기 4가지 확률 가정(상한) · 도달 10% = 가정<sup>3</sup></div>
    </div>
   </div>
  </div>
- <div class="callout amber"><b>중소기업 예산과의 차이</b> — 권고 설계(두 군 26–32명 × 3시점 = 78–96시료 · 부록 A5)면 측정비 어림만 약 3,350만–4,130만 원, 지역 지원사업의 인체적용시험 한도는 기업당 150만–500만 원<sup>5</sup> → <b>설계 점검만 먼저</b>(83만 원) · 측정 항목 선택(qPCR만 · 16S만) · 여러 회사 시료를 한 회차에 모아 처리 · 가격에 피험자 모집 · 시험 수행 비용은 없음 · 실제로 다시 산 고객 데이터는 아직 없음</div>
+ <div class="callout amber"><b>중소기업 예산과의 차이</b> — 권고 설계(두 군 26–32명 × 3시점 = 78–96시료 · 부록 A5)면 측정비 어림만 약 3,350만–4,130만 원, 지역 지원사업의 인체적용시험 한도는 기업당 150만–500만 원<sup>2</sup> → <b>설계 점검만 먼저</b>(83만 원) · 측정 항목 선택(qPCR만 · 16S만) · 여러 회사 시료를 한 회차에 모아 처리 · 가격에 피험자 모집 · 시험 수행 비용은 없음 · 실제로 다시 산 고객 데이터는 아직 없음</div>
 </div>
-<div class="foot"><sup>1</sup> Regulation (EC) No 1223/2009, Art. 11 — 서류는 제품별 · 10년 보관 &nbsp;<sup>2</sup> UK SI 2019/696, sch. 34 &nbsp;<sup>3</sup> 식약처. (2026). <i>기능성화장품 보고품목정보</i> — 팀 집계 &nbsp;<sup>4</sup> 가격 = 원가 ÷ 0.6(팀 독립 검토 11/1) · 원가 = 사람 시간 × 2026 학술연구용역 인건비 기준단가(행정안전부) — 일수는 가정 · 계산은 부록 A6 · 남는 40%는 순이익 아님 &nbsp;<sup>5</sup> 지방자치단체 화장품 시험비 지원사업(2025) — 충북 인체적용시험 일반 150만 · 기능성 300만 원(지원예산 50% 자부담) · 전북 남원 피부임상평가 500만 원(전북 기업) · 원가 계산 근거는 부록 A6<br><sup>6</sup> 140만 = 분석료 하한(설계서 없이) · 338만 = 설계서 83만 + 분석 255만(실패 보험으로 설계비 면제되는 건 미반영) · 145곳 = 기능성 보고 137(대기업 일부 포함 · 상한) + 원료사 · 제조사 8 · 1건 = 하한 · 3.8건 = 재구매 계기 4가지의 확률 가정(큰 시험 기준이라 상한) · 도달 10% = 근거 없는 가정 → 유료 시범에서 확인</div>
+<div class="foot"><sup>1</sup> 가격 = 원가 ÷ 0.6(팀 독립 검토 11/1) · 원가 = 사람 시간 × 2026 학술연구용역 인건비 기준단가(행정안전부) — 일수는 가정 · 계산은 부록 A6 · 남는 40%는 순이익 아님 &nbsp;<sup>2</sup> 지방자치단체 화장품 시험비 지원사업(2025) — 충북 인체적용시험 일반 150만 · 기능성 300만 원(지원예산 50% 자부담) · 전북 남원 피부임상평가 500만 원(전북 기업) · 원가 계산 근거는 부록 A6 &nbsp;<sup>3</sup> 140만 = 분석료 하한(설계서 없이) · 338만 = 설계서 83만 + 분석 255만(실패 보험으로 설계비 면제되는 건 미반영) · 145곳 = 기능성 보고 137(대기업 일부 포함 · 상한) + 원료사 · 제조사 8 · 1건 = 하한 · 3.8건 = 재구매 계기 4가지의 확률 가정(큰 시험 기준이라 상한) · 도달 10% = 근거 없는 가정 → 유료 시범에서 확인 · 측정비는 넣지 않음</div>
 </section>
 
 <section class="slide" data-step="6" data-title="실증 계획 · 한계와 보완" data-notes="작게 확인하고 키웁니다. 측정 기관과 파일럿으로 증폭 성공률, 다시 쟀을 때의 흔들림, 말라세지아 qPCR 검출 한계를 확인하고, 시험 대행 기관과 함께 중소기업 두 곳에 유료 시범을 제안해 실제로 돈을 내는지 봅니다. 그다음 사용 전 자료를 쌓아 범위가 유지되는지 봅니다. 한계도 분명합니다. 지불 의사는 아직 확인 전이고, 측정 기관이 사양서를 따르는지는 표준 시료로 확인합니다. 권고 설계 비용은 지역 지원 한도보다 커서 설계 점검부터 시작합니다. 말라세지아는 검증 전이라 측정 후보로만 씁니다. 또 원시 서열 파일의 서열 처리와 균 동정은 아직 직접 해 보지 않았습니다. 지금까지는 공개 가공 자료로 분석했고, 파일럿에서 표준 도구로 처리 과정을 만들어 표준 시료로 검증하며, 그 전에는 전문 시설에 맡깁니다. 피부 면봉 연구는 윤리 심의와 서면 동의를 받고, 데이터는 가명 처리합니다.">
@@ -1988,12 +1997,9 @@ body.shot #stage{padding:0}
    <li><span class="n">12</span>The Data Protection (Adequacy) (Republic of Korea) Regulations 2022 (SI 2022/1213).</li>
   </ol></div>
   <div class="sg"><h5>18장 상품 · 가격과 반복 매출</h5><ol>
-   <li class="re"><span class="n">1</span>Regulation (EC) No 1223/2009 → 2장 ⁸</li>
-   <li class="re"><span class="n">2</span>UK SI 2019/696 → 2장 ⁸</li>
-   <li class="re"><span class="n">3</span>식약처 기능성화장품 보고품목정보 → 2장 ⁵</li>
-   <li><span class="n">4</span>팀 내부 검토. (2026, 11월 1일). 사업성 독립 검토 — 가격 = 원가 ÷ 0.6 · 행정안전부. (2026, 1월 2일). <i>2026년 학술연구용역 인건비 기준단가</i> — 사람 시간 원가(부록 A6 ¹¹).</li>
-   <li><span class="n">5</span>충북 화장품 소재 유효성 및 안전성 시험비 지원(2025) · 남원시바이오산업연구원 공고 제2025-05호(2025) [지원 공고].</li>
-   <li><span class="n">6</span>팀 계산. (2026). 고객당 1–3.8건(재구매 계기 4가지 확률 가정) · 도달률 가정 · 분석료는 ⁴.</li>
+   <li><span class="n">1</span>팀 내부 검토. (2026, 11월 1일). 사업성 독립 검토 — 가격 = 원가 ÷ 0.6 · 행정안전부. (2026, 1월 2일). <i>2026년 학술연구용역 인건비 기준단가</i> — 사람 시간 원가(부록 A6 ¹¹).</li>
+   <li><span class="n">2</span>충북 화장품 소재 유효성 및 안전성 시험비 지원(2025) · 남원시바이오산업연구원 공고 제2025-05호(2025) [지원 공고].</li>
+   <li><span class="n">3</span>팀 계산. (2026). 고객당 1–3.8건(재구매 계기 4가지 확률 가정) · 도달률 가정 · 분석료는 ¹.</li>
   </ol></div>
   <div class="sg"><h5>19장 실증 계획 · 한계와 보완</h5><ol>
    <li><span class="n">1</span>Perez Perez, G. I., et al. (2016). Body site is a more determinant factor than human population diversity in the healthy skin microbiome. <i>PLoS One, 11</i>(4), e0151990.</li>
@@ -2065,7 +2071,7 @@ body.shot #stage{padding:0}
  </div>
  <div class="callout amber">지역 지원사업의 인체적용시험 한도는 기업당 150만–500만 원(충북 일반 150만 · 기능성 300만 · 50% 자부담 / 전북 남원 500만 · 전북 기업)<sup>10</sup> → 무료 점검 · 설계 점검만 먼저 · 측정 항목 선택 · 여러 회사 시료를 모아 처리 · 원료 국산화 지원(원료 기업 대상 · 기업당 최대 8,000만 원 · 2026 효능 · 안전성 모집 종료)은 고객 재원 사례일 뿐 · 가격에 피험자 모집 · 시험 수행 비용은 없음</div>
 </div>
-<div class="foot"><sup>1</sup> 채취 키트 제조사 공개 가격(50개 $355) &nbsp;<sup>2</sup> 미국 마이크로바이옴 연구 시설 1곳 공개 요금표 — 기업 단가 &nbsp;<sup>3</sup> 국내 대학 공동기기센터 gDNA 추출 요금 &nbsp;<sup>4</sup> 미국 대학 코어 1곳(2026-06) 라이브러리 외부 단가 $15 × 2 — 상한으로 씀 &nbsp;<sup>5</sup> 시퀀서 시약(25M · 600 cycle) $1,374 ÷ 192시료(16S + ITS 384 라이브러리) &nbsp;<sup>6</sup> 미국 대학 코어 1곳(FY27) 16S qPCR 기업 단가 &nbsp;<sup>7</sup> 미국 대학 코어 1곳 TaqMan 학술 단가 — 상한으로 씀 &nbsp;<sup>8</sup> 조달청 나라장터 기초금액(2026-06 · 2025-12) &nbsp;<sup>9</sup> GEN. (2024, 10월 9일) — 약 $49,000 &nbsp;<sup>10</sup> 지방자치단체 화장품 시험비 지원사업 2곳(2025 · 18장 ⁵) · 환율 1,336.80원/$ &nbsp;<sup>11</sup> 행정안전부. (2026). 학술연구용역 인건비 기준단가 — 일 연구원 263,756 · 책임 343,975원 · 국내 분석 업체 단가는 비공개 · 업체 · 시설 이름은 내부 문서에만</div>
+<div class="foot"><sup>1</sup> 채취 키트 제조사 공개 가격(50개 $355) &nbsp;<sup>2</sup> 미국 마이크로바이옴 연구 시설 1곳 공개 요금표 — 기업 단가 &nbsp;<sup>3</sup> 국내 대학 공동기기센터 gDNA 추출 요금 &nbsp;<sup>4</sup> 미국 대학 코어 1곳(2026-06) 라이브러리 외부 단가 $15 × 2 — 상한으로 씀 &nbsp;<sup>5</sup> 시퀀서 시약(25M · 600 cycle) $1,374 ÷ 192시료(16S + ITS 384 라이브러리) &nbsp;<sup>6</sup> 미국 대학 코어 1곳(FY27) 16S qPCR 기업 단가 &nbsp;<sup>7</sup> 미국 대학 코어 1곳 TaqMan 학술 단가 — 상한으로 씀 &nbsp;<sup>8</sup> 조달청 나라장터 기초금액(2026-06 · 2025-12) &nbsp;<sup>9</sup> GEN. (2024, 10월 9일) — 약 $49,000 &nbsp;<sup>10</sup> 지방자치단체 화장품 시험비 지원사업 2곳(2025 · 18장 ²) · 환율 1,336.80원/$ &nbsp;<sup>11</sup> 행정안전부. (2026). 학술연구용역 인건비 기준단가 — 일 연구원 263,756 · 책임 343,975원 · 국내 분석 업체 단가는 비공개 · 업체 · 시설 이름은 내부 문서에만</div>
 </section>
 
 <section class="slide" data-appx="A7" data-title="부록 A7 종 수준 — 포도상구균(Staphylococcus) DNA 대조" data-notes="(질의응답용) 「100%」는 비율이 아니라 우리가 읽은 구간의 일치도다.">
