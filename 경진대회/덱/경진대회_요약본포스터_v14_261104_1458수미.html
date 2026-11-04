@@ -2,7 +2,7 @@
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>요약본 포스터 v14 — 피부 마이크로바이옴 데이터, 믿고 써도 될까?</title>
-<!-- 발표물(1페이지 요약본) · 85 × 180 cm 세로 · 덱 v16(경진대회_덱_v16_261104_1026수미.html) 숫자 · 용어 기준 · 이승민 님 v3 구성 · 뿌리 넷(왜 필요한가 → 근거 → 주장과 활용 → 한계)으로 다시 짬 · 안내문 필수 구성 ① ② ③과 흐름은 그 안에 · 용어 · 마무리 문장은 덱 v17(이승민) · 출처는 발표자료 부록 · v11: 3절은 덱 1장 서비스 그림 중심 · 예방 · 관리는 한 줄 · v12: 2절을 주장 → 근거 짝(근거 ① 잘못 읽기 쉽다 · ② 걸러 낼 수 있다 · ③ 설계 · 측정 방법이 먼저) · v13: 2절 데이터 → 함정 ↓ 한 것 → 발견 · v14: 덱 v17 최신에 맞춤(20장 마무리 · 파일럿 → 예비 검증 · 19장 재원 · 18장 실패 보험 조건) -->
+<!-- 발표물(1페이지 요약본) · 85 × 180 cm 세로 · 덱 v16(경진대회_덱_v16_261104_1026수미.html) 숫자 · 용어 기준 · 이승민 님 v3 구성 · 뿌리 넷(왜 필요한가 → 근거 → 주장과 활용 → 한계)으로 다시 짬 · 안내문 필수 구성 ① ② ③과 흐름은 그 안에 · 용어 · 마무리 문장은 덱 v17(이승민) · 출처는 발표자료 부록 · v11: 3절은 덱 1장 서비스 그림 중심 · 예방 · 관리는 한 줄 · v12: 2절을 주장 → 근거 짝(근거 ① 잘못 읽기 쉽다 · ② 걸러 낼 수 있다 · ③ 설계 · 측정 방법이 먼저) · v13: 2절 데이터 → 함정 ↓ 한 것 → 발견 · v14: 덱 v17 최신에 맞춤(20장 마무리 · 파일럿 → 예비 검증 · 19장 재원 · 18장 실패 보험 조건 · 한눈에 보기 = 문제 → 우리가 한 것 → 할 수 있는 것) -->
 <!-- PDF: Chrome · Edge 인쇄 → PDF로 저장 · 용지는 @page 850 × 1800 mm · 여백 없음 · 배경 그래픽 켬 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
@@ -249,6 +249,8 @@ ul.b li:before{content:"";position:absolute;left:0;top:4.2mm;width:4.2mm;height:
 .p12-chk{display:flex;flex-direction:column;gap:2.5mm}
 .p12-chk div{background:var(--card);border:1px solid var(--line);border-radius:4mm;padding:3mm 4mm;font-size:20pt;line-height:1.35;color:var(--muted)}
 .p12-chk b{display:block;font-size:22pt;color:var(--g)}
+.p7-g.prob{border-color:var(--red);background:var(--redbg)}
+.p7-g.prob .h{color:var(--red)} .p7-g.prob .ic{stroke:var(--red)}
 .p13-st .ar{font-size:24pt;color:var(--faint);align-self:center}
 .p13-st .n.r{background:var(--red)}
 .p13-mx{display:grid;grid-template-columns:repeat(6,1fr);gap:1.5mm 3mm}
@@ -343,24 +345,24 @@ ul.b li:before{content:"";position:absolute;left:0;top:4.2mm;width:4.2mm;height:
 <main class="p7">
  <!-- 한눈에 보기 -->
  <section class="p7-glance-wrap">
-  <div class="p7-gt">한눈에 보기 — 어떤 데이터로 무엇을 도출해, 어떻게 쓰나</div>
+  <div class="p7-gt">한눈에 보기 — 어떤 문제가 있었고, 우리는 무엇을 했고, 그래서 무엇을 할 수 있나</div>
   <div class="p7-glance">
-   <div class="p7-g">
-    <div class="h"><svg viewBox="0 0 48 48" class="ic"><ellipse cx="24" cy="10" rx="15" ry="5"/><path d="M9 10v28c0 2.8 6.7 5 15 5s15-2.2 15-5V10"/><path d="M9 24c0 2.8 6.7 5 15 5s15-2.2 15-5"/></svg>어떤 데이터</div>
-    <div class="kw">공개 데이터셋 7개</div>
-    <div class="d">세균 시료 <b>1,308</b> · 곰팡이 <b>596</b> — 민감 피부 42명 · 한국 여성 595명 · 공개 화장품 시험 25명</div>
+   <div class="p7-g prob">
+    <div class="h"><svg viewBox="0 0 48 48" class="ic"><path d="M24 6L44 41H4z"/><path d="M24 19v10"/><path d="M24 34.5v.5"/></svg>어떤 문제</div>
+    <div class="kw">믿고 쓰기 어려운 피부 데이터</div>
+    <div class="d">화장품 근거로 쓰이기 시작했지만 오염균 · 분석 회차 · 비율 착시로 잘못 읽기 쉬움 — 대조군과 비교하면 전후 변화 대부분 소멸 · 중소기업은 혼자 거르기 어렵고, <b>독립적으로 읽어 줄 곳이 없음</b></div>
    </div>
    <div class="p7-ga">→</div>
    <div class="p7-g">
-    <div class="h"><svg viewBox="0 0 48 48" class="ic"><path d="M6 8h36L28 25v13l-8 4V25z"/></svg>무엇을 도출</div>
-    <div class="kw">신호 1 · 진입 장벽 3</div>
-    <div class="d">다섯 가지 관문으로 1,041속 → <b><i>Malassezia</i></b>(AUC 0.85 · 검증 전) · 측정 방법 · 시험 설계 · 비율의 한계 → <b>예방 · 관리</b></div>
+    <div class="h"><svg viewBox="0 0 48 48" class="ic"><path d="M6 8h36L28 25v13l-8 4V25z"/></svg>우리가 한 것</div>
+    <div class="kw">공개 데이터 7개 · 다섯 가지 관문</div>
+    <div class="d">세균 <b>1,308</b> · 곰팡이 <b>596</b> 시료를 데이터셋마다 따로 재분석 → 1,041속 중 신호 하나 <b><i>Malassezia</i></b>(AUC 0.85 · 검증 전) · 공개 화장품 시험은 ‘근거 불충분’ · 진입 장벽 셋(측정 방법 · 시험 설계 · 비율의 한계)</div>
    </div>
    <div class="p7-ga">→</div>
    <div class="p7-g use">
-    <div class="h"><svg viewBox="0 0 48 48" class="ic"><rect x="6" y="14" width="36" height="26" rx="4"/><path d="M17 14V9h14v5M6 25h36"/></svg>어떻게 활용</div>
-    <div class="kw">데이터 분석 파트너</div>
-    <div class="d">중소 화장품 기업에 무료 설계 점검 → 설계 · 사양서 → <b>독립 판정</b> → 결과지 · 실패 보험 · 한국 → 영국 · EU</div>
+    <div class="h"><svg viewBox="0 0 48 48" class="ic"><rect x="6" y="14" width="36" height="26" rx="4"/><path d="M17 14V9h14v5M6 25h36"/></svg>그래서 할 수 있는 것</div>
+    <div class="kw">중소 화장품 기업의 데이터 분석 파트너</div>
+    <div class="d">무료 설계 점검 → 설계 · 사양서 → <b>독립 판정</b> → 결과지 · 실패 보험 — 관리 제품의 근거를 믿고 쓸 수 있게 · 한국 → 영국 · EU</div>
    </div>
   </div>
  </section>
