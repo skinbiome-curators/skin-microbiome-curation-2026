@@ -184,7 +184,7 @@ ul.b li:before{content:"";position:absolute;left:0;top:4.2mm;width:4.2mm;height:
 .flow.f5 .fl{padding:3.5mm 3mm;font-size:19.5pt}
 .flow.f5 .fl b{font-size:22pt}
 /* v7(11/4 장수미): 안내문 제작 기준 — 「데이터셋 선정이유 → 데이터 기반 큐레이션 → 실제 적용 · 확장」 한 흐름 + 한눈에 보기 */
-.p7{flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:5mm;padding:7mm var(--px) 0;min-height:0;zoom:0.96}
+.p7{flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:5mm;padding:7mm var(--px) 0;min-height:0;zoom:0.95}
 .p7-glance-wrap{background:var(--mint);border-radius:8mm;padding:6mm 7mm 7mm;display:flex;flex-direction:column;gap:4mm}
 .p7-gt{font-size:30pt;font-weight:900;color:var(--g);letter-spacing:-.5pt}
 .p7-glance{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:4mm;align-items:stretch}
@@ -302,6 +302,15 @@ ul.b li:before{content:"";position:absolute;left:0;top:4.2mm;width:4.2mm;height:
 .p15-req{display:flex;align-items:center;gap:4mm;background:var(--card);border:1.2mm solid var(--steel);border-radius:5mm;padding:2.5mm 5mm;font-size:25pt;font-weight:800;color:var(--ink)}
 .p15-req .k{background:var(--g)}
 .p15-req b{color:var(--g)}
+.p7-g .gw{display:flex;flex-direction:column;gap:1.2mm;background:var(--redbg);border-radius:3mm;padding:2mm 3.5mm;font-size:19pt;line-height:1.3;color:var(--ink);font-weight:700}
+.p7-g .gw.t{display:block;line-height:1.45;font-weight:600} .p7-g .gw.t>b{color:var(--red)} .p7-g .gw.t .bd{margin:0 1.5mm 0 1mm}
+.p7-g .gw .gl{font-size:17pt;font-weight:800;color:var(--red)}
+.p7-g .gw .bd.r{background:var(--red)}
+.p7-g .gw.u{background:#fff;border:1px solid var(--line);font-weight:500;color:var(--muted)}
+.p7-g .gw.u b{color:var(--ink)}
+.p7-g .gw.u .pl b{color:var(--g)}
+.p7-ga.lb{flex-direction:column;justify-content:center;gap:2mm;text-align:center}
+.p7-ga.lb span{font-size:15pt;line-height:1.25;color:var(--g2);font-weight:800}
 .p15-wall{display:grid;grid-template-columns:auto 1fr;gap:1.6mm 3mm;align-items:center;font-size:21pt;line-height:1.35}
 .p15-wall>.bd{font-size:20pt;margin:0;background:var(--red)}
 .p15-wall .f{background:var(--redbg);border-radius:4mm;padding:1.8mm 4mm;color:var(--muted)}
@@ -448,13 +457,16 @@ ul.b li:before{content:"";position:absolute;left:0;top:4.2mm;width:4.2mm;height:
    <div class="p7-g">
     <div class="h"><svg viewBox="0 0 48 48" class="ic"><path d="M6 8h36L28 25v13l-8 4V25z"/></svg>우리가 한 것</div>
     <div class="kw">공개 데이터 7개 재분석 · 다섯 가지 관문</div>
-    <div class="d">세균 <b>1,308</b> · 곰팡이 <b>596</b> 시료 · 데이터셋마다 따로 → 1,041속 중 신호 하나 <b><i>Malassezia</i></b>(AUC 0.85 · 검증 전) · 공개 화장품 시험은 ‘근거 불충분’ → 그래서 동일 방법으로 잰 기준 · 시험 전 설계 · qPCR</div>
+    <div class="d">세균 <b>1,308</b> · 곰팡이 <b>596</b> 시료 · 데이터셋마다 따로 → 1,041속 중 신호는 <b><i>Malassezia</i></b> 하나(검증 전) · 공개 화장품 시험은 ‘근거 불충분’</div>
+    <div class="gw t"><b>알아낸 진입 장벽은 셋</b> — <i class="bd r">1</i>측정 방법 · 시점에 따라 값이 달라지고, <i class="bd r">2</i>시험 결과는 설계에서 이미 결정되며, <i class="bd r">3</i>비율만으로는 절대량 · 종을 알 수 없다</div>
    </div>
-   <div class="p7-ga">→</div>
+   <div class="p7-ga lb"><span>장벽을<br>함께 넘는<br>서비스로</span>→</div>
    <div class="p7-g use">
     <div class="h"><svg viewBox="0 0 48 48" class="ic"><rect x="6" y="14" width="36" height="26" rx="4"/><path d="M17 14V9h14v5M6 25h36"/></svg>우리가 제안하는 것</div>
     <div class="kw">중소 화장품 기업의 데이터 분석 파트너</div>
-    <div class="d">시험 전 설계 점검 · 측정 사양서 · 원자료 분석 · <b>독립 판정</b> → 시장별 문장 카드 · 후속 시험 설계 · 무료 점검 · 실패 보험</div>
+    <div class="d">세 장벽을 설계 · 사양서 · 분석으로 함께 넘음</div>
+    <div class="gw u"><span><i class="bd">1</i><b>측정 사양서</b> — 동일 방법으로 재게</span><span><i class="bd">2</i><b>시험 전 설계 점검</b> — 회차 · 대조군</span><span><i class="bd">3</i><b>qPCR 후속 분석</b> — 절대량</span><span class="pl">+ 원자료 검수 → <b>독립 판정</b>(제품도 측정도 하지 않음)</span></div>
+    <div class="d">고객이 받는 것: <b>근거 수준 판정 · 시장별 문장 카드 · 실패 보험</b></div>
    </div>
   </div>
  </section>
@@ -516,7 +528,7 @@ ul.b li:before{content:"";position:absolute;left:0;top:4.2mm;width:4.2mm;height:
    <div class="t"><b>같은 속 안 병원균 · 상재균</b>읽은 16S 구간으로 종 구분이 안 될 수 있음</div>
    <div class="t"><b>분석 회차 차이</b>회차가 다르면 같은 피부도 값이 달라짐 · 사용 전후를 다른 회차로 재면 효과와 구분 불가</div>
    <i>↓</i><i>↓</i><i>↓</i><i>↓</i><i>↓</i><i>↓</i>
-   <div class="g"><b><em>①</em>검출 일관성</b>데이터셋별 검출률 · 음성 대조와 비교</div>
+   <div class="g"><b><em>①</em>검출 일관성</b>데이터셋별 검출률 · 판독량에 따른 비율 변화 · 음성 대조(참고)</div>
    <div class="g"><b><em>②</em>교란 요인 배제</b>나이 · 피지 보정 후 재분석 · 비율 왜곡 보정 계산</div>
    <div class="g"><b><em>③</em>분류명 신뢰성</b>분류명 대조 · 미분류 서열 직접 대조</div>
    <div class="g"><b><em>④</em>판별력</b>재표집 4,000회 · 0.5에 걸치면 보류</div>
@@ -533,7 +545,7 @@ ul.b li:before{content:"";position:absolute;left:0;top:4.2mm;width:4.2mm;height:
      <div class="f"><b>4</b><span>후보</span></div><div class="a">→</div>
      <div class="f end"><b>1</b><span><i>Malassezia</i></span></div>
     </div>
-    <div class="p15-ex"><b>선별할 때 민감 여부 미사용</b> · 제외 예: <i>Lactobacillus</i>(원 논문 ‘민감 쪽 증가’ → 피부 상재균 아님 · 595명에선 드물어 오염 의심) · <i>Streptococcus</i>(두 자료 약 31배) · <i>Cladosporium</i>(음성 대조에서 최다) · 세균 3속은 구간이 0.5에 걸려 보류</div>
+    <div class="p15-ex"><b>선별할 때 민감 여부 미사용</b> · 제외 예: <i>Lactobacillus</i>(원 논문 ‘민감 쪽 증가’ → 피부 상재균 아님 · 595명에선 드물어 오염 의심) · <i>Streptococcus</i>(두 자료 약 31배) · <i>Cladosporium</i>(판독량이 적을수록 비율 증가 → 오염 의심) · 세균 3속은 구간이 0.5에 걸려 보류</div>
     <div class="bars2">
      <div class="br"><span>비민감</span><div class="tr"><i style="width:84.2%;background:var(--s1)"></i></div><s style="color:var(--s1)">84.2%</s></div>
      <div class="br"><span>민감</span><div class="tr"><i style="width:36.4%;background:var(--s2)"></i></div><s style="color:var(--s2)">36.4%</s></div>
