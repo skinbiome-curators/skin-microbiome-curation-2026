@@ -184,7 +184,7 @@ ul.b li:before{content:"";position:absolute;left:0;top:4.2mm;width:4.2mm;height:
 .flow.f5 .fl{padding:3.5mm 3mm;font-size:19.5pt}
 .flow.f5 .fl b{font-size:22pt}
 /* v7(11/4 장수미): 안내문 제작 기준 — 「데이터셋 선정이유 → 데이터 기반 큐레이션 → 실제 적용 · 확장」 한 흐름 + 한눈에 보기 */
-.p7{flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:5mm;padding:7mm var(--px) 0;min-height:0;zoom:0.97}
+.p7{flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:5mm;padding:7mm var(--px) 0;min-height:0;zoom:0.95}
 .p7-glance-wrap{background:var(--mint);border-radius:8mm;padding:6mm 7mm 7mm;display:flex;flex-direction:column;gap:4mm}
 .p7-gt{font-size:30pt;font-weight:900;color:var(--g);letter-spacing:-.5pt}
 .p7-glance{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:4mm;align-items:stretch}
@@ -311,6 +311,11 @@ ul.b li:before{content:"";position:absolute;left:0;top:4.2mm;width:4.2mm;height:
 .p7-g .gw.u .pl b{color:var(--g)}
 .p7-ga.lb{flex-direction:column;justify-content:center;gap:2mm;text-align:center}
 .p7-ga.lb span{font-size:15pt;line-height:1.25;color:var(--g2);font-weight:800}
+.p11-tb .sep{grid-column:1 / -1;border-top:.6mm dashed var(--g2);padding-top:1.5mm;font-size:16.5pt;font-weight:800;color:var(--g2)}
+.p11-tb .exr{background:var(--mint);align-self:stretch;display:flex;flex-direction:column;justify-content:center;padding:1mm 2mm;border-radius:2mm}
+.p11-tb .exr i{font-style:normal;font-size:15.5pt;font-weight:800;color:var(--g2)}
+.p11-tb .m.exr{align-items:center}
+.p11-tb .m.ok{color:var(--g2)}
 .p15-wall{display:grid;grid-template-columns:auto 1fr;gap:1.6mm 3mm;align-items:center;font-size:21pt;line-height:1.35}
 .p15-wall>.bd{font-size:20pt;margin:0;background:var(--red)}
 .p15-wall .f{background:var(--redbg);border-radius:4mm;padding:1.8mm 4mm;color:var(--muted)}
@@ -607,12 +612,14 @@ ul.b li:before{content:"";position:absolute;left:0;top:4.2mm;width:4.2mm;height:
     <ul><li>✅ △ ❌ <b>근거 수준</b> · 사용 가능 · 조건부 · 불충분</li><li><b>시장별 문장 카드</b> → <b>후속 시험 설계</b></li><li><b>실패 보험</b> · 분석까지 맡긴 시험이 ‘근거 불충분’이면 다음 설계 무료</li><li><b>기준 범위 속 위치</b> · 자료가 쌓인 뒤</li></ul></div>
   </div>
   <div class="p11-res p15-res">
-   <div class="out"><h5>결과물 견본 — 시장별 문장 카드(공개 화장품 시험 데이터 · 설계 점검 판정 근거 불충분)</h5>
+   <div class="out"><h5>결과물 견본 — 시장별 문장 카드</h5>
     <div class="p11-tb">
-     <span class="th">희망 표시 문장</span><span class="th">영국 · EU</span><span class="th">국내</span>
+     <span class="th">희망 표시 문장 · 위 두 줄 = 공개 화장품 시험 데이터</span><span class="th">영국 · EU</span><span class="th">국내</span>
      <span>건강한 피부 마이크로바이옴에 도움</span><span class="m no">✕</span><span class="m no">✕</span>
      <span>한국 여성 25명 · 4주 사용 피부 마이크로바이옴 인체적용시험 진행</span><span class="m" style="color:var(--amb)">△</span><span class="m" style="color:var(--amb)">△</span>
-     <span>표피포도상구균 증가</span><span class="m no">✕</span><span class="m no">✕</span>
+     <span class="sep">아래 두 줄 = 설계를 가정한 ✓ 예시</span>
+     <span class="exr"><i>예시 · 회복 시험 설계 가정</i>세안 후 흐트러진 피부 마이크로바이옴의 회복을 도움</span><span class="m ok exr">✓</span><span class="m no exr">✕</span>
+     <span class="exr"><i>예시 · 개선 설계 가정</i>4주 만에 피부 장벽 강화 · 마이크로바이옴 확인 인체적용시험</span><span class="m ok exr">✓</span><span class="m exr" style="color:var(--amb)">△</span>
     </div></div>
    <div class="p15-rc">
     <div class="mk p11-mk p15-mk">
@@ -701,6 +708,6 @@ ul.b li:before{content:"";position:absolute;left:0;top:4.2mm;width:4.2mm;height:
 
 <footer class="ft">
  <div class="end">피부 마이크로바이옴 데이터, 믿고 써도 될까? — <span>신뢰할 수 있는 설계 기준과 분석으로, 믿고 쓸 수 있는 근거를 정립하겠습니다.</span></div>
- <div class="meta"><span>분석: 공개 데이터 재분석 · 판별력 = Mann–Whitney AUC(부트스트랩 4,000회) · 금액은 모두 가정 · 회사 · 브랜드 이름은 쓰지 않음 · 덱 v17 기준 · 요약본 v15 · 출처 · 서지는 발표자료(PPT) 부록</span><span>사람: 질문 · 판정 기준 · 검수 기준 · 결정 — 2조 | AI: 코드 작성 · 자료 찾기 · 대조 보조</span></div>
+ <div class="meta"><span>분석: 공개 데이터 재분석 · 판별력 = Mann–Whitney AUC(부트스트랩 4,000회) · 금액은 모두 가정 · 회사 · 브랜드 이름은 쓰지 않음 · 덱 v19 기준 · 요약본 v15 · 출처 · 서지는 발표자료(PPT) 부록</span><span>사람: 질문 · 판정 기준 · 검수 기준 · 결정 — 2조 | AI: 코드 작성 · 자료 찾기 · 대조 보조</span></div>
 </footer>
 </body></html>
