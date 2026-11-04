@@ -1,0 +1,661 @@
+<title>피부 마이크로바이옴 분석 신청</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* 레이아웃: 위 띠(이름 · 메뉴 · 시연 표시) → 왼쪽 단계형 주문서 + 오른쪽 고정 견적 요약 / 좁으면 한 줄로 */
+:root{
+  --bg:#F3F6F5; --surface:#FFFFFF; --sunk:#EAF0EE; --ink:#14201C; --muted:#56645F; --line:#D5DFDB;
+  --accent:#0E7A56; --accent-ink:#FFFFFF; --accent-soft:#E1F1EA; --steel:#2F5D7C; --steel-soft:#E3EDF4;
+  --ok:#1C8A57; --warn:#A8670F; --warn-soft:#FBF0DC; --bad:#B9362B; --bad-soft:#F9E3E0; --tbd:#7C848C;
+  --f-display:"IBM Plex Sans KR","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"Consolas",monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1513; --surface:#16201D; --sunk:#111A17; --ink:#E4ECE8; --muted:#9AAAA3; --line:#2A3632;
+  --accent:#3BBE8C; --accent-ink:#06130E; --accent-soft:#163128; --steel:#86B6D8; --steel-soft:#16263A;
+  --ok:#52C793; --warn:#E3A84C; --warn-soft:#33270F; --bad:#F2786D; --bad-soft:#3A1D1A; --tbd:#8E979F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1513; --surface:#16201D; --sunk:#111A17; --ink:#E4ECE8; --muted:#9AAAA3; --line:#2A3632;
+  --accent:#3BBE8C; --accent-ink:#06130E; --accent-soft:#163128; --steel:#86B6D8; --steel-soft:#16263A;
+  --ok:#52C793; --warn:#E3A84C; --warn-soft:#33270F; --bad:#F2786D; --bad-soft:#3A1D1A; --tbd:#8E979F; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.num{font-family:var(--f-display);font-variant-numeric:tabular-nums}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:14.5px;line-height:1.6;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.3}
+a{color:var(--steel)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--steel);outline-offset:2px}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* 위 띠 */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding-block:12px}
+.brand{display:flex;flex-direction:column;line-height:1.25;margin-right:auto;min-width:0}
+.brand b{font-family:var(--f-display);font-size:16px}
+.brand span{font-size:12px;color:var(--muted)}
+.nav{display:flex;gap:4px}
+.nav a{text-decoration:none;color:var(--muted);padding:7px 14px;border-radius:999px;font-weight:500}
+.nav a[aria-current="page"]{background:var(--accent-soft);color:var(--accent)}
+.demo{background:var(--warn-soft);color:var(--warn);font-size:12.5px;border-bottom:1px solid var(--line)}
+.demo .wrap{padding-block:7px;display:flex;gap:10px;flex-wrap:wrap}
+.demo b{font-weight:700}
+
+/* 본문 격자 */
+main{padding-block:24px 48px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.head h1{font-size:26px}
+.head p{margin:4px 0 0;color:var(--muted);max-width:62ch}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:22px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}}
+
+/* 단계 표시 */
+.steps{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;padding:0;list-style:none}
+.steps button{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px 6px 6px;cursor:pointer;color:var(--muted);font-size:13px}
+.steps button .n{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--sunk);font-family:var(--f-mono);font-size:12px}
+.steps button[aria-current="step"]{border-color:var(--accent);color:var(--ink);font-weight:700}
+.steps button[aria-current="step"] .n{background:var(--accent);color:var(--accent-ink)}
+.steps button.done .n{background:var(--accent-soft);color:var(--accent)}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:18px;min-width:0}
+.panel h2{font-size:19px}
+.panel .sub{color:var(--muted);margin:-10px 0 0;font-size:13.5px}
+fieldset{border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+legend{font-family:var(--f-display);font-weight:600;font-size:15px;padding:0;margin-bottom:8px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+label.f{display:flex;flex-direction:column;gap:5px;font-size:13px;color:var(--muted);min-width:0}
+label.f > span{font-weight:500}
+input[type=text],input[type=email],input[type=tel],input[type=number],select,textarea{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px;color:var(--ink);width:100%;min-width:0}
+textarea{resize:vertical;min-height:70px}
+.req::after{content:" *";color:var(--bad)}
+.hint{font-size:12.5px;color:var(--muted);margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:13px;cursor:pointer;background:var(--surface)}
+.chip input{accent-color:var(--accent);margin:0}
+.chip:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+
+/* 신청 유형 카드 */
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.svc label{border:1px solid var(--line);border-radius:var(--r);padding:14px 14px 12px;display:flex;flex-direction:column;gap:6px;cursor:pointer;background:var(--surface);position:relative;min-width:0}
+.svc label:has(input:checked){border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.svc input{position:absolute;top:14px;right:14px;accent-color:var(--accent)}
+.svc .t{font-family:var(--f-display);font-weight:600;font-size:15px;padding-right:22px}
+.svc .p{font-family:var(--f-display);font-variant-numeric:tabular-nums;font-size:14px;color:var(--accent);font-weight:600}
+.svc .d{font-size:12.8px;color:var(--muted)}
+.svc .tag{align-self:flex-start;font-size:11.5px;padding:1px 8px;border-radius:999px;background:var(--steel-soft);color:var(--steel)}
+.addon{display:flex;flex-direction:column;gap:6px}
+.addon label{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;border:1px dashed var(--line);border-radius:8px;padding:9px 12px;cursor:pointer}
+.addon label.off{cursor:not-allowed;opacity:.6}
+.addon input{accent-color:var(--accent)}
+.addon .pr{font-size:12.5px;color:var(--tbd);font-weight:700;white-space:nowrap}
+
+/* 설계 점검 미리보기 */
+.check{border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.check .hd{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;background:var(--sunk);flex-wrap:wrap}
+.check .hd b{font-family:var(--f-display)}
+.grade{font-weight:700;font-size:13px;padding:3px 10px;border-radius:999px}
+.g-bad{background:var(--bad-soft);color:var(--bad)} .g-warn{background:var(--warn-soft);color:var(--warn)} .g-ok{background:var(--accent-soft);color:var(--ok)}
+.check ul{list-style:none;margin:0;padding:6px 14px 12px;display:flex;flex-direction:column}
+.check li{display:grid;grid-template-columns:22px 1fr;gap:8px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+.check li:last-child{border-bottom:0}
+.mk{font-weight:700;text-align:center}
+.mk.bad{color:var(--bad)} .mk.warn{color:var(--warn)} .mk.ok{color:var(--ok)}
+.check li small{display:block;color:var(--muted);font-size:12.3px}
+
+/* 표 */
+.tbox{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:640px}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:middle}
+thead th{background:var(--sunk);font-weight:600;font-size:12.5px;white-space:nowrap}
+td input[type=text],td select{padding:5px 7px;font-size:13px;border-radius:6px}
+td.x{width:34px;text-align:center}
+tr.flag td{background:var(--bad-soft)}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 13px;cursor:pointer;font-size:13.5px}
+.btn:hover{border-color:var(--steel)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}
+.btn.ghost{border-color:transparent;background:transparent;color:var(--muted)}
+.btn.icon{padding:4px 8px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.nav-btns{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:16px}
+.note{border-radius:8px;padding:10px 12px;font-size:13px}
+.note.warn{background:var(--warn-soft);color:var(--warn)}
+.note.bad{background:var(--bad-soft);color:var(--bad)}
+.note.ok{background:var(--accent-soft);color:var(--accent)}
+.note.info{background:var(--steel-soft);color:var(--steel)}
+.files{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.drop{border:1.5px dashed var(--line);border-radius:var(--r);padding:12px;display:flex;flex-direction:column;gap:6px;background:var(--sunk);min-width:0}
+.drop b{font-size:13.5px}
+.drop .ext{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.drop ul{margin:0;padding-left:16px;font-size:12.5px;font-family:var(--f-mono);overflow-wrap:anywhere}
+.drop.need{border-color:var(--warn)}
+.consent{display:flex;flex-direction:column;gap:8px}
+.consent label{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;font-size:13.5px;border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.consent input{accent-color:var(--accent);margin-top:4px}
+.consent small{color:var(--muted);display:block}
+
+/* 견적 요약 */
+aside{position:sticky;top:calc(env(safe-area-inset-top,0px) + 76px);display:flex;flex-direction:column;gap:12px}
+@media (max-width:900px){aside{position:static}}
+.sum{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:10px}
+.sum h3{font-size:15px}
+.kv{display:grid;grid-template-columns:1fr auto;gap:4px 10px;font-size:13px}
+.kv dt{color:var(--muted)} .kv dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
+.total{border-top:1px solid var(--line);padding-top:10px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.total b{font-family:var(--f-display);font-variant-numeric:tabular-nums;font-size:18px;color:var(--accent);text-align:right}
+.sum .small{font-size:12px;color:var(--muted);margin:0}
+.not{background:var(--sunk);border-radius:var(--r);padding:14px;font-size:12.8px;color:var(--muted)}
+.not b{color:var(--ink)}
+.not ul{margin:6px 0 0;padding-left:18px}
+
+/* 주문 확인 · 조회 */
+.ok-hd{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.ok-hd .id{font-family:var(--f-mono);font-size:20px;color:var(--accent);font-weight:500}
+.timeline{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+@media (max-width:760px){.timeline{grid-template-columns:minmax(0,1fr)}}
+.timeline li{border-top:4px solid var(--line);padding-top:8px;font-size:12.5px;color:var(--muted);min-width:0}
+.timeline li b{display:block;color:var(--ink);font-size:13px}
+.timeline li.done{border-color:var(--accent)} .timeline li.now{border-color:var(--warn)} .timeline li.now b{color:var(--warn)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.card{border:1px solid var(--line);border-radius:var(--r);padding:14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.card .k{font-size:12px;color:var(--muted)}
+.card b{font-family:var(--f-display)}
+.track-in{display:flex;gap:8px;flex-wrap:wrap}
+.track-in input{max-width:260px}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+footer .wrap{padding-block:18px;display:flex;flex-direction:column;gap:4px}
+@media (prefers-reduced-motion:no-preference){.panel,.sum{transition:border-color .15s}}
+</style>
+
+<div class="top"><div class="wrap">
+  <div class="brand"><b>피부 마이크로바이옴 데이터 분석 파트너</b><span>가칭 · 시험 전 설계 · 측정 사양서 · 원자료 분석 · 독립 판정</span></div>
+  <nav class="nav" aria-label="메뉴"><a href="#order" id="nav-order">분석 신청</a><a href="#track" id="nav-track">주문 조회</a></nav>
+</div></div>
+<div class="demo"><div class="wrap"><b>가상 · 시연용 페이지</b><span>실제로 접수 · 결제되지 않으며 파일도 서버로 올라가지 않습니다. 금액은 모두 가정(경진대회 덱 v17 18장 · 부록 A6)입니다.</span></div></div>
+
+<main class="wrap">
+<!-- ═══ 분석 신청 ═══ -->
+<section id="view-order">
+  <div class="head">
+    <div><h1>분석 신청서</h1><p>시험 계획 · 원자료 · 희망 표시 문장을 받아 판정합니다. 측정은 외부 측정 기관, 피험자 모집 · 채취는 시험 대행 기관 또는 귀사가 합니다. 시료는 이곳으로 보내지 않습니다.</p></div>
+    <div class="bar"><button class="btn" type="button" id="btn-sample">예시로 채우기</button><button class="btn ghost" type="button" id="btn-clear">모두 지우기</button></div>
+  </div>
+  <ol class="steps" id="steps"></ol>
+  <div class="grid">
+  <form id="form" novalidate>
+    <!-- 1 -->
+    <div class="panel" data-step="1">
+      <h2>신청 유형</h2>
+      <p class="sub">하나를 고릅니다. 처음이면 무료 설계 점검부터 시작해도 됩니다.</p>
+      <div class="svc" role="radiogroup" aria-label="신청 유형">
+        <label><input type="radio" name="svc" value="free" id="svc-free"><span class="t">무료 설계 점검</span><span class="p">무료</span><span class="d">시험 계획을 올리면 판정 · 미충족 항목 · 버려질 비용을 드립니다. 개선 설계는 유료 설계서로.</span><span class="tag">입구</span></label>
+        <label><input type="radio" name="svc" value="design" id="svc-design"><span class="t">설계서 · 측정 사양서</span><span class="p">83만 원 / 건</span><span class="d">채취(부위 · 시점 · 횟수 · 키트) · 대조군 · 인원 · 분석 회차 · 음성 대조를 정한 설계서와 측정 기관용 사양서.</span><span class="tag">시험 전</span></label>
+        <label><input type="radio" name="svc" value="analysis" id="svc-analysis"><span class="t">원자료 검수 · 분석</span><span class="p">140만–255만 원 / 건</span><span class="d">FASTQ · qPCR 값 품질 검수 → 서열 처리 · 균 동정 → 다섯 관문 · 대조군 대비 변화 → 결과지.</span><span class="tag">시험 후 · 핵심</span></label>
+        <label><input type="radio" name="svc" value="both" id="svc-both"><span class="t">설계서 + 분석</span><span class="p">223만–338만 원 / 건</span><span class="d">시험 전 설계부터 결과지까지. 결과가 ‘근거 불충분’이면 다음 설계 무료(실패 보험).</span><span class="tag">실패 보험 적용</span></label>
+      </div>
+      <fieldset>
+        <legend>추가 상품</legend>
+        <div class="addon">
+          <label><input type="checkbox" id="add-qpcr"><span><b>qPCR 후속 분석</b> — 리뉴얼 때 핵심 균만 재측정 후 비교</span><span class="pr">가격 미정</span></label>
+          <label><input type="checkbox" id="add-uk"><span><b>수출 패키지(영국)</b> — 영국 사용자 피부 자료 분석 + 효능 근거 서류용 영문 근거 요약 · 2단계</span><span class="pr">가격 미정</span></label>
+          <label class="off"><input type="checkbox" id="add-ref" disabled><span><b>기준 범위 결과지</b> — 같은 나이대 · 피부 타입 기준 속 위치 · 자료가 쌓인 뒤</span><span class="pr">준비 중</span></label>
+        </div>
+        <p class="hint">시장별 문장 카드(국내 · 영국 · EU)는 분석 결과지에 기본으로 들어갑니다.</p>
+      </fieldset>
+      <div class="nav-btns"><span></span><button class="btn primary" type="button" data-go="2">다음 · 시험 정보</button></div>
+    </div>
+
+    <!-- 2 -->
+    <div class="panel" data-step="2" hidden>
+      <h2>시험 정보와 설계</h2>
+      <p class="sub">입력하는 동안 아래 ‘설계 점검 미리보기’가 바뀝니다. 실제 판정은 공개된 판정 규칙으로 따로 합니다.</p>
+      <fieldset><legend>제품과 목적</legend>
+        <div class="row">
+          <label class="f"><span class="req">제품 이름(가명 가능)</span><input type="text" id="prod" placeholder="예: 진정 에센스 A"></label>
+          <label class="f"><span>제품 유형</span><select id="ptype"><option>에센스 · 세럼</option><option>크림 · 로션</option><option>클렌저</option><option>원료</option><option>기타</option></select></label>
+          <label class="f"><span>시험 목적</span><select id="purpose"><option value="ad">국내 광고 · 표시 실증</option><option value="export">수출 서류(영국 · EU)</option><option value="internal">내부 개발 판단</option></select></label>
+        </div>
+        <div class="row">
+          <label class="f"><span>시험 수행(모집 · 채취)</span><select id="cro"><option value="cro">시험 대행 기관에 의뢰</option><option value="self">귀사 직접 수행</option><option value="tbd">아직 정하지 않음</option></select></label>
+          <label class="f"><span>측정 기관</span><select id="lab"><option value="tbd">아직 정하지 않음 — 사양서로 의뢰</option><option value="have">이미 정함</option></select></label>
+          <label class="f"><span>대상 피부</span><select id="sens"><option value="1">민감 피부 라인</option><option value="0">일반</option></select></label>
+        </div>
+        <p class="note info" id="ad-note">국내 광고 실증용 시험은 자격 기관(대학 · 연구기관 등)이 수행해야 합니다 — 화장품 표시·광고 실증에 관한 규정 제4조.</p>
+      </fieldset>
+      <fieldset><legend>설계</legend>
+        <div class="row">
+          <label class="f"><span>군 구성</span><select id="ctrl"><option value="1">사용군 + 제품 미사용 대조군</option><option value="0">사용군만</option></select></label>
+          <label class="f"><span>군당 인원</span><input type="number" id="n" min="1" max="200" value="13"></label>
+          <label class="f"><span>채취 부위</span><select id="site"><option>볼</option><option>이마</option><option>팔 안쪽</option></select></label>
+          <label class="f"><span>채취 도구</span><select id="tool"><option>면봉(보존액 튜브)</option><option>테이프</option></select></label>
+        </div>
+        <div><span class="hint">측정 시점(사용 시작 기준)</span>
+          <div class="chips" id="tps"></div>
+        </div>
+        <div class="chips">
+          <label class="chip"><input type="checkbox" id="base2" checked>사용 전 2회 측정</label>
+          <label class="chip"><input type="checkbox" id="neg" checked>회차마다 음성 대조</label>
+          <label class="chip"><input type="checkbox" id="mock" checked>표준 시료(모의 군집)</label>
+        </div>
+        <label class="f"><span>분석 회차 계획</span><select id="batch"><option value="one">면봉을 −80°C 보관 → 시험 끝난 뒤 모든 시점을 한 회차로</option><option value="each">시점마다 그때그때 추출 · 판독</option><option value="tbd">아직 모름</option></select></label>
+      </fieldset>
+      <div class="check" aria-live="polite">
+        <div class="hd"><b>설계 점검 미리보기</b><span class="grade" id="grade"></span></div>
+        <ul id="checks"></ul>
+      </div>
+      <div class="nav-btns"><button class="btn" type="button" data-go="1">이전</button><button class="btn primary" type="button" data-go="3">다음 · 희망 표시 문장</button></div>
+    </div>
+
+    <!-- 3 -->
+    <div class="panel" data-step="3" hidden>
+      <h2>희망 표시 문장과 시장</h2>
+      <p class="sub">쓰고 싶은 문장마다 판매할 시장을 고릅니다. 결과지의 시장별 문장 카드에서 문장마다 ‘근거로 사용 가능 · 조건부 · 근거 불충분’을 판정합니다.</p>
+      <div class="tbox"><table>
+        <thead><tr><th style="width:46%">희망 표시 문장(국문 · 영문)</th><th>국내</th><th>영국</th><th>EU</th><th>입력 중 참고</th><th class="x"></th></tr></thead>
+        <tbody id="claims"></tbody>
+      </table></div>
+      <div class="bar"><button class="btn" type="button" id="add-claim">+ 문장 추가</button><span class="hint">입력 중 참고는 낱말만 보는 간이 표시입니다. 판정은 결과지에서 합니다.</span></div>
+      <div class="nav-btns"><button class="btn" type="button" data-go="2">이전</button><button class="btn primary" type="button" data-go="4">다음 · 자료 제출</button></div>
+    </div>
+
+    <!-- 4 -->
+    <div class="panel" data-step="4" hidden>
+      <h2>자료 제출</h2>
+      <p class="sub" id="files-sub"></p>
+      <div class="files">
+        <div class="drop" id="d-plan"><b>시험 계획서</b><span class="ext">.pdf · .docx · .hwp</span><input type="file" id="f-plan" accept=".pdf,.docx,.hwp"><ul></ul></div>
+        <div class="drop" id="d-fastq"><b>원시 서열 파일(FASTQ)</b><span class="ext">.fastq.gz · 양방향(R1 · R2) · 16S · ITS</span><input type="file" id="f-fastq" accept=".gz,.fastq" multiple><ul></ul></div>
+        <div class="drop" id="d-qpcr"><b>qPCR 값</b><span class="ext">.csv · .xlsx · 표준 곡선 포함</span><input type="file" id="f-qpcr" accept=".csv,.xlsx" multiple><ul></ul></div>
+        <div class="drop" id="d-qc"><b>측정 기관 품질 보고서</b><span class="ext">.pdf · 선택</span><input type="file" id="f-qc" accept=".pdf"><ul></ul></div>
+      </div>
+      <fieldset>
+        <legend>시료 정보 시트</legend>
+        <p class="hint">한 줄에 시료 하나. 엑셀에서 여러 줄을 복사해 표 안에 붙여 넣어도 됩니다(열 순서: 시료 ID · 피험자 · 구분 · 시점 · 판독 회차). 사용 전 2회는 시점을 ‘0주-1’ · ‘0주-2’로 적습니다.</p>
+        <div class="tbox"><table>
+          <thead><tr><th>시료 ID</th><th>피험자</th><th>구분</th><th>시점</th><th>판독 회차(런 ID)</th><th class="x"></th></tr></thead>
+          <tbody id="sheet"></tbody>
+        </table></div>
+        <div class="bar">
+          <button class="btn" type="button" id="add-row">+ 줄 추가</button>
+          <button class="btn" type="button" id="fill-good">예시: 한 회차로 묶은 시험</button>
+          <button class="btn" type="button" id="fill-bad">예시: 시점마다 다른 회차(공개 시험 8장)</button>
+        </div>
+        <div id="sheet-check"></div>
+      </fieldset>
+      <div class="nav-btns"><button class="btn" type="button" data-go="3">이전</button><button class="btn primary" type="button" data-go="5">다음 · 신청자 · 동의</button></div>
+    </div>
+
+    <!-- 5 -->
+    <div class="panel" data-step="5" hidden>
+      <h2>신청자와 동의</h2>
+      <fieldset><legend>신청자</legend>
+        <div class="row">
+          <label class="f"><span class="req">회사 이름</span><input type="text" id="co" autocomplete="organization"></label>
+          <label class="f"><span class="req">담당자</span><input type="text" id="who" autocomplete="name"></label>
+          <label class="f"><span class="req">이메일</span><input type="email" id="mail" autocomplete="email"></label>
+          <label class="f"><span>연락처</span><input type="tel" id="tel" autocomplete="tel"></label>
+        </div>
+        <div class="row">
+          <label class="f"><span>결제 방식</span><select id="pay"><option>견적서 확인 뒤 세금계산서</option><option>지역 시험비 지원사업 연계 문의</option></select></label>
+          <label class="f"><span>지원사업 이름(있으면)</span><input type="text" id="grant" placeholder="예: 지역 인체적용시험 지원"></label>
+        </div>
+      </fieldset>
+      <fieldset><legend>확인과 동의</legend>
+        <div class="consent">
+          <label><input type="checkbox" id="c1"><span><b>우리가 하지 않는 것을 확인했습니다.</b><small>진단 · 효능 보증 · 측정 · 시험 수행 · 문구 서명은 하지 않습니다. 결과는 공개된 판정 규칙에 따른 독립 판정입니다.</small></span></label>
+          <label><input type="checkbox" id="c2"><span><b>판정 규칙은 시험 전에 공개되며, 결과가 ‘근거 불충분’일 수 있습니다.</b><small>지금 줄 수 있는 최고 등급은 ‘조건부’입니다(‘근거로 사용 가능’ 기준 설계 중).</small></span></label>
+          <label id="c3-wrap"><input type="checkbox" id="c3"><span><b>실패 보험 조건을 확인했습니다.</b><small>분석까지 맡긴 시험이 ‘근거 불충분’이면 다음 시험의 설계서가 무료입니다. 설계서만 받은 시험은 해당하지 않습니다.</small></span></label>
+          <label><input type="checkbox" id="c4"><span><b>원자료는 가명 처리해 보냅니다.</b><small>피부 면봉 연구는 인체유래물연구라 IRB 심의 · 서면 동의가 필요합니다. 사람 DNA 서열은 분석 전에 제거합니다.</small></span></label>
+          <label><input type="checkbox" id="c5"><span><b>(선택) 사용 전 자료의 2차 사용에 동의합니다.</b><small>동의 · 권리 · 검수를 통과한 사용 전 자료만, 다른 고객에게는 집계된 범위로만 씁니다. 피험자 동의서에 2차 사용이 적혀 있어야 합니다.</small></span></label>
+        </div>
+      </fieldset>
+      <div id="submit-msg"></div>
+      <div class="nav-btns"><button class="btn" type="button" data-go="4">이전</button><button class="btn primary" type="submit">신청서 제출(가상)</button></div>
+    </div>
+
+    <!-- 완료 -->
+    <div class="panel" id="done" hidden>
+      <div class="ok-hd"><h2>신청서가 접수되었습니다(가상)</h2><span class="id" id="done-id"></span></div>
+      <p class="sub" style="margin:0">아래 순서로 진행됩니다. 실제로는 아무 것도 전송되지 않았습니다.</p>
+      <div class="cards" id="done-cards"></div>
+      <div class="bar"><a class="btn primary" id="done-track" href="#track">주문 조회에서 보기</a><button class="btn" type="button" id="btn-new">새 신청서</button></div>
+    </div>
+  </form>
+
+  <aside>
+    <div class="sum">
+      <h3>견적 요약</h3>
+      <dl class="kv" id="sum-kv"></dl>
+      <div class="total"><span>우리 매출(설계 · 분석)</span><b id="sum-total">—</b></div>
+      <p class="small" id="sum-note"></p>
+    </div>
+    <div class="sum">
+      <h3>측정 기관에 낼 비용(별도)</h3>
+      <dl class="kv" id="lab-kv"></dl>
+      <p class="small">측정비는 측정 기관 몫이라 위 금액에 넣지 않습니다. 시료당 약 43만 원은 미국 코어 단가 어림(국내 견적 전 · 16S · ITS · qPCR · 생물정보 포함)입니다. 피험자 모집 · 시험 수행 비용도 따로입니다.</p>
+    </div>
+    <div class="not"><b>하지 않는 것</b><ul><li>진단 · 효능 보증</li><li>측정(실험실 작업) · 시험 수행</li><li>표시 문구 서명(수출 서류는 현지 책임자 몫)</li></ul></div>
+  </aside>
+  </div>
+</section>
+
+<!-- ═══ 주문 조회 ═══ -->
+<section id="view-track" hidden>
+  <div class="head"><div><h1>주문 조회</h1><p>주문 번호로 진행 단계와 결과지를 확인합니다.</p></div></div>
+  <div class="panel">
+    <div class="track-in"><label class="f" style="flex:1;max-width:280px"><span>주문 번호</span><input type="text" id="tq" class="mono" placeholder="MB-261104-0000"></label><button class="btn primary" type="button" id="tq-go" style="align-self:flex-end">조회</button><button class="btn" type="button" id="tq-ex" style="align-self:flex-end">예시 주문 보기</button></div>
+    <div id="track-out"></div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <span>피부 마이크로바이옴 데이터 분석 파트너(가칭) · 경진대회 발표용 가상 페이지 · 2026-11-04</span>
+  <span>측정 기관 · 시험 대행 기관은 협의 전입니다. 금액 · 일정은 모두 가정이며 법률 자문이 아닙니다.</span>
+</div></footer>
+
+<script>
+(function(){
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const man = v => (v/10000).toLocaleString('ko-KR') + '만';
+const won = v => man(v) + ' 원';
+const PER_SAMPLE = 430000;
+const TPS = ['0주','2주','4주','8주'];
+const STEPS = ['신청 유형','시험 정보','표시 문장','자료 제출','신청자 · 동의'];
+let step = 1;
+
+/* 단계 표시 */
+function drawSteps(){
+  $('#steps').innerHTML = STEPS.map((t,i)=>`<li><button type="button" data-go="${i+1}" ${i+1===step?'aria-current="step"':''} class="${i+1<step?'done':''}"><span class="n">${i+1}</span>${t}</button></li>`).join('');
+}
+function go(n){
+  step = Math.max(1, Math.min(5, n));
+  $$('[data-step]').forEach(p => p.hidden = +p.dataset.step !== step);
+  $('#done').hidden = true;
+  drawSteps(); window.scrollTo({top:0, behavior:'auto'});
+}
+document.addEventListener('click', e => { const b = e.target.closest('[data-go]'); if (b) go(+b.dataset.go); });
+
+/* 시점 칩 */
+$('#tps').innerHTML = TPS.map((t,i)=>`<label class="chip"><input type="checkbox" value="${t}" id="tp-${i}" ${i<3?'checked':''}>${t}</label>`).join('');
+
+/* 설계 점검 */
+function design(){
+  const v = {
+    ctrl: $('#ctrl').value === '1', n: Math.max(0, +$('#n').value || 0),
+    tps: $$('#tps input:checked').map(x=>x.value), base2: $('#base2').checked,
+    neg: $('#neg').checked, mock: $('#mock').checked, batch: $('#batch').value, sens: $('#sens').value === '1'
+  };
+  const items = [];
+  const add = (lv, t, d) => items.push({lv, t, d});
+  if (v.tps.length < 2) add('bad','측정 시점이 1개 이하','사용 전 · 후를 비교할 수 없습니다.');
+  else add('ok', `측정 시점 ${v.tps.join(' · ')}`, '');
+  if (!v.ctrl) add('bad','제품 미사용 대조군 없음','계절 · 회차에 따른 변화를 제품 효과로 오인할 수 있습니다.');
+  else add('ok','제품 미사용 대조군 있음','');
+  if (v.batch === 'each') add('bad','시점과 회차 겹침','시점마다 따로 판독하면 효과와 회차 차이가 섞입니다. 공개 화장품 시험(8장)이 이 경우였습니다.');
+  else if (v.batch === 'tbd') add('warn','분석 회차 계획 미정','면봉을 −80°C에 보관했다가 모든 시점을 한 회차로 판독하도록 사양서에 적습니다.');
+  else add('ok','모든 시점을 한 회차로 판독','');
+  if (!v.neg) add('bad','음성 대조 없음','피부 마이크로바이옴은 DNA 양이 적어 시약 오염을 가를 수 없습니다.');
+  if (!v.mock) add('warn','표준 시료 없음','측정 기관이 사양서를 지켰는지 확인할 방법이 줄어듭니다.');
+  if (!v.base2) add('warn','사용 전 1회 측정','같은 사람도 다시 측정하면 값이 흔들려, 흔들림 범위를 알 수 없습니다.');
+  if (v.n < 13) add('warn',`군당 ${v.n}명`,'흔들림이 공개 화장품 시험 수준이면 군당 13–16명(총 26–32명), 보수값이면 17–20명입니다(부록 A5).');
+  else add('ok',`군당 ${v.n}명`,'첫 모집군의 흔들림으로 인원을 한 번 다시 계산합니다.');
+  add('ok', v.sens ? 'qPCR 3종: 전체 세균 · 전체 곰팡이 · M. restricta' : 'qPCR 2종: 전체 세균 · 전체 곰팡이', '실제 양(절대량)을 함께 측정해 비율 착시를 가립니다.');
+  const bad = items.some(i=>i.lv==='bad'), warn = items.some(i=>i.lv==='warn');
+  const grade = bad ? ['근거 불충분','g-bad'] : warn ? ['조건부','g-warn'] : ['조건부 · 현재 최고 등급','g-ok'];
+  const groups = v.ctrl ? 2 : 1;
+  const visits = v.tps.length + (v.base2 ? 1 : 0);
+  const samples = groups * v.n * visits;
+  return {v, items, grade, bad, samples, groups, visits};
+}
+function drawDesign(){
+  const d = design();
+  $('#grade').textContent = d.grade[0]; $('#grade').className = 'grade ' + d.grade[1];
+  const mk = {bad:'✕', warn:'△', ok:'✓'};
+  $('#checks').innerHTML = d.items.map(i=>`<li><span class="mk ${i.lv}">${mk[i.lv]}</span><span>${i.t}${i.d?`<small>${i.d}</small>`:''}</span></li>`).join('');
+  $('#ad-note').hidden = $('#purpose').value !== 'ad';
+  summary();
+}
+
+/* 희망 표시 문장 */
+function claimHint(t){
+  const s = t.replace(/\s/g,'');
+  if (/치료|진단|질환|아토피/.test(s)) return ['bad','의약품으로 오인될 표현'];
+  if (/유익균.*균형|균형.*보호/.test(s)) return ['bad','국내 금지 예시(유익균의 균형 보호)'];
+  if (/건강한.*마이크로바이옴|healthy/i.test(s)) return ['warn','‘건강한’의 기준이 없음'];
+  if (/증가|감소|개선|improv|increas|reduc/i.test(s)) return ['warn','변화 주장 — 대조군 · 회차 설계가 필요'];
+  if (/시험|진행|tested/i.test(s)) return ['ok','시험 사실 문장(대상 명시)'];
+  return ['','—'];
+}
+function claimRow(text='', k=true, u=false, e=false){
+  const tr = document.createElement('tr');
+  const id = 'cl' + Math.random().toString(36).slice(2,7);
+  tr.innerHTML = `<td><input type="text" id="${id}" value="${text.replace(/"/g,'&quot;')}" placeholder="예: 피부 마이크로바이옴 인체적용시험 진행"></td>
+   <td><input type="checkbox" ${k?'checked':''} aria-label="국내"></td><td><input type="checkbox" ${u?'checked':''} aria-label="영국"></td><td><input type="checkbox" ${e?'checked':''} aria-label="EU"></td>
+   <td class="h" style="font-size:12.5px"></td><td class="x"><button class="btn icon ghost" type="button" aria-label="이 문장 지우기">✕</button></td>`;
+  const upd = () => { const [lv,t] = claimHint(tr.querySelector('input[type=text]').value); const c = tr.querySelector('.h'); c.textContent = t; c.style.color = lv ? `var(--${lv==='bad'?'bad':lv==='warn'?'warn':'ok'})` : 'var(--muted)'; };
+  tr.querySelector('input[type=text]').addEventListener('input', upd);
+  tr.querySelector('.x button').addEventListener('click', () => { tr.remove(); summary(); });
+  upd(); $('#claims').append(tr);
+}
+$('#add-claim').addEventListener('click', () => claimRow());
+
+/* 시료 정보 시트 */
+const KINDS = ['사용군','대조군','음성 대조','표준 시료'];
+function sheetRow(r={}){
+  const tr = document.createElement('tr');
+  const id = 's' + Math.random().toString(36).slice(2,7);
+  tr.innerHTML = `<td><input type="text" class="mono" id="${id}" value="${r.id||''}"></td><td><input type="text" class="mono" value="${r.sub||''}"></td>
+   <td><select>${KINDS.map(k=>`<option ${k===r.kind?'selected':''}>${k}</option>`).join('')}</select></td>
+   <td><input type="text" value="${r.tp||''}"></td><td><input type="text" class="mono" value="${r.run||''}"></td>
+   <td class="x"><button class="btn icon ghost" type="button" aria-label="이 줄 지우기">✕</button></td>`;
+  tr.querySelector('.x button').addEventListener('click', () => { tr.remove(); checkSheet(); });
+  tr.addEventListener('input', checkSheet); tr.addEventListener('change', checkSheet);
+  $('#sheet').append(tr);
+}
+function readSheet(){
+  return $$('#sheet tr').map(tr => { const f = tr.querySelectorAll('input,select'); return {tr, id:f[0].value.trim(), sub:f[1].value.trim(), kind:f[2].value, tp:f[3].value.trim(), run:f[4].value.trim()}; });
+}
+function checkSheet(){
+  const rows = readSheet(); const out = []; rows.forEach(r=>r.tr.classList.remove('flag'));
+  if (!rows.length) { $('#sheet-check').innerHTML = '<p class="hint">시료가 아직 없습니다. 예시 버튼으로 채워 보거나 엑셀에서 붙여 넣으세요.</p>'; summary(); return; }
+  const empty = rows.filter(r=>!r.id || !r.tp || !r.run || (/(사용군|대조군)/.test(r.kind) && !r.sub));
+  empty.forEach(r=>r.tr.classList.add('flag'));
+  if (empty.length) out.push(['bad', `빈 칸이 있는 줄 ${empty.length}개 — 시료 ID · 피험자 · 시점 · 판독 회차를 채워 주세요.`]);
+  const ids = rows.map(r=>r.id).filter(Boolean); const dup = ids.filter((x,i)=>ids.indexOf(x)!==i);
+  if (dup.length) out.push(['bad', `같은 시료 ID가 두 번 이상: ${[...new Set(dup)].join(', ')}`]);
+  const subj = rows.filter(r=>/(사용군|대조군)/.test(r.kind) && r.tp && r.run);
+  const byTp = {}; subj.forEach(r => { const t = r.tp.replace(/-\d+$/,''); (byTp[t] = byTp[t] || new Set()).add(r.run); });
+  const tps = Object.keys(byTp);
+  if (tps.length >= 2) {
+    let overlap = false;
+    for (let i=0;i<tps.length;i++) for (let j=i+1;j<tps.length;j++) if ([...byTp[tps[i]]].some(x=>byTp[tps[j]].has(x))) overlap = true;
+    const desc = tps.map(t=>`${t}: ${[...byTp[t]].join(' · ')}`).join(' / ');
+    if (!overlap) out.push(['bad', `시점과 회차 겹침 — 시점끼리 함께 쓴 판독 회차가 하나도 없습니다(${desc}). 이대로면 제품 효과와 회차 차이를 가를 수 없습니다.`]);
+    else out.push(['ok', `시점끼리 같은 판독 회차를 함께 씁니다(${desc}).`]);
+  }
+  const runs = [...new Set(rows.map(r=>r.run).filter(Boolean))];
+  const negRuns = new Set(rows.filter(r=>r.kind==='음성 대조').map(r=>r.run));
+  const missNeg = runs.filter(x=>!negRuns.has(x));
+  if (missNeg.length) out.push(['warn', `음성 대조가 없는 판독 회차: ${missNeg.join(', ')}`]);
+  else if (runs.length) out.push(['ok', `판독 회차 ${runs.length}개 모두 음성 대조 있음`]);
+  if (!rows.some(r=>r.kind==='표준 시료')) out.push(['warn','표준 시료(모의 군집)가 없습니다 — 측정 정확도를 확인할 수 없습니다.']);
+  const cls = {bad:'bad',warn:'warn',ok:'ok'};
+  $('#sheet-check').innerHTML = `<div style="display:flex;flex-direction:column;gap:6px">${out.map(([l,t])=>`<p class="note ${cls[l]}" style="margin:0">${t}</p>`).join('')}</div>`;
+  summary();
+}
+function fillSheet(mode){
+  $('#sheet').innerHTML = '';
+  const tps = ['0주-1','0주-2','4주'];
+  let k = 1;
+  ['사용군','대조군'].forEach((g,gi) => { for (let s=1;s<=3;s++) tps.forEach(t => {
+    const run = mode==='good' ? 'RUN-01' : (t==='4주' ? 'RUN-B' : 'RUN-A');
+    sheetRow({id:`S${String(k++).padStart(3,'0')}`, sub:`${gi?'C':'T'}${String(s).padStart(2,'0')}`, kind:g, tp:t, run});
+  }); });
+  const runs = mode==='good' ? ['RUN-01'] : ['RUN-A','RUN-B'];
+  runs.forEach((r,i) => sheetRow({id:`NC${i+1}`, sub:'', kind:'음성 대조', tp:'-', run:r}));
+  if (mode==='good') sheetRow({id:'MOCK1', sub:'', kind:'표준 시료', tp:'-', run:'RUN-01'});
+  checkSheet();
+}
+$('#add-row').addEventListener('click', () => { sheetRow(); checkSheet(); });
+$('#fill-good').addEventListener('click', () => fillSheet('good'));
+$('#fill-bad').addEventListener('click', () => fillSheet('bad'));
+$('#sheet').closest('.tbox').addEventListener('paste', e => {
+  const t = (e.clipboardData || window.clipboardData).getData('text');
+  if (!t || !/\t|\n/.test(t)) return;
+  e.preventDefault();
+  t.trim().split(/\r?\n/).forEach(line => { const c = line.split('\t'); sheetRow({id:c[0], sub:c[1], kind:KINDS.includes((c[2]||'').trim())?c[2].trim():'사용군', tp:c[3], run:c[4]}); });
+  checkSheet();
+});
+
+/* 파일 */
+const fmt = b => b > 1e9 ? (b/1e9).toFixed(1)+' GB' : b > 1e6 ? (b/1e6).toFixed(1)+' MB' : Math.max(1, Math.round(b/1e3))+' KB';
+['plan','fastq','qpcr','qc'].forEach(k => $('#f-'+k).addEventListener('change', e => {
+  $('#d-'+k+' ul').innerHTML = [...e.target.files].map(f=>`<li>${f.name} · ${fmt(f.size)}</li>`).join('');
+  needFiles();
+}));
+function needFiles(){
+  const s = svc();
+  const need = {plan: s==='free'||s==='design'||s==='both', fastq: s==='analysis', qpcr: s==='analysis'};
+  ['plan','fastq','qpcr'].forEach(k => $('#d-'+k).classList.toggle('need', !!need[k] && !$('#f-'+k).files.length));
+  $('#files-sub').textContent = {
+    free:'무료 설계 점검은 시험 계획서만 있으면 됩니다. 시료 정보 시트는 계획 단계라 비워 둬도 됩니다.',
+    design:'설계서는 시험 계획서(초안)로 시작합니다. 원자료는 받지 않습니다.',
+    analysis:'측정 기관에서 받은 원자료를 그대로 올립니다. 균 목록 같은 가공 결과가 아니라 FASTQ · qPCR 값 · 음성 대조 · 시료 정보가 필요합니다.',
+    both:'지금은 시험 계획서를 올리고, 원자료는 측정이 끝난 뒤 주문 조회에서 올립니다.'
+  }[s] || '신청 유형을 먼저 고르세요.';
+}
+
+/* 견적 요약 */
+function svc(){ const r = $('input[name=svc]:checked'); return r ? r.value : ''; }
+function summary(){
+  const s = svc(), d = design(), kv = [];
+  const price = {free:[0,0], design:[830000,830000], analysis:[1400000,2550000], both:[2230000,3380000]}[s];
+  const name = {free:'무료 설계 점검', design:'설계서 · 측정 사양서', analysis:'원자료 검수 · 분석', both:'설계서 + 분석'}[s];
+  kv.push(['신청 유형', name || '고르지 않음']);
+  if ($('#add-qpcr').checked) kv.push(['qPCR 후속 분석','가격 미정']);
+  if ($('#add-uk').checked) kv.push(['수출 패키지(영국)','가격 미정']);
+  kv.push(['희망 표시 문장', $$('#claims tr').length + '개']);
+  kv.push(['설계 점검 미리보기', d.grade[0]]);
+  if (s==='analysis' || s==='both') kv.push(['실패 보험', '적용']); else if (s) kv.push(['실패 보험', '해당 없음']);
+  $('#sum-kv').innerHTML = kv.map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join('');
+  $('#sum-total').textContent = !price ? '—' : price[0]===0 ? '무료' : price[0]===price[1] ? won(price[0]) : `${man(price[0])}–${man(price[1])} 원`;
+  const extra = d.samples > 96 && (s==='analysis'||s==='both') ? ' 96시료를 넘으면 분석료는 별도 견적입니다.' : '';
+  $('#sum-note').textContent = (s==='analysis'||s==='both' ? '분석료는 78–96시료 기준 · 가격 = 원가(사람 시간) ÷ 0.6 · 가정.' : s ? '가격 = 원가(사람 시간) ÷ 0.6 · 가정.' : '') + extra;
+  const sheetN = readSheet().filter(r=>/(사용군|대조군)/.test(r.kind)).length;
+  const lab = [['설계상 시료 수', `${d.groups}군 × ${d.v.n}명 × ${d.visits}회 = ${d.samples}`], ['측정비 어림', won(d.samples*PER_SAMPLE)]];
+  if (sheetN) lab.push(['시트에 적은 시료', sheetN + '개']);
+  if (d.bad) lab.push(['이 설계로 버려질 수 있는 측정비', won(d.samples*PER_SAMPLE)]);
+  $('#lab-kv').innerHTML = lab.map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join('');
+  $('#c3-wrap').hidden = !(s==='analysis'||s==='both');
+  needFiles();
+}
+$('#form').addEventListener('input', e => { if (e.target.closest('[data-step="2"]')) drawDesign(); else summary(); });
+$('#form').addEventListener('change', e => { if (e.target.closest('[data-step="2"]')) drawDesign(); else summary(); });
+
+/* 예시 · 지우기 */
+function sample(){
+  $('#svc-both').checked = true; $('#add-qpcr').checked = false; $('#add-uk').checked = true;
+  $('#prod').value = '진정 에센스 A(가명)'; $('#purpose').value = 'ad'; $('#cro').value = 'cro'; $('#lab').value = 'tbd'; $('#sens').value = '1';
+  $('#ctrl').value = '1'; $('#n').value = 13; $('#batch').value = 'tbd'; $('#base2').checked = true; $('#neg').checked = true; $('#mock').checked = true;
+  $$('#tps input').forEach((x,i)=>x.checked = i<3);
+  $('#claims').innerHTML = '';
+  claimRow('건강한 피부 마이크로바이옴에 도움 / Supports a healthy skin microbiome', true, true, true);
+  claimRow('한국 여성 25명 · 4주 사용 피부 마이크로바이옴 인체적용시험 진행', true, true, false);
+  claimRow('표피포도상구균 증가 / S. epidermidis increased', true, false, true);
+  fillSheet('good');
+  $('#co').value = '예시 화장품(주)'; $('#who').value = '홍길동'; $('#mail').value = 'rnd@example.com'; $('#tel').value = '';
+  drawDesign();
+}
+function clearAll(){
+  $('#form').reset(); $('#claims').innerHTML = ''; $('#sheet').innerHTML = '';
+  $$('#tps input').forEach((x,i)=>x.checked = i<3);
+  ['plan','fastq','qpcr','qc'].forEach(k=>$('#d-'+k+' ul').innerHTML='');
+  claimRow(); checkSheet(); drawDesign(); go(1);
+}
+$('#btn-sample').addEventListener('click', () => { sample(); go(1); });
+$('#btn-clear').addEventListener('click', clearAll);
+
+/* 제출 */
+function newId(){ const d = new Date(); const y = String(d.getFullYear()).slice(2), m = String(d.getMonth()+1).padStart(2,'0'), dd = String(d.getDate()).padStart(2,'0'); return `MB-${y}${m}${dd}-${String(Math.floor(Math.random()*9000)+1000)}`; }
+$('#form').addEventListener('submit', e => {
+  e.preventDefault();
+  const miss = [];
+  if (!svc()) miss.push('신청 유형(1단계)');
+  if (!$('#prod').value.trim()) miss.push('제품 이름(2단계)');
+  if (!$('#co').value.trim() || !$('#who').value.trim() || !/\S+@\S+\.\S+/.test($('#mail').value)) miss.push('회사 · 담당자 · 이메일(5단계)');
+  const must = ['c1','c2','c4'].concat((svc()==='analysis'||svc()==='both') ? ['c3'] : []);
+  if (must.some(id=>!$('#'+id).checked)) miss.push('필수 확인 항목');
+  if (miss.length) { $('#submit-msg').innerHTML = `<p class="note bad" style="margin:0">빠진 것이 있어 제출하지 않았습니다: ${miss.join(' · ')}</p>`; return; }
+  $('#submit-msg').innerHTML = '';
+  const id = newId(), d = design(), s = svc();
+  const order = {id, svc:s, prod:$('#prod').value.trim(), grade:d.grade[0], samples:d.samples, claims:$$('#claims tr').length, uk:$('#add-uk').checked, at:new Date().toISOString().slice(0,10)};
+  try { localStorage.setItem('mb-last-order', JSON.stringify(order)); } catch(_){}
+  lastOrder = order;
+  $$('[data-step]').forEach(p=>p.hidden=true); $('#done').hidden = false;
+  $('#done-id').textContent = id;
+  const next = {
+    free:[['1','시험 계획 확인','빠진 정보가 있으면 이메일로 묻습니다.'],['2','설계 점검 리포트','판정 · 미충족 항목 · 버려질 비용'],['3','다음 선택','개선 설계가 필요하면 유료 설계서(83만 원)']],
+    design:[['1','견적서 · 계약','세금계산서 발행'],['2','설계서 · 측정 사양서','측정 기관 · 시험 대행 기관에 그대로 전달'],['3','측정 뒤','원자료 분석을 맡기면 실패 보험 적용']],
+    analysis:[['1','견적서 · 계약','78–96시료 기준'],['2','원자료 확인','파일 무결성 · 시료 정보 시트 · 음성 대조'],['3','결과지','근거 수준 · 시장별 문장 카드 · 후속 시험 설계']],
+    both:[['1','견적서 · 계약','실패 보험 포함'],['2','설계서 · 측정 사양서','측정 기관 · 시험 대행 기관에 전달'],['3','측정 뒤 원자료 제출','주문 조회에서 올림 → 결과지']]
+  }[s];
+  $('#done-cards').innerHTML = next.map(([n,t,dd])=>`<div class="card"><span class="k">${n}단계</span><b>${t}</b><span class="hint">${dd}</span></div>`).join('');
+  $('#done-track').href = '#track'; $('#tq').value = id;
+  $('#steps').innerHTML = ''; window.scrollTo({top:0});
+});
+$('#btn-new').addEventListener('click', clearAll);
+
+/* 주문 조회 */
+let lastOrder = null;
+try { lastOrder = JSON.parse(localStorage.getItem('mb-last-order') || 'null'); } catch(_){}
+const EX = {id:'MB-261028-0007', svc:'analysis', prod:'진정 에센스 B(예시)', grade:'근거 불충분', samples:75, claims:3, uk:false, at:'2026-10-28', example:true, now:5};
+const STAGES = [['접수','신청서 · 견적'],['자료 확인','파일 무결성 · 시료 정보'],['품질 검수','음성 대조 · 표준 시료'],['서열 처리','균 동정'],['분석','다섯 관문 · 대조군 대비 변화'],['독립 판정','공개 판정 규칙'],['결과지 발행','결과물 내려받기']];
+function track(id){
+  id = (id||'').trim().toUpperCase();
+  let o = null;
+  if (lastOrder && lastOrder.id === id) o = Object.assign({now:0}, lastOrder);
+  else if (!id || id === EX.id) o = EX;
+  if (!o) { $('#track-out').innerHTML = `<p class="note warn">${id} 주문을 찾지 못했습니다. 이 가상 페이지에서는 방금 낸 신청서와 예시 주문(${EX.id})만 조회됩니다.</p>`; return; }
+  const name = {free:'무료 설계 점검', design:'설계서 · 측정 사양서', analysis:'원자료 검수 · 분석', both:'설계서 + 분석'}[o.svc];
+  const tl = STAGES.map(([t,d],i)=>`<li class="${i<o.now?'done':i===o.now?'now':''}"><b>${t}</b>${d}</li>`).join('');
+  let res = '';
+  if (o.example) res = `
+    <h3 style="font-size:16px">결과지(예시 · 공개 화장품 시험 적용 · 14 · 14-2장)</h3>
+    <div class="cards">
+      <div class="card"><span class="k">근거 수준</span><b style="color:var(--bad)">❌ 근거 불충분</b><span class="hint">미충족 4: 시점과 회차 겹침 · 대조군 없음 · 사용 전 1회 · 음성 대조 없음</span></div>
+      <div class="card"><span class="k">버려질 비용(16S 추출 · 판독만 · 하한)</span><b class="num">약 421만–1,394만 원</b><span class="hint">75시료 × 시료당 $42–139</span></div>
+      <div class="card"><span class="k">시장별 문장 카드</span><b>3문장 판정</b><span class="hint">‘건강한 마이크로바이옴에 도움’ ❌ · 시험 사실 문장 △ · ‘표피포도상구균 증가’ ❌(종 구분 불가)</span></div>
+      <div class="card"><span class="k">후속 시험 설계</span><b>개선 설계 4건</b><span class="hint">대조군 · 사용 전 2회 · 한 회차 판독 · 회차마다 음성 대조 → 실패 보험으로 다음 설계서 무료</span></div>
+    </div>
+    <p class="note info" style="margin:0">가상 시연이라 결과지 파일은 없습니다.</p>`;
+  else res = `<p class="note info" style="margin:0">방금 낸 신청서입니다(가상). 원자료가 들어오면 품질 검수부터 진행됩니다.</p>`;
+  $('#track-out').innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:16px;margin-top:14px">
+      <div class="ok-hd"><span class="id">${o.id}</span>${o.example?'<span class="grade g-warn">예시 주문</span>':''}</div>
+      <dl class="kv" style="max-width:520px"><dt>신청 유형</dt><dd>${name}</dd><dt>제품</dt><dd>${o.prod}</dd><dt>접수일</dt><dd>${o.at}</dd><dt>시료 수</dt><dd>${o.samples}</dd><dt>희망 표시 문장</dt><dd>${o.claims}개</dd><dt>신청 때 설계 점검</dt><dd>${o.grade}</dd></dl>
+      <ol class="timeline">${tl}</ol>
+      ${res}
+    </div>`;
+}
+$('#tq-go').addEventListener('click', () => track($('#tq').value));
+$('#tq-ex').addEventListener('click', () => { $('#tq').value = EX.id; track(EX.id); });
+$('#tq').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); track($('#tq').value); } });
+
+/* 화면 전환(#order · #track) */
+function route(){
+  const t = location.hash === '#track';
+  $('#view-order').hidden = t; $('#view-track').hidden = !t;
+  $('#nav-order').toggleAttribute('aria-current', !t); $('#nav-track').toggleAttribute('aria-current', t);
+  if (!t) { $('#nav-order').setAttribute('aria-current','page'); $('#nav-track').removeAttribute('aria-current'); }
+  else { $('#nav-track').setAttribute('aria-current','page'); $('#nav-order').removeAttribute('aria-current'); track($('#tq').value || (lastOrder ? lastOrder.id : EX.id)); }
+}
+window.addEventListener('hashchange', route);
+
+/* 처음 상태: 예시로 채운 신청서 */
+sample(); go(1); route();
+})();
+</script>
