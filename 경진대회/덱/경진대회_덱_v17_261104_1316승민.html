@@ -1047,18 +1047,25 @@ body.shot #stage{padding:0}
 .bz-why ol{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:7px;font-size:13px;line-height:1.5}
 .bz-why ol b{color:#4E3680}
 
-.bz-money{display:grid;grid-template-columns:1.35fr 1fr;gap:16px}
+.bz-money{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}
 .bz-ladder td.bz-stg{white-space:nowrap;font-weight:800;color:var(--green);font-size:12px}
 .bz-ladder tr.core td{background:#EAF4EE}
 .bz-box{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 15px}
-.bz-rev{flex:1;display:flex;flex-direction:column;gap:7px;padding:12px 18px}
-.bz-rev .rv-h{font-size:13px;font-weight:800;color:var(--steel);margin-top:2px}
+.bz-money .bz-ladder{font-size:14px}
+.bz-money .bz-ladder thead th{font-size:13.5px}
+.bz-money .bz-ladder th,.bz-money .bz-ladder td{padding:8px 11px;line-height:1.45}
+.bz-money .bz-ladder td.bz-stg{font-size:13px}
+.bz-cost{font-size:15px;padding:12px 18px}
+.bz-rev{flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:9px;padding:16px 20px}
+.bz-rev .rv-h{font-size:14.5px;font-weight:800;color:var(--steel);margin-top:2px}
 .bz-rev .ltv{gap:7px}
-.bz-rev .ltv-r .tr{height:22px}
-.bz-rev .ltv-r{grid-template-columns:112px 1fr 118px}
-.bz-rev .ltv-r .k small{color:#4A5058}
-.bz-rev .ltv-r s{font-size:16.5px;white-space:nowrap}
-.bz-rev .rv-n{font-size:12.5px;color:#4A5058;line-height:1.5}
+.bz-rev .ltv-r .tr{height:28px}
+.bz-rev .ltv-r .k{font-size:14.5px}
+.bz-rev .bz-k{font-size:15px}
+.bz-rev .ltv-r{grid-template-columns:122px 1fr 124px}
+.bz-rev .ltv-r .k small{color:#4A5058;font-size:12.5px}
+.bz-rev .ltv-r s{font-size:19px;white-space:nowrap}
+.bz-rev .rv-n{font-size:13px;color:#4A5058;line-height:1.5}
 .bz-rev ul{margin:2px 0 0;border-top:1px dashed #D8D5CC;padding-top:8px}
 .bz-box ul{margin:4px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:5px;font-size:13px;line-height:1.5}
 
@@ -1654,11 +1661,11 @@ body.shot #stage{padding:0}
      <div class="ltv-r"><div class="k">하한<small>14.5건 × 140만</small></div><div class="tr"><i style="--w:10.9%;--c:#0f8f63"></i></div><s style="color:var(--green2)">약 2,000만 원</s></div>
      <div class="ltv-r"><div class="k">상한<small>55건 × 338만</small></div><div class="tr"><i style="--w:100%;--c:#3C6E91"></i></div><s style="color:var(--steel)">약 1.9억 원</s></div>
     </div>
-    <div class="rv-n">1건 = 첫 시험만 · 3.8건 = 재구매 계기 4가지 확률 가정(상한) · 도달 10% = 가정<sup>3</sup></div>
+    <div class="rv-n">1건 = 첫 시험만 · 3.8건 = 재구매 계기 4가지 확률 가정 · 도달 10% = 가정<sup>3</sup></div>
    </div>
   </div>
  </div>
- <div class="callout amber"><b>중소기업 예산과의 차이</b> — 권고 설계(두 군 26–32명 × 3시점 = 78–96시료 · 부록 A5)면 측정비 어림만 약 3,350만–4,130만 원, 지역 지원사업의 인체적용시험 한도는 기업당 150만–500만 원<sup>2</sup> → <b>설계 점검만 먼저</b>(83만 원) · 측정 항목 선택(qPCR만 · 16S만) · 여러 회사 시료를 한 회차에 모아 처리 · 가격에 피험자 모집 · 시험 수행 비용은 없음 · 실제로 다시 산 고객 데이터는 아직 없음</div>
+ <div class="callout amber bz-cost"><b>고객 부담</b> — 권고 설계 측정비 약 3,350만–4,130만 원 ≫ 지역 지원 한도 150만–500만 원<sup>2</sup> → <b>설계 점검(83만 원)부터</b> · 측정 항목 선택 · 여러 회사 시료 묶음 처리</div>
 </div>
 <div class="foot"><sup>1</sup> 가격 = 원가 ÷ 0.6(팀 독립 검토 11/1) · 원가 = 사람 시간 × 2026 학술연구용역 인건비 기준단가(행정안전부) — 일수는 가정 · 계산은 부록 A6 · 남는 40%는 순이익 아님 &nbsp;<sup>2</sup> 지방자치단체 화장품 시험비 지원사업(2025) — 충북 인체적용시험 일반 150만 · 기능성 300만 원(지원예산 50% 자부담) · 전북 남원 피부임상평가 500만 원(전북 기업) · 원가 계산 근거는 부록 A6 &nbsp;<sup>3</sup> 140만 = 분석료 하한(설계서 없이) · 338만 = 설계서 83만 + 분석 255만(실패 보험으로 설계비 면제되는 건 미반영) · 145곳 = 기능성 보고 137(대기업 일부 포함 · 상한) + 원료사 · 제조사 8 · 1건 = 하한 · 3.8건 = 재구매 계기 4가지의 확률 가정(큰 시험 기준이라 상한) · 도달 10% = 근거 없는 가정 → 유료 시범에서 확인 · 측정비는 넣지 않음</div>
 </section>
