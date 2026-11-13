@@ -1,0 +1,16 @@
+job	prompt	files(원본>폴더 안 이름)
+07_A_1	프롬프트/07_A.txt	입력/07/genus_pct.tsv>genus_pct.tsv;입력/07/sample_info.tsv>sample_info.tsv
+07_A_2	프롬프트/07_A.txt	입력/07/genus_pct.tsv>genus_pct.tsv;입력/07/sample_info.tsv>sample_info.tsv
+07_A_3	프롬프트/07_A.txt	입력/07/genus_pct.tsv>genus_pct.tsv;입력/07/sample_info.tsv>sample_info.tsv
+07_C_1	프롬프트/07_C.txt	입력/07/genus_pct.tsv>genus_pct.tsv;입력/07/sample_info.tsv>sample_info.tsv
+07_C_2	프롬프트/07_C.txt	입력/07/genus_pct.tsv>genus_pct.tsv;입력/07/sample_info.tsv>sample_info.tsv
+07_C_3	프롬프트/07_C.txt	입력/07/genus_pct.tsv>genus_pct.tsv;입력/07/sample_info.tsv>sample_info.tsv
+07_D_1	프롬프트/07_D.txt	입력/07/genus_pct.tsv>genus_pct.tsv;입력/07/sample_info.tsv>sample_info.tsv;입력/판정규칙.md>판정규칙.md
+07_D_2	프롬프트/07_D.txt	입력/07/genus_pct.tsv>genus_pct.tsv;입력/07/sample_info.tsv>sample_info.tsv;입력/판정규칙.md>판정규칙.md
+07_D_3	프롬프트/07_D.txt	입력/07/genus_pct.tsv>genus_pct.tsv;입력/07/sample_info.tsv>sample_info.tsv;입력/판정규칙.md>판정규칙.md
+설계_A_1	프롬프트/설계_A.txt	입력/설계/설계_A_1_계획서.md>계획서.md
+설계_A_2	프롬프트/설계_A.txt	입력/설계/설계_A_2_계획서.md>계획서.md
+설계_A_3	프롬프트/설계_A.txt	입력/설계/설계_A_3_계획서.md>계획서.md
+설계_C_1	프롬프트/설계_C.txt	입력/설계/설계_C_1_계획서.md>계획서.md
+설계_C_2	프롬프트/설계_C.txt	입력/설계/설계_C_2_계획서.md>계획서.md
+설계_C_3	프롬프트/설계_C.txt	입력/설계/설계_C_3_계획서.md>계획서.md
